@@ -1,21 +1,33 @@
 {
-  "name": "svelte-derver-starter",
-  "version": "0.0.1",
-  "description": "SvelteJS client and Derver server starter, bundeled with ESBuild",
-  "main": "index.js",
-  "scripts": {
-    "build": "node esbuild",
-    "dev": "node esbuild --dev",
-    "prestart": "npm run build",
-    "start": "cd dist && node app",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "derver": "^0.4.13",
-    "esbuild": "^0.8.57",
-    "esbuild-svelte": "^0.4.3",
-    "node-watch": "^0.7.1",
-    "svelte": "^3.35.0"
-  }
+    "name": "svelte-derver-starter",
+    "version": "0.0.1",
+    "description": "SvelteJS client and Derver server starter, bundeled with ESBuild",
+    "main": "index.js",
+    "scripts": {
+        "build": "node esbuild",
+        "dev": "node esbuild --dev",
+        "prestart": "npm run build",
+        "start": "cd dist && node app",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "mongoose": "^5.12.3"
+    },
+    "devDependencies": {
+        "aovi-svelte": "^0.2.0",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "derver": "^0.4.14",
+        "esbuild": "^0.11.6",
+        "esbuild-svelte": "^0.4.3",
+        "mongodb": "^3.6.6",
+        "node-watch": "^0.7.1",
+        "postcss": "^8.2.9",
+        "redis": "^3.1.0",
+        "sass": "^1.32.8",
+        "spectre.css": "^0.5.9",
+        "svelte": "^3.37.0",
+        "svelte-preprocess": "^4.7.0"
+    }
 }

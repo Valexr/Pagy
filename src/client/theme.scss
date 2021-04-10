@@ -1,0 +1,17 @@
+// Define variables to override default ones
+// $primary-color: rgb(255,62,0);
+// $error-color: #c02020;
+// $font-size: 0.9rem;
+// $font-size-sm: .8rem;
+// $font-size-lg: 1rem;
+// $light-color: #303742 !default;
+// $dark-color: #fff !default;
+
+// Import full Spectre source code
+@import "../../node_modules/spectre.css/src/spectre.scss";
+@import "../../node_modules/spectre.css/src/spectre-icons.scss";
+
+.icon-edit::before {
+    border-width: 0.1rem;
+    transform: translate(-45%, -65%) rotate(-45deg);
+}

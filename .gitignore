@@ -1,4 +1,10 @@
 node_modules
 dist/app.js
 dist/static/build
-package-lock.json
+data
+
+*-lock.*
+*.mongodb
+*.map
+
+.DS_Store
