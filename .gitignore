@@ -1,10 +1,10 @@
 node_modules
-dist/app.js
-dist/static/build
-data
+app/server/server.js
+app/client/build
+app/data
 
 *-lock.*
-*.mongodb
 *.map
 
 .DS_Store
+.env

@@ -1,6 +1,7 @@
 function log(req, res, next) {
     console.log({
         'req.method': req.method,
+        'req.headers': req.headers,
         'req.url': req.url,
         'req.path': req.path,
         'req.query': req.query,

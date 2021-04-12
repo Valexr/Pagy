@@ -1,6 +1,7 @@
 const DEV = process.argv.includes('--dev');
 const sveltePlugin = require("esbuild-svelte");
 const sveltePreprocess = require("svelte-preprocess");
+console.log('env', process.argv.includes('--dev'), process.env.mode)
 
 const svelteConfig = {
     compileOptions: {

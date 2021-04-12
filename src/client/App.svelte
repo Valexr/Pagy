@@ -2,43 +2,91 @@
     import { onMount } from "svelte";
     import { fly } from "svelte/transition";
 
-    var books = [];
-    var addBookForm = {
-        title: "",
-        author: "",
-        description: "",
-    };
-    var editForm = {
-        _id: "",
-        title: "",
-        author: "",
-        description: "",
-    };
-    let redisactive = true,
-        currentdb = "redis";
-    function setRedis() {
-        books = [];
-        redisactive = true;
-        currentdb = "redis";
-        getBooks();
+    let books = [],
+        addBookForm = {
+            title: "",
+            author: "",
+            description: "",
+        },
+        editForm = {
+            _id: "",
+            title: "",
+            author: "",
+            description: "",
+        },
+        type = "all";
+
+    $: console.log(books);
+    onMount(() => getAll("*"));
+
+    async function getAll(type) {
+        books = await fetch(`/api/${type}`).then((res) => res.json());
     }
 
-    function getBooks() {
-        fetch(`/books/${currentdb}`).then(
-            async (res) => (books = await res.json())
-        );
-        // books = await fetch(`/books/${currentdb}`).json();
-        // .then((data) => {
-        // 	books = data;
-        // });
-        // axios.get(`/books/${currentdb}`).then((res) => {
-        // 	books = res.data;
-        // });
+    function addBook() {
+        const payload = {
+            title: addBookForm.title,
+            author: addBookForm.author,
+            description: addBookForm.description,
+        };
+        const path = "/api/book:";
+        fetch(path, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        })
+            .then(() => {
+                getAll("*");
+            })
+            .catch((error) => {
+                console.log(error);
+                getAll("*");
+            });
     }
-    $: console.log(books);
+
+    async function editBook(book) {
+        // editForm = book;
+        editForm = await fetch(`/api/books/${book._id}`).then((res) =>
+            res.json()
+        );
+        updatetoggle();
+    }
+
+    function updateBook() {
+        const payload = {
+            title: editForm.title,
+            author: editForm.author,
+            description: editForm.description,
+        };
+        const path = `/api/books/${editForm._id}`;
+        fetch(path, {
+            method: "PUT", // or 'PUT'
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        })
+            .then(() => {
+                getAll("*");
+            })
+            .catch((error) => {
+                console.error(error);
+                getAll("*");
+            });
+        updatetoggle();
+    }
+
+    async function copyBook(book) {
+        addBookForm = await fetch(`/api/books/${book._id}`).then((res) =>
+            res.json()
+        );
+        addBook();
+    }
 
     function removeBook(bookID) {
-        const path = `/books/${currentdb}/${bookID.book._id}`;
+        const path = `/api/books/${bookID._id}`;
         fetch(path, {
             method: "DELETE",
             // headers: {
@@ -49,77 +97,14 @@
             // axios
             // .delete(path)
             .then(() => {
-                getBooks();
+                getAll("*");
             })
             .catch((error) => {
                 console.error(error);
-                getBooks();
+                getAll("*");
             });
     }
 
-    function addBook() {
-        const payload = {
-            title: addBookForm.title,
-            author: addBookForm.author,
-            description: addBookForm.description,
-        };
-        const path = `/books/${currentdb}`;
-        fetch(path, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-        })
-            // 	.then((response) => response.json())
-            // 	.then((data) => {
-            // 		console.log("Success:", data);
-            // 	})
-            // 	.catch((error) => {
-            // 		console.error("Error:", error);
-            // 	});
-            // axios
-            // 	.post(path, payload)
-            .then(() => {
-                getBooks();
-            })
-            .catch((error) => {
-                console.log(error);
-                getBooks();
-            });
-        addtoggle();
-    }
-
-    function editBook(book) {
-        updatetoggle();
-        editForm = book.book;
-    }
-
-    function updateBook() {
-        const payload = {
-            title: editForm.title,
-            author: editForm.author,
-            description: editForm.description,
-        };
-        const path = `/books/${currentdb}/${editForm._id}`;
-        fetch(path, {
-            method: "PUT", // or 'PUT'
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-        })
-            // axios
-            // .put(path, payload)
-            .then(() => {
-                getBooks();
-            })
-            .catch((error) => {
-                console.error(error);
-                getBooks();
-            });
-        updatetoggle();
-    }
     function initForm() {
         addBookForm.title = "";
         addBookForm.author = "";
@@ -129,14 +114,13 @@
         editForm.author = "";
         editForm.description = "";
     }
-    onMount(getBooks);
-    let addopen = false;
+    let addopen = false,
+        updateopen = false;
 
     function addtoggle() {
-        // initForm();
+        initForm();
         addopen = !addopen;
     }
-    let updateopen = false;
 
     function updatetoggle() {
         // initForm();
@@ -151,47 +135,77 @@
     }
 </script>
 
-<header class="navbar container">
+<header class="navbar container p-sticky">
     <section class="navbar-section">
         <button class="btn btn-primary" on:click={addtoggle}>Add Book</button>
     </section>
     <section class="navbar-center">
-        <h1>Books</h1>
+        <h1>Pagy</h1>
     </section>
     <section class="navbar-section">
-        <button class="btn" on:click={setRedis}>Redis</button>
+        <nav class="btn-group btn-group-block">
+            <button
+                class="btn"
+                class:btn-primary={type === "all"}
+                on:click={() => (getAll("*"), (type = "all"))}>All</button
+            >
+            <button
+                class="btn"
+                class:btn-primary={type === "book"}
+                on:click={() => (getAll("book*"), (type = "book"))}
+                >Books</button
+            >
+            <button
+                class="btn"
+                class:btn-primary={type === "user"}
+                on:click={() => (getAll("user*"), (type = "user"))}>User</button
+            >
+            <button
+                class="btn"
+                class:btn-primary={type === "role"}
+                on:click={() => (getAll("role*"), (type = "role"))}>Role</button
+            >
+        </nav>
     </section>
 </header>
 
 <main class="container">
     <section class="column col-12">
-        <table class="table table-striped table-hover table-scroll">
+        <table class="table table-hover table-scroll">
             <thead>
                 <tr>
                     <th />
                     <th on:click={sortby}>Title</th>
                     <th>Author</th>
                     <th>Description</th>
+                    <th>Create</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {#each books as book (book._id)}
-                    <tr transition:fly={{ y: 48, duration: 200 }}>
+                    <tr>
                         <td><i class="icon icon-more-vert c-move" /></td>
                         <td>{book.title}</td>
                         <td>{book.author}</td>
                         <td>{book.description}</td>
+                        <td>{new Date(book.create).toLocaleString()}</td>
                         <td>
                             <button
                                 class="btn btn-primary btn-action tooltip"
                                 data-tooltip="Edit book"
-                                on:click={editBook({ book })}
+                                on:click={editBook(book)}
                                 ><i class="icon icon-edit" /></button
                             >
                             <button
+                                class="btn btn-action tooltip"
+                                data-tooltip="Copy book"
+                                on:click={copyBook(book)}
+                                ><i class="icon icon-copy" /></button
+                            >
+                            <button
                                 class="btn btn-link text-error"
-                                on:click={removeBook({ book })}
+                                on:click={removeBook(book)}
                                 ><i class="icon icon-delete" /></button
                             >
                         </td>
@@ -250,7 +264,10 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" on:click={addBook}>Add book</button>
+            <button
+                class="btn btn-primary"
+                on:click={() => (addBook(), addtoggle())}>Add book</button
+            >
             <button class="btn btn-link" on:click={addtoggle}>Cancel</button>
         </div>
     </div>

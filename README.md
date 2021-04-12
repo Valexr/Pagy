@@ -1,4 +1,4 @@
-# Svelte-Derver-Starter
+# Pagy
 
 A starter for baking fullstack application with client based on Svelte framework and server side powered by Derver. 
 
@@ -13,13 +13,13 @@ A starter for baking fullstack application with client based on Svelte framework
 Just run:
 
 ```sh
-npx degit alexxnb/svelte-derver-starter myapp
+npx degit valexr/pagy myapp
 cd myapp
 npm install
 npm run dev
 ```
 
-Then open browser on `http://localhost:8080`, change files in the `src` and watch the changes. 
+Then open browser on `http://localhost:1313`, change files in the `src` and watch the changes. 
 
 ### Building
 
