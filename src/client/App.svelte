@@ -1,6 +1,5 @@
 <script>
     import { onMount } from "svelte";
-    import { fly } from "svelte/transition";
 
     let books = [],
         addBookForm = {

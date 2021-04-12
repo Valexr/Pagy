@@ -3,7 +3,6 @@ import redis from './redis'
 import { log, json, body } from './middlewares'
 
 const DEV = process.env.NODE_ENV === 'dev';
-
 const app = server({
     port: DEV ? 3131 : 1313,
     spa: true,

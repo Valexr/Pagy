@@ -1,5 +1,5 @@
 node_modules
-app/server/server.js
+app/server/*
 app/client/build
 app/data
 

@@ -1,8 +1,6 @@
 const DEV = process.argv.includes('--dev');
 const sveltePlugin = require("esbuild-svelte");
 const sveltePreprocess = require("svelte-preprocess");
-console.log('env', process.argv.includes('--dev'), process.env.mode)
-
 const svelteConfig = {
     compileOptions: {
         dev: DEV,
@@ -15,17 +13,13 @@ const svelteConfig = {
         })
     ]
 }
-
-/* Edit this file below only if know what you doing! */
-
 const { fork } = require("child_process");
 const { build } = require("esbuild");
 const { createRemote } = require("derver");
 const watch = require("node-watch");
 const path = require("path");
-
+const fs = require('fs/promises');
 const CWD = process.cwd();
-
 const remote = DEV && createRemote('svelte_derver_starter');
 
 (async () => {
@@ -49,6 +43,9 @@ const remote = DEV && createRemote('svelte_derver_starter');
             await bundleClient.rebuild();
             console.log('Restarting server...');
         });
+    } else {
+        fs.unlink('app/client/build/client.js.map')
+        fs.unlink('app/server/server.js.map')
     }
 })()
 

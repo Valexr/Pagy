@@ -6,9 +6,10 @@
     "scripts": {
         "build": "node esbuild",
         "dev": "NODE_ENV=dev node esbuild --dev",
-        "prestart": "npm run build",
+        "prestart": "node esbuild",
         "start": "cd app/server && node server",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "compose": "node esbuild && docker compose up -d --no-deps --build "
     },
     "author": "Valexr",
     "license": "MIT",
