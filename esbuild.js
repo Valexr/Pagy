@@ -28,7 +28,7 @@ const remote = DEV && createRemote('svelte_derver_starter');
 
     if (DEV) {
 
-        nodemon(path.join(CWD, 'app/server', 'server.js'), { cwd: path.join(CWD, 'app') });
+        nodemon(path.join(CWD, 'app/server', 'server.js'), { cwd: path.join(CWD, 'app/server') });
 
         watch(path.join(CWD, 'src', 'client'), { recursive: true }, async function () {
             try {

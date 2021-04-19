@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ],
+            "@cmp": [
+                "src/client/components/index.js"
+            ],
+            "@pages/*": [
+                "src/client/pages/*"
+            ],
+            "@routes": [
+                "src/client/routes/index.js"
+            ],
+            "@utils": [
+                "src/client/utils/index.js"
+            ]
+        }
+    }
+}

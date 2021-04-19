@@ -1,7 +1,8 @@
 node_modules
 app/server/*
 app/client/build
-app/data
+# app/redis
+# app/json
 
 *-lock.*
 *.map

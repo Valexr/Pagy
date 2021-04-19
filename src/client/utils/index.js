@@ -1,0 +1,7 @@
+export { default as Nav } from './Nav.svelte'
+export { default as Home } from './Home.svelte'
+export { default as Portfolio } from './Portfolio.svelte'
+export { default as Contacts } from './Contacts.svelte'
+export { default as Lazy } from './Lazy.svelte'
+export { default as Transition } from './Transition.svelte'
+export { default as error404 } from './error404.svelte'
