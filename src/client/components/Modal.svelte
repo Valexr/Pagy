@@ -1,7 +1,10 @@
 <script>
+    import { onMount } from "svelte";
+    import { router } from "tinro";
+
     export let id = "modal",
         size = "",
-        opener = false,
+        opener = "",
         title = "Title",
         action = {
             title: "Action",
@@ -11,22 +14,26 @@
             title: "Cancel",
             do: "",
         };
-    $: console.log("opener", opener);
+
+    const close = () => {
+        // router.location.hash.clear();
+        // router.location.query.clear();
+        router.goto($router.path);
+    };
 </script>
 
-<div class="modal {size}" class:active={opener} {id}>
-    <div
-        class="modal-overlay"
-        aria-label="Close"
-        on:click={() => (opener = !opener)}
-    />
+<div
+    class="modal {size} {`modal-${opener}`}"
+    class:active={$router.hash === `modal-${opener}`}
+>
+    <a href={$router.path} class="modal-overlay" aria-label="Close">&nbsp;</a>
     <div class="modal-container">
         <div class="modal-header">
             <slot name="header">
                 <button
                     class="btn btn-clear float-right"
                     aria-label="Close"
-                    on:click={() => (opener = !opener)}
+                    on:click={close}
                 />
                 <div class="modal-title h5">{title}</div>
             </slot>
@@ -42,7 +49,7 @@
                     type="submit"
                     on:click={action.do}>{action.title}</button
                 >
-                <button class="btn btn-link" on:click={() => (opener = !opener)}
+                <button class="btn btn-link" on:click={close}
                     >{cancel.title}</button
                 >
             </slot>

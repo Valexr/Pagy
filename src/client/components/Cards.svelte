@@ -4,7 +4,7 @@
             <div class="card-image">
                 <img
                     class="img-responsive"
-                    src="../img/osx-el-capitan.jpg"
+                    src="/img/osx-el-capitan.jpg"
                     alt="OS X El Capitan"
                 />
             </div>
@@ -30,7 +30,7 @@
             <div class="card-image">
                 <img
                     class="img-responsive"
-                    src="../img/osx-yosemite.jpg"
+                    src="/img/osx-yosemite.jpg"
                     alt="OS X Yosemite"
                 />
             </div>
@@ -52,7 +52,7 @@
             <div class="card-image">
                 <img
                     class="img-responsive"
-                    src="../img/macos-sierra-2.jpg"
+                    src="/img/macos-sierra-2.jpg"
                     alt="macOS Sierra"
                 />
             </div>
@@ -74,7 +74,7 @@
             <div class="card-image">
                 <img
                     class="img-responsive"
-                    src="../img/osx-el-capitan-2.jpg"
+                    src="/img/osx-el-capitan-2.jpg"
                     alt="OS X El Capitan"
                 />
             </div>
@@ -103,7 +103,7 @@
             <div class="card-image">
                 <img
                     class="img-responsive"
-                    src="../img/macos-sierra.jpg"
+                    src="/img/macos-sierra.jpg"
                     alt="macOS Sierra"
                 />
             </div>
@@ -122,7 +122,7 @@
             <div class="card-image">
                 <img
                     class="img-responsive"
-                    src="../img/osx-yosemite-2.jpg"
+                    src="/img/osx-yosemite-2.jpg"
                     alt="OS X Yosemite"
                 />
             </div>

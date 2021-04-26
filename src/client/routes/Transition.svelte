@@ -1,11 +1,14 @@
 <!-- Transition.svelte -->
 <script>
     import { fade } from "svelte/transition";
-    import { path } from "@routes";
+    import { Route, router, meta } from "tinro";
+    import { routes, Lazy, cpath, cmeta, chistory } from "@routes";
+
+    $: id = $cpath ? $cpath.alias : $router.path === "/" ? "auth" : "404";
 </script>
 
-{#key $path.alias}
-    <main class="container {$path.alias}" in:fade={{ duration: 700 }}>
+{#key $router.path}
+    <main {id} class="container" in:fade={{ duration: 500 }}>
         <slot />
     </main>
 {/key}
@@ -13,7 +16,7 @@
 <style lang="scss">
     main {
         padding-top: 5em;
-        &.auth {
+        &#auth {
             padding-top: 0;
             height: 100%;
             display: flex;

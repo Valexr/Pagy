@@ -33,13 +33,13 @@
                 downbut={null}
                 let:item
             >
-                <slot name="item">
+                <!-- <slot name="item">
                     {(item.title = item.props.title)}
                     {(item.href = item.match)}
-                </slot>
-                <!-- <a href={item.match} class:active={$router.path === item.match}>
+                </slot> -->
+                <a href={item.match} class:active={$router.path === item.match}>
                     {item.props.title}
-                </a> -->
+                </a>
             </DropDown>
         </div>
     </section>
@@ -76,7 +76,6 @@
 {/if}
 
 <style lang="scss">
-    @import "../../../node_modules/spectre.css/src/variables";
     header {
         z-index: 100;
         // height: 2.5rem;

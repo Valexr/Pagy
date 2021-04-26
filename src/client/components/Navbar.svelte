@@ -1,6 +1,8 @@
 <script>
-    import { cmeta } from "@routes";
+    import { router } from "tinro";
+    import { cmeta, cpath } from "@routes";
     import { items } from "@stores/store";
+    import { addopen } from "@stores/pages";
     import { DropDown } from "@cmp";
 
     let locales = ["ru", "en", "fr", "de"],
@@ -14,15 +16,15 @@
         menusOpen = false;
 
     let addBookForm = {
-            title: "",
-            author: "",
-            description: "",
-        },
-        addopen = false;
+        title: "",
+        author: "",
+        description: "",
+    };
 
     function addtoggle() {
         initForm();
-        addopen = !addopen;
+        router.location.hash.set("sidebar");
+        // addopen = !addopen;
     }
 
     function initForm() {
@@ -32,7 +34,7 @@
     }
 </script>
 
-<nav class="navbar container p-sticky">
+<nav class="navbar container p-sticky bg-gray">
     <section class="navbar-section columns">
         {#if $cmeta.params.locale}
             <div class="column col-auto not-navigate">
@@ -49,7 +51,7 @@
                     >
                         {item.toUpperCase()}
                         <button
-                            class="btn btn-action btn-sm p-relative float-right sm-acts"
+                            class="btn btn-link btn-sm p-relative float-right sm-acts"
                             on:click|preventDefault|stopPropagation
                         >
                             <i class="icon icon-edit" />
@@ -72,7 +74,7 @@
                 >
                     {item}
                     <button
-                        class="btn btn-action btn-sm p-relative float-right sm-acts"
+                        class="btn btn-link btn-sm p-relative float-right sm-acts"
                         on:click|preventDefault|stopPropagation
                     >
                         <i class="icon icon-edit" />
@@ -86,9 +88,11 @@
             <button
                 class="btn btn-primary btn-lg badge"
                 data-badge={$items.length}
-                on:click={addtoggle}
+                on:click|stopPropagation={addtoggle}
                 ><i class="icon icon-plus" />
-                <span class="hide-xs">Page</span>
+                <span class="text-capitalize hide-xs"
+                    >{$cpath.alias.slice(0, -1)}</span
+                >
             </button>
         </div>
     </section>
@@ -111,7 +115,7 @@
 <style lang="scss">
     @import "../../../node_modules/spectre.css/src/variables";
     .navbar {
-        z-index: 1;
+        z-index: 99;
         height: 5em;
         position: fixed;
         top: 4em;

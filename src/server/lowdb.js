@@ -104,7 +104,7 @@ function post(req, res, next) {
             .get(req.params.type)
             .push(req.body)
             .last()
-            .assign({ id: Date.now(), create: Date.now() }, req.body)
+            .assign({ id: Date.now(), create: Date.now(), update: Date.now() }, req.body)
             .write()
             .then(item => res.json(item))
     })

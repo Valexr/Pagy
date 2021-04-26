@@ -1,31 +1,40 @@
 <script>
+    import * as data from "@api/data";
+
     let onAuth = false;
     const user = {
         email: "",
         password: "",
     };
+
     function addUser() {
         onAuth = true;
         const path = "/api/data/users";
-        if (user.email)
-            fetch(path, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(user),
-            })
-                .then(async (res) => {
-                    const user = await res.json();
-                    // users = [...users, user];
-                    console.log("add: ", user);
-                    setTimeout(() => (onAuth = false), 3000);
-                })
-                .catch((error) => {
-                    console.log(error);
-                    setTimeout(() => (onAuth = false), 3000);
-                });
-        else setTimeout(() => (onAuth = false), 500);
+        if (user.email) {
+            data.db("users", "admin");
+            data.add("admin", user).then((res) =>
+                setTimeout(() => (onAuth = false), 1000)
+            );
+            // fetch(path, {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify(user),
+            // })
+            //     .then(async (res) => {
+            //         const user = await res.json();
+            //         // users = [...users, user];
+            //         console.log("add: ", user);
+            //         setTimeout(() => (onAuth = false), 3000);
+            //     })
+            //     .catch((error) => {
+            //         console.log(error);
+            //         setTimeout(() => (onAuth = false), 3000);
+            //     });
+        } else {
+            setTimeout(() => (onAuth = false), 500);
+        }
     }
 </script>
 
@@ -53,8 +62,9 @@
                 </div>
                 <div class="form-group">
                     <label class="form-checkbox">
-                        <input type="checkbox" /><i class="form-icon" /> Remember
-                        me
+                        <input type="checkbox" required /><i
+                            class="form-icon"
+                        /> Remember me
                     </label>
                 </div>
             </fieldset>

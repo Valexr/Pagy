@@ -1,19 +1,21 @@
 <script>
     import { router, meta } from "tinro";
     import { routes, cpath, cmeta, chistory } from "@routes";
-    import Viewpoint from "svelte-viewpoint";
 
-    export let route = {},
-        duration = 100;
+    export let component = null;
 
     $: $cmeta = meta();
-    $: $chistory = { ...$chistory, [$cpath.alias]: $cmeta.url };
+    $: $chistory = { ...$chistory, [$cpath.alias]: $cmeta.match };
+    $: $cpath =
+        routes.find((route) =>
+            $cmeta.pattern
+                ? $cmeta.pattern === route.match
+                : $cmeta.url === route.match
+        ) || routes[routes.length - 1];
 </script>
 
-<Viewpoint
-    delay={duration}
-    timeout={500}
-    {...route}
-    router={$router}
-    meta={$cmeta}
-/>
+{#await component()}
+    Loading component...
+{:then Cmp}
+    <svelte:component this={Cmp.default} router={$router} meta={$cmeta} />
+{/await}

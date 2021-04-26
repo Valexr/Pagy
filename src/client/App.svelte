@@ -1,5 +1,5 @@
 <script>
-    import { Head, Header, Footer } from "@cmp";
+    import { Head, Header, Footer, Modals, SideBars } from "@cmp";
     import { Router } from "@routes";
     import { media } from "svelte-match-media";
 
@@ -14,7 +14,9 @@
 <Header />
 <Router />
 <Footer />
+<SideBars />
 
+<!-- <Modals /> -->
 <style lang="scss" global>
     @import "./global.scss";
 </style>

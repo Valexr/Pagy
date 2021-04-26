@@ -1,11 +1,3 @@
-<script context="module">
-    export async function preload({ router, meta }) {
-        let db = router.path.split("/").filter(Boolean)[0];
-        pages = await data.db(db, meta.params.locale, meta.params.menu);
-        return { pages, router, meta };
-    }
-</script>
-
 <script>
     import { onMount, onDestroy } from "svelte";
     import { router } from "tinro";
@@ -15,43 +7,46 @@
     import { media } from "svelte-match-media";
     import { Modal } from "@cmp";
     import { items } from "@stores/store";
+    import { editForm } from "@stores/pages";
 
-    onMount(() => ($items = pages));
+    onMount(() => {
+        // pages = await data.db("pages", meta.params.locale, meta.params.menu);
+        // $items = pages;
+    });
+    $: data.db("pages", meta.params.locale, meta.params.menu).then((res) => {
+        $items = res;
+        // $items = pages;
+    });
 
-    export let pages = [],
-        meta = {};
+    export let meta = {};
 
     let addBookForm = {
-            title: "",
-            author: "",
-            description: "",
-        },
-        editForm = {
-            id: "",
-            title: "",
-            author: "",
-            description: "",
-        };
+        title: "",
+        author: "",
+        description: "",
+    };
 
     async function addPage() {
-        pages = await data.add(meta.params.menu, addBookForm);
+        $items = await data.add(meta.params.menu, addBookForm);
         addtoggle();
     }
     async function copyPage(page) {
         addBookForm = await data.get(meta.params.menu, page.id);
-        pages = await data.add(meta.params.menu, addBookForm);
+        $items = await data.add(meta.params.menu, addBookForm);
     }
     async function editPage(page) {
-        updatetoggle();
-        editForm = await data.get(meta.params.menu, page.id);
         router.location.query.set("page", page.id);
+        // router.location.hash.set("modal-update");
+        router.location.hash.set("sidebar");
+        $editForm = await data.get(meta.params.menu, page.id);
     }
     async function updatePage() {
-        pages = await data.set(meta.params.menu, editForm, editForm.id);
+        router.goto($router.path);
+        $items = await data.set(meta.params.menu, $editForm, editForm.id);
         updatetoggle();
     }
     async function deletePage(page) {
-        pages = await data.del(meta.params.menu, page.id);
+        $items = await data.del(meta.params.menu, page.id);
     }
 
     function initForm() {
@@ -76,18 +71,18 @@
         updateopen = !updateopen;
     }
 
-    function sortby(items) {
-        pages = pages.sort((a, b) => {
-            return b.id - a.id;
-        });
-        console.log("sort");
-    }
+    // function sortby(items) {
+    //     $items = items.sort((a, b) => {
+    //         return b.id - a.id;
+    //     });
+    //     console.log("sort");
+    // }
 
-    const sortList = (ev) => {
-        pages = ev.detail;
-    };
+    // const sortList = (ev) => {
+    //     $items = ev.detail;
+    // };
 
-    $: sub = Array.from(Array(pages.length).keys());
+    $: sub = Array.from(Array($items.length).keys());
     function openSub(i) {
         console.log(sub, i);
         sub[i] = sub[i] === i ? true : i;
@@ -101,8 +96,8 @@
         <thead>
             <tr>
                 <th />
-                <th on:click={sortby}>Id</th>
-                <th on:click={sortby}>Title</th>
+                <th>Id</th>
+                <th>Title</th>
                 <th>Author</th>
                 <th>Description</th>
                 <th>Create</th>
@@ -111,7 +106,7 @@
             </tr>
         </thead>
         <tbody>
-            {#each pages as page, i (page.id)}
+            {#each $items as page, i (page.id)}
                 <tr class:bg-secondary={sub[i] === true}>
                     <td>
                         <button
@@ -129,19 +124,22 @@
                     <td>{date(page.update)}</td>
                     <td>
                         <button
-                            class="btn btn-action  btn-sm tooltip"
+                            class="btn btn-action tooltip"
+                            class:btn-sm={$media.md}
                             data-tooltip="Edit page"
-                            on:click={editPage(page)}
-                            tinro-ignore><i class="icon icon-edit" /></button
+                            on:click|stopPropagation={() => editPage(page)}
+                            ><i class="icon icon-edit" /></button
                         >
                         <button
-                            class="btn btn-link btn-action btn-sm tooltip"
+                            class="btn btn-link btn-action tooltip"
+                            class:btn-sm={$media.md}
                             data-tooltip="Copy page"
                             on:click={copyPage(page)}
                             ><i class="icon icon-copy" /></button
                         >
                         <button
-                            class="btn btn-link btn-action btn-sm text-error"
+                            class="btn btn-link btn-action text-error"
+                            class:btn-sm={$media.md}
                             on:click={deletePage(page)}
                             ><i class="icon icon-delete" /></button
                         >
@@ -173,7 +171,6 @@
                                     </p>
                                 </div>
                             </div>
-                            <!-- <Cards /> -->
                         </td>
                     </tr>
                 {/if}
@@ -182,9 +179,9 @@
     </table>
 </section>
 
-<Modal
+<!-- <Modal
     id="modal-add"
-    bind:opener={addopen}
+    opener="add"
     title="Add a new page"
     action={{ title: "Add page", do: addPage }}
 >
@@ -224,7 +221,7 @@
 
 <Modal
     id="modal-update"
-    bind:opener={updateopen}
+    opener="update"
     title="Update page"
     action={{ title: "Update", do: updatePage }}
 >
@@ -239,7 +236,7 @@
                 class="form-input"
                 type="text"
                 id="newTitle"
-                bind:value={editForm.title}
+                bind:value={$editForm.title}
                 placeholder="page title"
             />
         </div>
@@ -249,7 +246,7 @@
                 class="form-input"
                 type="text"
                 id="newAuthor"
-                bind:value={editForm.author}
+                bind:value={$editForm.author}
                 placeholder="page author"
             />
         </div>
@@ -259,13 +256,12 @@
                 class="form-input"
                 rows="5"
                 id="newDescription"
-                bind:value={editForm.description}
+                bind:value={$editForm.description}
                 placeholder="page description"
             />
         </div>
     </form>
-</Modal>
-
+</Modal> -->
 <style lang="scss">
     @import "../../../node_modules/spectre.css/src/variables";
     .sub {

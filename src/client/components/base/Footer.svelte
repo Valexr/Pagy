@@ -8,19 +8,28 @@
         cpath: $cpath,
         chistory: $chistory,
     };
+
+    let logopen = false;
+
     $: console.log(log);
 </script>
 
-<footer class="container navbar p-fixed bg-gray">
-    <pre
-        class="code hide-xs"
-        data-lang="JSON">
+<footer class="container navbar p-fixed bg-gray p-2">
+    {#if logopen}
+        <pre
+            class="code hide-xs"
+            data-lang="JSON">
             <code>router: {JSON.stringify($router, 0, 2)}</code>
             <code>cpath: {JSON.stringify($cpath, 0, 2)}</code>
             <code>cmeta: {JSON.stringify($cmeta, 0, 2)}</code>
             <code>chistory: {JSON.stringify($chistory, 0, 2)}</code>
     </pre>
-    <section class="navbar-section" />
+    {/if}
+    <section class="navbar-section">
+        <button class="btn btn-action" on:click={() => (logopen = !logopen)}>
+            <i class="icon icon-arrow-{logopen ? 'down' : 'up'}" />
+        </button>
+    </section>
     <section class="navbar-center">
         <copy>&copy; {new Date().getFullYear()}</copy>
     </section>

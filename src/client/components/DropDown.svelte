@@ -1,7 +1,8 @@
 <script>
     import { clickout } from "@utils";
 
-    export let opener = false,
+    export let ul = null,
+        opener = false,
         openbut = {
             name: "Open",
             icon: "",
@@ -35,41 +36,48 @@
             class="icon {openbut.icon ? openbut.icon : 'icon-caret'}"
         />
     </button>
-    <ul class="menu" use:clickout={opener} on:clickout={() => (opener = false)}>
-        {#each items as item}
-            <li class="menu-item text-capitalize">
-                <slot {item}>
-                    <a
-                        href={item.href}
-                        on:click={item.action}
-                        class:active={item.active}
+    {#if opener}
+        <ul
+            class="menu"
+            bind:this={ul}
+            use:clickout={ul}
+            on:clickout={() => (opener = false)}
+        >
+            {#each items as item}
+                <li class="menu-item text-capitalize">
+                    <slot {item}>
+                        <a
+                            href={item.href}
+                            on:click={item.action}
+                            class:active={item.active}
+                        >
+                            {item.title}
+                            {#if item.button}
+                                <button
+                                    class="btn btn-action btn-sm p-relative float-right sm-acts"
+                                    on:click|preventDefault|stopPropagation
+                                >
+                                    <i class="icon icon-edit" />
+                                </button>
+                            {/if}
+                        </a>
+                    </slot>
+                </li>
+            {/each}
+            {#if downbut}
+                <li class="divider" />
+                <li class="menu-item">
+                    <button
+                        class="btn btn-primary btn-block text-light"
+                        on:click={downbut.action}
                     >
-                        {item.title}
-                        {#if item.button}
-                            <button
-                                class="btn btn-action btn-sm p-relative float-right sm-acts"
-                                on:click|preventDefault|stopPropagation
-                            >
-                                <i class="icon icon-edit" />
-                            </button>
-                        {/if}
-                    </a>
-                </slot>
-            </li>
-        {/each}
-        {#if downbut}
-            <li class="divider" />
-            <li class="menu-item">
-                <button
-                    class="btn btn-primary btn-block text-light"
-                    on:click={downbut.action}
-                >
-                    <i class="icon icon-plus" />
-                    {downbut.title}
-                </button>
-            </li>
-        {/if}
-    </ul>
+                        <i class="icon icon-plus" />
+                        {downbut.title}
+                    </button>
+                </li>
+            {/if}
+        </ul>
+    {/if}
 </div>
 
 <style lang="scss">

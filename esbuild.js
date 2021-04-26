@@ -59,7 +59,7 @@ async function build_server() {
         minify: !DEV,
         incremental: DEV,
         // external: Object.keys(require('./package.json').dependencies),
-        // external: ['mongoose'],
+        external: ['../img/*'],
         plugins: [
             plugin_server()
         ]

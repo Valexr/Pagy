@@ -7,7 +7,10 @@ chistory.subscribe(val => sessionStorage.setItem("chistory", JSON.stringify(val)
 export const cmeta = writable(JSON.parse(sessionStorage.getItem("cmeta")) || {});
 cmeta.subscribe(val => sessionStorage.setItem("cmeta", JSON.stringify(val)));
 
-export const cpath = derived(cmeta, $cmeta => routes.find((route) => $cmeta.pattern ? $cmeta.pattern === route.match : $cmeta.url === route.match) || routes[routes.length - 1]);
+export const cpath = writable(JSON.parse(sessionStorage.getItem("cpath")) || {});
+cpath.subscribe(val => sessionStorage.setItem("cpath", JSON.stringify(val)));
+
+// export const cpath = derived(cmeta, $cmeta => routes.find((route) => $cmeta.pattern ? $cmeta.pattern === route.match : $cmeta.url === route.match) || routes[routes.length - 1]);
 
 export const routes = [
     {
@@ -40,7 +43,7 @@ export const routes = [
         match: '/plugins',
         alias: 'plugins',
         menu: true,
-        navbar: false,
+        navbar: true,
         component: () => import('@pages/plugins.svelte'),
         props: { title: 'plugins' }
     },
@@ -48,7 +51,7 @@ export const routes = [
         match: '/locales',
         alias: 'locales',
         menu: true,
-        navbar: false,
+        navbar: true,
         component: () => import('@/client/pages/locales.svelte'),
         props: { title: 'locales' }
     },
@@ -56,7 +59,7 @@ export const routes = [
         match: '/repository',
         alias: 'repository',
         menu: true,
-        navbar: false,
+        navbar: true,
         component: () => import('@/client/pages/repository.svelte'),
         props: { title: 'repository' }
     },
