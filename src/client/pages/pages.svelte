@@ -1,8 +1,27 @@
-<script>
-    import { onMount } from "svelte";
+<script context="module">
+    export async function preload({ router, meta }) {
+        let db = router.path.split("/").filter(Boolean)[0];
+        pages = await data.db(db, meta.params.locale, meta.params.menu);
+        return { pages, router, meta };
+    }
+</script>
 
-    let books = [],
-        addBookForm = {
+<script>
+    import { onMount, onDestroy } from "svelte";
+    import { router } from "tinro";
+    import { slide } from "svelte/transition";
+    import { date } from "@utils";
+    import * as data from "@api/data";
+    import { media } from "svelte-match-media";
+    import { Modal } from "@cmp";
+    import { items } from "@stores/store";
+
+    onMount(() => ($items = pages));
+
+    export let pages = [],
+        meta = {};
+
+    let addBookForm = {
             title: "",
             author: "",
             description: "",
@@ -12,102 +31,27 @@
             title: "",
             author: "",
             description: "",
-        },
-        type = "all";
-
-    $: console.log(books, type);
-    onMount(() => getAll("books"));
-
-    function getAll(tp) {
-        fetch(`/api/${tp}`).then(async (res) => {
-            books = await res.json();
-            type = tp;
-        });
-    }
-
-    function addBook() {
-        const payload = {
-            title: addBookForm.title,
-            author: addBookForm.author,
-            description: addBookForm.description,
         };
-        const path = "/api/books";
-        fetch(path, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-        })
-            .then(async (res) => {
-                const item = await res.json();
-                books = [...books, item];
-                console.log("add: ", item);
-                // getAll("books")
-            })
-            .catch((error) => {
-                console.log(error);
-                getAll("books");
-            });
-    }
 
-    async function copyBook(book) {
-        addBookForm = await fetch(`/api/books/${book.id}`).then((res) =>
-            res.json()
-        );
-        addBookForm && addBook();
+    async function addPage() {
+        pages = await data.add(meta.params.menu, addBookForm);
+        addtoggle();
     }
-
-    async function editBook(book) {
-        // editForm = book;
-        editForm = await fetch(`/api/books/${book.id}`).then((res) =>
-            res.json()
-        );
+    async function copyPage(page) {
+        addBookForm = await data.get(meta.params.menu, page.id);
+        pages = await data.add(meta.params.menu, addBookForm);
+    }
+    async function editPage(page) {
+        updatetoggle();
+        editForm = await data.get(meta.params.menu, page.id);
+        router.location.query.set("page", page.id);
+    }
+    async function updatePage() {
+        pages = await data.set(meta.params.menu, editForm, editForm.id);
         updatetoggle();
     }
-
-    function updateBook() {
-        const payload = {
-            title: editForm.title,
-            author: editForm.author,
-            description: editForm.description,
-        };
-        const path = `/api/books/${editForm.id}`;
-        fetch(path, {
-            method: "PUT", // or 'PUT'
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-        })
-            .then(async (res) => {
-                const item = await res.json();
-                const index = books.findIndex((el) => el.id === item.id);
-                books[index] = item;
-                console.log("update: ", item, index);
-                // getAll("books");
-            })
-            .catch((error) => {
-                console.error(error);
-                getAll("books");
-            });
-        updatetoggle();
-    }
-
-    function removeBook(book) {
-        const path = `/api/books/${book.id}`;
-        fetch(path, { method: "DELETE" })
-            .then(async (res) => {
-                const diff = await res.json();
-                const ids = diff.map((i) => i.id);
-                books = books.filter((el) => !ids.includes(el.id));
-                console.log("delete: ", diff, ids, books);
-                // getAll("books");
-            })
-            .catch((error) => {
-                console.error(error);
-                getAll("books");
-            });
+    async function deletePage(page) {
+        pages = await data.del(meta.params.menu, page.id);
     }
 
     function initForm() {
@@ -133,230 +77,204 @@
     }
 
     function sortby(items) {
-        books = books.sort((a, b) => {
+        pages = pages.sort((a, b) => {
             return b.id - a.id;
         });
         console.log("sort");
     }
 
     const sortList = (ev) => {
-        books = ev.detail;
+        pages = ev.detail;
     };
-    let sub = false;
+
+    $: sub = Array.from(Array(pages.length).keys());
+    function openSub(i) {
+        console.log(sub, i);
+        sub[i] = sub[i] === i ? true : i;
+    }
+    let p =
+        "The responsive layout also provides fixed-width containers. Use grid-xs(480px), grid-sm(600px), grid-md(840px), grid-lg(960px) or grid-xl(1280px) to the container for a fixed-width container with the specific max-width.";
 </script>
 
-<header class="navbar container p-sticky">
-    <section class="navbar-section">
-        <button class="btn btn-primary" on:click={addtoggle}>Add Book</button>
-    </section>
-    <section class="navbar-center">
-        <h3>{books.length} pages</h3>
-    </section>
-    <section class="navbar-section">
-        <nav class="btn-group btn-group-block">
-            <button
-                class="btn"
-                class:btn-primary={type === "all"}
-                on:click={() => (getAll("*"), (type = "all"))}>All</button
-            >
-            <button
-                class="btn"
-                class:btn-primary={type === "books"}
-                on:click={() => getAll("books")}>Books</button
-            >
-            <button
-                class="btn"
-                class:btn-primary={type === "user"}
-                on:click={() => (getAll("user*"), (type = "user"))}>User</button
-            >
-            <button
-                class="btn"
-                class:btn-primary={type === "role"}
-                on:click={() => (getAll("role*"), (type = "role"))}>Role</button
-            >
-            <button
-                class="btn"
-                class:btn-primary={type === "animal"}
-                on:click={() => (getAll("animal*"), (type = "animal"))}
-                >Animal</button
-            >
-        </nav>
-    </section>
-</header>
-
-<main class="container">
-    <section class="column col-12">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th />
-                    <th on:click={sortby}>Id</th>
-                    <th on:click={sortby}>Title</th>
-                    <th>Author</th>
-                    <th>Description</th>
-                    <th>Create</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {#each books as book, i (book.id)}
-                    <tr>
-                        <td
-                            ><button
-                                class="btn btn-link btn-action tooltip"
-                                data-tooltip="Sub set"
-                                on:click={(e) => (sub = !sub)}
-                                ><i
-                                    class="icon icon-more-vert c-move"
-                                /></button
-                            ></td
+<section class="container">
+    <table class="table table-hover" class:table-scroll={$media.md}>
+        <thead>
+            <tr>
+                <th />
+                <th on:click={sortby}>Id</th>
+                <th on:click={sortby}>Title</th>
+                <th>Author</th>
+                <th>Description</th>
+                <th>Create</th>
+                <th>Update</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {#each pages as page, i (page.id)}
+                <tr class:bg-secondary={sub[i] === true}>
+                    <td>
+                        <button
+                            class="btn btn-link btn-action btn-sm tooltip"
+                            data-tooltip="Sub set"
+                            on:click={openSub(i)}
+                            ><i class="icon icon-more-vert c-move" /></button
                         >
-                        <td>{i}</td>
-                        <td>{book.title}</td>
-                        <td>{book.author}</td>
-                        <td>{book.description}</td>
-                        <td>{new Date(book.create).toLocaleString("ru")}</td>
-                        <td>
-                            <button
-                                class="btn btn-primary btn-action tooltip"
-                                data-tooltip="Edit book"
-                                on:click={editBook(book)}
-                                ><i class="icon icon-edit" /></button
-                            >
-                            <button
-                                class="btn btn-action tooltip"
-                                data-tooltip="Copy book"
-                                on:click={copyBook(book)}
-                                ><i class="icon icon-copy" /></button
-                            >
-                            <button
-                                class="btn btn-link text-error"
-                                on:click={removeBook(book)}
-                                ><i class="icon icon-delete" /></button
-                            >
+                    </td>
+                    <td>{i}</td>
+                    <td>{page.title}</td>
+                    <td>{page.author}</td>
+                    <td>{page.description}</td>
+                    <td>{date(page.create)}</td>
+                    <td>{date(page.update)}</td>
+                    <td>
+                        <button
+                            class="btn btn-action  btn-sm tooltip"
+                            data-tooltip="Edit page"
+                            on:click={editPage(page)}
+                            tinro-ignore><i class="icon icon-edit" /></button
+                        >
+                        <button
+                            class="btn btn-link btn-action btn-sm tooltip"
+                            data-tooltip="Copy page"
+                            on:click={copyPage(page)}
+                            ><i class="icon icon-copy" /></button
+                        >
+                        <button
+                            class="btn btn-link btn-action btn-sm text-error"
+                            on:click={deletePage(page)}
+                            ><i class="icon icon-delete" /></button
+                        >
+                    </td>
+                </tr>
+                {#if sub[i] === true}
+                    <tr
+                        transition:slide
+                        class="sub bg-gray"
+                        class:sub-open={sub[i] === true}
+                    >
+                        <td colspan="8">
+                            <div class="columns">
+                                <div class="column col-5">
+                                    <p>
+                                        {p}
+                                    </p>
+                                </div>
+                                <div class="column col-2">
+                                    <img
+                                        src="/favicon.png"
+                                        alt="favicon"
+                                        width="100px"
+                                    />
+                                </div>
+                                <div class="column col-5">
+                                    <p>
+                                        {p}
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- <Cards /> -->
                         </td>
                     </tr>
-                    {#if sub}
-                        <tr>
-                            <td colspan="7">
-                                SubSet SvelteJS + Spectre client, Derver BFF
-                                server
-                            </td>
-                        </tr>
-                    {/if}
-                {/each}
-            </tbody>
-        </table>
-    </section>
-</main>
+                {/if}
+            {/each}
+        </tbody>
+    </table>
+</section>
 
-<div class="modal" class:active={addopen} id="modal-add">
-    <div class="modal-overlay" aria-label="Close" on:click={addtoggle} />
-    <div class="modal-container">
-        <div class="modal-header">
-            <button
-                class="btn btn-clear float-right"
-                aria-label="Close"
-                on:click={addtoggle}
+<Modal
+    id="modal-add"
+    bind:opener={addopen}
+    title="Add a new page"
+    action={{ title: "Add page", do: addPage }}
+>
+    <form class="form-horizontal" slot="body">
+        <div class="form-group">
+            <label class="form-label" for="newTitle">Title</label>
+            <input
+                class="form-input"
+                type="text"
+                id="newTitle"
+                bind:value={addBookForm.title}
+                placeholder="page title"
             />
-            <div class="modal-title h5">Add a new book</div>
         </div>
-        <div class="modal-body">
-            <div class="content">
-                <div class="form-group">
-                    <label class="form-label" for="newTitle">Title</label>
-                    <input
-                        class="form-input"
-                        type="text"
-                        id="newTitle"
-                        bind:value={addBookForm.title}
-                        placeholder="book title"
-                    />
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="newAuthor">Author</label>
-                    <input
-                        class="form-input"
-                        type="text"
-                        id="newAuthor"
-                        bind:value={addBookForm.author}
-                        placeholder="book author"
-                    />
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="newDescription">
-                        Description
-                    </label>
-                    <textarea
-                        class="form-input"
-                        rows="5"
-                        id="newDescription"
-                        bind:value={addBookForm.description}
-                        placeholder="book description"
-                    />
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button
-                class="btn btn-primary"
-                on:click={() => (addBook(), addtoggle())}>Add book</button
-            >
-            <button class="btn btn-link" on:click={addtoggle}>Cancel</button>
-        </div>
-    </div>
-</div>
-<div class="modal" class:active={updateopen} id="modal-update">
-    <div class="modal-overlay" aria-label="Close" on:click={updatetoggle} />
-    <div class="modal-container">
-        <div class="modal-header">
-            <button
-                class="btn btn-clear float-right"
-                aria-label="Close"
-                on:click={updatetoggle}
+        <div class="form-group">
+            <label class="form-label" for="newAuthor">Author</label>
+            <input
+                class="form-input"
+                type="text"
+                id="newAuthor"
+                bind:value={addBookForm.author}
+                placeholder="page author"
             />
-            <div class="modal-title h5">Update book</div>
         </div>
-        <div class="modal-body">
-            <div class="content">
-                <div class="form-group">
-                    <label class="form-label" for="newTitle">Title</label>
-                    <input
-                        class="form-input"
-                        type="text"
-                        id="newTitle"
-                        bind:value={editForm.title}
-                        placeholder="book title"
-                    />
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="newAuthor">Author</label>
-                    <input
-                        class="form-input"
-                        type="text"
-                        id="newAuthor"
-                        bind:value={editForm.author}
-                        placeholder="book author"
-                    />
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="newDescription">
-                        Description
-                    </label>
-                    <textarea
-                        class="form-input"
-                        rows="5"
-                        id="newDescription"
-                        bind:value={editForm.description}
-                        placeholder="book description"
-                    />
-                </div>
-            </div>
+        <div class="form-group">
+            <label class="form-label" for="newDescription"> Description </label>
+            <textarea
+                class="form-input"
+                rows="5"
+                id="newDescription"
+                bind:value={addBookForm.description}
+                placeholder="page description"
+            />
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" on:click={updateBook}>Update</button
-            >
-            <button class="btn btn-link" on:click={updatetoggle}>Cancel</button>
+    </form>
+</Modal>
+
+<Modal
+    id="modal-update"
+    bind:opener={updateopen}
+    title="Update page"
+    action={{ title: "Update", do: updatePage }}
+>
+    <form
+        class="form-horizontal"
+        slot="body"
+        on:submit|preventDefault={updatePage}
+    >
+        <div class="form-group">
+            <label class="form-label" for="newTitle">Title</label>
+            <input
+                class="form-input"
+                type="text"
+                id="newTitle"
+                bind:value={editForm.title}
+                placeholder="page title"
+            />
         </div>
-    </div>
-</div>
+        <div class="form-group">
+            <label class="form-label" for="newAuthor">Author</label>
+            <input
+                class="form-input"
+                type="text"
+                id="newAuthor"
+                bind:value={editForm.author}
+                placeholder="page author"
+            />
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="newDescription"> Description </label>
+            <textarea
+                class="form-input"
+                rows="5"
+                id="newDescription"
+                bind:value={editForm.description}
+                placeholder="page description"
+            />
+        </div>
+    </form>
+</Modal>
+
+<style lang="scss">
+    @import "../../../node_modules/spectre.css/src/variables";
+    .sub {
+        height: 0;
+        transition: height 500ms ease 500ms;
+        // display: none;
+        &.sub-open {
+            height: 300px;
+            // display: table-row;
+        }
+    }
+</style>

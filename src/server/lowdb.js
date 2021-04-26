@@ -1,53 +1,18 @@
-import { lowdb } from './db'
+import { lowdb, createdb } from './db'
 import { nanoid } from 'nanoid'
 
-export default { load, get, post, update, del }
+export default { db, get, post, put, del }
 
-export function lowDb() {
-    // Set some defaults (required if your JSON file is empty)
-    lowdb.defaults({ posts: [], user: {}, count: 0 })
-        .write()
-
-    lowdb._.mixin({
-        add: function (a, v) {
-            let has = false
-            a.some(i => {
-                if (lowdb._.isEqual(i, v)) has = true
-            })
-            !has && a.push(v)
-        }
-    })
-    // Add a post
-    lowdb.get('posts')
-        // .includes({ id: 1, title: 'title3' })
-        // .push({ id: 1, title: 'title2' })
-        .add({ id: 5, title: 'title5' })
-        .write()
-
-    // Set a user using Lodash shorthand syntax
-    lowdb.set('user.name', 'typicode')
-        .write()
-
-    // Increment count
-    lowdb.update('count', n => n + 1)
-        .write()
-
-    const postsId1 = lowdb.get('posts')
-        .filter({ id: 1, title: 'title' })
-        .value()
-    // console.log(postsId1)
-    return lowdb.get('posts').value()
-}
-
-const idlength = 8
-let utc = Date.now() // Math.floor(Date.now() / 1000) || ~~(+new Date / 1000) / ~~(new Date().getTime() / 1000) 
-const books = { books: [] }
-const pages = { pages: [] }
-import lodashId from 'lodash-id'
-
-function load() {
+async function db(req, res, next) {
+    if (req.params.locale) createdb(req.params.datatype, req.params.locale)
+    else createdb(req.params.datatype)
     lowdb().then(lowdb => {
-        lowdb.defaults(books).write()
+        lowdb.defaults({ [req.params.type]: [] }).write()
+        const items = lowdb
+            .get(req.params.type)
+            .value()
+        res.json(items)
+        // next()
     })
     // lowdb._.mixin({
     //     add: function (a, v) {
@@ -102,6 +67,7 @@ function load() {
 }
 
 function get(req, res) {
+    console.log(req.params)
     if (req.params.id) {
         // lowdb._.mixin(lodashId)
         lowdb().then(lowdb => {
@@ -114,10 +80,19 @@ function get(req, res) {
         })
     } else {
         lowdb().then(lowdb => {
-            const items = lowdb
-                .get(req.params.type)
-                .value()
-            res.json(items)
+            const type = lowdb.has(req.params.type).value()
+            console.log(type)
+            if (type) {
+                const items = lowdb
+                    .get(req.params.type)
+                    .value()
+                res.json(items)
+            } else {
+                lowdb
+                    .set(req.params.type, [])
+                    .write()
+                res.json([])
+            }
         })
     }
 }
@@ -135,7 +110,7 @@ function post(req, res, next) {
     })
 }
 
-function update(req, res, next) {
+function put(req, res, next) {
     // lowdb._.mixin(lodashId)
     lowdb().then(lowdb => {
         lowdb

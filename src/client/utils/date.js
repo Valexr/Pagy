@@ -19,3 +19,7 @@ export function dateFormat(date, locale, options) {
         return new Intl.DateTimeFormat(locale, options).format(datetime)
     } else { return 'undefined' }
 }
+
+export function date(utc, locale = "ru") {
+    return new Date(utc).toLocaleString(locale);
+}

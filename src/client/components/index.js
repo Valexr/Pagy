@@ -1,1 +1,8 @@
+export { default as Head } from './Head.svelte'
 export { default as Header } from './Header.svelte'
+export { default as Navbar } from './Navbar.svelte'
+export { default as Footer } from './Footer.svelte'
+export { default as Cards } from './Cards.svelte'
+export { default as DropDown } from './DropDown.svelte'
+export { default as BreadCrumbs } from './BreadCrumbs.svelte'
+export { default as Modal } from './Modal.svelte'

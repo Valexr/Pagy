@@ -6,6 +6,7 @@ app/client/build
 
 *-lock.*
 *.map
+app.js
 
 .DS_Store
 .env

@@ -8,4 +8,4 @@ COPY ./app /app
 
 EXPOSE 1313
 
-CMD ["node","server/server.js"]
+CMD ["node","app.js"]

@@ -1,22 +1,42 @@
 <script>
-    import { Route, router } from "tinro";
-    import { Lazy, Transition } from "@routes";
-    import { routes } from "@routes";
-    $: path =
-        routes.find((route) => route.match.includes($router.path)) ||
-        routes[routes.length - 1];
-    $: console.log($router.path, path.match, path);
+    import { fade } from "svelte/transition";
+    import { Route, router, meta } from "tinro";
+    import { routes, Lazy, cpath, cmeta, chistory } from "@routes";
+
+    $: id = $cpath ? $cpath.alias : $router.path === "/" ? "auth" : "404";
 </script>
 
-<main class="container">
-    <Transition>
+{#key $router}
+    <main {id} class="container" in:fade={{ duration: 700 }}>
         <Route>
-            <Route path={path.match}>
-                <Lazy component={path.component} />
-            </Route>
-            <Route fallback>
-                <Lazy component={path.component} />
+            {#each routes.filter((route) => route.menu) as route}
+                <Route path={route.match} let:meta>
+                    <Lazy {route} />
+                </Route>
+            {/each}
+            <Route fallback let:meta>
+                fallback
+                <Lazy route={routes[routes.length - 1]} />
             </Route>
         </Route>
-    </Transition>
-</main>
+    </main>
+{/key}
+
+<style lang="scss">
+    main {
+        padding: 4em 0 4em;
+        &#auth {
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    }
+</style>

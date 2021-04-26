@@ -1,24 +1,89 @@
 <script>
-    import { active } from "tinro";
-    import { routes } from "@routes";
+    import { router, meta } from "tinro";
+    import { routes, chistory, cmeta, cpath } from "@routes";
+    import { clickout } from "@utils";
+    import { DropDown, Navbar, BreadCrumbs } from "@cmp";
+
+    let menu = false,
+        user = false;
+
+    $: links = routes
+        .map((link) => {
+            if (link.match.includes(":")) {
+                const match =
+                    link.alias in $chistory
+                        ? $chistory[link.alias]
+                        : link.default;
+                return {
+                    ...link,
+                    match: match,
+                };
+            } else return link;
+        })
+        .filter((link) => link.menu);
 </script>
 
-<header class="navbar container p-sticky">
-    <section class="navbar-section">
-        <button class="btn btn-primary">Add Book</button>
+<header class="navbar container p-fixed p-2 bg-gray">
+    <section class="navbar-section columns">
+        <div class="column col-auto">
+            <DropDown
+                bind:opener={menu}
+                openbut={{ name: "", icon: "icon-apps" }}
+                items={links}
+                downbut={null}
+                let:item
+            >
+                <slot name="item">
+                    {(item.title = item.props.title)}
+                    {(item.href = item.match)}
+                </slot>
+                <!-- <a href={item.match} class:active={$router.path === item.match}>
+                    {item.props.title}
+                </a> -->
+            </DropDown>
+        </div>
     </section>
-    <section class="navbar-center">
-        <h1>Pagy</h1>
+    <section class="navbar-center columns">
+        <div class="column col-auto">
+            <BreadCrumbs />
+        </div>
     </section>
-    <section class="navbar-section">
-        <nav class="btn-group btn-group-block">
-            {#each routes.filter((route) => route.menu) as route}
-                <a class="btn" href={route.match} use:active exact
-                    >{route.props.title}</a
-                >
-            {/each}
-        </nav>
+    <section class="navbar-section columns">
+        <div class="column col-auto">
+            <DropDown
+                bind:opener={user}
+                openbut={{
+                    name: "",
+                    icon: "icon-people",
+                    class: "btn-action s-circle badge",
+                    badge: "8",
+                }}
+                items={links}
+                downbut={null}
+                right={true}
+                let:item
+            >
+                <a href={item.match} class:active={$router.path === item.match}>
+                    {item.props.title}
+                </a>
+            </DropDown>
+        </div>
     </section>
 </header>
 
-<style lang="scss"></style>
+{#if $cpath.navbar}
+    <Navbar />
+{/if}
+
+<style lang="scss">
+    @import "../../../node_modules/spectre.css/src/variables";
+    header {
+        z-index: 100;
+        // height: 2.5rem;
+        .menu {
+            .menu-item a {
+                text-transform: capitalize;
+            }
+        }
+    }
+</style>

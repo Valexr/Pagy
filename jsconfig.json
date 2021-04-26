@@ -5,6 +5,12 @@
             "@/*": [
                 "src/*"
             ],
+            "@api/*": [
+                "src/client/api/*"
+            ],
+            "@ep/*": [
+                "server/endpoints/*"
+            ],
             "@cmp": [
                 "src/client/components/index.js"
             ],
@@ -14,8 +20,14 @@
             "@routes": [
                 "src/client/routes/index.js"
             ],
+            "@stores/*": [
+                "src/client/stores/*"
+            ],
             "@utils": [
                 "src/client/utils/index.js"
+            ],
+            "@spectre/*": [
+                "node_modules/spectre.css/src/*"
             ]
         }
     }

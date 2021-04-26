@@ -28,7 +28,7 @@ const remote = DEV && createRemote('svelte_derver_starter');
 
     if (DEV) {
 
-        nodemon(path.join(CWD, 'app/server', 'server.js'), { cwd: path.join(CWD, 'app/server') });
+        nodemon(path.join(CWD, 'app', 'app.js'), { cwd: path.join(CWD, 'app') });
 
         watch(path.join(CWD, 'src', 'client'), { recursive: true }, async function () {
             try {
@@ -45,7 +45,7 @@ const remote = DEV && createRemote('svelte_derver_starter');
         });
     } else {
         fs.unlink('app/client/build/client.js.map')
-        fs.unlink('app/server/server.js.map')
+        fs.unlink('app/app.js.map')
     }
 })()
 
@@ -53,7 +53,7 @@ async function build_server() {
     return await build({
         entryPoints: ['src/server/main.js'],
         bundle: true,
-        outfile: 'app/server/server.js',
+        outfile: 'app/app.js',
         platform: 'node',
         sourcemap: DEV, // Use `DEV && 'inline'` to inline sourcemaps to the bundle
         minify: !DEV,
@@ -106,7 +106,7 @@ function plugin_server() {
                     contents: `
                     import {derver} from "derver";
                     import path from "path";
-                    const DIR = path.join(__dirname,'../client');
+                    const DIR = path.join(__dirname,'client');
                     export default function (options){
                         return derver({
                             dir: DIR,
@@ -124,7 +124,7 @@ function plugin_server() {
                     contents: `
                     import {derver} from "derver";
                     import path from "path";
-                    const DIR = path.join(__dirname,'../client');
+                    const DIR = path.join(__dirname,'client');
                     export default function (options){
                         return derver({
                             dir: DIR,

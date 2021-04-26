@@ -1,0 +1,28 @@
+{
+  "admin": [
+    {
+      "email": "valexr@gmail.com",
+      "password": "www",
+      "id": 1618914837935,
+      "create": 1618914837935
+    },
+    {
+      "email": "Email@Email.ru",
+      "password": "Password",
+      "id": 1618915776434,
+      "create": 1618915776434
+    },
+    {
+      "email": "email@email.ru",
+      "password": "pass",
+      "id": 1618919366921,
+      "create": 1618919366921
+    },
+    {
+      "email": "mail@mail.to",
+      "password": "sa",
+      "id": 1618919453190,
+      "create": 1618919453190
+    }
+  ]
+}
