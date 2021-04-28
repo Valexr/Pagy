@@ -1,5 +1,5 @@
 <div class="docs-demo columns">
-    <div class="column col-6 col-xs-12">
+    <div class="column col-4 col-xs-12">
         <div class="card">
             <div class="card-image">
                 <img
@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <div class="column col-6 col-xs-12">
+    <div class="column col-4 col-xs-12">
         <div class="card">
             <div class="card-header">
                 <div class="card-title h5">Apple</div>
@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-    <div class="column col-6 col-xs-12">
+    <div class="column col-4 col-xs-12">
         <div class="card">
             <div class="card-image">
                 <img
@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div class="column col-6 col-xs-12">
+    <div class="column col-4 col-xs-12">
         <div class="card">
             <div class="card-image">
                 <img
@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-    <div class="column col-6 col-xs-12">
+    <div class="column col-4 col-xs-12">
         <div class="card">
             <div class="card-header">
                 <div class="card-title h5">Apple</div>
@@ -109,7 +109,7 @@
             </div>
         </div>
     </div>
-    <div class="column col-6 col-xs-12">
+    <div class="column col-4 col-xs-12">
         <div class="card">
             <div class="card-header">
                 <div class="card-title h5">Google</div>

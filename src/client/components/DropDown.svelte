@@ -12,7 +12,8 @@
         },
         items = [],
         downbut = {},
-        right = false;
+        right = false,
+        list = true;
 </script>
 
 <div class="dropdown {right ? 'dropdown-right' : ''}" class:active={opener}>
@@ -32,9 +33,8 @@
                 <img src="favicon.png" alt="YZ" />
             </figure>
         </slot> -->
-        {openbut.name}<i
-            class="icon {openbut.icon ? openbut.icon : 'icon-caret'}"
-        />
+        {openbut.name}
+        <i class="icon {openbut.icon ? openbut.icon : 'icon-caret'}" />
     </button>
     {#if opener}
         <ul
@@ -43,27 +43,33 @@
             use:clickout={ul}
             on:clickout={() => (opener = false)}
         >
-            {#each items as item}
-                <li class="menu-item text-capitalize">
-                    <slot {item}>
-                        <a
-                            href={item.href}
-                            on:click={item.action}
-                            class:active={item.active}
-                        >
-                            {item.title}
-                            {#if item.button}
-                                <button
-                                    class="btn btn-action btn-sm p-relative float-right sm-acts"
-                                    on:click|preventDefault|stopPropagation
-                                >
-                                    <i class="icon icon-edit" />
-                                </button>
-                            {/if}
-                        </a>
-                    </slot>
+            {#if list}
+                {#each items as item}
+                    <li class="menu-item text-capitalize">
+                        <slot {item}>
+                            <a
+                                href={item.href}
+                                on:click={item.action}
+                                class:active={item.active}
+                            >
+                                {item.title}
+                                {#if item.button}
+                                    <button
+                                        class="btn btn-action btn-sm p-relative float-right sm-acts"
+                                        on:click|preventDefault|stopPropagation
+                                    >
+                                        <i class="icon icon-edit" />
+                                    </button>
+                                {/if}
+                            </a>
+                        </slot>
+                    </li>
+                {/each}
+            {:else}
+                <li>
+                    <slot name="static" />
                 </li>
-            {/each}
+            {/if}
             {#if downbut}
                 <li class="divider" />
                 <li class="menu-item">

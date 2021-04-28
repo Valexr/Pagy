@@ -1,9 +1,11 @@
 <script>
+    import { fade } from "svelte/transition";
     import { router } from "tinro";
     import { cmeta, cpath } from "@routes";
     import { items } from "@stores/store";
     import { addopen } from "@stores/pages";
     import { DropDown } from "@cmp";
+    import { media } from "svelte-match-media";
 
     let locales = ["ru", "en", "fr", "de"],
         addLocale = {
@@ -13,7 +15,8 @@
         menus = ["header", "main", "footer"],
         addMenu = { action: () => console.log("addMenu"), title: "Menu" },
         localesOpen = false,
-        menusOpen = false;
+        menusOpen = false,
+        searchOpen = false;
 
     let addBookForm = {
         title: "",
@@ -23,7 +26,7 @@
 
     function addtoggle() {
         initForm();
-        router.location.hash.set("sidebar");
+        router.location.hash.set("modal-add");
         // addopen = !addopen;
     }
 
@@ -34,10 +37,10 @@
     }
 </script>
 
-<nav class="navbar container p-sticky bg-gray">
-    <section class="navbar-section columns">
+<nav class="navbar container p-sticky p-2" in:fade={{ duration: 500 }}>
+    <section class="navbar-section ">
         {#if $cmeta.params.locale}
-            <div class="column col-auto not-navigate">
+            <div class="column col-auto">
                 <DropDown
                     opener={localesOpen}
                     openbut={{ name: $cmeta.params.locale.toUpperCase() }}
@@ -83,7 +86,7 @@
             </DropDown>
         </div>
     </section>
-    <section class="navbar-center columns">
+    <section class="navbar-center ">
         <div class="column col-auto">
             <button
                 class="btn btn-primary btn-lg badge"
@@ -96,18 +99,57 @@
             </button>
         </div>
     </section>
-    <section class="navbar-section columns">
-        <div class="column col-auto">
-            <div class="input-group">
-                <input
-                    type="text"
-                    class="form-input hide-xs"
-                    placeholder="..."
-                />
-                <button class="btn btn-primary input-group-btn"
-                    ><i class="icon icon-search" /></button
+    <section class="navbar-section ">
+        <div
+            class="column"
+            class:col-auto={(!$media.md && !$media.sm) || $media.xs}
+        >
+            {#if $media.xs}
+                <DropDown
+                    opener={searchOpen}
+                    openbut={{
+                        name: "",
+                        icon: "icon-search",
+                        class: "btn-primary btn-action",
+                    }}
+                    right="true"
+                    downbut={null}
+                    list={false}
                 >
-            </div>
+                    <slot slot="static">
+                        <input
+                            id="input-search"
+                            type="text"
+                            class="form-input"
+                            placeholder="..."
+                        />
+                    </slot>
+                    <!-- <a
+                    href={`/pages/${$cmeta.params.locale}/${item}`}
+                    class:active={item === $cmeta.params.menu}
+                >
+                    {item}
+                    <button
+                        class="btn btn-link btn-sm p-relative float-right sm-acts"
+                        on:click|preventDefault|stopPropagation
+                    >
+                        <i class="icon icon-edit" />
+                    </button>
+                </a> -->
+                </DropDown>
+            {:else}
+                <div class="input-group float-right">
+                    <input
+                        id="input-search"
+                        type="text"
+                        class="form-input"
+                        placeholder="..."
+                    />
+                    <button class="btn btn-primary input-group-btn"
+                        ><i class="icon icon-search" /></button
+                    >
+                </div>
+            {/if}
         </div>
     </section>
 </nav>
@@ -116,9 +158,12 @@
     @import "../../../node_modules/spectre.css/src/variables";
     .navbar {
         z-index: 99;
-        height: 5em;
-        position: fixed;
-        top: 4em;
+        height: 4.5em;
+        // position: fixed;
+        top: 0;
         background: $light-color;
+    }
+    #input-search {
+        max-width: 240px;
     }
 </style>

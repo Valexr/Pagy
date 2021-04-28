@@ -22,6 +22,16 @@ const fs = require('fs/promises');
 const CWD = process.cwd();
 const remote = DEV && createRemote('svelte_derver_starter');
 
+function removeMap(path) {
+    fs.access(path, fs.F_OK, (err) => {
+        if (err) {
+            console.error(err)
+            return
+        }
+        fs.unlink(path)
+    })
+}
+
 (async () => {
     const bundleServer = await build_server();
     const bundleClient = await build_client();

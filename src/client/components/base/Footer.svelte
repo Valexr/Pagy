@@ -9,7 +9,7 @@
         chistory: $chistory,
     };
 
-    let logopen = false;
+    let logopen = true;
 
     $: console.log(log);
 </script>
@@ -26,12 +26,19 @@
     </pre>
     {/if}
     <section class="navbar-section">
-        <button class="btn btn-action" on:click={() => (logopen = !logopen)}>
-            <i class="icon icon-arrow-{logopen ? 'down' : 'up'}" />
-        </button>
+        <div class="column col-auto">
+            <button
+                class="btn btn-action"
+                on:click={() => (logopen = !logopen)}
+            >
+                <i class="icon icon-arrow-{logopen ? 'down' : 'up'}" />
+            </button>
+        </div>
     </section>
     <section class="navbar-center">
-        <copy>&copy; {new Date().getFullYear()}</copy>
+        <div class="column col-auto">
+            <copy>&copy; {new Date().getFullYear()}</copy>
+        </div>
     </section>
     <section class="navbar-section" />
 </footer>

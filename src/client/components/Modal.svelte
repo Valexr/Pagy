@@ -35,7 +35,7 @@
                     aria-label="Close"
                     on:click={close}
                 />
-                <div class="modal-title h5">{title}</div>
+                <div class="modal-title h1">{title}</div>
             </slot>
         </div>
         <div class="modal-body">
@@ -47,8 +47,10 @@
                     class="btn btn-primary"
                     aria-keyshortcuts="Enter"
                     type="submit"
-                    on:click={action.do}>{action.title}</button
+                    on:click={action.do}
                 >
+                    {action.title}
+                </button>
                 <button class="btn btn-link" on:click={close}
                     >{cancel.title}</button
                 >

@@ -15,7 +15,11 @@
 </script>
 
 {#await component()}
-    Loading component...
+    <div class="docs-demo columns">
+        <div class="column col-12 text-center">
+            <div class="loading loading-lg" />
+        </div>
+    </div>
 {:then Cmp}
     <svelte:component this={Cmp.default} router={$router} meta={$cmeta} />
 {/await}

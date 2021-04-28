@@ -23,8 +23,8 @@
         .filter((link) => link.menu);
 </script>
 
-<header class="navbar container p-fixed p-2 bg-gray">
-    <section class="navbar-section columns">
+<header class="navbar container p-sticky p-2 bg-gray">
+    <section class="navbar-section">
         <div class="column col-auto">
             <DropDown
                 bind:opener={menu}
@@ -37,18 +37,22 @@
                     {(item.title = item.props.title)}
                     {(item.href = item.match)}
                 </slot> -->
-                <a href={item.match} class:active={$router.path === item.match}>
+                <a
+                    href={item.match}
+                    class:active={$router.path === item.match}
+                    on:click={() => (menu = !menu)}
+                >
                     {item.props.title}
                 </a>
             </DropDown>
         </div>
     </section>
-    <section class="navbar-center columns">
+    <section class="navbar-center ">
         <div class="column col-auto">
             <BreadCrumbs />
         </div>
     </section>
-    <section class="navbar-section columns">
+    <section class="navbar-section ">
         <div class="column col-auto">
             <DropDown
                 bind:opener={user}
@@ -63,7 +67,11 @@
                 right={true}
                 let:item
             >
-                <a href={item.match} class:active={$router.path === item.match}>
+                <a
+                    href={item.match}
+                    class:active={$router.path === item.match}
+                    on:click={() => (user = !user)}
+                >
                     {item.props.title}
                 </a>
             </DropDown>
@@ -78,7 +86,7 @@
 <style lang="scss">
     header {
         z-index: 100;
-        // height: 2.5rem;
+        top: -4em;
         .menu {
             .menu-item a {
                 text-transform: capitalize;

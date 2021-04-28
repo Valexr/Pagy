@@ -28,7 +28,7 @@ export const routes = [
         menu: true,
         navbar: true,
         component: () => import('@pages/users.svelte'),
-        props: { title: 'users' }
+        props: { title: 'users', keywords: 'keywords', description: 'description' }
     },
     {
         match: '/pages/:locale/:menu',
@@ -37,7 +37,7 @@ export const routes = [
         menu: true,
         navbar: true,
         component: () => import('@pages/pages.svelte'),
-        props: { title: 'pages' }
+        props: { title: 'pages', keywords: 'keywords', description: 'description' }
     },
     {
         match: '/plugins',
@@ -45,7 +45,7 @@ export const routes = [
         menu: true,
         navbar: true,
         component: () => import('@pages/plugins.svelte'),
-        props: { title: 'plugins' }
+        props: { title: 'plugins', keywords: 'keywords', description: 'description' }
     },
     {
         match: '/locales',
@@ -53,7 +53,7 @@ export const routes = [
         menu: true,
         navbar: true,
         component: () => import('@/client/pages/locales.svelte'),
-        props: { title: 'locales' }
+        props: { title: 'locales', keywords: 'keywords', description: 'description' }
     },
     {
         match: '/repository',
@@ -61,7 +61,7 @@ export const routes = [
         menu: true,
         navbar: true,
         component: () => import('@/client/pages/repository.svelte'),
-        props: { title: 'repository' }
+        props: { title: 'repository', keywords: 'keywords', description: 'description' }
     },
     {
         match: '/system',
@@ -69,7 +69,7 @@ export const routes = [
         menu: true,
         navbar: false,
         component: () => import('@/client/pages/system.svelte'),
-        props: { title: 'system' }
+        props: { title: 'system', keywords: 'keywords', description: 'description' }
     },
     {
         match: '*',

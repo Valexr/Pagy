@@ -13,10 +13,10 @@
         // pages = await data.db("pages", meta.params.locale, meta.params.menu);
         // $items = pages;
     });
-    $: data.db("pages", meta.params.locale, meta.params.menu).then((res) => {
-        $items = res;
-        // $items = pages;
-    });
+    // $: data.db("pages", meta.params.locale, meta.params.menu).then((res) => {
+    //     $items = res;
+    //     // $items = pages;
+    // });
 
     export let meta = {};
 
@@ -38,7 +38,7 @@
         router.location.query.set("page", page.id);
         // router.location.hash.set("modal-update");
         router.location.hash.set("sidebar");
-        $editForm = await data.get(meta.params.menu, page.id);
+        // $editForm = await data.get(meta.params.menu, page.id);
     }
     async function updatePage() {
         router.goto($router.path);
@@ -82,6 +82,8 @@
     //     $items = ev.detail;
     // };
 
+    $items = data.db("pages", meta.params.locale, meta.params.menu);
+
     $: sub = Array.from(Array($items.length).keys());
     function openSub(i) {
         console.log(sub, i);
@@ -91,93 +93,105 @@
         "The responsive layout also provides fixed-width containers. Use grid-xs(480px), grid-sm(600px), grid-md(840px), grid-lg(960px) or grid-xl(1280px) to the container for a fixed-width container with the specific max-width.";
 </script>
 
-<section class="container">
-    <table class="table table-hover" class:table-scroll={$media.md}>
-        <thead>
-            <tr>
-                <th />
-                <th>Id</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Description</th>
-                <th>Create</th>
-                <th>Update</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {#each $items as page, i (page.id)}
-                <tr class:bg-secondary={sub[i] === true}>
-                    <td>
-                        <button
-                            class="btn btn-link btn-action btn-sm tooltip"
-                            data-tooltip="Sub set"
-                            on:click={openSub(i)}
-                            ><i class="icon icon-more-vert c-move" /></button
-                        >
-                    </td>
-                    <td>{i}</td>
-                    <td>{page.title}</td>
-                    <td>{page.author}</td>
-                    <td>{page.description}</td>
-                    <td>{date(page.create)}</td>
-                    <td>{date(page.update)}</td>
-                    <td>
-                        <button
-                            class="btn btn-action tooltip"
-                            class:btn-sm={$media.md}
-                            data-tooltip="Edit page"
-                            on:click|stopPropagation={() => editPage(page)}
-                            ><i class="icon icon-edit" /></button
-                        >
-                        <button
-                            class="btn btn-link btn-action tooltip"
-                            class:btn-sm={$media.md}
-                            data-tooltip="Copy page"
-                            on:click={copyPage(page)}
-                            ><i class="icon icon-copy" /></button
-                        >
-                        <button
-                            class="btn btn-link btn-action text-error"
-                            class:btn-sm={$media.md}
-                            on:click={deletePage(page)}
-                            ><i class="icon icon-delete" /></button
-                        >
-                    </td>
+<h1 class="flex-centered">Pages</h1>
+
+{#await $items}
+    <div class="docs-demo columns">
+        <div class="column col-12 text-center">
+            <div class="loading loading-lg" />
+        </div>
+    </div>
+{:then items}
+    <section class="container">
+        <table class="table table-hover" class:table-scroll={$media.md}>
+            <thead>
+                <tr>
+                    <th />
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Description</th>
+                    <th>Create</th>
+                    <th>Update</th>
+                    <th>Actions</th>
                 </tr>
-                {#if sub[i] === true}
-                    <tr
-                        transition:slide
-                        class="sub bg-gray"
-                        class:sub-open={sub[i] === true}
-                    >
-                        <td colspan="8">
-                            <div class="columns">
-                                <div class="column col-5">
-                                    <p>
-                                        {p}
-                                    </p>
-                                </div>
-                                <div class="column col-2">
-                                    <img
-                                        src="/favicon.png"
-                                        alt="favicon"
-                                        width="100px"
-                                    />
-                                </div>
-                                <div class="column col-5">
-                                    <p>
-                                        {p}
-                                    </p>
-                                </div>
-                            </div>
+            </thead>
+            <tbody>
+                {#each items as page, i (page.id)}
+                    <tr class:bg-secondary={sub[i] === true}>
+                        <td>
+                            <button
+                                class="btn btn-link btn-action btn-sm tooltip"
+                                data-tooltip="Sub set"
+                                on:click={openSub(i)}
+                                ><i
+                                    class="icon icon-more-vert c-move"
+                                /></button
+                            >
+                        </td>
+                        <td>{i}</td>
+                        <td>{page.title}</td>
+                        <td>{page.author}</td>
+                        <td>{page.description}</td>
+                        <td>{date(page.create)}</td>
+                        <td>{date(page.update)}</td>
+                        <td>
+                            <button
+                                class="btn btn-action tooltip"
+                                class:btn-sm={$media.md}
+                                data-tooltip="Edit page"
+                                on:click|stopPropagation={() => editPage(page)}
+                                ><i class="icon icon-edit" /></button
+                            >
+                            <button
+                                class="btn btn-link btn-action tooltip"
+                                class:btn-sm={$media.md}
+                                data-tooltip="Copy page"
+                                on:click={copyPage(page)}
+                                ><i class="icon icon-copy" /></button
+                            >
+                            <button
+                                class="btn btn-link btn-action text-error"
+                                class:btn-sm={$media.md}
+                                on:click={deletePage(page)}
+                                ><i class="icon icon-delete" /></button
+                            >
                         </td>
                     </tr>
-                {/if}
-            {/each}
-        </tbody>
-    </table>
-</section>
+                    {#if sub[i] === true}
+                        <tr
+                            transition:slide
+                            class="sub bg-gray"
+                            class:sub-open={sub[i] === true}
+                        >
+                            <td colspan="8">
+                                <div class="columns">
+                                    <div class="column col-5">
+                                        <p>
+                                            {p}
+                                        </p>
+                                    </div>
+                                    <div class="column col-2">
+                                        <img
+                                            src="/favicon.png"
+                                            alt="favicon"
+                                            width="100px"
+                                        />
+                                    </div>
+                                    <div class="column col-5">
+                                        <p>
+                                            {p}
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {/if}
+                {/each}
+            </tbody>
+        </table>
+    </section>
+{/await}
 
 <!-- <Modal
     id="modal-add"

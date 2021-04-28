@@ -9,7 +9,11 @@ setup({
     xl: 'screen and (max-width: 1280px)',
     xxl: 'screen and (min-width: 1281px)',
     landscape: '(orientation: landscape)',
-    portrait: '(orientation: portrait)'
+    portrait: '(orientation: portrait)',
+    dark: '(prefers-color-scheme: dark)',
+    light: '(prefers-color-scheme: light)',
+    mouse: '(hover: hover)',
+    touch: '(hover: none)',
 })
 
 const app = new App({

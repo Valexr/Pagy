@@ -15,9 +15,8 @@
 
 <style lang="scss">
     main {
-        padding-top: 5em;
+        padding-bottom: 5em;
         &#auth {
-            padding-top: 0;
             height: 100%;
             display: flex;
             flex-flow: column;

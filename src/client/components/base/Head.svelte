@@ -1,9 +1,18 @@
 <script>
-    import { state } from 'svelte-pathfinder';
+    import { cpath } from "@routes";
+    export let name;
 </script>
 
 <svelte:head>
-    <title>{$state.title}</title>
-    <meta name="keywords" content={$state.keywords} />
-    <meta name="description" content={$state.description} />
+    {#if $cpath.props}
+        <title>{`${name} — ${$cpath.props.title}`}</title>
+        <meta name="keywords" content={$cpath.props.keywords} />
+        <meta name="description" content={$cpath.props.description} />
+    {/if}
 </svelte:head>
+
+<style lang="scss">
+    :global(title) {
+        text-transform: capitalize;
+    }
+</style>
