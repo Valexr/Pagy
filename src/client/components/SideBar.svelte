@@ -4,10 +4,11 @@
     import { quintOut } from "svelte/easing";
     import { router } from "tinro";
     import { clickout } from "@utils";
-    import { cmeta } from "@routes";
+    import { cmeta, chistory } from "@routes";
     // import { editForm } from "@stores/pages";
     import { items } from "@stores/store";
     import * as data from "@api/data";
+    import * as pages from "@api/pages";
 
     let aside = null,
         form = null,
@@ -19,28 +20,27 @@
             description: "",
         },
         isOpen = false,
-        width = null;
+        width = 0;
 
-    // onMount(() => getPage());
-
-    const close = () => router.goto($router.path);
+    const close = () =>
+        router.goto($router.from ? $router.from : $router.url.split("&id")[0]);
 
     async function getPage() {
-        editForm = await data.get($cmeta.params.menu, $router.query.page);
+        editForm = await pages.get("items", $chistory.query);
     }
 
     async function updatePage() {
+        $items = await pages.set("items", editForm, $chistory.query);
         close();
-        $items = await data.set($cmeta.params.menu, editForm, editForm.id);
     }
-    $: if (aside && editForm) width = aside.offsetWidth;
+    // $: if (aside && isOpen) width = aside.clientWidth;
     // $: isOpen && getPage();
     $: console.log(editForm, $cmeta, width);
 </script>
 
 <aside
     class="container p-fixed"
-    transition:fly|local={{
+    transition:fly={{
         delay: 0,
         duration: 500,
         x: right ? 480 : -480,
@@ -49,10 +49,12 @@
         easing: quintOut,
     }}
     on:introend={() => (isOpen = true)}
+    on:outrostart={() => (isOpen = false)}
     bind:this={aside}
     use:clickout={aside}
     on:clickout={close}
-    style={right ? "right: 0" : ""}
+    class:right
+    style="width: {isOpen ? aside.clientWidth : ''}px;"
 >
     {#await getPage()}
         <div class="docs-demo columns">
@@ -72,15 +74,22 @@
                 />
             </div>
             <div class="column col-12">
-                <details class="accordion" open>
-                    <summary class="accordion-header">
+                <div class="accordion">
+                    <input
+                        type="checkbox"
+                        id="accordion-1"
+                        name="accordion-checkbox"
+                        hidden
+                        checked
+                    />
+                    <label class="accordion-header" for="accordion-1">
                         <i class="icon icon-arrow-right mr-1" />
                         Title
-                    </summary>
-                    <div class="accordion-body">
+                    </label>
+                    <div class="accordion-body column">
                         <!-- Accordions content -->
                         <form
-                            class="form-horizontal"
+                            class="form"
                             on:submit|preventDefault={updatePage}
                             bind:this={form}
                         >
@@ -121,6 +130,7 @@
                                     placeholder="page description"
                                 />
                             </div>
+                            <!-- form select control -->
                             <div class="form-group">
                                 <select class="form-select">
                                     <option>Choose an option</option>
@@ -130,11 +140,46 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <select class="form-select" multiple>
+                                    <option>Choose an option</option>
+                                    <option>Slack</option>
+                                    <option>Skype</option>
+                                    <option>Hipchat</option>
+                                </select>
+                            </div>
+                            <!-- form radio control -->
+                            <div class="form-group">
+                                <legend class="form-label">Gender</legend>
+                                <label class="form-radio">
+                                    <input type="radio" name="gender" checked />
+                                    <i class="form-icon" /> Male
+                                </label>
+                                <label class="form-radio">
+                                    <input type="radio" name="gender" />
+                                    <i class="form-icon" /> Female
+                                </label>
+                            </div>
+                            <!-- form switch control -->
+                            <div class="form-group">
+                                <label class="form-switch">
+                                    <input type="checkbox" />
+                                    <i class="form-icon" /> Send me emails with news
+                                    and tips
+                                </label>
+                            </div>
+                            <!-- form checkbox control -->
+                            <div class="form-group">
+                                <label class="form-checkbox">
+                                    <input type="checkbox" />
+                                    <i class="form-icon" /> Remember me
+                                </label>
+                            </div>
+                            <div class="form-group">
                                 <button
                                     class="btn btn-primary"
                                     aria-keyshortcuts="Enter"
                                     type="submit"
-                                    on:click={updatePage}
+                                    on:click|preventDefault={updatePage}
                                 >
                                     Update
                                 </button>
@@ -146,6 +191,19 @@
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+                <details class="accordion" open>
+                    <summary class="accordion-header">
+                        <i class="icon icon-arrow-right mr-1" />
+                        Title
+                    </summary>
+                    <div class="accordion-body">
+                        <pre
+                            class="code"
+                            data-lang="JSON">
+                            <code>{JSON.stringify(editForm, 0, 2)}</code>
+                        </pre>
                     </div>
                 </details>
             </div>
@@ -164,11 +222,14 @@
         box-shadow: 0 0.2rem 0.5rem rgba(48, 55, 66, 0.3);
         background: white;
         overflow-y: auto;
-        padding: 1.6rem 3.2rem;
+        padding: 1.6rem;
         button#close {
             position: absolute;
             top: 1.6rem;
             right: 1.6rem;
+        }
+        &.right {
+            right: 0;
         }
     }
     .aside-backdrop {

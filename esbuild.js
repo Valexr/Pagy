@@ -107,7 +107,6 @@ function plugin_server() {
         name: 'server-plugin',
         setup(b) {
             b.onResolve({ filter: /^@server$/ }, args => {
-
                 return { path: DEV ? 'server_development.js' : 'server_production.js', namespace: 'server' }
             });
 

@@ -1,0 +1,97 @@
+{
+    "filters": {
+        "role": [
+            "admin",
+            "publisher",
+            "developer"
+        ]
+    },
+    "items": [
+        {
+            "email": "valexr@gmail.com",
+            "password": "www",
+            "role": "admin",
+            "id": 1618914837935,
+            "create": 1618914837935,
+            "update": 1619464130061
+        },
+        {
+            "email": "Email@Email.ru",
+            "password": "Password",
+            "role": "publisher",
+            "id": 1618915776434,
+            "create": 1618915776434,
+            "update": 1619464130061
+        },
+        {
+            "email": "email@email.ru",
+            "password": "pass",
+            "role": "publisher",
+            "id": 1618919366921,
+            "create": 1618919366921,
+            "update": 1619464130061
+        },
+        {
+            "email": "mail@mail.to",
+            "password": "sa",
+            "role": "publisher",
+            "id": 1618919453190,
+            "create": 1618919453190,
+            "update": 1619464130061
+        },
+        {
+            "email": "user@user.user",
+            "password": "user",
+            "role": [
+                "developer",
+                "admin"
+            ],
+            "id": 1619463906616,
+            "create": 1619463906616,
+            "update": 1619464130061
+        },
+        {
+            "email": "a@a.a",
+            "password": "a",
+            "role": "developer",
+            "id": 1619464130061,
+            "create": 1619464130061,
+            "update": 1619464130061
+        },
+        {
+            "email": "tarzan@mail.ru",
+            "password": "tarzan",
+            "role": "developer",
+            "id": 1619468162034,
+            "create": 1619468162034,
+            "update": 1619468162034,
+            "admin": [
+                1,
+                2,
+                3
+            ],
+            "developer": {
+                "a": "developer",
+                "b": 2,
+                "c": 3
+            },
+            "publisher": [
+                {
+                    "a": 1,
+                    "b": 2,
+                    "c": 3
+                },
+                {
+                    "a": 1,
+                    "b": 2,
+                    "c": 3
+                },
+                {
+                    "a": 1,
+                    "b": 2,
+                    "c": 3
+                }
+            ]
+        }
+    ]
+}

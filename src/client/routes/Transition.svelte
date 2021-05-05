@@ -7,12 +7,20 @@
     $: id = $cpath ? $cpath.alias : $router.path === "/" ? "auth" : "404";
 </script>
 
+<!-- {#await $router.path}
+    <div class="docs-demo columns">
+        <div class="column col-12 text-center">
+            <div class="loading loading-lg" />
+        </div>
+    </div>
+{:then} -->
 {#key $router.path}
     <main {id} class="container" in:fade={{ duration: 500 }}>
         <slot />
     </main>
 {/key}
 
+<!-- {/await} -->
 <style lang="scss">
     main {
         padding-bottom: 5em;

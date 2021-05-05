@@ -9,11 +9,9 @@
 
     // onMount(async () => (locales = await data.db("locales", "locales")));
 
-    function sortby(type) {
-        locales = locales.sort((a, b) => {
-            return a.region - b.region;
-        });
-        console.log("sort");
+    function sortby() {
+        locales = locales.sort((a, b) => a.region - b.region);
+        // console.log("sort");
     }
 
     // $: console.log([
@@ -53,7 +51,7 @@
                 </tr>
             </thead>
             <tbody>
-                {#each locales as locale, i (locale.name)}
+                {#each locales as locale, i}
                     <tr>
                         <td>
                             <button
@@ -72,7 +70,7 @@
                             {locale.region}
                         </td>
                         <td>
-                            <figure class="avatar avatar-lg mr-2">
+                            <figure class="avatar avatar mr-2">
                                 <img src={locale.flag} alt={locale.name} />
                             </figure>
                         </td>

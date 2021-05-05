@@ -1,8 +1,9 @@
 <script>
     import { onMount } from "svelte";
     import { router } from "tinro";
+    import { clickout } from "@utils";
 
-    export let id = "modal",
+    export let // id = "modal",
         size = "",
         opener = "",
         title = "Title",
@@ -13,21 +14,25 @@
         cancel = {
             title: "Cancel",
             do: "",
-        };
+        },
+        modal = null;
 
     const close = () => {
-        // router.location.hash.clear();
-        // router.location.query.clear();
-        router.goto($router.path);
+        router.goto($router.from ? $router.from : $router.url.split("#")[0]);
     };
 </script>
 
-<div
+<section
     class="modal {size} {`modal-${opener}`}"
     class:active={$router.hash === `modal-${opener}`}
 >
-    <a href={$router.path} class="modal-overlay" aria-label="Close">&nbsp;</a>
-    <div class="modal-container">
+    <div class="modal-overlay" aria-label="Close">&nbsp;</div>
+    <div
+        class="modal-container"
+        bind:this={modal}
+        use:clickout={modal}
+        on:clickout={close}
+    >
         <div class="modal-header">
             <slot name="header">
                 <button
@@ -47,7 +52,7 @@
                     class="btn btn-primary"
                     aria-keyshortcuts="Enter"
                     type="submit"
-                    on:click={action.do}
+                    on:click={() => (action.do(), close())}
                 >
                     {action.title}
                 </button>
@@ -57,4 +62,4 @@
             </slot>
         </div>
     </div>
-</div>
+</section>

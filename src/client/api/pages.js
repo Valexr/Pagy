@@ -1,12 +1,12 @@
-const base = '/api/v1/users'
+const base = '/api/v1/pages'
 
-export async function get(type, url = '') {
-    const path = `${base}/${type}${url}`;
+export async function get(type, query = '') {
+    const path = `${base}/${type}${query}`;
     return fetch(path).then((res) => res.json());
 }
 
-export async function add(type, payload) {
-    const path = `${base}/${type}`;
+export async function add(type, payload, query = '') {
+    const path = `${base}/${type}${query}`;
     const options = {
         method: "POST",
         headers: {
@@ -15,15 +15,15 @@ export async function add(type, payload) {
         body: JSON.stringify(payload),
     };
     return fetch(path, options)
-        .then((res) => get(type))
+        .then((res) => get(type, query))
         .catch((err) => {
             console.log(err);
-            get(type);
+            get(type, query);
         });
 }
 
-export async function set(type, id, payload) {
-    const path = `${base}/${type}/${id}`;
+export async function set(type, payload, query = '') {
+    const path = `${base}/${type}${query}`;
     const options = {
         method: "PUT",
         headers: {
@@ -32,20 +32,20 @@ export async function set(type, id, payload) {
         body: JSON.stringify(payload),
     };
     return fetch(path, options)
-        .then((res) => get(type))
+        .then((res) => get(type, query.split("&id")[0]))
         .catch((err) => {
             console.error(err);
-            get(type);
+            get(type, query.split("&id")[0]);
         });
 }
 
-export async function del(type, id) {
-    const path = `${base}/${type}/${id}`;
+export async function del(type, query = '') {
+    const path = `${base}/${type}${query}`;
     const options = { method: "DELETE" }
     return fetch(path, options)
-        .then((res) => get(type))
+        .then((res) => get(type, query.split("&id")[0]))
         .catch((err) => {
             console.error(err);
-            get(type);
+            get(type, query.split("&id")[0]);
         });
 }

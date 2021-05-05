@@ -1,0 +1,7 @@
+{
+    "footer": "Footer",
+    "error404": "error404",
+    "menu": "Menu",
+    "foot": "{count} {count, plural, =1 {foot} other {feet}}",
+    "time": "Now is {time}"
+}

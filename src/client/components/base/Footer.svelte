@@ -1,6 +1,8 @@
 <script>
     import { router, meta } from "tinro";
     import { routes, chistory, cmeta, cpath } from "@routes";
+    import { t } from "svelte-intl-precompile";
+    import slugify from "@sindresorhus/slugify";
 
     const log = {
         router: $router,
@@ -28,7 +30,7 @@
     <section class="navbar-section">
         <div class="column col-auto">
             <button
-                class="btn btn-action"
+                class="btn btn-action btn-sm"
                 on:click={() => (logopen = !logopen)}
             >
                 <i class="icon icon-arrow-{logopen ? 'down' : 'up'}" />
@@ -38,6 +40,9 @@
     <section class="navbar-center">
         <div class="column col-auto">
             <copy>&copy; {new Date().getFullYear()}</copy>
+            {$t("footer")}
+            {$t("menu")}
+            {slugify($t("time", { values: { time: 123 } }))}
         </div>
     </section>
     <section class="navbar-section" />

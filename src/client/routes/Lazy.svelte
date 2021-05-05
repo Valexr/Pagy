@@ -5,10 +5,16 @@
     export let component = null;
 
     $: $cmeta = meta();
-    $: $chistory = { ...$chistory, [$cpath.alias]: $cmeta.match };
+    $: $chistory = {
+        ...$chistory,
+        [$cpath.alias]: $router.url.substring(3),
+        lang: $cmeta.params.lang || "en",
+        url: $router.url.substring(3),
+        query: "?" + $router.url.split(/[?#]/)[1],
+    };
     $: $cpath =
         routes.find((route) =>
-            $cmeta.pattern
+            $cmeta.pattern && $cmeta.params.lang !== "api"
                 ? $cmeta.pattern === route.match
                 : $cmeta.url === route.match
         ) || routes[routes.length - 1];

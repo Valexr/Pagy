@@ -1,0 +1,6 @@
+{
+    "footer": "Футер",
+    "error404": "ошибка404",
+    "menu": "Menu",
+    "foot": "{count} {count, plural, =1 {foot} other {feet}}"
+}

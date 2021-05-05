@@ -1,21 +1,22 @@
 <script>
-    import { cmeta } from "@routes";
-    import { ModalAdd } from "@cmp";
+    import { onMount } from "svelte";
+    import { cmeta, chistory } from "@routes";
+    import { Modal } from "@cmp";
     import { addopen, addBookForm } from "@stores/pages";
     import { items } from "@stores/store";
     import * as data from "@api/data";
+    import * as pages from "@api/pages";
     import { router } from "tinro";
 
+    onMount(() => ($addBookForm = {}));
+
     async function addPage() {
-        $items = await data.add($cmeta.params.menu, $addBookForm);
+        $items = await pages.add("items", $addBookForm, $chistory.query);
         $addopen = !$addopen;
     }
 </script>
 
-{#if $router.hash === `modal-add`}
-    <ModalAdd />
-{/if}
-<!-- <Modal
+<Modal
     id="modal-add"
     size={"modal-lg"}
     opener={"add"}
@@ -68,4 +69,4 @@
             </div>
         </div>
     </form>
-</Modal> -->
+</Modal>

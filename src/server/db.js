@@ -11,5 +11,5 @@ let adapter
 export const lowdb = () => low(adapter)
 
 export function createdb(datatype, locale) {
-    adapter = new FileAsync(`json/${datatype}${locale ? '-' + locale : ''}.json`)
+    adapter = new FileAsync(`data/${datatype}${locale ? '-' + locale : ''}.json`)
 }

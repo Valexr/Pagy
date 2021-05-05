@@ -1,5 +1,6 @@
 // Define variables to override default ones
-// $primary-color: rgb(255,62,0);
+// $primary-color: #9b51e0;
+// $primary-color: #4240d4;
 // $error-color: #c02020;
 // $font-size: 0.9rem;
 // $font-size-sm: .8rem;
@@ -22,4 +23,42 @@ $off-canvas-breakpoint: 840px;
 }
 .sm-acts {
     top: -2px;
+}
+.form-select {
+    -webkit-appearance: none;
+}
+.bg-light {
+    color: $dark-color;
+    background: $light-color;
+}
+.text-light {
+    color: $light-color;
+    // background: $dark-color;
+}
+.icon-home {
+    &::before {
+        border: $icon-border-width solid currentColor;
+        border-bottom: 0;
+        border-right: 0;
+        transform: translate(-50%, -40%) rotate(45deg);
+        width: .8em;
+        height: .8em;
+    }
+  
+    &::after {
+        transform: translate(-50%, -50%);
+        border-bottom: $icon-border-width solid currentColor;
+        height: 1em;
+        width: .8em;
+    }
+}
+
+.modal.modal-lg {
+    .modal-overlay {
+        background: rgba(247, 248, 249, 0.75);
+    }
+    .modal-container {max-height: 97vh; height: 100%;}
+}
+.dropdown-auto {
+    .menu {min-width: auto;}
 }

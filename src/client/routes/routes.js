@@ -1,7 +1,7 @@
 import { writable, derived, get } from 'svelte/store';
 import { router, meta } from "tinro";
 
-export const chistory = writable(JSON.parse(sessionStorage.getItem("chistory")) || {});
+export const chistory = writable(JSON.parse(sessionStorage.getItem("chistory")) || { lang: 'en' });
 chistory.subscribe(val => sessionStorage.setItem("chistory", JSON.stringify(val)));
 
 export const cmeta = writable(JSON.parse(sessionStorage.getItem("cmeta")) || {});
@@ -10,65 +10,75 @@ cmeta.subscribe(val => sessionStorage.setItem("cmeta", JSON.stringify(val)));
 export const cpath = writable(JSON.parse(sessionStorage.getItem("cpath")) || {});
 cpath.subscribe(val => sessionStorage.setItem("cpath", JSON.stringify(val)));
 
-// export const cpath = derived(cmeta, $cmeta => routes.find((route) => $cmeta.pattern ? $cmeta.pattern === route.match : $cmeta.url === route.match) || routes[routes.length - 1]);
-
 export const routes = [
     {
-        match: '/',
+        match: '/:lang',
+        default: '/',
         alias: 'auth',
         menu: true,
         navbar: false,
+        icon: 'emoji',
         component: () => import('@pages/auth.svelte'),
         props: { title: 'auth', keywords: 'keywords', description: 'description' }
     },
     {
-        match: '/users/:role',
-        default: '/users/admin',
+        match: '/:lang/users',
+        default: '/users?role=admin',
         alias: 'users',
         menu: true,
         navbar: true,
+        icon: 'people',
         component: () => import('@pages/users.svelte'),
         props: { title: 'users', keywords: 'keywords', description: 'description' }
     },
     {
-        match: '/pages/:locale/:menu',
-        default: '/pages/ru/header',
+        match: '/:lang/pages',
+        default: '/pages?locale=en&menu=header',
         alias: 'pages',
         menu: true,
         navbar: true,
+        icon: 'bookmark',
         component: () => import('@pages/pages.svelte'),
         props: { title: 'pages', keywords: 'keywords', description: 'description' }
     },
     {
-        match: '/plugins',
+        match: '/:lang/plugins',
+        default: '/plugins',
         alias: 'plugins',
         menu: true,
         navbar: true,
+        icon: 'link',
         component: () => import('@pages/plugins.svelte'),
         props: { title: 'plugins', keywords: 'keywords', description: 'description' }
     },
     {
-        match: '/locales',
+        match: '/:lang/locales',
+        default: '/locales',
         alias: 'locales',
         menu: true,
         navbar: true,
-        component: () => import('@/client/pages/locales.svelte'),
+        icon: 'location',
+        component: () => import('@pages/locales.svelte'),
         props: { title: 'locales', keywords: 'keywords', description: 'description' }
     },
     {
-        match: '/repository',
+        match: '/:lang/repository',
+        default: '/repository',
         alias: 'repository',
         menu: true,
         navbar: true,
-        component: () => import('@/client/pages/repository.svelte'),
+        icon: 'photo',
+        component: () => import('@pages/repository.svelte'),
         props: { title: 'repository', keywords: 'keywords', description: 'description' }
     },
     {
-        match: '/system',
+        match: '/:lang/system',
+        default: '/system',
         alias: 'system',
         menu: true,
         navbar: false,
-        component: () => import('@/client/pages/system.svelte'),
+        icon: 'time',
+        component: () => import('@pages/system.svelte'),
         props: { title: 'system', keywords: 'keywords', description: 'description' }
     },
     {

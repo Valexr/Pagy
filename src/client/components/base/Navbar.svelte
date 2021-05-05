@@ -1,19 +1,18 @@
 <script>
     import { fade } from "svelte/transition";
     import { router } from "tinro";
-    import { cmeta, cpath } from "@routes";
-    import { items } from "@stores/store";
+    import { cmeta, cpath, chistory } from "@routes";
+    import { items, filters } from "@stores/store";
     import { addopen } from "@stores/pages";
     import { DropDown } from "@cmp";
     import { media } from "svelte-match-media";
 
-    let locales = ["ru", "en", "fr", "de"],
-        addLocale = {
+    let addLocale = {
             action: () => console.log("addLocale"),
             title: "Locale",
         },
-        menus = ["header", "main", "footer"],
         addMenu = { action: () => console.log("addMenu"), title: "Menu" },
+        addRole = { action: () => console.log("addRole"), title: "Role" },
         localesOpen = false,
         menusOpen = false,
         searchOpen = false;
@@ -26,7 +25,8 @@
 
     function addtoggle() {
         initForm();
-        router.location.hash.set("modal-add");
+        // router.location.hash.set("modal-add");
+        router.goto(`${$router.url}#modal-add`);
         // addopen = !addopen;
     }
 
@@ -35,22 +35,48 @@
         addBookForm.author = "";
         addBookForm.description = "";
     }
+    let roles = Object.entries($filters)[0];
+    $: console.log($filters, $chistory);
 </script>
 
-<nav class="navbar container p-sticky p-2" in:fade={{ duration: 500 }}>
+<nav class="navbar container p-sticky bg-light" in:fade={{ duration: 500 }}>
     <section class="navbar-section ">
-        {#if $cmeta.params.locale}
+        {#if $router.query.role}
             <div class="column col-auto">
                 <DropDown
                     opener={localesOpen}
-                    openbut={{ name: $cmeta.params.locale.toUpperCase() }}
-                    items={locales}
+                    openbut={{ name: $router.query.role }}
+                    items={$filters.role}
+                    downbut={addRole}
+                    let:item
+                >
+                    <a
+                        href={`${$router.path}?role=${item}`}
+                        class:active={item === $router.query.role}
+                    >
+                        {item}
+                        <button
+                            class="btn btn-link btn-sm p-relative float-right sm-acts"
+                            on:click|preventDefault|stopPropagation
+                        >
+                            <i class="icon icon-edit" />
+                        </button>
+                    </a>
+                </DropDown>
+            </div>
+        {/if}
+        {#if $router.query.locale}
+            <div class="column col-auto">
+                <DropDown
+                    opener={localesOpen}
+                    openbut={{ name: $router.query.locale.toUpperCase() }}
+                    items={$filters.locale}
                     downbut={addLocale}
                     let:item
                 >
                     <a
-                        href={`/pages/${item}/${$cmeta.params.menu}`}
-                        class:active={item === $cmeta.params.locale}
+                        href={`${$router.path}?locale=${item}&menu=${$router.query.menu}`}
+                        class:active={item === $router.query.locale}
                     >
                         {item.toUpperCase()}
                         <button
@@ -63,33 +89,36 @@
                 </DropDown>
             </div>
         {/if}
-        <div class="column col-auto">
-            <DropDown
-                opener={menusOpen}
-                openbut={{ name: $cmeta.params.menu }}
-                items={menus}
-                downbut={addMenu}
-                let:item
-            >
-                <a
-                    href={`/pages/${$cmeta.params.locale}/${item}`}
-                    class:active={item === $cmeta.params.menu}
+        {#if $router.query.menu}
+            <div class="column col-auto">
+                <DropDown
+                    opener={menusOpen}
+                    openbut={{ name: $router.query.menu }}
+                    items={$filters.menu}
+                    downbut={addMenu}
+                    let:item
                 >
-                    {item}
-                    <button
-                        class="btn btn-link btn-sm p-relative float-right sm-acts"
-                        on:click|preventDefault|stopPropagation
+                    <a
+                        href={`${$router.path}?locale=${$router.query.locale}&menu=${item}`}
+                        class:active={item === $router.query.menu}
                     >
-                        <i class="icon icon-edit" />
-                    </button>
-                </a>
-            </DropDown>
-        </div>
+                        {item}
+                        <button
+                            class="btn btn-link btn-sm p-relative float-right sm-acts"
+                            on:click|preventDefault|stopPropagation
+                        >
+                            <i class="icon icon-edit" />
+                        </button>
+                    </a>
+                </DropDown>
+            </div>
+        {/if}
     </section>
     <section class="navbar-center ">
         <div class="column col-auto">
             <button
-                class="btn btn-primary btn-lg badge"
+                class="btn btn-primary badge"
+                class:btn-action={$media.xs}
                 data-badge={$items.length}
                 on:click|stopPropagation={addtoggle}
                 ><i class="icon icon-plus" />
@@ -145,7 +174,7 @@
                         class="form-input"
                         placeholder="..."
                     />
-                    <button class="btn btn-primary input-group-btn"
+                    <button class="btn btn-primary btn-action input-group-btn"
                         ><i class="icon icon-search" /></button
                     >
                 </div>
@@ -155,13 +184,10 @@
 </nav>
 
 <style lang="scss">
-    @import "../../../node_modules/spectre.css/src/variables";
     .navbar {
         z-index: 99;
-        height: 4.5em;
-        // position: fixed;
+        height: 4em;
         top: 0;
-        background: $light-color;
     }
     #input-search {
         max-width: 240px;

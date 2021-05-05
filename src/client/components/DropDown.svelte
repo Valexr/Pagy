@@ -1,5 +1,6 @@
 <script>
     import { clickout } from "@utils";
+    import { media } from "svelte-match-media";
 
     export let ul = null,
         opener = false,
@@ -13,15 +14,21 @@
         items = [],
         downbut = {},
         right = false,
-        list = true;
+        list = true,
+        auto = false;
+    const open = () => (opener = !opener);
 </script>
 
-<div class="dropdown {right ? 'dropdown-right' : ''}" class:active={opener}>
+<div
+    class="dropdown {right ? 'dropdown-right' : ''}"
+    class:dropdown-auto={auto}
+    class:active={opener}
+>
     <button
         class="btn text-capitalize {openbut.class}"
         data-badge={openbut.badge}
         data-initial={openbut.initial}
-        on:click|stopPropagation|preventDefault={() => (opener = !opener)}
+        on:click|stopPropagation|preventDefault={open}
     >
         <!-- <slot name="img">
             <figure

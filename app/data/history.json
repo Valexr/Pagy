@@ -1,0 +1,82 @@
+{
+    "date": {
+        "pages": {
+            "ru": [
+                {
+                    "id": 1,
+                    "title": "title",
+                    "url": "/title",
+                    "locale": "ru",
+                    "menu": "header",
+                    "parents": [],
+                    "children": [],
+                    "create": {
+                        "date": "date",
+                        "user": "user.id"
+                    },
+                    "history": [
+                        {
+                            "date": "date",
+                            "user": "user.id"
+                        }
+                    ],
+                    "seo": {
+                        "title": "title",
+                        "keywords": "keywords",
+                        "description": "description"
+                    },
+                    "options": {
+                        "visible": true,
+                        "disabled": false,
+                        "secured": false,
+                        "blank": true,
+                        "redirect": "",
+                        "alias": ""
+                    },
+                    "widgets": {
+                        "text": [
+                            {
+                                "title": "title",
+                                "alias": "alias",
+                                "content": "content"
+                            }
+                        ],
+                        "richtext": [
+                            {
+                                "title": "title",
+                                "alias": "alias",
+                                "content": "url"
+                            }
+                        ],
+                        "img": [
+                            {
+                                "title": "title",
+                                "alias": "alias",
+                                "small": "url",
+                                "medium": "url",
+                                "big": "url"
+                            }
+                        ]
+                    },
+                    "collections": {
+                        "list": [],
+                        "gallery": []
+                    }
+                }
+            ]
+        },
+        "users": [
+            {
+                "email": "email"
+            }
+        ]
+    },
+    "date1": [
+        {
+            "locale": "ru",
+            "menu": "header",
+            "pages": [],
+            "users": []
+        }
+    ]
+}

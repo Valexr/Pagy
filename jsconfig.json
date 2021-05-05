@@ -8,9 +8,6 @@
             "@api/*": [
                 "src/client/api/*"
             ],
-            "@ep/*": [
-                "server/endpoints/*"
-            ],
             "@cmp": [
                 "src/client/components/index.js"
             ],
@@ -26,9 +23,18 @@
             "@utils": [
                 "src/client/utils/index.js"
             ],
+            "@lang/*": [
+                "app/lang/*"
+            ],
             "@spectre/*": [
                 "node_modules/spectre.css/src/*"
-            ]
+            ],
+            "$EP/*": [
+                "src/server/endpoints/*"
+            ],
+            "$utils": [
+                "src/server/utils.js"
+            ],
         }
     }
 }
