@@ -8,11 +8,12 @@
     import { items, filters } from "@stores/store";
     import { cmeta, chistory } from "@routes";
 
-    async function getPages() {
-        $items = await pages.get("items", $chistory.query.split("&id")[0]);
-        $filters = await pages.get("filters");
+    onMount(async () => ($filters = await pages.get("filters")));
+
+    function get() {
+        $items = pages.get("items", $chistory.query.split("&id")[0]);
     }
-    $: getPages($router.query);
+    $: get($router.query);
 
     function editPage(page) {
         router.goto(`${$router.url}&id=${page.id}#sidebar`);

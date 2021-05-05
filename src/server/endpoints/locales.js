@@ -17,7 +17,6 @@ export default function (app) {
     // app.use(db)
 
     app.get('/:type', (req, res) => {
-        console.log(req.query)
         if (Object.keys(req.query).length) {
             if (req.query.id) {
                 lowdb().then(lowdb => {
@@ -41,7 +40,7 @@ export default function (app) {
                 const items = lowdb
                     .get(req.params.type)
                     .value()
-                console.log(items)
+                // console.log(items)
                 res.json(items)
             })
         }
@@ -67,6 +66,16 @@ export default function (app) {
                 .assign({ ...req.body, update: Date.now() })
                 .write()
                 .then(item => res.json(item))
+        })
+    })
+
+    app.patch('/:type', (req, res, next) => {
+        lowdb().then(lowdb => {
+            lowdb
+                .get(req.params.type)
+                .each((o, i) => o.id = Date.now() + i)
+                .write()
+                .then(items => res.json(items))
         })
     })
 

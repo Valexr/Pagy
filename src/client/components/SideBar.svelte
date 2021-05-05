@@ -1,5 +1,5 @@
 <script>
-    import { onDestroy, onMount } from "svelte";
+    import { onDestroy, onMount, tick } from "svelte";
     import { fly, fade } from "svelte/transition";
     import { quintOut } from "svelte/easing";
     import { router } from "tinro";
@@ -7,7 +7,6 @@
     import { cmeta, chistory } from "@routes";
     // import { editForm } from "@stores/pages";
     import { items } from "@stores/store";
-    import * as data from "@api/data";
     import * as pages from "@api/pages";
 
     let aside = null,
@@ -26,6 +25,7 @@
         router.goto($router.from ? $router.from : $router.url.split("&id")[0]);
 
     async function getPage() {
+        await tick();
         editForm = await pages.get("items", $chistory.query);
     }
 

@@ -2,17 +2,20 @@
     import { onMount } from "svelte";
     import { media } from "svelte-match-media";
     import { date } from "@utils";
-    import * as data from "@api/data";
     import * as locales from "@api/locales";
     import { items, filters } from "@stores/store";
     import { chistory } from "@routes";
     import { router } from "tinro";
 
+    onMount(async () => ($filters = await locales.get("filters")));
     async function get() {
-        $items = await locales.get("locales", $chistory.query.split("&id")[0]);
-        $filters = await locales.get("filters");
+        // $items = await locales.patch("locales");
+        $items = locales.get("locales", $chistory.query.split("&id")[0]);
+        // return await locales.get("locales", $chistory.query.split("&id")[0]);
+        // const ids = (o, i) => (o = { id: Date.now() + i, ...o });
     }
     $: get($router.query);
+    $: console.log($items);
 
     // let locales = [];
 
@@ -60,7 +63,7 @@
                 </tr>
             </thead>
             <tbody>
-                {#each items as locale, i}
+                {#each items as locale, i (locale.id)}
                     <tr>
                         <td>
                             <button

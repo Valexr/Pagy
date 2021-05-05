@@ -15,7 +15,6 @@ export default function (app) {
     app.use(db)
 
     app.get('/:type', (req, res) => {
-        console.log(req.query)
         if (Object.keys(req.query).length) {
             lowdb().then(lowdb => {
                 const items = lowdb

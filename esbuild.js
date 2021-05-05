@@ -18,19 +18,19 @@ const { build } = require("esbuild");
 const { createRemote } = require("derver");
 const watch = require("node-watch");
 const path = require("path");
-const fs = require('fs/promises');
+// const fs = require('fs/promises');
 const CWD = process.cwd();
 const remote = DEV && createRemote('svelte_derver_starter');
 
-function removeMap(path) {
-    fs.access(path, fs.F_OK, (err) => {
-        if (err) {
-            console.error(err)
-            return
-        }
-        fs.unlink(path)
-    })
-}
+// function removeMap(path) {
+//     fs.access(path, fs.F_OK, (err) => {
+//         if (err) {
+//             console.error(err)
+//             return
+//         }
+//         fs.unlink(path)
+//     })
+// }
 
 (async () => {
     const bundleServer = await build_server();
@@ -54,8 +54,8 @@ function removeMap(path) {
             console.log('Restarting server...');
         });
     } else {
-        fs.unlink('app/client/build/client.js.map')
-        fs.unlink('app/app.js.map')
+        // fs.unlink('app/client/build/client.js.map')
+        // fs.unlink('app/app.js.map')
     }
 })()
 
@@ -68,7 +68,6 @@ async function build_server() {
         sourcemap: DEV, // Use `DEV && 'inline'` to inline sourcemaps to the bundle
         minify: !DEV,
         incremental: DEV,
-        // external: Object.keys(require('./package.json').dependencies),
         plugins: [
             plugin_server()
         ]
@@ -118,7 +117,7 @@ function plugin_server() {
                     const DIR = path.join(__dirname,'client');
                     export default function (options){
                         return derver({
-                            dir: DIR,
+                            dir: path.join(__dirname,'client'),
                             ...options,
                             remote: 'svelte_derver_starter'
                         });
@@ -136,7 +135,7 @@ function plugin_server() {
                     const DIR = path.join(__dirname,'client');
                     export default function (options){
                         return derver({
-                            dir: DIR,
+                            dir: path.join(__dirname,'client'),
                             cache: true,
                             compress: true,
                             watch: false,

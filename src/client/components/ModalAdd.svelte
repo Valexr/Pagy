@@ -4,7 +4,6 @@
     import { Modal } from "@cmp";
     import { addopen, addBookForm } from "@stores/pages";
     import { items } from "@stores/store";
-    import * as data from "@api/data";
     import * as pages from "@api/pages";
     import { router } from "tinro";
 

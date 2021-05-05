@@ -39,6 +39,23 @@ export async function set(type, payload, query = '') {
         });
 }
 
+export async function patch(type, payload, query = '') {
+    const path = `${base}/${type}${query}`;
+    const options = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+    };
+    return fetch(path, options)
+        .then((res) => res.json())
+        .catch((err) => {
+            console.error(err);
+            get(type, query);
+        });
+}
+
 export async function del(type, query = '') {
     const path = `${base}/${type}${query}`;
     const options = { method: "DELETE" }

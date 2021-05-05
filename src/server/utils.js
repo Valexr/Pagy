@@ -32,7 +32,7 @@ export function objMatch(obj, query) {
 export function omatch(o, q) {
     const match = Object.entries(o).map(([k, v]) => {
         if (k in q) {
-            console.log(JSON.stringify(v))
+            // console.log(JSON.stringify(v))
             const
                 qa = q[k].split(','),
                 va = v.toString().split(','),

@@ -17,7 +17,6 @@ export default function (app) {
     // app.use(db)
 
     app.get('/:type', (req, res) => {
-        console.log(req.query)
         if (Object.keys(req.query).length) {
             if (req.query.id) {
                 lowdb().then(lowdb => {
@@ -41,7 +40,6 @@ export default function (app) {
                 const items = lowdb
                     .get(req.params.type)
                     .value()
-                console.log(items)
                 res.json(items)
             })
         }

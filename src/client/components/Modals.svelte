@@ -3,7 +3,6 @@
     import { ModalAdd } from "@cmp";
     import { addopen, addBookForm } from "@stores/pages";
     import { items } from "@stores/store";
-    import * as data from "@api/data";
     import { router } from "tinro";
 
     async function addPage() {

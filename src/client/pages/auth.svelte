@@ -1,5 +1,5 @@
 <script>
-    import * as data from "@api/data";
+    // import * as data from "@api/data";
 
     let onAuth = false;
     const user = {
