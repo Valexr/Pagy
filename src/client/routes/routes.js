@@ -53,7 +53,7 @@ export const routes = [
     },
     {
         match: '/:lang/locales',
-        default: '/locales',
+        default: '/locales?region=Europe',
         alias: 'locales',
         menu: true,
         navbar: true,

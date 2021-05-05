@@ -3,16 +3,25 @@
     import { media } from "svelte-match-media";
     import { date } from "@utils";
     import * as data from "@api/data";
-    // import { routes, path, curlocale } from "@routes";
+    import * as locales from "@api/locales";
+    import { items, filters } from "@stores/store";
+    import { chistory } from "@routes";
+    import { router } from "tinro";
 
-    let locales = [];
+    async function get() {
+        $items = await locales.get("locales", $chistory.query.split("&id")[0]);
+        $filters = await locales.get("filters");
+    }
+    $: get($router.query);
+
+    // let locales = [];
 
     // onMount(async () => (locales = await data.db("locales", "locales")));
 
-    function sortby() {
-        locales = locales.sort((a, b) => a.region - b.region);
-        // console.log("sort");
-    }
+    // function sortby() {
+    //     $items = locales.sort((a, b) => a.region - b.region);
+    //     // console.log("sort");
+    // }
 
     // $: console.log([
     //     ...new Set(
@@ -23,14 +32,14 @@
     // ]);
 </script>
 
-{#await data.db("locales", "locales")}
+{#await $items}
     <!-- Loading locales... -->
     <div class="docs-demo columns">
         <div class="column col-12 text-center">
             <div class="loading loading-lg" />
         </div>
     </div>
-{:then locales}
+{:then items}
     <h1 class="flex-centered">Locales</h1>
     <section class="container">
         <table
@@ -41,7 +50,7 @@
                 <tr>
                     <th />
                     <th>Id</th>
-                    <th on:click={sortby}>Region</th>
+                    <th>Region</th>
                     <th>Flag</th>
                     <th>Name</th>
                     <!-- <th>Languages</th> -->
@@ -51,7 +60,7 @@
                 </tr>
             </thead>
             <tbody>
-                {#each locales as locale, i}
+                {#each items as locale, i}
                     <tr>
                         <td>
                             <button

@@ -15,7 +15,8 @@
         addRole = { action: () => console.log("addRole"), title: "Role" },
         localesOpen = false,
         menusOpen = false,
-        searchOpen = false;
+        searchOpen = false,
+        regionsOpen = false;
 
     let addBookForm = {
         title: "",
@@ -35,8 +36,8 @@
         addBookForm.author = "";
         addBookForm.description = "";
     }
-    let roles = Object.entries($filters)[0];
-    $: console.log($filters, $chistory);
+    // let roles = Object.entries($filters)[0];
+    // $: console.log($filters, $chistory);
 </script>
 
 <nav class="navbar container p-sticky bg-light" in:fade={{ duration: 500 }}>
@@ -101,6 +102,30 @@
                     <a
                         href={`${$router.path}?locale=${$router.query.locale}&menu=${item}`}
                         class:active={item === $router.query.menu}
+                    >
+                        {item}
+                        <button
+                            class="btn btn-link btn-sm p-relative float-right sm-acts"
+                            on:click|preventDefault|stopPropagation
+                        >
+                            <i class="icon icon-edit" />
+                        </button>
+                    </a>
+                </DropDown>
+            </div>
+        {/if}
+        {#if $router.query.region}
+            <div class="column col-auto">
+                <DropDown
+                    opener={regionsOpen}
+                    openbut={{ name: $router.query.region }}
+                    items={$filters.region}
+                    downbut={addMenu}
+                    let:item
+                >
+                    <a
+                        href={`${$router.path}?region=${item}`}
+                        class:active={item === $router.query.region}
                     >
                         {item}
                         <button

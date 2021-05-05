@@ -3,7 +3,7 @@ import FileAsync from 'lowdb/adapters/FileAsync'
 import { omatch } from '$utils'
 
 const
-    adapter = new FileAsync(`data/pages.json`),
+    adapter = new FileAsync(`data/locales.json`),
     lowdb = () => low(adapter)
 
 // function db(req, res, next) {

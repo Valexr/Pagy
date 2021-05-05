@@ -69,7 +69,6 @@ async function build_server() {
         minify: !DEV,
         incremental: DEV,
         // external: Object.keys(require('./package.json').dependencies),
-        external: ['../img/*'],
         plugins: [
             plugin_server()
         ]
@@ -96,6 +95,7 @@ async function build_client() {
         minify: !DEV,
         incremental: DEV,
         mainFields: ['svelte', 'module', 'main'],
+        external: ['../img/*'],
         plugins: [
             sveltePlugin(svelteConfig)
         ]
