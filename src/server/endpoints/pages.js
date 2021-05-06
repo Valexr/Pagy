@@ -1,6 +1,6 @@
 import low from 'lowdb'
 import FileAsync from 'lowdb/adapters/FileAsync'
-import { omatch } from '$utils'
+import { omatch, osome } from '$utils'
 
 const
     adapter = new FileAsync(`data/pages.json`),
@@ -25,6 +25,15 @@ export default function (app) {
                         .find({ id: +req.query.id })
                         .value()
                     res.json(item)
+                })
+            } else if (req.query.sq) {
+                lowdb().then(lowdb => {
+                    const items = lowdb
+                        .get(req.params.type)
+                        .filter(o => osome(o, req.query.sq))
+                        .value()
+                    res.json(items)
+                    // o.sq.some(o => req.query.sq.includes(`${o}`))
                 })
             } else {
                 lowdb().then(lowdb => {
@@ -68,13 +77,33 @@ export default function (app) {
         })
     })
 
-    app.delete('/:type', (req, res) => {
+    app.patch('/:type', (req, res, next) => {
         lowdb().then(lowdb => {
             lowdb
                 .get(req.params.type)
-                .remove(o => omatch(o, req.query))
+                .each((o, i) => o[req.query.patch] = Object.values(o))
                 .write()
-                .then(item => res.json(item))
+                .then(items => res.json(items))
         })
+    })
+
+    app.delete('/:type', (req, res) => {
+        if (req.query.prop) {
+            lowdb().then(lowdb => {
+                lowdb
+                    .get(req.params.type)
+                    .each(o => delete o[req.query.prop])
+                    .write()
+                    .then(item => res.json(item))
+            })
+        } else {
+            lowdb().then(lowdb => {
+                lowdb
+                    .get(req.params.type)
+                    .remove(o => omatch(o, req.query))
+                    .write()
+                    .then(item => res.json(item))
+            })
+        }
     })
 }

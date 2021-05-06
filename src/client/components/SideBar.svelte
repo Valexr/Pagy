@@ -33,7 +33,7 @@
         $items = await pages.set("items", editForm, $chistory.query);
         close();
     }
-    // $: if (aside && isOpen) width = aside.clientWidth;
+    $: if (aside && isOpen) width = aside.clientWidth;
     // $: isOpen && getPage();
     $: console.log(editForm, $cmeta, width);
 </script>
@@ -46,7 +46,7 @@
         x: right ? 480 : -480,
         y: 0,
         opacity: 1,
-        easing: quintOut,
+        // easing: quintOut,
     }}
     on:introend={() => (isOpen = true)}
     on:outrostart={() => (isOpen = false)}
@@ -54,7 +54,6 @@
     use:clickout={aside}
     on:clickout={close}
     class:right
-    style="width: {isOpen ? aside.clientWidth : ''}px;"
 >
     {#await getPage()}
         <div class="docs-demo columns">
@@ -216,7 +215,7 @@
     aside {
         top: 0;
         bottom: 0;
-        width: auto;
+        width: 100%;
         max-width: 480px;
         z-index: 400;
         box-shadow: 0 0.2rem 0.5rem rgba(48, 55, 66, 0.3);

@@ -18,7 +18,8 @@
         modal = null;
 
     const close = () => {
-        router.goto($router.from ? $router.from : $router.url.split("#")[0]);
+        router.location.hash.set("");
+        // router.goto($router.url.split("#")[0]);
     };
 </script>
 
@@ -26,7 +27,7 @@
     class="modal {size} {`modal-${opener}`}"
     class:active={$router.hash === `modal-${opener}`}
 >
-    <div class="modal-overlay" aria-label="Close">&nbsp;</div>
+    <div class="modal-overlay" aria-label="Close" on:click={close}>&nbsp;</div>
     <div
         class="modal-container"
         bind:this={modal}

@@ -7,6 +7,7 @@
     export let value;
     export let index;
     export let type;
+    export let rowIndex;
 
     let arr = [];
     $: arr = [...arr, item];
@@ -14,7 +15,7 @@
 </script>
 
 {#if type == "key"}
-    <b class="th">{value}</b>
+    {value}
 {:else if key == "actions"}
     <nav class="action-buttons">
         <button
@@ -43,7 +44,7 @@
 {:else if key == "update"}
     {date(value)}
 {:else if key == "id"}
-    {index}
+    {rowIndex}
 {:else if key == "latitude" || key == "longitude"}
     <code>{value}</code>
 {:else}

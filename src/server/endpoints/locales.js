@@ -1,6 +1,6 @@
 import low from 'lowdb'
 import FileAsync from 'lowdb/adapters/FileAsync'
-import { omatch } from '$utils'
+import { omatch, osome } from '$utils'
 
 const
     adapter = new FileAsync(`data/locales.json`),
@@ -25,6 +25,14 @@ export default function (app) {
                         .find({ id: +req.query.id })
                         .value()
                     res.json(item)
+                })
+            } else if (req.query.sq) {
+                lowdb().then(lowdb => {
+                    const items = lowdb
+                        .get(req.params.type)
+                        .filter(o => osome(o, req.query.sq))
+                        .value()
+                    res.json(items)
                 })
             } else {
                 lowdb().then(lowdb => {

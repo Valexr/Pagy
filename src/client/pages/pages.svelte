@@ -8,15 +8,21 @@
     import { items, filters } from "@stores/store";
     import { cmeta, chistory } from "@routes";
 
-    onMount(async () => ($filters = await pages.get("filters")));
+    onMount(async () => {
+        $filters = await pages.get("filters");
+        // pages.del("items", "?prop=sq");
+        // pages.patch("items", "", "?patch=sq");
+    });
 
-    function get() {
-        $items = pages.get("items", $chistory.query.split("&id")[0]);
+    async function get() {
+        $items = await pages.get("items", $chistory.query.split("&id")[0]);
     }
     $: get($router.query);
 
     function editPage(page) {
-        router.goto(`${$router.url}&id=${page.id}#sidebar`);
+        router.goto(
+            `${$router.path}?locale=${page.locale}&menu=${page.menu}&id=${page.id}#sidebar`
+        );
     }
     async function copyPage(page) {
         const add = await pages.get(

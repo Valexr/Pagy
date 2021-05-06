@@ -19,6 +19,7 @@
         // initialLocale: "getLocaleFromNavigator()",
         initialLocale: getLocaleFromPathname(/^\/(.*?)\//),
     });
+
     $: !$router.path.substring(0, 3).includes($chistory.lang)
         ? router.goto(`/${$chistory.lang + $router.url}`)
         : ``;

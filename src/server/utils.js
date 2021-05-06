@@ -45,8 +45,35 @@ export function omatch(o, q) {
 
 function adiff(a, b, same = true, bool = true) {
     if (a.length && b.length) {
-        const d = b.map((i) => i);
-        a = a.filter((i) => same ? d.includes(i) : !d.includes(i));
+        const d = b.map((b) => b);
+        a = a.filter((a) => same ? d.includes(a) : !d.includes(a));
         return a.length ? bool ? true : a : false
     }
 }
+
+export function osome(o, q) {
+    if (o && q) {
+        const oa = Object.values(o)
+        const qa = q.split(',')
+        const compare = (o, q) => JSON.stringify(o).includes(q)
+        console.log('oa: ', JSON.stringify(oa), 'q: ', qa)
+        console.log('some: ', qa.some(q => compare(o, q)))
+        return qa.some(q => compare(oa, q)) || false
+    }
+    // o.some(o => qa.some(q => compare(o, q)))
+    // const match = o.map(o => {
+    // console.log('some: ', JSON.stringify(o).includes(q.split(',')), '<--------------------')
+    // return o.some(o => `${o}`.split(',').includes(q.split(',')))
+    // const
+    //     qa = q[k].split(','),
+    //     va = v.toString().split(','),
+    //     m = adiff(qa, va, true, true)
+    // return m
+    // })
+    // return match
+}
+
+// export function oprop(o, p) {
+//     let { p, ...rest } = o
+//     return { rest }
+// }

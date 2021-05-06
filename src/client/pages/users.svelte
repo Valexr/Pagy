@@ -4,8 +4,8 @@
     import { date } from "@utils";
     import * as users from "@api/users";
     import { items, filters } from "@stores/store";
-    // import { Table } from "svelte-tabular-table";
-    // import { TableCmps } from "@cmp";
+    import { Table } from "svelte-tabular-table";
+    import { TableCmps } from "@cmp";
     import { router } from "tinro";
     import { cpath, chistory } from "@routes";
 
@@ -15,14 +15,14 @@
     }
     $: getItems($router.query);
 
-    // const config = {
+    // $: config = $items && {
     //     id: "users",
     //     class: "table table-striped table-hover",
     //     init: {
     //         keys: ["id", "email", "password", "create", "update", "actions"],
     //         index: "id",
-    //         data: users,
-    //         // nodiv: true,
+    //         data: $items,
+    //         nodiv: true,
     //     },
     //     features: {
     //         sortable: {
@@ -31,7 +31,7 @@
     //         rearrangeable: (from, to) => alert(`from ${from} to ${to}`),
     //     },
     //     dimensions: {
-    //         widths: [30, 50, "auto", "auto", "auto", "auto", "auto"],
+    //         // widths: [30, 50, "auto", "auto", "auto", "auto", "auto"],
     //     },
     //     callbacks: {
     //         render: {
@@ -40,7 +40,6 @@
     //         },
     //     },
     // };
-    // $: console.log(items);
 </script>
 
 <h1 class="flex-centered">{$cpath.alias}</h1>
@@ -53,9 +52,9 @@
     </div>
 {:then items}
     <section class="container">
-        <!-- {#if users.length}
-        <Table {...config} />
-    {/if} -->
+        <!-- {#if items}
+            <Table {...config} />
+        {/if} -->
 
         <table
             class="table table-striped table-hover"
