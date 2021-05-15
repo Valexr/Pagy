@@ -52,19 +52,9 @@
 
     $: if (!$authed) goto(`/auth`);
 
-    $: if (!$path.substring(1, 4).includes("/"))
-        $path = `/${$history.lang + $path}`;
-
+    $: if (!$pattern("/:lang/*")) $path = `/${$history.lang + $path}`;
+    // !$path.substring(1, 4).includes("/")
     $: if ($page && $history) $history[$page.alias] = $url;
-
-    onMount(() => {
-        if (localStorage.session) {
-            // console.log(localStorage.session);
-            // session.update(localStorage);
-            // session.save();
-            // goto(`/${$history.lang}/users?role=admin`);
-        }
-    });
 
     // $: console.log(getLocaleFromPathname(/^\/(.*?)\//));
 </script>

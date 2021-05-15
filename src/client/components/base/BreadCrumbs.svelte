@@ -12,7 +12,7 @@
 
     export let crumbs = [];
     $: crumbs = $path.split("/").filter(Boolean);
-    $: console.log(crumbs);
+    // $: console.log(crumbs);
 </script>
 
 <ul class="breadcrumb">
