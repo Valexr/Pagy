@@ -19,7 +19,7 @@ setup({
 const app = new App({
     target: document.body,
     props: {
-        name: 'Pagy'
+        name: 'Pg'
     }
 });
 

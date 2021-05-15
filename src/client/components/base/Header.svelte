@@ -80,7 +80,7 @@
             {#if $authed}
                 <BreadCrumbs />
             {:else}
-                Pagy
+                Pg
             {/if}
         </div>
     </section>
