@@ -14,10 +14,7 @@
     import { DropDown, Search, Add } from "@cmp";
     import { media } from "svelte-match-media";
 
-    let addLocale = {
-            action: () => console.log("addLocale"),
-            title: "Locale",
-        },
+    let addLocale = { action: () => console.log("addLocale"), title: "Locale" },
         addMenu = { action: () => console.log("addMenu"), title: "Menu" },
         addRole = { action: () => console.log("addRole"), title: "Role" },
         rolesOpen = false,

@@ -1,12 +1,11 @@
 import { writable, readable, derived, get } from "svelte/store";
-import { Session } from "@api/session";
-
-// export let session = new Session(sessionStorage)
 
 const base = '/api/v1/auth'
 
 export const session = writable(JSON.parse(sessionStorage.getItem('session')) || {});
 session.subscribe(val => sessionStorage.session = JSON.stringify(val));
+
+// const getsession = (data) => { return get(session)[data] }
 
 // export const back = writable(JSON.parse(localStorage.getItem('back')) || {});
 // back.subscribe(val => localStorage.back = JSON.stringify(val));
@@ -115,13 +114,8 @@ export async function cookie() {
         credentials: 'include',
         headers: {
             "Content-Type": "application/json",
-            // Cookie: 'cookie=cookie; c=c; c=c'
-        },
-        // body: JSON.stringify(form),
+        }
     }
-
-    // if (localStorage.length) localStorage.clear();
-    // session.store = user.remember ? localStorage : sessionStorage
 
     try {
         const res = await fetch(path, options)
@@ -150,9 +144,6 @@ export async function login(form) {
         body: JSON.stringify(form),
     }
 
-    // if (localStorage.length) localStorage.clear();
-    // session.store = user.remember ? localStorage : sessionStorage
-
     try {
         const res = await fetch(path, options)
         const user = await res.json()
@@ -169,7 +160,6 @@ export async function login(form) {
     }
 }
 
-const getsession = (data) => { return get(session)[data] }
 
 export async function refresh(token) {
     const path = `${base}/refresh`;

@@ -134,44 +134,4 @@ export default function (app) {
         }
     })
 
-    app.put('/:type', (req, res, next) => {
-        lowdb().then(lowdb => {
-            lowdb
-                .get(req.params.type)
-                .find({ id: +req.query.id })
-                .assign({ ...req.body, update: Date.now() })
-                .write()
-                .then(item => res.json(item))
-        })
-    })
-
-    app.patch('/:type', (req, res, next) => {
-        lowdb().then(lowdb => {
-            lowdb
-                .get(req.params.type)
-                .each(o => o.password = bcrypt.hashSync(o.username, 9))
-                .write()
-                .then(items => res.json(items))
-        })
-    })
-
-    app.delete('/:type', (req, res) => {
-        if (req.query.prop) {
-            lowdb().then(lowdb => {
-                lowdb
-                    .get(req.params.type)
-                    .each(o => delete o[req.query.prop])
-                    .write()
-                    .then(item => res.json(item))
-            })
-        } else {
-            lowdb().then(lowdb => {
-                lowdb
-                    .get(req.params.type)
-                    .remove(o => omatch(o, req.query))
-                    .write()
-                    .then(item => res.json(item))
-            })
-        }
-    })
 }

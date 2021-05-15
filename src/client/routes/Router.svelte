@@ -1,6 +1,5 @@
 <script>
     import { onMount } from "svelte";
-    import { fade } from "svelte/transition";
     import {
         url,
         path,

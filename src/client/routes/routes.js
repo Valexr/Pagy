@@ -106,14 +106,6 @@ export const page = derived([routes, pattern], ([$routes, $pattern]) => $routes.
 
 export const history = writable(JSON.parse(sessionStorage.getItem("history")) || { lang: 'en' });
 history.subscribe(val => sessionStorage.setItem("history", JSON.stringify(val)));
-// export const history = derived([page, url, path], ([$page, $url, $path], set) => {
-//     // ...$history,
-//     set({
-//         [$page.alias]: $url && $url.substring(3),
-//         lang: $path.params && $path.params.lang,
-
-//     } || { lang: 'en' })
-// })
 
 export const authed = derived(
     [session, page],
