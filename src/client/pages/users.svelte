@@ -25,9 +25,9 @@
         $query.params.role && getItems($query.params.role);
 
     async function getItems() {
-        $items = db.get(`users/items${$query.split("&id")[0]}`);
-        $filters = await db.get("users/filters");
-        const all = await db.get("users/all");
+        $items = db.get(`/users/items${$query.split("&id")[0]}`);
+        $filters = await db.get("/users/filters");
+        const all = await db.get("/users/all");
         console.log(all);
     }
 
@@ -37,12 +37,12 @@
     }
 
     async function copyUser(user) {
-        const add = await db.get(`users/items${$query}&id=${user.id}`);
-        $items = await db.add(`users/items${$query}&id=${user.id}`, add);
+        const add = await db.get(`/users/items${$query}&id=${user.id}`);
+        $items = await db.add(`/users/items${$query}&id=${user.id}`, add);
     }
 
     async function deleteUser(user) {
-        $items = await db.del(`users/items${$query}&id=${user.id}`);
+        $items = await db.del(`/users/items${$query}&id=${user.id}`);
     }
 
     // noticy.default("test", 0);

@@ -2,21 +2,15 @@ import low from 'lowdb'
 import FileAsync from 'lowdb/adapters/FileAsync'
 import { omatch, osome } from '$utils'
 
-const lowdb = async (adapter) => await low(new FileAsync(`data/${adapter}.json`))
-// const db = await lowdb(adapter)
-// const file = file => { return new FileAsync(`data/${file}.json`) }
-
-// function db(req, res, next) {
-//     adapter = new FileAsync(`data/users.json`)
-//     next()
-// }
+const db = async (adapter) => await low(new FileAsync(`data/${adapter}.json`))
 
 export default function (app) {
+
     app.get('/:base/:data', async (req, res) => {
         console.log(req.params)
         if (Object.keys(req.query).length) {
             if (req.query.id) {
-                lowdb(req.params.base).then(lowdb => {
+                db(req.params.base).then(lowdb => {
                     const item = lowdb
                         .get(req.params.data)
                         .find({ id: +req.query.id })
@@ -24,7 +18,7 @@ export default function (app) {
                     res.json(item)
                 })
             } else if (req.query.sq) {
-                lowdb(req.params.base).then(lowdb => {
+                db(req.params.base).then(lowdb => {
                     const items = lowdb
                         .get(req.params.data)
                         .filter(o => osome(o, req.query.sq))
@@ -32,7 +26,7 @@ export default function (app) {
                     res.json(items)
                 })
             } else {
-                lowdb(req.params.base).then(lowdb => {
+                db(req.params.base).then(lowdb => {
                     const items = lowdb
                         .get(req.params.data)
                         .filter(o => omatch(o, req.query))
@@ -41,14 +35,14 @@ export default function (app) {
                 })
             }
         } else if (req.params.data === 'all') {
-            lowdb(req.params.base).then(async lowdb => {
+            db(req.params.base).then(async lowdb => {
                 const base = await lowdb.read()
-                // .getState()
-                console.log(JSON.stringify(base))
+                // lowdb.getState()
+                // console.log(JSON.stringify(base))
                 res.json(base)
             })
         } else {
-            lowdb(req.params.base).then(lowdb => {
+            db(req.params.base).then(lowdb => {
                 const items = lowdb
                     .get(req.params.data)
                     .value()
@@ -58,25 +52,25 @@ export default function (app) {
     })
 
     app.post('/:base/:data', (req, res, next) => {
-        lowdb(req.params.base).then(lowdb => {
-            lowdb
+        db(req.params.base).then(lowdb => {
+            const item = lowdb
                 .get(req.params.data)
                 .push(req.body)
                 .last()
                 .assign({ id: Date.now(), create: Date.now(), update: Date.now(), role: req.query.role })
                 .write()
-                .then(item => res.json(item))
+            res.json(item)
         })
     })
 
     app.put('/:base/:data', (req, res, next) => {
-        lowdb(req.params.base).then(lowdb => {
-            lowdb
+        db(req.params.base).then(lowdb => {
+            const item = lowdb
                 .get(req.params.data)
                 .find({ id: +req.query.id })
                 .assign({ ...req.body, update: Date.now() })
                 .write()
-                .then(item => res.json(item))
+            res.json(item)
         })
     })
 
@@ -93,29 +87,23 @@ export default function (app) {
     })
 
     app.delete('/:base/:data', (req, res) => {
-        // lowdb(req.params.base).then(lowdb => {
-        //     lowdb
-        //         .get(req.params.data)
-        //         .remove({ id: +req.query.id })
-        //         .write()
-        //         .then(item => res.json(item))
-        // })
         if (req.query.prop) {
-            lowdb(req.params.base).then(lowdb => {
-                lowdb
+            db(req.params.base).then(async lowdb => {
+                const item = await lowdb
                     .get(req.params.data)
                     .each(o => delete o[req.query.prop])
                     .write()
-                    .then(item => res.json(item))
+                res.json(item)
             })
         } else {
-            lowdb(req.params.base).then(lowdb => {
-                lowdb
+            db(req.params.base).then(lowdb => {
+                const item = lowdb
                     .get(req.params.data)
                     .remove(o => omatch(o, req.query))
                     .write()
-                    .then(item => res.json(item))
+                res.json(item)
             })
         }
     })
+
 }

@@ -50,15 +50,14 @@
         // registerLang($history.lang);
     }
 
-    $: if (!$authed) goto(`/${$history.lang}/auth`);
+    $: if (!$authed) goto(`/auth`);
 
     $: if (!$path.substring(1, 4).includes("/"))
         $path = `/${$history.lang + $path}`;
 
-    $: if ($history) $history[$page.alias] = $url;
+    $: if ($page && $history) $history[$page.alias] = $url;
 
     onMount(() => {
-        console.log(document.cookie.split(";"));
         if (localStorage.session) {
             // console.log(localStorage.session);
             // session.update(localStorage);
@@ -67,7 +66,7 @@
         }
     });
 
-    $: console.log(getLocaleFromPathname(/^\/(.*?)\//));
+    // $: console.log(getLocaleFromPathname(/^\/(.*?)\//));
 </script>
 
 <svelte:window on:click={click} />

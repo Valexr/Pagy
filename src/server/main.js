@@ -20,9 +20,9 @@ app.sub('/api', (app) => {
         app.use(...middlewares)
         app.sub('/auth', auth)
         app.use(token)
+        app.sub('/db', db)
         // app.sub('/pages', pages)
         // app.sub('/users', users)
         // app.sub('/locales', locales)
-        app.sub('/db', db)
     })
 });

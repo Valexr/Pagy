@@ -6,13 +6,13 @@
     // $: console.log($noticy);
 </script>
 
-<div class="noticy container p-fixed">
+<section class="noticy container p-absolute" on:click={() => noticy.clear()}>
     {#each $noticy as notice (notice.id)}
         <div
             animate:flip
             class="toast {!notice.type.default
                 ? `toast-${notice.type}`
-                : ''} my-1 p-absolute"
+                : ''} my-1"
             in:fly={{ y: -48 }}
             out:fade
         >
@@ -27,7 +27,7 @@
             {#if notice.icon}<i class={notice.icon} />{/if}
         </div>
     {/each}
-</div>
+</section>
 
 <style>
     .noticy {

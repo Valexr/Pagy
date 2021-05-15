@@ -12,15 +12,16 @@
 
     export let crumbs = [];
     $: crumbs = $path.split("/").filter(Boolean);
+    $: console.log(crumbs);
 </script>
 
 <ul class="breadcrumb">
     <li class="breadcrumb-item">
-        <a href="/"> <i class="icon icon-home" /></a>
+        <a href="/home"> <i class="icon icon-home" /></a>
     </li>
     {#each crumbs as link}
         <li class="breadcrumb-item">
-            <a href="/">{link}</a>
+            <a href="/{link}">{link}</a>
         </li>
     {/each}
 </ul>

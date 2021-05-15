@@ -58,14 +58,6 @@
           "c": 3
         }
       ]
-    },
-    {
-      "username": "mail@mail.to",
-      "password": "$2a$09$YvKWWaa6eTBHDPrjtCXEmuDbeRj72CtlYOstpNIHJr0Q/iOZLSm.m",
-      "role": "publisher",
-      "id": 1621094852095,
-      "create": 1621094852095,
-      "update": 1621094852095
     }
   ]
 }

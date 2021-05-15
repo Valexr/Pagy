@@ -1,5 +1,7 @@
 <script>
-    import { Noticy } from "@cmp";
+    import { Noticy, noticy } from "@cmp";
 </script>
 
-<Noticy />
+{#if $noticy.length}
+    <Noticy />
+{/if}

@@ -18,14 +18,14 @@
     import { items, filters } from "@stores/store";
 
     onMount(async () => {
-        $filters = await db.get("pages/filters");
+        $filters = await db.get("/pages/filters");
         // db.del(`pages/items${$query}&prop=undefined`);
         // pages.del("items", "?prop=sq");
         // pages.patch("items", "", "?patch=sq");
     });
 
     async function get() {
-        $items = await db.get(`pages/items${$query.split("&id")[0]}`);
+        $items = await db.get(`/pages/items${$query.split("&id")[0]}`);
     }
     $: get($query);
 
@@ -34,11 +34,11 @@
         $fragment = "#sidebar";
     }
     async function copyPage(page) {
-        const add = await db.get(`pages/items${$query}&id=${page.id}`);
-        $items = await db.add(`pages/items${$query}`, add);
+        const add = await db.get(`/pages/items${$query}&id=${page.id}`);
+        $items = await db.add(`/pages/items${$query}`, add);
     }
     async function deletePage(page) {
-        $items = await db.del(`pages/items${$query}&id=${page.id}`);
+        $items = await db.del(`/pages/items${$query}&id=${page.id}`);
     }
 
     function sortby(items) {

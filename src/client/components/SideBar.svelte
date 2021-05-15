@@ -38,14 +38,14 @@
     async function getPage() {
         await tick();
         if ($page.alias === "locales")
-            editForm = await db.get(`locales/items${$query}`);
+            editForm = await db.get(`/locales/items${$query}`);
         else if ($page.alias === "users")
-            editForm = await db.get(`users/items${$query}`);
-        else editForm = await db.get(`pages/items${$query}`);
+            editForm = await db.get(`/users/items${$query}`);
+        else editForm = await db.get(`/pages/items${$query}`);
     }
 
     async function updatePage() {
-        $items = await db.set(`pages/items${$query}`, editForm);
+        $items = await db.set(`/pages/items${$query}`, editForm);
         close();
     }
     $: if (aside && isOpen) width = aside.clientWidth;

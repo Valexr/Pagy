@@ -21,6 +21,11 @@ function createNotificationStore() {
             return [...state.filter(n => n.id !== id)]
         })
     }
+    function clear(id) {
+        _notifications.update(state => {
+            return []
+        })
+    }
 
     const notifications = derived(_notifications, ($_notifications, set) => {
         set($_notifications)
@@ -49,6 +54,7 @@ function createNotificationStore() {
         subscribe: notifications.subscribe,
         send,
         close,
+        clear,
         default: (msg, timeout, title, close) => send(msg, "default", timeout, title, close),
         error: (msg, timeout, title, close) => send(msg, "error", timeout, title, close),
         warning: (msg, timeout, title, close) => send(msg, "warning", timeout, title, close),

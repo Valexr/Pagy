@@ -25,10 +25,10 @@
     } from "svelte-pathfinder";
 
     let func = `o.id = Date.now() + i`;
-    onMount(async () => ($filters = await db.get("locales/filters")));
+    onMount(async () => ($filters = await db.get("/locales/filters")));
     async function get() {
         // db.patch(`locales/items?patch=${func}`);
-        $items = db.get(`locales/items${$query.split("&id")[0]}`);
+        $items = db.get(`/locales/items${$query.split("&id")[0]}`);
     }
 
     function edit(locale) {

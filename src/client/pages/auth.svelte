@@ -77,8 +77,8 @@
             .minLength(6, "не менее 6 символов")
             .check("password")
             .required()
-            .minLength(8, "Password should be at least 8 symbols length")
-            .match(/[a-zA-Z0-9#?!@$%^&*-]/).end;
+            .match(/[a-zA-Z0-9#?!@$%^&*-]/)
+            .minLength(8, "Password should be at least 8 symbols length").end;
         // .is((v) => v === true, "Вы согласны отправить личные данные?");
 
         if ($form.valid) {
@@ -100,10 +100,10 @@
                         case 200:
                             noticy.success(
                                 $form.username,
-                                5000,
+                                2500,
                                 $t("expires") + time(res.user.exp * 1000)
                             );
-                            goto(`/${$history.lang}/users?role=admin`);
+                            goto(`/users?role=admin`);
                             break;
                     }
                 })
@@ -112,7 +112,15 @@
                     console.log("err: ", err);
                 });
         } else {
-            noticy.default("Form invalid", 1000);
+            noticy.default(
+                JSON.stringify(
+                    $form.err
+                        .toArray()
+                        .filter((e) => e)
+                        .toString()
+                ),
+                5000
+            );
             setTimeout(() => (onAuth = false), 500);
         }
     }
@@ -236,8 +244,8 @@
             </fieldset>
             <button
                 aria-keyshortcuts="Enter"
-                class="btn btn-primary btn-block"
                 disabled={submitable}
+                class="btn btn-primary btn-block"
                 class:c-not-allowed={submitable}
                 class:loading={onAuth}
             >

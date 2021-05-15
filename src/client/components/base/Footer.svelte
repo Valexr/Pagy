@@ -18,7 +18,6 @@
         path: $path,
         query: $query,
         fragment: $fragment,
-        query: $query,
         authed: $authed,
         session: $session,
         // history: $history,
