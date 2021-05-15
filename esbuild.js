@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const DEV = process.argv.includes('--dev');
 const sveltePlugin = require("esbuild-svelte");
 const sveltePreprocess = require("svelte-preprocess");

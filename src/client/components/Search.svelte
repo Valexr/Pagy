@@ -1,18 +1,21 @@
 <script>
-    import { router } from "tinro";
+    import {
+        url,
+        path,
+        pattern,
+        query,
+        fragment,
+        click,
+        state,
+    } from "svelte-pathfinder";
     import { media } from "svelte-match-media";
     import { DropDown } from "@cmp";
 
     let searchOpen = false;
 
-    $: sq = $router.query.sq && decodeURI($router.query.sq);
+    $: sq = $query.params.sq ? decodeURI($query.params.sq) : "";
 
-    async function searchQuery(e) {
-        router.location.query.set("sq", e.target.value);
-        // const itms = await $items
-        // if (e.target.blur()) router.location.query.set("sq", "");
-        // $items.filter((i) => i.title.includes(e.target.value));
-    }
+    async function searchQuery(e) {}
 </script>
 
 {#if $media.xs}
@@ -32,8 +35,9 @@
                 id="input-search"
                 type="text"
                 class="form-input"
-                placeholder="...case sensitive"
+                placeholder="...case insensitive"
                 on:input={searchQuery}
+                bind:value={$query.params.sq}
             />
         </slot>
         <!-- <a
@@ -54,8 +58,9 @@
         <input
             class="form-input"
             type="text"
-            placeholder="...case sensitive"
-            on:input={searchQuery}
+            placeholder="...case insensitive"
+            on:change={searchQuery}
+            bind:value={$query.params.sq}
         /><i
             class:text-primary={sq}
             class:text-gray={!sq}
@@ -78,12 +83,15 @@
 {/if}
 
 <style lang="scss">
+    // .sq {
+    //     color: var(--primary-color);
+    // }
     #input-search {
         max-width: 240px;
     }
     .has-icon-right .form-input {
         &:focus + i {
-            color: blue;
+            color: var(--primary-color);
         }
     }
 </style>

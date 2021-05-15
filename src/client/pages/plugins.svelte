@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { routes, chistory } from "@routes";
+    import { routes, history } from "@routes";
     import { navbar } from "@stores/store";
     import Sortable from "sortablejs";
     let pagelist = {},
@@ -28,12 +28,12 @@
         menus = ["header", "main", "footer"];
 
     async function changeLocale(locale) {
-        $chistory.locale = locale;
-        pages = await data.db("pages", $chistory.locale, $chistory.menu);
+        $history.locale = locale;
+        pages = await data.db("pages", $history.locale, $history.menu);
     }
     async function changeMenu(menu) {
-        $chistory.menu = menu;
-        pages = await data.get($chistory.menu);
+        $history.menu = menu;
+        pages = await data.get($history.menu);
     }
 </script>
 
@@ -45,8 +45,7 @@
             <div class="off-canvas off-canvas-sidebar-show">
                 <a
                     class="off-canvas-toggle btn btn-primary btn-action"
-                    href="#sidebar-demo"
-                    tinro-ignore><i class="icon icon-menu" /></a
+                    href="#sidebar-demo"><i class="icon icon-menu" /></a
                 >
                 <div class="off-canvas-sidebar container" id="sidebar-demo">
                     <div class="columns">
@@ -55,9 +54,8 @@
                                 <button
                                     class="btn btn-link dropdown-toggle text-uppercase"
                                     tabindex="0"
-                                    tinro-ignore
                                 >
-                                    {$chistory.locale}<i
+                                    {$history.locale}<i
                                         class="icon icon-caret"
                                     />
                                 </button>
@@ -65,11 +63,11 @@
                                     {#each locales as locale}
                                         <li class="menu-item">
                                             <a
-                                                href={`/pages/${locale}/${$chistory.menu}`}
+                                                href={`/pages/${locale}/${$history.menu}`}
                                                 on:click={() =>
                                                     changeLocale(locale)}
                                                 class:active={locale ===
-                                                    $chistory.locale}
+                                                    $history.locale}
                                             >
                                                 {locale.toUpperCase()}
                                                 <button
@@ -97,8 +95,7 @@
                                 <button
                                     class="btn btn-link dropdown-toggle text-capitalize"
                                     tabindex="0"
-                                    tinro-ignore
-                                    >{$chistory.menu}<i
+                                    >{$history.menu}<i
                                         class="icon icon-caret"
                                     /></button
                                 >
@@ -106,11 +103,11 @@
                                     {#each menus as menu}
                                         <li class="menu-item  text-capitalize">
                                             <a
-                                                href={`/pages/${$chistory.locale}/${menu}`}
+                                                href={`/pages/${$history.locale}/${menu}`}
                                                 on:click={() =>
                                                     changeMenu(menu)}
                                                 class:active={menu ===
-                                                    $chistory.menu}
+                                                    $history.menu}
                                                 >{menu}
                                                 <button
                                                     on:click|stopPropagation|preventDefault

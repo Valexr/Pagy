@@ -1,17 +1,24 @@
 <script>
-    import { cmeta } from "@routes";
     import { ModalAdd } from "@cmp";
     import { addopen, addBookForm } from "@stores/pages";
     import { items } from "@stores/store";
-    import { router } from "tinro";
+    import {
+        url,
+        path,
+        pattern,
+        query,
+        fragment,
+        click,
+        state,
+    } from "svelte-pathfinder";
 
     async function addPage() {
-        $items = await data.add($cmeta.params.menu, $addBookForm);
+        $items = await data.add($path.params.menu, $addBookForm);
         $addopen = !$addopen;
     }
 </script>
 
-{#if $router.hash === `modal-add`}
+{#if $fragment === `modal-add`}
     <ModalAdd />
 {/if}
 <!-- <Modal

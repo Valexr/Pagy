@@ -1,84 +1,95 @@
 <script>
-    import { router, meta } from "tinro";
-    import { routes, chistory, cmeta, cpath } from "@routes";
-    import { clickout } from "@utils";
-    import { DropDown, Navbar, BreadCrumbs } from "@cmp";
+    import { tick } from "svelte";
+    import {
+        url,
+        path,
+        pattern,
+        query,
+        fragment,
+        click,
+        state,
+    } from "svelte-pathfinder";
+    import { page, routes, history, authed } from "@routes";
+    import { DropDown, Navbar, BreadCrumbs, Button } from "@cmp";
+    import { session } from "@api/auth";
 
     let menu = false,
         user = false,
         lang = false,
-        langs = ["en", "ru"],
-        urlmatch = $router.url.substring(3);
+        langs = ["en", "ru"];
 
-    $: links = routes
-        .map((link) => {
-            if (link.match.includes(":")) {
-                const match =
-                    link.alias in $chistory
-                        ? $chistory[link.alias]
-                        : link.default;
-                return {
-                    ...link,
-                    match: match,
-                };
-            } else return link;
-        })
-        .filter((link) => link.menu);
+    // $: links = routes
+    //     .map((link) => {
+    //         if (link.match.includes(":")) {
+    //             const match =
+    //                 link.alias in $history
+    //                     ? $history[link.alias]
+    //                     : link.default;
+    //             return {
+    //                 ...link,
+    //                 match: match,
+    //             };
+    //         } else return link;
+    //     })
+    //     .filter((link) => link.menu);
 
     function changeLang(item) {
         lang = !lang;
-        $chistory.lang = item;
-        router.goto(`/${item}${urlmatch}`);
+        $history.lang = item;
+        $path.params.lang = item;
     }
-    // $: console.log($router.path.match(/^\/(.*?)\//)[1]);
 </script>
 
 <header class="navbar container p-sticky bg-gray">
     <section class="navbar-section">
         <div class="column col-auto">
-            <DropDown
-                bind:opener={menu}
-                openbut={{ name: "", icon: "icon-apps", class: "btn-link" }}
-                items={links}
-                downbut={null}
-                let:item
-            >
-                <!-- <slot name="item">
-                    {(item.title = item.props.title)}
-                    {(item.href = item.match)}
-                </slot> -->
-                <a
-                    href={item.match}
-                    class:active={$chistory.url === item.match}
-                    on:click={() => (menu = !menu)}
+            {#if $authed}
+                <DropDown
+                    bind:opener={menu}
+                    openbut={{ name: "", icon: "icon-apps", class: "btn-link" }}
+                    items={$routes.filter((r) => r.menu)}
+                    downbut={null}
+                    let:item
                 >
-                    {#if item.icon}
-                        <i
-                            class="icon icon-{item.icon} {$chistory.url ===
-                            item.match
-                                ? 'text-primary'
-                                : 'text-gray'}"
-                        />
-                    {/if}
-                    {item.props.title}
-                </a>
-            </DropDown>
+                    <a
+                        href={$history[item.alias] || item.default}
+                        class="columns"
+                        class:active={$pattern(item.match)}
+                        on:click={() => tick().then(() => (menu = !menu))}
+                    >
+                        {#if item.icon}
+                            <i
+                                class="
+                                menu-icon 
+                                icon 
+                                icon-{item.icon} 
+                                {$pattern(item.match)
+                                    ? 'text-primary'
+                                    : 'text-gray'}
+                                "
+                            />
+                        {/if}
+                        <span class="px-1">{item.props.title}</span>
+                    </a>
+                </DropDown>
+            {/if}
         </div>
     </section>
     <section class="navbar-center ">
         <div class="column col-auto">
-            <BreadCrumbs />
+            {#if $authed}
+                <BreadCrumbs />
+            {:else}
+                Pagy
+            {/if}
         </div>
     </section>
     <section class="navbar-section ">
-        <!-- <div class="column col-auto">
-            
-        </div> -->
         <div class="column col-auto">
             <DropDown
                 bind:opener={lang}
                 openbut={{
-                    name: $chistory.lang,
+                    name: $history.lang,
                     icon: "icon-location",
                     class: "btn-link",
                 }}
@@ -89,39 +100,49 @@
                 let:item
             >
                 <a
-                    href
-                    class:active={$chistory.lang === item}
+                    href={`/${item}${$url.substring(3)}`}
+                    class:active={$history.lang === item}
                     on:click={changeLang(item)}
-                    tinro-ignore
                 >
                     {item}
                 </a>
             </DropDown>
-            <DropDown
+            {#if $authed}
+                <Button
+                    but={{ class: "btn-link s-circle", icon: "shutdown" }}
+                    on:click={session.set({ username: $session.username })}
+                />
+                <!-- <DropDown
                 bind:opener={user}
                 openbut={{
                     name: "",
                     icon: "icon-people",
                     class: "btn-link s-circle",
                 }}
-                items={links}
-                downbut={null}
+                downbut={{
+                    action: () => ($session = { username: $session.username }),
+                    title: "Logout",
+                    icon: "shutdown",
+                }}
                 right={true}
                 let:item
             >
-                <a
-                    href={item.match}
-                    class:active={$chistory.url === item.match}
-                    on:click={() => (user = !user)}
-                >
-                    {item.props.title}
-                </a>
-            </DropDown>
+                <slot slot="static">
+                    <a
+                        href
+                        class="btn btn-link"
+                        on:click={() => (user = !user)}
+                    >
+                        {$session.username}
+                    </a>
+                </slot>
+            </DropDown> -->
+            {/if}
         </div>
     </section>
 </header>
 
-{#if $cpath.navbar}
+{#if $page.navbar}
     <Navbar />
 {/if}
 

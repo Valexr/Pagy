@@ -1,26 +1,21 @@
-<!-- Transition.svelte -->
 <script>
     import { fade } from "svelte/transition";
-    import { Route, router, meta } from "tinro";
-    import { routes, Lazy, cpath, cmeta, chistory } from "@routes";
+    import { page } from "@routes";
 
-    $: id = $cpath ? $cpath.alias : $router.path === "/" ? "auth" : "404";
+    export let duration = 500;
 </script>
 
-<!-- {#await $router.path}
-    <div class="docs-demo columns">
-        <div class="column col-12 text-center">
-            <div class="loading loading-lg" />
-        </div>
-    </div>
-{:then} -->
-{#key $router.path}
-    <main {id} class="container" in:fade={{ duration: 500 }}>
+{#key $page}
+    <main
+        id={$page.alias}
+        class:bg-gray={$page.alias === "auth"}
+        class="container"
+        in:fade={{ duration: duration, delay: 100 }}
+    >
         <slot />
     </main>
 {/key}
 
-<!-- {/await} -->
 <style lang="scss">
     main {
         padding-bottom: 5em;
@@ -34,6 +29,8 @@
             right: 0;
             bottom: 0;
             left: 0;
+            overflow-y: auto;
+            padding: 3em 0;
         }
     }
 </style>

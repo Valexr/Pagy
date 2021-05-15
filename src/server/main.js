@@ -1,8 +1,11 @@
 import server from '@server';
+import auth from '$EP/auth'
 import pages from '$EP/pages'
 import users from '$EP/users'
 import locales from '$EP/locales'
-import { log, json, body } from './middlewares'
+import db from '$EP/db'
+import token from './token'
+import middlewares from './middlewares'
 
 const DEV = process.env.NODE_ENV === 'dev';
 const app = server({
@@ -14,11 +17,12 @@ const app = server({
 
 app.sub('/api', (app) => {
     app.sub('/v1', app => {
-        app.use(body)
-        app.use(json)
-        app.use(log)
-        app.sub('/pages', pages)
-        app.sub('/users', users)
-        app.sub('/locales', locales)
+        app.use(...middlewares)
+        app.sub('/auth', auth)
+        app.use(token)
+        // app.sub('/pages', pages)
+        // app.sub('/users', users)
+        // app.sub('/locales', locales)
+        app.sub('/db', db)
     })
 });

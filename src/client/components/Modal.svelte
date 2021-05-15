@@ -1,6 +1,14 @@
 <script>
     import { onMount } from "svelte";
-    import { router } from "tinro";
+    import {
+        url,
+        path,
+        pattern,
+        query,
+        fragment,
+        click,
+        state,
+    } from "svelte-pathfinder";
     import { clickout } from "@utils";
 
     export let // id = "modal",
@@ -18,14 +26,13 @@
         modal = null;
 
     const close = () => {
-        router.location.hash.set("");
-        // router.goto($router.url.split("#")[0]);
+        $fragment = "";
     };
 </script>
 
 <section
     class="modal {size} {`modal-${opener}`}"
-    class:active={$router.hash === `modal-${opener}`}
+    class:active={$fragment === `modal-${opener}`}
 >
     <div class="modal-overlay" aria-label="Close" on:click={close}>&nbsp;</div>
     <div

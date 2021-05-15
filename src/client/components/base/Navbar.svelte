@@ -1,9 +1,16 @@
 <script>
     import { fade } from "svelte/transition";
-    import { router } from "tinro";
-    import { cmeta, cpath, chistory } from "@routes";
+    import {
+        url,
+        path,
+        pattern,
+        query,
+        fragment,
+        click,
+        state,
+        back,
+    } from "svelte-pathfinder";
     import { items, filters } from "@stores/store";
-    import { addopen } from "@stores/pages";
     import { DropDown, Search, Add } from "@cmp";
     import { media } from "svelte-match-media";
 
@@ -13,27 +20,28 @@
         },
         addMenu = { action: () => console.log("addMenu"), title: "Menu" },
         addRole = { action: () => console.log("addRole"), title: "Role" },
+        rolesOpen = false,
         localesOpen = false,
         menusOpen = false,
         regionsOpen = false;
 
-    $: console.log($items);
+    // $: console.log($items);
 </script>
 
 <nav class="navbar container p-sticky bg-light" in:fade={{ duration: 500 }}>
     <section class="navbar-section ">
-        {#if $router.query.role}
+        {#if $query.params.role}
             <div class="column col-auto">
                 <DropDown
-                    opener={localesOpen}
-                    openbut={{ name: $router.query.role }}
+                    opener={rolesOpen}
+                    openbut={{ name: $query.params.role }}
                     items={$filters.role}
                     downbut={addRole}
                     let:item
                 >
                     <a
-                        href={`${$router.path}?role=${item}`}
-                        class:active={item === $router.query.role}
+                        href={`${$path}?role=${item}`}
+                        class:active={item === $query.params.role}
                     >
                         {item}
                         <button
@@ -46,18 +54,18 @@
                 </DropDown>
             </div>
         {/if}
-        {#if $router.query.locale}
+        {#if $query.params.locale}
             <div class="column col-auto">
                 <DropDown
                     opener={localesOpen}
-                    openbut={{ name: $router.query.locale.toUpperCase() }}
+                    openbut={{ name: $query.params.locale.toUpperCase() }}
                     items={$filters.locale}
                     downbut={addLocale}
                     let:item
                 >
                     <a
-                        href={`${$router.path}?locale=${item}&menu=${$router.query.menu}`}
-                        class:active={item === $router.query.locale}
+                        href={`${$path}?locale=${item}&menu=${$query.params.menu}`}
+                        class:active={item === $query.params.locale}
                     >
                         {item.toUpperCase()}
                         <button
@@ -70,18 +78,18 @@
                 </DropDown>
             </div>
         {/if}
-        {#if $router.query.menu}
+        {#if $query.params.menu}
             <div class="column col-auto">
                 <DropDown
                     opener={menusOpen}
-                    openbut={{ name: $router.query.menu }}
+                    openbut={{ name: $query.params.menu }}
                     items={$filters.menu}
                     downbut={addMenu}
                     let:item
                 >
                     <a
-                        href={`${$router.path}?locale=${$router.query.locale}&menu=${item}`}
-                        class:active={item === $router.query.menu}
+                        href={`${$path}?locale=${$query.params.locale}&menu=${item}`}
+                        class:active={item === $query.params.menu}
                     >
                         {item}
                         <button
@@ -94,19 +102,19 @@
                 </DropDown>
             </div>
         {/if}
-        {#if $router.query.region}
+        {#if $query.params.region}
             <div class="column col-auto">
                 <DropDown
                     opener={regionsOpen}
-                    openbut={{ name: $router.query.region }}
+                    openbut={{ name: $query.params.region }}
                     items={$filters.region}
                     downbut={false}
                     auto
                     let:item
                 >
                     <a
-                        href={`${$router.path}?region=${item}`}
-                        class:active={item === $router.query.region}
+                        href={`${$path}?region=${item}`}
+                        class:active={item === $query.params.region}
                     >
                         {item}
                         <!-- <button

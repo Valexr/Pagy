@@ -2,12 +2,24 @@
     import { onDestroy, onMount, tick } from "svelte";
     import { fly, fade } from "svelte/transition";
     import { quintOut } from "svelte/easing";
-    import { router } from "tinro";
+    import {
+        url,
+        path,
+        pattern,
+        query,
+        fragment,
+        click,
+        state,
+        back,
+    } from "svelte-pathfinder";
     import { clickout } from "@utils";
-    import { cmeta, chistory } from "@routes";
+    import { page } from "@routes";
     // import { editForm } from "@stores/pages";
     import { items } from "@stores/store";
+    import * as db from "@api/db";
+    import * as users from "@api/users";
     import * as pages from "@api/pages";
+    import * as locales from "@api/locales";
 
     let aside = null,
         form = null,
@@ -21,21 +33,23 @@
         isOpen = false,
         width = 0;
 
-    const close = () =>
-        router.goto($router.from ? $router.from : $router.url.split("&id")[0]);
+    const close = () => (($query = $query.split("&id")[0]), ($fragment = ""));
 
     async function getPage() {
         await tick();
-        editForm = await pages.get("items", $chistory.query);
+        if ($page.alias === "locales")
+            editForm = await db.get(`locales/items${$query}`);
+        else if ($page.alias === "users")
+            editForm = await db.get(`users/items${$query}`);
+        else editForm = await db.get(`pages/items${$query}`);
     }
 
     async function updatePage() {
-        $items = await pages.set("items", editForm, $chistory.query);
+        $items = await db.set(`pages/items${$query}`, editForm);
         close();
     }
     $: if (aside && isOpen) width = aside.clientWidth;
     // $: isOpen && getPage();
-    $: console.log(editForm, $cmeta, width);
 </script>
 
 <aside
@@ -43,7 +57,7 @@
     transition:fly={{
         delay: 0,
         duration: 500,
-        x: right ? 480 : -480,
+        x: right ? 490 : -490,
         y: 0,
         opacity: 1,
         // easing: quintOut,
@@ -79,7 +93,6 @@
                         id="accordion-1"
                         name="accordion-checkbox"
                         hidden
-                        checked
                     />
                     <label class="accordion-header" for="accordion-1">
                         <i class="icon icon-arrow-right mr-1" />
@@ -201,7 +214,7 @@
                         <pre
                             class="code"
                             data-lang="JSON">
-                            <code>{JSON.stringify(editForm, 0, 2)}</code>
+                            <code contenteditable="true">{JSON.stringify(editForm, 0, 2)}</code>
                         </pre>
                     </div>
                 </details>
@@ -216,7 +229,7 @@
         top: 0;
         bottom: 0;
         width: 100%;
-        max-width: 480px;
+        max-width: 490px;
         z-index: 400;
         box-shadow: 0 0.2rem 0.5rem rgba(48, 55, 66, 0.3);
         background: white;
@@ -241,5 +254,8 @@
         right: 0;
         top: 0;
         z-index: 300;
+    }
+    .accordion .accordion-body {
+        overflow: auto;
     }
 </style>

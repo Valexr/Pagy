@@ -1,17 +1,26 @@
 <script>
     import { router, meta } from "tinro";
     import { routes, cpath, cmeta, chistory } from "@routes";
+    import {
+        addMessages,
+        init,
+        getLocaleFromNavigator,
+        register,
+        getLocaleFromPathname,
+    } from "svelte-intl-precompile";
+
+    register("en", () => import("@lang/en.json"));
+    register("ru", () => import("@lang/ru.json"));
+    init({
+        fallbackLocale: "en",
+        // initialLocale: "getLocaleFromNavigator()",
+        initialLocale: getLocaleFromPathname(/^\/(.*?)\//),
+    });
 
     export let component = null;
 
     $: $cmeta = meta();
-    $: $chistory = {
-        ...$chistory,
-        [$cpath.alias]: $router.url.substring(3),
-        lang: $cmeta.params.lang || "en",
-        url: $router.url.substring(3),
-        query: "?" + $router.url.split(/[?#]/)[1],
-    };
+
     $: $cpath =
         routes.find((route) =>
             $cmeta.pattern && $cmeta.params.lang !== "api"

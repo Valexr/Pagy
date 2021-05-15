@@ -1,41 +1,95 @@
 <script>
-    import { Route, router, meta } from "tinro";
-    import { routes, Lazy, Transition, cpath, cmeta, chistory } from "@routes";
+    import { onMount } from "svelte";
+    import { fade } from "svelte/transition";
     import {
-        addMessages,
+        url,
+        path,
+        query,
+        pattern,
+        fragment,
+        state,
+        click,
+        goto,
+    } from "svelte-pathfinder";
+    import Viewpoint from "svelte-viewpoint";
+    import {
+        page,
+        authed,
+        routes,
+        history,
+        Authguard,
+        Transition,
+    } from "@routes";
+    import { session, refresh } from "@api/auth";
+    import Auth from "@pages/auth.svelte";
+    import {
         init,
-        getLocaleFromNavigator /*, register */,
+        register,
+        addMessages,
         getLocaleFromPathname,
+        getLocaleFromNavigator,
     } from "svelte-intl-precompile";
     import en from "@lang/en.json";
     import ru from "@lang/ru.json";
-    // @ts-ignore
-    addMessages("en", en);
-    addMessages("ru", ru);
-    // register('es', () => import('../../locales/en.js')); <-- use this approach if you want locales to be load lazily
 
-    init({
-        fallbackLocale: "en",
-        // initialLocale: "getLocaleFromNavigator()",
-        initialLocale: getLocaleFromPathname(/^\/(.*?)\//),
+    $: if ($page) {
+        addMessages("en", en);
+        addMessages("ru", ru);
+        init({
+            fallbackLocale: "en",
+            initialLocale: $history.lang,
+        });
+        // async function registerLang(lang) {
+        //     await register("en", () => import("@lang/en.json"));
+        //     await register("ru", () => import("@lang/ru.json"));
+        //     init({
+        //         fallbackLocale: "en",
+        //         initialLocale: lang,
+        //     });
+        // }
+        // registerLang($history.lang);
+    }
+
+    $: if (!$authed) goto(`/${$history.lang}/auth`);
+
+    $: if (!$path.substring(1, 4).includes("/"))
+        $path = `/${$history.lang + $path}`;
+
+    $: if ($history) $history[$page.alias] = $url;
+
+    onMount(() => {
+        console.log(document.cookie.split(";"));
+        if (localStorage.session) {
+            // console.log(localStorage.session);
+            // session.update(localStorage);
+            // session.save();
+            // goto(`/${$history.lang}/users?role=admin`);
+        }
     });
 
-    $: !$router.path.substring(0, 3).includes($chistory.lang)
-        ? router.goto(`/${$chistory.lang + $router.url}`)
-        : ``;
+    $: console.log(getLocaleFromPathname(/^\/(.*?)\//));
 </script>
 
+<svelte:window on:click={click} />
+
 <Transition>
-    <Route>
-        {#each routes.filter((route) => route.menu) as route}
-            <Route path={route.match} let:meta>
-                <Lazy component={route.component} />
-            </Route>
-        {/each}
-        <Route fallback let:meta>
-            <Lazy component={routes[routes.length - 1].component} />
-        </Route>
-    </Route>
+    {#if !$authed}<Auth />{:else}
+        <Viewpoint
+            delay={500}
+            timeout={500}
+            {...$page}
+            query={$query}
+            path={$path}
+        >
+            <svelte:fragment slot="loading">
+                <div class="columns">
+                    <div class="column col-12 text-center">
+                        <div class="loading loading-lg" />
+                    </div>
+                </div>
+            </svelte:fragment>
+        </Viewpoint>
+    {/if}
 </Transition>
 
 <style lang="scss"></style>

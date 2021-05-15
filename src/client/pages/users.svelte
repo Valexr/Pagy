@@ -2,19 +2,50 @@
     import { onMount } from "svelte";
     import { media } from "svelte-match-media";
     import { date } from "@utils";
-    import * as users from "@api/users";
+    import * as db from "@api/db";
     import { items, filters } from "@stores/store";
-    import { Table } from "svelte-tabular-table";
-    import { TableCmps } from "@cmp";
-    import { router } from "tinro";
-    import { cpath, chistory } from "@routes";
+    // import { Table } from "svelte-tabular-table";
+    // import { TableCmps } from "@cmp";
+    import { history } from "@routes";
+    import {
+        url,
+        path,
+        pattern,
+        query,
+        fragment,
+        click,
+        state,
+        back,
+        goto,
+    } from "svelte-pathfinder";
+    import { noticy } from "@cmp";
+    import { login, refresh, session } from "@api/auth";
+
+    $: if ($fragment !== "sidebar" && !$query.params.id)
+        $query.params.role && getItems($query.params.role);
 
     async function getItems() {
-        $items = await users.get("items", $chistory.query);
-        $filters = await users.get("filters");
+        $items = db.get(`users/items${$query.split("&id")[0]}`);
+        $filters = await db.get("users/filters");
+        const all = await db.get("users/all");
+        console.log(all);
     }
-    $: getItems($router.query);
 
+    function editUser(page) {
+        $query.params.id = page.id;
+        $fragment = "#sidebar";
+    }
+
+    async function copyUser(user) {
+        const add = await db.get(`users/items${$query}&id=${user.id}`);
+        $items = await db.add(`users/items${$query}&id=${user.id}`, add);
+    }
+
+    async function deleteUser(user) {
+        $items = await db.del(`users/items${$query}&id=${user.id}`);
+    }
+
+    // noticy.default("test", 0);
     // $: config = $items && {
     //     id: "users",
     //     class: "table table-striped table-hover",
@@ -42,7 +73,7 @@
     // };
 </script>
 
-<h1 class="flex-centered">{$cpath.alias}</h1>
+<h1 class="flex-centered">Users</h1>
 
 {#await $items}
     <div class="docs-demo columns">
@@ -64,8 +95,8 @@
                 <tr>
                     <th />
                     <th>Id</th>
-                    <th>Email</th>
-                    <th>Password</th>
+                    <th>Username</th>
+                    <!-- <th>Password</th> -->
                     <th>Create</th>
                     <th>Update</th>
                     <th>Actions</th>
@@ -86,31 +117,31 @@
                         <td>{i}</td>
                         <td
                             contenteditable="true"
-                            bind:textContent={user.email}
+                            bind:textContent={user.username}
                         >
-                            {user.email}
+                            {user.username}
                         </td>
-                        <td>{user.password}</td>
+                        <!-- <td>{user.password}</td> -->
                         <td>{date(user.create)}</td>
                         <td>{date(user.update)}</td>
                         <td>
                             <button
                                 class="btn btn-action tooltip"
                                 data-tooltip="Edit book"
-                                on:click|preventDefault
+                                on:click|stopPropagation={editUser(user)}
                             >
                                 <i class="icon icon-edit" />
                             </button>
                             <button
                                 class="btn btn-link btn-action tooltip"
                                 data-tooltip="Copy book"
-                                on:click|preventDefault
+                                on:click={copyUser(user)}
                             >
                                 <i class="icon icon-copy" />
                             </button>
                             <button
                                 class="btn btn-link btn-action text-error"
-                                on:click|preventDefault
+                                on:click={deleteUser(user)}
                             >
                                 <i class="icon icon-delete" />
                             </button>

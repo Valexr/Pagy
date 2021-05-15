@@ -14,7 +14,6 @@
         items = [],
         downbut = {},
         right = false,
-        list = true,
         auto = false;
     const open = () => (opener = !opener);
 </script>
@@ -48,9 +47,9 @@
             class="menu"
             bind:this={ul}
             use:clickout={ul}
-            on:clickout={() => (opener = false)}
+            on:clickout={() => (opener = !opener)}
         >
-            {#if list}
+            {#if items.length}
                 {#each items as item}
                     <li class="menu-item text-capitalize">
                         <slot {item}>
@@ -84,7 +83,11 @@
                         class="btn btn-primary btn-block text-light"
                         on:click={downbut.action}
                     >
-                        <i class="icon icon-plus" />
+                        <i
+                            class="icon icon-{downbut.icon
+                                ? downbut.icon
+                                : 'plus'}"
+                        />
                         {downbut.title}
                     </button>
                 </li>

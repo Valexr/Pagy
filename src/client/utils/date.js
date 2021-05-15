@@ -23,3 +23,6 @@ export function dateFormat(date, locale, options) {
 export function date(utc, locale = "ru") {
     return new Date(utc).toLocaleString(locale);
 }
+export function time(utc, locale = "ru") {
+    return new Date(utc).toLocaleTimeString(locale);
+}

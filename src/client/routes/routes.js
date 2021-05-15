@@ -1,25 +1,36 @@
-import { writable, derived, get } from 'svelte/store';
-import { router, meta } from "tinro";
+import { readable, writable, derived, get } from 'svelte/store';
+import {
+    url,
+    path,
+    query,
+    pattern,
+    fragment,
+    state,
+    click,
+    goto,
+} from "svelte-pathfinder";
+import { session, refresh } from "@api/auth";
 
-export const chistory = writable(JSON.parse(sessionStorage.getItem("chistory")) || { lang: 'en' });
-chistory.subscribe(val => sessionStorage.setItem("chistory", JSON.stringify(val)));
-
-export const cmeta = writable(JSON.parse(sessionStorage.getItem("cmeta")) || {});
-cmeta.subscribe(val => sessionStorage.setItem("cmeta", JSON.stringify(val)));
-
-export const cpath = writable(JSON.parse(sessionStorage.getItem("cpath")) || {});
-cpath.subscribe(val => sessionStorage.setItem("cpath", JSON.stringify(val)));
-
-export const routes = [
+export const routes = readable([
     {
-        match: '/:lang',
-        default: '/',
+        match: '/:lang/auth',
+        default: '/auth',
         alias: 'auth',
-        menu: true,
+        menu: false,
         navbar: false,
         icon: 'emoji',
         component: () => import('@pages/auth.svelte'),
         props: { title: 'auth', keywords: 'keywords', description: 'description' }
+    },
+    {
+        match: '/:lang/home',
+        default: '/home',
+        alias: 'home',
+        menu: true,
+        navbar: false,
+        icon: 'home',
+        component: () => import('@pages/home.svelte'),
+        props: { title: 'home', keywords: 'keywords', description: 'description' }
     },
     {
         match: '/:lang/users',
@@ -89,4 +100,48 @@ export const routes = [
         component: () => import('@pages/404.svelte'),
         props: { title: '404', keywords: 'keywords', description: 'description' }
     },
-];
+]);
+
+export const page = derived([routes, pattern], ([$routes, $pattern]) => $routes.find((route) => $pattern(route.match)) || null)
+
+export const history = writable(JSON.parse(sessionStorage.getItem("history")) || { lang: 'en' });
+history.subscribe(val => sessionStorage.setItem("history", JSON.stringify(val)));
+// export const history = derived([page, url, path], ([$page, $url, $path], set) => {
+//     // ...$history,
+//     set({
+//         [$page.alias]: $url && $url.substring(3),
+//         lang: $path.params && $path.params.lang,
+
+//     } || { lang: 'en' })
+// })
+
+export const authed = derived(
+    [session, page],
+    ([$session, $page], set) => {
+        if ($session.access_token) {
+            const refreshable = $session.refresh_token && $session.refresh_token !== "undefined"
+            if (refreshable) {
+                set(true)
+            }
+            else {
+                set(false)
+            }
+            // if (!$session.isValid && refreshable) {
+            //     refresh().then((res) => {
+            //         const { status, user } = res;
+            //         switch (status) {
+            //             case 401:
+            //                 set(false)
+            //                 break;
+            //             case 200:
+            //                 set(true)
+            //                 break;
+            //         }
+            //     })
+            // } else if ($session.isValid && refreshable) {
+            //     set(true)
+            // } else if (!$session.isValid && !refreshable) (
+            //     set(false)
+            // )
+        } else set(false)
+    }, false);

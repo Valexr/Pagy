@@ -1,12 +1,20 @@
+
 function log(req, res, next) {
     console.log({
-        'req.method': req.method,
-        // 'req.headers': req.headers,
-        'req.url': req.url,
-        'req.path': req.path,
-        'req.query': req.query,
-        'req.params': req.params,
-        'req.body': req.body
+        'req': {
+            'method': req.method,
+            'headers': req.headers,
+            'req.url': req.url,
+            'req.path': req.path,
+            'req.query': req.query,
+            'req.params': req.params,
+            'req.body': req.body
+        },
+        'res': {
+            'status': res.statusCode,
+            'headers': res.headers,
+            'res.body': res.body
+        }
     });
     next();
 }
@@ -29,8 +37,9 @@ function body(req, res, next, data = '') {
             // console.log(chunk, data)
         })
         req.on('end', (decode) => {
+            console.log(data)
             // decode = decodeURIComponent(data);
-            req.body = JSON.parse(data);
+            if (data) req.body = JSON.parse(data);
             next()
         })
     } else {
@@ -38,4 +47,17 @@ function body(req, res, next, data = '') {
     }
 }
 
-export { log, json, body }
+function errors(req, res, next) {
+    res.error = (code = 500, message, headers) => {
+        res.writeHead(code, {
+            "Content-Type": "application/json",
+            ...headers
+            // ...location ? { Location: location } : ''
+        });
+        res.end(JSON.stringify(message));
+    }
+    next();
+}
+
+
+export default [log, json, body, errors]

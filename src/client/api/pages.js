@@ -1,4 +1,14 @@
+import { login, refresh, session } from "@api/auth";
+
 const base = '/api/v1/pages'
+const options = {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json",
+        ...session.authorizationHeader,
+        // Authorization: session.store.refresh_token,
+    },
+}
 
 export async function get(type, query = '') {
     const path = `${base}/${type}${query}`;
@@ -7,13 +17,9 @@ export async function get(type, query = '') {
 
 export async function add(type, payload, query = '') {
     const path = `${base}/${type}${query}`;
-    const options = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-    };
+    options.method = "POST"
+    options.body = JSON.stringify(payload)
+
     return fetch(path, options)
         .then((res) => get(type, query))
         .catch((err) => {
@@ -24,13 +30,9 @@ export async function add(type, payload, query = '') {
 
 export async function set(type, payload, query = '') {
     const path = `${base}/${type}${query}`;
-    const options = {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-    };
+    options.method = "PUT"
+    options.body = JSON.stringify(payload)
+
     return fetch(path, options)
         .then((res) => get(type, query.split("&id")[0]))
         .catch((err) => {
@@ -41,13 +43,9 @@ export async function set(type, payload, query = '') {
 
 export async function patch(type, payload, query = '') {
     const path = `${base}/${type}${query}`;
-    const options = {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-    };
+    options.method = "PATCH"
+    options.body = JSON.stringify(payload)
+
     return fetch(path, options)
         .then((res) => res.json())
         .catch((err) => {
@@ -58,7 +56,8 @@ export async function patch(type, payload, query = '') {
 
 export async function del(type, query = '') {
     const path = `${base}/${type}${query}`;
-    const options = { method: "DELETE" }
+    options.method = "DELETE"
+
     return fetch(path, options)
         .then((res) => get(type, query.split("&id")[0]))
         .catch((err) => {

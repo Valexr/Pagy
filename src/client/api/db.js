@@ -13,7 +13,7 @@ import {
 } from "svelte-pathfinder";
 import { history } from "@routes";
 
-const base = '/api/v1/db/users'
+const base = '/api/v1/db'
 
 // const getsession = (data) => { return get(session)[data] }
 // const sess = () => { return JSON.parse(sessionStorage.session) }
@@ -63,17 +63,31 @@ export async function get(url) {
 export async function add(url, payload) {
     const path = `${base}/${url}`;
     await myFetch(path, { method: "POST" }, payload)
-    return data(url.split("&id")[0])
+    return get(url.split("&id")[0])
 }
 
 export async function set(url, payload) {
     const path = `${base}/${url}`;
     await myFetch(path, { method: "PUT" }, payload)
-    return data(url.split("&id")[0])
+    return get(url.split("&id")[0])
+}
+
+export async function patch(url, payload) {
+    const path = `${base}/${url}`;
+    return myFetch(path, { method: "PATCH" }, payload)
+    options.method = "PATCH"
+    options.body = JSON.stringify(payload)
+
+    return fetch(path, options)
+        .then((res) => res.json())
+        .catch((err) => {
+            console.error(err);
+            get(type, query);
+        });
 }
 
 export async function del(url) {
     const path = `${base}/${url}`;
     await myFetch(path, { method: "DELETE" })
-    return data(url.split("&id")[0])
+    return get(url.split("&id")[0])
 }

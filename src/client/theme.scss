@@ -15,7 +15,16 @@ $off-canvas-breakpoint: 840px;
 @import "../../node_modules/spectre.css/src/spectre-exp";
 @import "../../node_modules/spectre.css/src/_variables";
 
-
+:root {
+    --primary-color: $primary-color;
+    // gray
+    --dark-color: $dark-color;
+    --light-color: $light-color;
+    // control
+    --success-color: $success-color;
+    --warning-color: $warning-color;
+    --error-color: $error-color;
+}
 
 .icon-edit::before {
     border-width: 0.1rem;
@@ -41,15 +50,31 @@ $off-canvas-breakpoint: 840px;
         border-bottom: 0;
         border-right: 0;
         transform: translate(-50%, -40%) rotate(45deg);
-        width: .8em;
-        height: .8em;
+        width: 0.8em;
+        height: 0.8em;
     }
-  
+
     &::after {
         transform: translate(-50%, -50%);
         border-bottom: $icon-border-width solid currentColor;
         height: 1em;
-        width: .8em;
+        width: 0.8em;
+    }
+}
+
+.icon-emojis {
+    border: 0.1rem solid currentColor;
+    border-radius: 50%;
+    &::before {
+        border-radius: 50%;
+        box-shadow: -0.17em -0.1em, 0.17em -0.1em;
+        height: 0.05em;
+        width: 0.15em;
+    }
+    &::after {
+        border: 0.045rem solid currentColor;
+        transform: translate(-50%, 150%) rotate(0deg);
+        width: 0.5em;
     }
 }
 
@@ -57,8 +82,13 @@ $off-canvas-breakpoint: 840px;
     .modal-overlay {
         background: rgba(247, 248, 249, 0.75);
     }
-    .modal-container {max-height: 97vh; height: 100%;}
+    .modal-container {
+        max-height: 97vh;
+        height: 100%;
+    }
 }
 .dropdown-auto {
-    .menu {min-width: auto;}
+    .menu {
+        min-width: auto;
+    }
 }

@@ -1,8 +1,17 @@
 <script>
-    import { router } from "tinro";
+    import {
+        url,
+        path,
+        pattern,
+        query,
+        fragment,
+        click,
+        state,
+        back,
+    } from "svelte-pathfinder";
     import { SideBar } from "@cmp";
 </script>
 
-{#if $router.hash === "sidebar"}
+{#if $fragment === "#sidebar"}
     <SideBar />
 {/if}

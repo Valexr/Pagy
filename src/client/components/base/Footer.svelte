@@ -1,19 +1,32 @@
 <script>
-    import { router, meta } from "tinro";
-    import { routes, chistory, cmeta, cpath } from "@routes";
+    import {
+        url,
+        path,
+        pattern,
+        query,
+        fragment,
+        click,
+        state,
+    } from "svelte-pathfinder";
     import { t } from "svelte-intl-precompile";
     import slugify from "@sindresorhus/slugify";
+    import { history, page, authed } from "@routes";
+    import { session } from "@api/auth";
 
-    const log = {
-        router: $router,
-        cmeta: $cmeta,
-        cpath: $cpath,
-        chistory: $chistory,
+    $: log = {
+        url: $url,
+        path: $path,
+        query: $query,
+        fragment: $fragment,
+        query: $query,
+        authed: $authed,
+        session: $session,
+        // history: $history,
     };
 
     let logopen = true;
 
-    $: console.log(log);
+    // $: console.dir(log);
 </script>
 
 <footer class="container navbar p-fixed bg-gray p-2">
@@ -21,10 +34,10 @@
         <pre
             class="code hide-xs"
             data-lang="JSON">
-            <code>router: {JSON.stringify($router, 0, 2)}</code>
-            <code>cpath: {JSON.stringify($cpath, 0, 2)}</code>
-            <code>cmeta: {JSON.stringify($cmeta, 0, 2)}</code>
-            <code>chistory: {JSON.stringify($chistory, 0, 2)}</code>
+            <code>routing: {JSON.stringify(log, 0, 2)}</code>
+            <code>page: {JSON.stringify($page, 0, 2)}</code>
+            <!-- <code>query: {JSON.stringify($query, 0, 2)}</code> -->
+            <code>history: {JSON.stringify($history, 0, 2)}</code>
     </pre>
     {/if}
     <section class="navbar-section">

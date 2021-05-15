@@ -1,20 +1,43 @@
+<script context="module">
+    export async function preload({ path, query }) {
+        const data = await locales.get("locales", query.split("&id")[0]);
+        return { data };
+    }
+</script>
+
 <script>
     import { onMount } from "svelte";
     import { media } from "svelte-match-media";
     import { date } from "@utils";
+    import * as db from "@api/db";
     import * as locales from "@api/locales";
     import { items, filters } from "@stores/store";
-    import { chistory } from "@routes";
-    import { router } from "tinro";
+    import {
+        url,
+        path,
+        pattern,
+        query,
+        fragment,
+        click,
+        state,
+        back,
+        goto,
+    } from "svelte-pathfinder";
 
-    onMount(async () => ($filters = await locales.get("filters")));
+    let func = `o.id = Date.now() + i`;
+    onMount(async () => ($filters = await db.get("locales/filters")));
     async function get() {
-        // $items = await locales.patch("locales");
-        $items = locales.get("locales", $chistory.query.split("&id")[0]);
-        // return await locales.get("locales", $chistory.query.split("&id")[0]);
-        // const ids = (o, i) => (o = { id: Date.now() + i, ...o });
+        // db.patch(`locales/items?patch=${func}`);
+        $items = db.get(`locales/items${$query.split("&id")[0]}`);
     }
-    $: get($router.query);
+
+    function edit(locale) {
+        $query.params.id = locale.id;
+        $fragment = "#sidebar";
+    }
+    export let data;
+    $items = data;
+    $: get($query);
     $: console.log($items);
 
     // let locales = [];
@@ -36,7 +59,6 @@
 </script>
 
 {#await $items}
-    <!-- Loading locales... -->
     <div class="docs-demo columns">
         <div class="column col-12 text-center">
             <div class="loading loading-lg" />
@@ -56,7 +78,7 @@
                     <th>Region</th>
                     <th>Flag</th>
                     <th>Name</th>
-                    <!-- <th>Languages</th> -->
+                    <th>Capital</th>
                     <th>alpha2Code</th>
                     <th>callingCodes</th>
                     <th width="140">Actions</th>
@@ -89,6 +111,7 @@
                         <td>
                             {locale.name}
                         </td>
+                        <td>{locale.capital}</td>
                         <!-- <td>
                             {#each locale.languages
                                 .map((l) => l.name)
@@ -101,14 +124,14 @@
                         <td>
                             <button
                                 class="btn btn-action tooltip"
-                                data-tooltip="Edit book"
-                                on:click|preventDefault
+                                data-tooltip="Edit"
+                                on:click|stopPropagation={edit(locale)}
                             >
                                 <i class="icon icon-edit" />
                             </button>
                             <button
                                 class="btn btn-link btn-action tooltip"
-                                data-tooltip="Copy book"
+                                data-tooltip="Copy"
                                 on:click|preventDefault
                             >
                                 <i class="icon icon-copy" />
@@ -125,5 +148,10 @@
             </tbody>
         </table>
     </section>
-    <!-- <svelte:component this={Cmp.default} router={$router} meta={$cmeta} /> -->
 {/await}
+
+<style lang="scss">
+    .avatar img {
+        object-fit: cover;
+    }
+</style>

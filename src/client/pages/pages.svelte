@@ -1,38 +1,44 @@
 <script>
     import { onMount, onDestroy } from "svelte";
     import { slide } from "svelte/transition";
-    import { router } from "tinro";
+    import {
+        url,
+        path,
+        pattern,
+        query,
+        fragment,
+        click,
+        state,
+        back,
+        goto,
+    } from "svelte-pathfinder";
     import { date } from "@utils";
-    import * as pages from "@api/pages";
+    import * as db from "@api/db";
     import { media } from "svelte-match-media";
     import { items, filters } from "@stores/store";
-    import { cmeta, chistory } from "@routes";
 
     onMount(async () => {
-        $filters = await pages.get("filters");
+        $filters = await db.get("pages/filters");
+        // db.del(`pages/items${$query}&prop=undefined`);
         // pages.del("items", "?prop=sq");
         // pages.patch("items", "", "?patch=sq");
     });
 
     async function get() {
-        $items = await pages.get("items", $chistory.query.split("&id")[0]);
+        $items = await db.get(`pages/items${$query.split("&id")[0]}`);
     }
-    $: get($router.query);
+    $: get($query);
 
     function editPage(page) {
-        router.goto(
-            `${$router.path}?locale=${page.locale}&menu=${page.menu}&id=${page.id}#sidebar`
-        );
+        $query.params.id = page.id;
+        $fragment = "#sidebar";
     }
     async function copyPage(page) {
-        const add = await pages.get(
-            "items",
-            `${$chistory.query}&id=${page.id}`
-        );
-        $items = await pages.add("items", add, $chistory.query);
+        const add = await db.get(`pages/items${$query}&id=${page.id}`);
+        $items = await db.add(`pages/items${$query}`, add);
     }
     async function deletePage(page) {
-        $items = await pages.del("items", `${$chistory.query}&id=${page.id}`);
+        $items = await db.del(`pages/items${$query}&id=${page.id}`);
     }
 
     function sortby(items) {

@@ -1,8 +1,17 @@
 <script>
-    import { router, meta } from "tinro";
+    import {
+        url,
+        path,
+        pattern,
+        query,
+        fragment,
+        click,
+        state,
+        back,
+    } from "svelte-pathfinder";
 
     export let crumbs = [];
-    $: crumbs = $router.path.split("/").filter(Boolean);
+    $: crumbs = $path.split("/").filter(Boolean);
 </script>
 
 <ul class="breadcrumb">

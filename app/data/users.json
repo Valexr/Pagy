@@ -1,97 +1,71 @@
 {
-    "filters": {
-        "role": [
-            "admin",
-            "publisher",
-            "developer"
-        ]
-    },
-    "items": [
-        {
-            "email": "valexr@gmail.com",
-            "password": "www",
-            "role": "admin",
-            "id": 1618914837935,
-            "create": 1618914837935,
-            "update": 1619464130061
-        },
-        {
-            "email": "Email@Email.ru",
-            "password": "Password",
-            "role": "publisher",
-            "id": 1618915776434,
-            "create": 1618915776434,
-            "update": 1619464130061
-        },
-        {
-            "email": "email@email.ru",
-            "password": "pass",
-            "role": "publisher",
-            "id": 1618919366921,
-            "create": 1618919366921,
-            "update": 1619464130061
-        },
-        {
-            "email": "mail@mail.to",
-            "password": "sa",
-            "role": "publisher",
-            "id": 1618919453190,
-            "create": 1618919453190,
-            "update": 1619464130061
-        },
-        {
-            "email": "user@user.user",
-            "password": "user",
-            "role": [
-                "developer",
-                "admin"
-            ],
-            "id": 1619463906616,
-            "create": 1619463906616,
-            "update": 1619464130061
-        },
-        {
-            "email": "a@a.a",
-            "password": "a",
-            "role": "developer",
-            "id": 1619464130061,
-            "create": 1619464130061,
-            "update": 1619464130061
-        },
-        {
-            "email": "tarzan@mail.ru",
-            "password": "tarzan",
-            "role": "developer",
-            "id": 1619468162034,
-            "create": 1619468162034,
-            "update": 1619468162034,
-            "admin": [
-                1,
-                2,
-                3
-            ],
-            "developer": {
-                "a": "developer",
-                "b": 2,
-                "c": 3
-            },
-            "publisher": [
-                {
-                    "a": 1,
-                    "b": 2,
-                    "c": 3
-                },
-                {
-                    "a": 1,
-                    "b": 2,
-                    "c": 3
-                },
-                {
-                    "a": 1,
-                    "b": 2,
-                    "c": 3
-                }
-            ]
-        }
+  "filters": {
+    "role": [
+      "admin",
+      "publisher",
+      "developer"
     ]
+  },
+  "items": [
+    {
+      "username": "valexr@gmail.com",
+      "password": "$2a$09$fzKgMmHT3NPxelgtwpcuOuZzszddY7Xa8QPQ2InmRM766sh.owwyC",
+      "role": "admin",
+      "id": 1618914837935,
+      "create": 1618914837935,
+      "update": 1619464130061,
+      "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwiaWF0IjoxNjIwODA3OTU2LCJleHAiOjE2MjA4MDgwMTZ9.AfoaUbNzAvPZzjJnWyhVNKZRx6HEm3qjk-XOVv3sWhE"
+    },
+    {
+      "username": "mail@mail.to",
+      "password": "$2a$09$YvKWWaa6eTBHDPrjtCXEmuDbeRj72CtlYOstpNIHJr0Q/iOZLSm.m",
+      "role": "publisher",
+      "id": 1618919453190,
+      "create": 1618919453190,
+      "update": 1619464130061
+    },
+    {
+      "username": "tarzan@mail.ru",
+      "password": "$2a$09$CbrLk2IaGJWZcOkxBwSQ3uqAu0/PEpsg28Ub.IvnxPL/aG9JHGRLG",
+      "role": "developer",
+      "id": 1619468162034,
+      "create": 1619468162034,
+      "update": 1619468162034,
+      "admin": [
+        1,
+        2,
+        3
+      ],
+      "developer": {
+        "a": "developer",
+        "b": 2,
+        "c": 3
+      },
+      "publisher": [
+        {
+          "a": 1,
+          "b": 2,
+          "c": 3
+        },
+        {
+          "a": 1,
+          "b": 2,
+          "c": 3
+        },
+        {
+          "a": 1,
+          "b": 2,
+          "c": 3
+        }
+      ]
+    },
+    {
+      "username": "mail@mail.to",
+      "password": "$2a$09$YvKWWaa6eTBHDPrjtCXEmuDbeRj72CtlYOstpNIHJr0Q/iOZLSm.m",
+      "role": "publisher",
+      "id": 1621094852095,
+      "create": 1621094852095,
+      "update": 1621094852095
+    }
+  ]
 }

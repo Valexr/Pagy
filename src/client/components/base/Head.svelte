@@ -1,13 +1,13 @@
 <script>
-    import { cpath } from "@routes";
+    import { page } from "@routes";
     export let name;
 </script>
 
 <svelte:head>
-    {#if $cpath.props}
-        <title>{`${name} — ${$cpath.props.title}`}</title>
-        <meta name="keywords" content={$cpath.props.keywords} />
-        <meta name="description" content={$cpath.props.description} />
+    {#if $page.props}
+        <title>{`${name} — ${$page.props.title}`}</title>
+        <meta name="keywords" content={$page.props.keywords} />
+        <meta name="description" content={$page.props.description} />
     {/if}
 </svelte:head>
 

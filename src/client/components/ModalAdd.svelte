@@ -1,16 +1,23 @@
 <script>
     import { onMount } from "svelte";
-    import { cmeta, chistory } from "@routes";
     import { Modal } from "@cmp";
     import { addopen, addBookForm } from "@stores/pages";
     import { items } from "@stores/store";
     import * as pages from "@api/pages";
-    import { router } from "tinro";
+    import {
+        url,
+        path,
+        pattern,
+        query,
+        fragment,
+        click,
+        state,
+    } from "svelte-pathfinder";
 
     onMount(() => ($addBookForm = {}));
 
     async function addPage() {
-        $items = await pages.add("items", $addBookForm, $chistory.query);
+        $items = await pages.add("items", $addBookForm, $query);
         $addopen = !$addopen;
     }
 </script>

@@ -52,10 +52,10 @@
 {/if}
 
 <style lang="scss">
-    .th {
-        border-bottom-width: 0.1rem;
-        text-transform: capitalize;
-    }
+    // .th {
+    //     border-bottom-width: 0.1rem;
+    //     text-transform: capitalize;
+    // }
     .action-buttons {
         box-sizing: border-box;
     }
