@@ -1,12 +1,11 @@
 import jwt from "jsonwebtoken";
-
-const JWT_SECRET = process.env.JWT_SECRET
+// import { JWT_SECRET } from 'env'
 
 export default function token(req, res, next) {
     if (req.headers.authorization) {
         try {
             const token = req.headers.authorization.split(' ')[1];
-            const verified = jwt.verify(token, JWT_SECRET);
+            const verified = jwt.verify(token, process.env.JWT_SECRET);
             console.log('verified: ', verified)
             next();
         } catch (err) {

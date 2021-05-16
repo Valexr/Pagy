@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 const DEV = process.argv.includes('--dev');
 const sveltePlugin = require("esbuild-svelte");
 const sveltePreprocess = require("svelte-preprocess");
@@ -61,6 +59,7 @@ const remote = DEV && createRemote('svelte_derver_starter');
     }
 })()
 
+
 async function build_server() {
     return await build({
         entryPoints: ['src/server/main.js'],
@@ -70,7 +69,9 @@ async function build_server() {
         sourcemap: DEV, // Use `DEV && 'inline'` to inline sourcemaps to the bundle
         minify: !DEV,
         incremental: DEV,
+        legalComments: 'none',
         plugins: [
+            // envPlugin(),
             plugin_server()
         ]
     });
@@ -97,10 +98,33 @@ async function build_client() {
         incremental: DEV,
         mainFields: ['svelte', 'module', 'main'],
         external: ['../img/*'],
+        legalComments: 'none',
         plugins: [
             sveltePlugin(svelteConfig)
         ]
     });
+}
+
+function plugin_env() {
+    return {
+        name: 'env',
+        setup(build) {
+            // Intercept import paths called "env" so esbuild doesn't attempt
+            // to map them to a file system location. Tag them with the "env-ns"
+            // namespace to reserve them for this plugin.
+            build.onResolve({ filter: /^env$/ }, args => ({
+                path: args.path,
+                namespace: 'env-ns',
+            }))
+
+            // Load paths tagged with the "env-ns" namespace and behave as if
+            // they point to a JSON file containing the environment variables.
+            build.onLoad({ filter: /.*/, namespace: 'env-ns' }, () => ({
+                contents: JSON.stringify(process.env),
+                loader: 'json',
+            }))
+        },
+    }
 }
 
 function plugin_server() {
@@ -114,6 +138,7 @@ function plugin_server() {
             b.onLoad({ filter: /^server_development\.js$/, namespace: 'server' }, (args) => {
                 return {
                     contents: `
+                    import 'dotenv/config'
                     import {derver} from "derver";
                     import path from "path";
                     const DIR = path.join(__dirname,'client');
@@ -132,6 +157,7 @@ function plugin_server() {
             b.onLoad({ filter: /^server_production\.js$/, namespace: 'server' }, (args) => {
                 return {
                     contents: `
+                    import 'dotenv/config'
                     import {derver} from "derver";
                     import path from "path";
                     const DIR = path.join(__dirname,'client');

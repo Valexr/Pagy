@@ -3,15 +3,20 @@ import FileAsync from 'lowdb/adapters/FileAsync'
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import cookie from "cookie";
-import { omatch, osome } from '$utils'
-// require('dotenv').config({ path: './.env', debug: true })
+// import { JWT_SECRET } from '.env'
 
-const JWT_SECRET = process.env.JWT_SECRET
-console.log('jwt', JWT_SECRET)
 
-const
-    adapter = new FileAsync(`data/users.json`),
-    lowdb = () => low(adapter)
+// process.env.JWT_SECRET = 'secret'
+const lowdb = (file = 'users') => low(new FileAsync(`data/${file}.json`))
+
+console.log('jwt', process.env.JWT_SECRET)
+// let lowdb
+// const params = '/:base/:data'
+
+// async function database(req, res, next) {
+//     lowdb = await low(new FileAsync(`data/${req.params.base}.json`))
+//     next()
+// }
 
 export default function (app) {
 
@@ -20,7 +25,7 @@ export default function (app) {
         if (req.headers.cookie) {
             try {
                 const cookies = cookie.parse(req.headers.cookie)
-                const verified = jwt.verify(cookies.sid, JWT_SECRET);
+                const verified = jwt.verify(cookies.sid, process.env.JWT_SECRET);
                 if (verified) {
                     const user = await lowdb().then(lowdb => {
                         return lowdb
@@ -59,20 +64,20 @@ export default function (app) {
             if (!pass) { return res.error(401, "Bad password"); }
 
             const tokens = {
-                access_token: jwt.sign({ id: user.id, pass: bcrypt.hashSync(user.password, 9) }, JWT_SECRET, {
+                access_token: jwt.sign({ id: user.id, pass: bcrypt.hashSync(user.password, 9) }, process.env.JWT_SECRET, {
                     expiresIn: "5s"
                 }),
-                refresh_token: jwt.sign({ id: user.id, pass: bcrypt.hashSync(user.password, 9) }, JWT_SECRET, {
+                refresh_token: jwt.sign({ id: user.id, pass: bcrypt.hashSync(user.password, 9) }, process.env.JWT_SECRET, {
                     expiresIn: "1m"
                 })
             }
             if (!tokens.access_token.length || !tokens.refresh_token.length) { return res.error(401, "Bad tokens"); }
 
-            const verified = jwt.verify(tokens.refresh_token, JWT_SECRET);
+            const verified = jwt.verify(tokens.refresh_token, process.env.JWT_SECRET);
             const session = { ...tokens, id: user.id, username: user.username, exp: verified.exp }
             if (session) {
                 if (remember) {
-                    const cookie_token = jwt.sign({ id: user.id, pass: bcrypt.hashSync(user.password, 9) }, JWT_SECRET, {
+                    const cookie_token = jwt.sign({ id: user.id, pass: bcrypt.hashSync(user.password, 9) }, process.env.JWT_SECRET, {
                         expiresIn: "1h"
                     })
                     res.writeHead(200, {
@@ -106,7 +111,7 @@ export default function (app) {
     app.get('/refresh', async (req, res, next) => {
         try {
             const token = req.headers.authorization.split(' ')[1];
-            const verified = jwt.verify(token, JWT_SECRET);
+            const verified = jwt.verify(token, process.env.JWT_SECRET);
 
             if (verified) {
                 const user = await lowdb().then(lowdb => {
@@ -119,7 +124,7 @@ export default function (app) {
                 // const access = req.cookies.sid
                 // const acc = jwt.verify(access, 'secret');
 
-                const access_token = jwt.sign({ id: user.id, pass: bcrypt.hashSync(user.password, 9) }, JWT_SECRET, {
+                const access_token = jwt.sign({ id: user.id, pass: bcrypt.hashSync(user.password, 9) }, process.env.JWT_SECRET, {
                     expiresIn: "5s"
                 });
                 res.json({ access_token, id: user.id, username: user.username, refreshexp: verified.exp })

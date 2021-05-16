@@ -37,8 +37,9 @@
     }
 
     async function copyUser(user) {
-        const add = await db.get(`/users/items${$query}&id=${user.id}`);
-        $items = await db.add(`/users/items${$query}&id=${user.id}`, add);
+        const url = `/users/items${$query}&id=${user.id}`;
+        const add = await db.get(url);
+        $items = await db.add(url, add);
     }
 
     async function deleteUser(user) {

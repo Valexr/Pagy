@@ -40,7 +40,7 @@
     export let data;
     $items = data;
     $: get($query);
-    $: console.log($items);
+    // $: console.log($items);
 
     // let locales = [];
 

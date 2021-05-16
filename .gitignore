@@ -9,4 +9,4 @@ app/client/build
 app.js
 
 .DS_Store
-# .env
+.env
