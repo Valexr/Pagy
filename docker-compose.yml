@@ -5,4 +5,4 @@ services:
     ports: [127.0.0.1:1313:1313]
     volumes: [./app:/app]
     image: pagy:latest
-    container_name: pagy
+    container_name: pg

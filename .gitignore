@@ -1,7 +1,5 @@
 node_modules
-app/server/*
 app/client/build
-# app/redis
 # app/json
 
 *-lock.*

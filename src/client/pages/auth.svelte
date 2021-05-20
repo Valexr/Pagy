@@ -1,5 +1,9 @@
 <!-- <script context="module">
     import { cookie } from "@api/auth";
+    export async function preload({ path, query }) {
+        const data = await locales.get("locales", query.split("&id")[0]);
+        return { data };
+    }
     cookie().then(async (res) => {
         if (res.ok) {
             noticy.default(JSON.stringify(await res.json(), 0, 2), 5000);
@@ -12,19 +16,22 @@
     import { t } from "svelte-intl-precompile";
     import { noticy } from "@cmp";
     import { login, refresh, session, cookie } from "@api/auth";
-    // import { login } from "@api/login";
-    import { date, time } from "@utils";
+    import { date, time, createTimer } from "@utils";
     import { history, authed } from "@routes";
-    import {
-        url,
-        path,
-        query,
-        pattern,
-        fragment,
-        state,
-        click,
-        goto,
-    } from "svelte-pathfinder";
+    import { goto } from "svelte-pathfinder";
+    import CryptoJS from "crypto-js";
+
+    // Encrypt
+    var ciphertext = CryptoJS.AES.encrypt(
+        JSON.stringify($session),
+        "secret key 123"
+    ).toString();
+
+    // Decrypt
+    var bytes = CryptoJS.AES.decrypt(ciphertext, "secret key 123");
+    var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+
+    console.log(ciphertext, decryptedData); // [{id: 1}, {id: 2}]
 
     const form = aoviSvelte({
         username: "",
@@ -45,31 +52,34 @@
 
     onMount(async () => {
         $form.valid = false;
-        const res = await cookie();
-        if (res.ok) {
-            const user = await res.json();
+        const cookies = await cookie();
+        console.log(cookies.ok);
+        if (cookies.ok) {
+            const user = await cookies.json();
             noticy.warning($t("authenticate-please"), 0, $t("jwt-expired"));
             $form.username = user.username;
             $form.remember = true;
+            console.log(user);
+
             if (password && !password.value) {
                 $form.err.password = $t("authenticate-please");
                 password.focus();
             }
         } else if ($session.username) {
-            noticy.error($t("authenticate-please"), 0, $t("jwt-expired"));
+            noticy.error($t("authenticate-please"), 5000, $t("jwt-expired"));
             $form.username = $session.username;
+
             if (password && !password.value) {
                 $form.err.password = $t("authenticate-please");
                 password.focus();
             }
         } else {
-            noticy.primary($t("login-please"), 0, $t("welcome-to-pagy"));
+            noticy.primary($t("login-please"), 10000, $t("welcome-to-pagy"));
             username.focus();
         }
     });
 
     async function submit() {
-        // patch("items");
         form.aovi
             .check("username")
             .required("Email?")
@@ -100,7 +110,7 @@
                         case 200:
                             noticy.success(
                                 $form.username,
-                                2500,
+                                5000,
                                 $t("expires") + time(res.user.exp * 1000)
                             );
                             goto(`/users?role=admin`);
@@ -132,128 +142,122 @@
     );
 </script>
 
-<div class="columns">
-    <div class="column col-auto p-centered">
-        <form on:submit|preventDefault={submit}>
-            <fieldset disabled={onAuth}>
-                <div
-                    class="form-group"
-                    class:has-error={$form.err.username}
-                    class:has-success={$good_username}
-                >
-                    <label class="form-label" for="newAuthor"
-                        >{$t("email")}</label
-                    >
-                    <input
-                        aria-label="username"
-                        aria-required="true"
-                        autocorrect="off"
-                        autocapitalize="off"
-                        autocomplete="username"
-                        id="username"
-                        class="form-input"
-                        type="email"
-                        placeholder="Email"
-                        bind:this={username}
-                        bind:value={$form.username}
-                        on:input={() => ($form.err.username = false)}
-                    />
-                    {#if $form.err.username}
-                        <span class="form-input-hint">{$form.err.username}</span
-                        >
-                        <!-- {:else if $good_username}
-                        <span class="form-input-hint">Good email!</span> -->
-                    {/if}
-                </div>
-                <div
-                    class="form-group"
-                    class:has-error={$form.err.password}
-                    class:has-success={$good_password}
-                >
-                    <label class="form-label" for="newAuthor"
-                        >{$t("password")}</label
-                    >
-                    {#if isPassvis}
-                        <div class="has-icon-right">
-                            <input
-                                aria-label="password"
-                                aria-required="true"
-                                autocorrect="off"
-                                autocapitalize="off"
-                                autocomplete="current-password"
-                                id="password"
-                                class="form-input"
-                                type="text"
-                                placeholder="Password"
-                                bind:value={$form.password}
-                                on:input={() => ($form.err.password = false)}
-                            />
-                            <i
-                                class="form-icon icon icon-emoji text-primary c-hand"
-                                on:click={(e) => (isPassvis = !isPassvis)}
-                            />
-                        </div>
-                    {:else}
-                        <div class="has-icon-right">
-                            <input
-                                aria-label="password"
-                                aria-required="true"
-                                autocorrect="off"
-                                autocapitalize="off"
-                                autocomplete="current-password"
-                                id="password"
-                                class="form-input"
-                                type="password"
-                                placeholder="Password"
-                                bind:this={password}
-                                bind:value={$form.password}
-                                on:input={() => ($form.err.password = false)}
-                            />
-                            <i
-                                class="form-icon icon icon-emojis text-gray c-hand"
-                                on:click={(e) => (isPassvis = !isPassvis)}
-                            />
-                        </div>
-                    {/if}
-                    {#if $form.err.password}
-                        <span class="form-input-hint">{$form.err.password}</span
-                        >
-                    {/if}
-                </div>
-                <div
-                    class="form-group"
-                    class:has-error={$form.err.remember}
-                    class:has-success={$form.remember}
-                >
-                    <label
-                        class="form-checkbox tooltip"
-                        data-tooltip={$t("uses-cookies")}
-                    >
-                        <input
-                            type="checkbox"
-                            bind:checked={$form.remember}
-                            on:focus={() => ($form.err.remember = false)}
-                        /><i class="form-icon" />
-                        {$t("remember-me")}
-                    </label>
-                    {#if $form.err.remember}
-                        <span class="form-input-hint">{$form.err.remember}</span
-                        >
-                    {/if}
-                </div>
-            </fieldset>
-            <button
-                aria-keyshortcuts="Enter"
-                disabled={submitable}
-                class="btn btn-primary btn-block"
-                class:c-not-allowed={submitable}
-                class:loading={onAuth}
+<section class="flex-centered">
+    <form on:submit|preventDefault={submit}>
+        <fieldset disabled={onAuth}>
+            <div
+                class="form-group"
+                class:has-error={$form.err.username}
+                class:has-success={$good_username}
             >
-                {$t("sign-in")}
-            </button>
-        </form>
-    </div>
-</div>
+                <label class="form-label" for="newAuthor">{$t("email")}</label>
+                <input
+                    aria-label="username"
+                    aria-required="true"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="username"
+                    id="username"
+                    class="form-input"
+                    type="email"
+                    placeholder="Email"
+                    bind:this={username}
+                    bind:value={$form.username}
+                    on:input={() => ($form.err.username = false)}
+                />
+                {#if $form.err.username}
+                    <span class="form-input-hint">{$form.err.username}</span>
+                    <!-- {:else if $good_username}
+                        <span class="form-input-hint">Good email!</span> -->
+                {/if}
+            </div>
+            <div
+                class="form-group"
+                class:has-error={$form.err.password}
+                class:has-success={$good_password}
+            >
+                <label class="form-label" for="newAuthor"
+                    >{$t("password")}</label
+                >
+                {#if isPassvis}
+                    <div class="has-icon-right">
+                        <input
+                            aria-label="password"
+                            aria-required="true"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            autocomplete="current-password"
+                            id="password"
+                            class="form-input"
+                            type="text"
+                            placeholder="Password"
+                            bind:value={$form.password}
+                            on:input={() => ($form.err.password = false)}
+                        />
+                        <i
+                            class="form-icon icon icon-emoji text-primary c-hand"
+                            on:click={(e) => (isPassvis = !isPassvis)}
+                        />
+                    </div>
+                {:else}
+                    <div class="has-icon-right">
+                        <input
+                            aria-label="password"
+                            aria-required="true"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            autocomplete="current-password"
+                            id="password"
+                            class="form-input"
+                            type="password"
+                            placeholder="Password"
+                            bind:this={password}
+                            bind:value={$form.password}
+                            on:input={() => ($form.err.password = false)}
+                        />
+                        <i
+                            class="form-icon icon icon-emojis text-gray c-hand"
+                            on:click={(e) => (isPassvis = !isPassvis)}
+                        />
+                    </div>
+                {/if}
+                {#if $form.err.password}
+                    <span class="form-input-hint">{$form.err.password}</span>
+                {/if}
+            </div>
+            <div
+                class="form-group"
+                class:has-error={$form.err.remember}
+                class:has-success={$form.remember}
+            >
+                <label
+                    class="form-checkbox tooltip"
+                    data-tooltip={$t("uses-cookies")}
+                >
+                    <input
+                        type="checkbox"
+                        bind:checked={$form.remember}
+                        on:focus={() => ($form.err.remember = false)}
+                    /><i class="form-icon" />
+                    {$t("remember-me")}
+                </label>
+                {#if $form.err.remember}
+                    <span class="form-input-hint">{$form.err.remember}</span>
+                {/if}
+            </div>
+        </fieldset>
+        <button
+            aria-keyshortcuts="Enter"
+            disabled={submitable}
+            class="btn btn-primary btn-block"
+            class:c-not-allowed={submitable}
+            class:loading={onAuth}
+        >
+            {$t("sign-in")}
+        </button>
+        <button class="btn btn-link btn-block">{$t("forget-password")}</button>
+    </form>
+</section>
 
 <style lang="scss">
     form {

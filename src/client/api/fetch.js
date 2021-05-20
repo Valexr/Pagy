@@ -1,4 +1,5 @@
-import { refresh } from "@api/auth";
+import { writable, readable, derived, get } from "svelte/store";
+import { session, refresh } from "@api/auth";
 
 const base = '/api/v1/db'
 
@@ -7,7 +8,7 @@ export default async function (url, { ...options }, body = undefined) {
         return fetch(base + url, {
             ...options,
             headers: {
-                Authorization: `Baerer ${JSON.parse(sessionStorage.session).access_token}`,
+                Authorization: `Baerer ${get(session).access_token}`,
                 "Content-Type": "application/json",
             },
             ...(body && { body: JSON.stringify(body) })

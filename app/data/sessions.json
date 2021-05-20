@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "id": 1619468162034,
+      "username": "tarzan@mail.ru",
+      "remember": false,
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxOTQ2ODE2MjAzNCwicGFzcyI6IiQyYSQwOSRkNUtpUWE5dkFvL20uVEYzZWhIR3J1aGk2YTFDVjBkeWdHYUMudlROcVJ2ZUpBL3RLWTlXRyIsImlhdCI6MTYyMTMyNjUwNiwiZXhwIjoxNjIxMzI2NTIxfQ.ktG5DW6A9EZPmeM2hFic3vrme0LOGy-X_gqhGdPl_0I",
+      "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxOTQ2ODE2MjAzNCwicGFzcyI6IiQyYSQwOSRIdmNGM3RTLm9kNXJ2SzRsYTRiREdlMzY2WHkuVXBRUnVLWDkzUW9Oek92WGFjVlVXdkhyaSIsImlhdCI6MTYyMTMyNjUwNiwiZXhwIjoxNjIxMzI2NTY2fQ.imCTA6Sl-bQ6-fD-JUOZOncvVtqGuYNlUNv-RMr9SNA",
+      "refresh_exp": 1621326566
+    },
+    {
+      "id": 1618914837935,
+      "username": "valexr@gmail.com",
+      "remember": false,
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwicGFzcyI6IiQyYSQwOSRkMVY1QkNVWWM4NC9EM2tHYTI5Y3EuRmdHV3FsSHFEellJMTlSMWJKYlZOZlcvaElmNUFTSyIsImlhdCI6MTYyMTQ4NTk1NSwiZXhwIjoxNjIxNDg1OTcwfQ._BIGouki815lpzDgSxHIm_7MXcWRuFMD1e9erqk8Tas",
+      "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwicGFzcyI6IiQyYSQwOSR6LnRYSGd5M0MuZzdzdUNSRGFGWGNPZTJaMkFuei56dWJQRURKQVFvb2ZiOVhuaW1UZjgwLiIsImlhdCI6MTYyMTQ4NTk1NSwiZXhwIjoxNjIxNDg2MDE1fQ.38WreXlSJvaXTsZ8mAZz9zm4ClWAax-AYjmuJlNzFXI",
+      "exp": 1621486015,
+      "ip": "127.0.0.1",
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0"
+    }
+  ]
+}

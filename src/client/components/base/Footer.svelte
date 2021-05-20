@@ -23,7 +23,7 @@
         // history: $history,
     };
 
-    let logopen = true;
+    let logopen = false;
 
     // $: console.dir(log);
 </script>

@@ -30,6 +30,10 @@ export function slugify(...args) {
 //     return true;
 // }
 
+export function okey(o, k) {
+
+}
+
 export function omatch(o, q) {
     const match = Object.entries(o).map(([k, v]) => {
         if (k in q) {

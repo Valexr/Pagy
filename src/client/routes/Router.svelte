@@ -1,25 +1,7 @@
 <script>
-    import { onMount } from "svelte";
-    import {
-        url,
-        path,
-        query,
-        pattern,
-        fragment,
-        state,
-        click,
-        goto,
-    } from "svelte-pathfinder";
+    import { url, path, query, pattern, click, goto } from "svelte-pathfinder";
     import Viewpoint from "svelte-viewpoint";
-    import {
-        page,
-        authed,
-        routes,
-        history,
-        Authguard,
-        Transition,
-    } from "@routes";
-    import { session, refresh } from "@api/auth";
+    import { page, authed, history, Transition } from "@routes";
     import Auth from "@pages/auth.svelte";
     import {
         init,
@@ -49,13 +31,11 @@
         // registerLang($history.lang);
     }
 
-    $: if (!$authed) goto(`/auth`);
+    $: !$authed ? goto(`/auth`) : goto(`/users?role=admin`);
 
     $: if (!$pattern("/:lang/*")) $path = `/${$history.lang + $path}`;
-    // !$path.substring(1, 4).includes("/")
-    $: if ($page && $history) $history[$page.alias] = $url;
 
-    // $: console.log(getLocaleFromPathname(/^\/(.*?)\//));
+    $: if ($page && $history) $history[$page.alias] = $url;
 </script>
 
 <svelte:window on:click={click} />

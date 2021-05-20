@@ -1,28 +1,13 @@
 <script>
     import { fade } from "svelte/transition";
-    import {
-        url,
-        path,
-        pattern,
-        query,
-        fragment,
-        click,
-        state,
-        back,
-    } from "svelte-pathfinder";
-    import { items, filters } from "@stores/store";
+    import { path, query } from "svelte-pathfinder";
+    import { filters } from "@stores/store";
     import { DropDown, Search, Add } from "@cmp";
     import { media } from "svelte-match-media";
 
     let addLocale = { action: () => console.log("addLocale"), title: "Locale" },
         addMenu = { action: () => console.log("addMenu"), title: "Menu" },
-        addRole = { action: () => console.log("addRole"), title: "Role" },
-        rolesOpen = false,
-        localesOpen = false,
-        menusOpen = false,
-        regionsOpen = false;
-
-    // $: console.log($items);
+        addRole = { action: () => console.log("addRole"), title: "Role" };
 </script>
 
 <nav class="navbar container p-sticky bg-light" in:fade={{ duration: 500 }}>
@@ -30,7 +15,6 @@
         {#if $query.params.role}
             <div class="column col-auto">
                 <DropDown
-                    opener={rolesOpen}
                     openbut={{ name: $query.params.role }}
                     items={$filters.role}
                     downbut={addRole}
@@ -54,7 +38,6 @@
         {#if $query.params.locale}
             <div class="column col-auto">
                 <DropDown
-                    opener={localesOpen}
                     openbut={{ name: $query.params.locale.toUpperCase() }}
                     items={$filters.locale}
                     downbut={addLocale}
@@ -78,7 +61,6 @@
         {#if $query.params.menu}
             <div class="column col-auto">
                 <DropDown
-                    opener={menusOpen}
                     openbut={{ name: $query.params.menu }}
                     items={$filters.menu}
                     downbut={addMenu}
@@ -102,7 +84,6 @@
         {#if $query.params.region}
             <div class="column col-auto">
                 <DropDown
-                    opener={regionsOpen}
                     openbut={{ name: $query.params.region }}
                     items={$filters.region}
                     downbut={false}

@@ -2,6 +2,8 @@
 function log(req, res, next) {
     console.log({
         'req': {
+            'connection': req.connection.remoteAddress,
+            'agent': req.headers['user-agent'],
             'method': req.method,
             'headers': req.headers,
             'req.url': req.url,
@@ -52,7 +54,6 @@ function errors(req, res, next) {
         res.writeHead(code, {
             "Content-Type": "application/json",
             ...headers
-            // ...location ? { Location: location } : ''
         });
         res.end(JSON.stringify(message));
     }

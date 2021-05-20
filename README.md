@@ -1,6 +1,6 @@
-# Pagy
+# Pg
 
-A starter for baking fullstack application with client based on Svelte framework and server side powered by Derver. 
+SvelteJS + SpectreCSS on client, Derver BFF, LowDB base.json & JWT auth simple headless CMS, bundeled by ESBuild
 
 ### Features:
 

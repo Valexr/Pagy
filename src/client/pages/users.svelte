@@ -1,25 +1,13 @@
 <script>
     import { onMount } from "svelte";
+    import { query, fragment } from "svelte-pathfinder";
     import { media } from "svelte-match-media";
-    import { date } from "@utils";
     import * as db from "@api/db";
+    import { date } from "@utils";
     import { items, filters } from "@stores/store";
+    // import { history } from "@routes";
     // import { Table } from "svelte-tabular-table";
     // import { TableCmps } from "@cmp";
-    import { history } from "@routes";
-    import {
-        url,
-        path,
-        pattern,
-        query,
-        fragment,
-        click,
-        state,
-        back,
-        goto,
-    } from "svelte-pathfinder";
-    import { noticy } from "@cmp";
-    import { login, refresh, session } from "@api/auth";
 
     $: if ($fragment !== "sidebar" && !$query.params.id)
         $query.params.role && getItems($query.params.role);
@@ -46,12 +34,11 @@
         $items = await db.del(`/users/items${$query}&id=${user.id}`);
     }
 
-    // noticy.default("test", 0);
-    // $: config = $items && {
+    // $: config = $items.length && {
     //     id: "users",
     //     class: "table table-striped table-hover",
     //     init: {
-    //         keys: ["id", "email", "password", "create", "update", "actions"],
+    //         keys: ["id", "username", "create", "update", "actions"],
     //         index: "id",
     //         data: $items,
     //         nodiv: true,

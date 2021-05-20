@@ -1,4 +1,12 @@
+<script context="module">
+    const list = new Set();
+    function closeAll() {
+        list.forEach((fn) => fn());
+    }
+</script>
+
 <script>
+    import { onMount } from "svelte";
     import { clickout } from "@utils";
     import { media } from "svelte-match-media";
 
@@ -15,7 +23,18 @@
         downbut = {},
         right = false,
         auto = false;
-    const open = () => (opener = !opener);
+    // const open = () => (opener = !opener);
+    onMount(() => {
+        const fn = () => (opener = false);
+        list.add(fn);
+        return () => list.delete(fn);
+    });
+
+    function toggle() {
+        if (opener) return (opener = false);
+        closeAll();
+        opener = true;
+    }
 </script>
 
 <div
@@ -27,7 +46,7 @@
         class="btn text-capitalize {openbut.class}"
         data-badge={openbut.badge}
         data-initial={openbut.initial}
-        on:click|stopPropagation|preventDefault={open}
+        on:click|stopPropagation={toggle}
     >
         <!-- <slot name="img">
             <figure

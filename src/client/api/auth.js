@@ -5,6 +5,8 @@ const base = '/api/v1/auth'
 export const session = writable(JSON.parse(sessionStorage.getItem('session')) || {});
 session.subscribe(val => sessionStorage.session = JSON.stringify(val));
 
+// export const session = writable({})
+
 // const getsession = (data) => { return get(session)[data] }
 
 // export const back = writable(JSON.parse(localStorage.getItem('back')) || {});
@@ -107,25 +109,19 @@ session.subscribe(val => sessionStorage.session = JSON.stringify(val));
 // );
 // $values contains fetch result as long as session has not expired
 
+
 export async function cookie() {
     const path = `${base}/cookie`;
     const options = {
         method: "GET",
-        credentials: 'include',
+        // credentials: 'include',
         headers: {
             "Content-Type": "application/json",
         }
     }
 
     try {
-        const res = await fetch(path, options)
-        // const user = await res.json()
-        // const status = res.status
-        // console.log(res, await res.json())
-        // if (res.ok) {
-        return res
-        // }
-
+        return await fetch(path, options)
     } catch (err) {
         console.log("err: ", err)
         res.error(400, err);
@@ -136,10 +132,9 @@ export async function login(form) {
     const path = `${base}/login`;
     const options = {
         method: "POST",
-        credentials: 'include',
+        // credentials: 'include',
         headers: {
             "Content-Type": "application/json",
-            // Cookie: 'cookie=cookie; c=c; c=c'
         },
         body: JSON.stringify(form),
     }
@@ -149,10 +144,6 @@ export async function login(form) {
         const user = await res.json()
         const status = res.status
         res.ok && session.set(user)
-        //     form.remember ?
-        //         session.create(localStorage, user)
-        //         : session.create(sessionStorage, user)
-
         return { status, user }
     } catch (err) {
         console.log("err: ", err)
@@ -160,14 +151,13 @@ export async function login(form) {
     }
 }
 
-
 export async function refresh(token) {
     const path = `${base}/refresh`;
     const options = {
         method: "GET",
-        credentials: 'include',
+        // credentials: 'include',
         headers: {
-            Authorization: `Bearer ${JSON.parse(sessionStorage.session).refresh_token}`,
+            Authorization: `Bearer ${get(session).refresh_token}`,
         },
     }
     try {
