@@ -1,14 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import {
-        url,
-        path,
-        pattern,
-        query,
-        fragment,
-        click,
-        state,
-    } from "svelte-pathfinder";
+    import { fragment } from "svelte-pathfinder";
     import { clickout } from "@utils";
 
     export let // id = "modal",
@@ -25,14 +17,12 @@
         },
         modal = null;
 
-    const close = () => {
-        $fragment = "";
-    };
+    const close = () => ($fragment = "");
 </script>
 
 <section
     class="modal {size} {`modal-${opener}`}"
-    class:active={$fragment === `modal-${opener}`}
+    class:active={$fragment === `#modal-${opener}`}
 >
     <div class="modal-overlay" aria-label="Close" on:click={close}>&nbsp;</div>
     <div

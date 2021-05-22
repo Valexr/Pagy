@@ -1,19 +1,11 @@
 <script>
-    import {
-        url,
-        path,
-        pattern,
-        query,
-        fragment,
-        click,
-        state,
-    } from "svelte-pathfinder";
+    import { fragment } from "svelte-pathfinder";
     import { media } from "svelte-match-media";
     import { page } from "@routes";
     import { items, filters } from "@stores/store";
 
     function addtoggle() {
-        $fragment = "modal-add";
+        $fragment = "#modal-add";
     }
 </script>
 

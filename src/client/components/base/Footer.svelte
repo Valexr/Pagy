@@ -53,8 +53,6 @@
         <div class="column col-auto">
             <copy>&copy; {new Date().getFullYear()}</copy>
             {$t("footer")}
-            {$t("menu")}
-            {slugify($t("time", { values: { time: 123 } }))}
         </div>
     </section>
     <section class="navbar-section" />

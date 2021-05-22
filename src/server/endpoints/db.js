@@ -1,12 +1,23 @@
-import low from 'lowdb'
-import FileAsync from 'lowdb/adapters/FileAsync'
+import { Low, JSONFile } from 'lowdb'
+import lodash from 'lodash'
 import { omatch, osome } from '$utils'
 
 let base, table, pattern = '/:base/:table'
 
+const dbs = {}
+function db(file) {
+    dbs[file] ||= new Low(new JSONFile(`data/${file}.json`))
+    return dbs[file]
+}
+const lowdb = (file) => new Low(new JSONFile(`data/${file}.json`))
+
 async function connect(req, res, next) {
-    base = await low(new FileAsync(`data/${req.params.base}.json`))
-    table = base.get(req.params.table)
+    // base = lowdb(req.params.base)
+    base = db(req.params.base)
+    await base.read()
+    table = req.params.table
+    // const { items } = base.data
+    // console.log(base.data)
     next()
 }
 
@@ -21,39 +32,37 @@ export default function (app) {
         if (hasquery) {
             const items =
                 req.query.id
-                    ? table.find({ id: +req.query.id }).value()
-                    : req.query.sq
-                        ? table.filter(o => osome(o, req.query.sq)).value()
-                        : table.filter(o => omatch(o, req.query)).value()
+                    ? base.data[table].find(i => i.id === +req.query.id)
+                    : req.query.q
+                        ? base.data[table].filter(o => osome(o, req.query.q))
+                        : base.data[table].filter(o => omatch(o, req.query))
             res.json(items)
 
         } else if (all) {
-            const data = await base.read()
-            const state = base.getState()
-            // const rename = Object.entries(state).each(([k, v]) => k === 'items' ? k = 'users' : '')
-            const items = data.get('items').value()
-            // console.log('data', JSON.stringify(data), items, state)
-            res.json(items)
+            // await base.read()
+            res.json(base.data.filters.role)
 
         } else {
-            const items = table.value()
-            res.json(items)
+            // const items = table
+            res.json(base.data[table])
         }
     })
 
-    app.post(pattern, (req, res, next) => {
+    app.post(pattern, async (req, res, next) => {
         const meta = { id: Date.now(), create: Date.now(), update: Date.now(), role: req.query.role }
-        const item = table.push(req.body).last().assign(meta).write()
-        res.json(item)
+        base.data[table].push({ ...req.body, ...meta })
+        await base.write()
+        res.json(base.data[table])
     })
 
-    app.put(pattern, (req, res, next) => {
+    app.put(pattern, async (req, res, next) => {
         const meta = { ...req.body, update: Date.now() }
-        const item = table.find({ id: +req.query.id }).assign(meta).write()
-        res.json(item)
+        base.data[table].forEach(i => i.id === +req.query.id && Object.assign(i, meta))
+        await base.write()
+        res.json(base.data[table])
     })
 
-    app.patch(pattern, (req, res, next) => {
+    app.patch(pattern, async (req, res, next) => {
         fn = req.query.patch
         // console.log(fn)
         // lowdb
@@ -63,11 +72,13 @@ export default function (app) {
         //     .then(items => res.json(items))
     })
 
-    app.delete(pattern, (req, res) => {
-        const item = req.query.prop
-            ? table.each(o => delete o[req.query.prop]).write()
-            : table.remove(o => omatch(o, req.query)).write()
-        res.json(item)
+    app.delete(pattern, async (req, res) => {
+        const items = req.query.prop
+            ? base.data[table].forEach(o => delete o[req.query.prop])
+            : base.data[table].filter(o => !omatch(o, req.query))
+        base.data[table] = items
+        await base.write()
+        res.json(items)
     })
 
 }

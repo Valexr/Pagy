@@ -1,5 +1,5 @@
 {
-    "welcome-to-pagy": "Welcome to Pagy!",
+    "welcome-to-pg": "Welcome to Pg!",
     "login-please": "Login please",
     "jwt-expired": "Session expired",
     "authenticate-please": "Authenticate please",
@@ -13,8 +13,5 @@
     "invalid-password": "Invalid password",
     "forget-password": "Forget password?",
     "footer": "Footer",
-    "error404": "error404",
-    "menu": "Menu",
-    "foot": "{count} {count, plural, =1 {foot} other {feet}}",
-    "time": "Now is {time}"
+    "error404": "error404"
 }

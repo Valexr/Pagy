@@ -1,5 +1,4 @@
-import low from 'lowdb'
-import FileAsync from 'lowdb/adapters/FileAsync'
+import { Low, JSONFile } from 'lowdb'
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import cookie from "cookie";
@@ -8,7 +7,7 @@ import os from 'os'
 
 // console.log('mac: ', os.networkInterfaces())
 // process.env.JWT_SECRET = 'secret'
-const lowdb = (file = 'users') => low(new FileAsync(`data/${file}.json`))
+// const lowdb = (file = 'users') => low(new FileAsync(`data/${file}.json`))
 
 console.log('jwt', process.env.JWT_SECRET)
 // let lowdb
@@ -19,6 +18,12 @@ console.log('jwt', process.env.JWT_SECRET)
 //     next()
 // }
 
+const dbs = {}
+function lowdb(file = 'users') {
+    dbs[file] ||= new Low(new JSONFile(`data/${file}.json`))
+    return dbs[file]
+}
+
 export default function (app) {
 
     app.get('/cookie', async (req, res, next) => {
@@ -28,12 +33,8 @@ export default function (app) {
                 const cookies = cookie.parse(req.headers.cookie)
                 const verified = jwt.verify(cookies.sid, process.env.JWT_SECRET);
                 if (verified) {
-                    const user = await lowdb().then(lowdb => {
-                        return lowdb
-                            .get('items')
-                            .find({ id: verified.id })
-                            .value()
-                    })
+                    await lowdb('users').read()
+                    const user = lowdb('users').data.items.find(i => i.id === verified.id)
                     const pass = await bcrypt.compare(user.password, verified.pass)
                     if (!pass) { return res.error(401, "Bad password"); }
                     console.log('cookies: ', cookies, verified, user)
@@ -55,19 +56,23 @@ export default function (app) {
     app.post('/login', async (req, res, next) => {
         try {
             const { username, password, remember } = req.body;
-            const user = await lowdb().then(lowdb => {
-                return lowdb
-                    .get('items')
-                    .find({ username })
-                    .value()
-            })
+
+            await lowdb('users').read()
+            const user = lowdb('users').data.items.find(i => i.username === username)
             if (!user) { return res.error(400, "User not found"); }
 
             const pass = await bcrypt.compare(password, user.password);
             if (!pass) { return res.error(401, "Bad password"); }
 
+            // const refresh = jwt.verify(tokens.refresh_token, process.env.JWT_SECRET);
+            const ip = req.connection.remoteAddress
+            const ua = req.headers['user-agent']
+            const id = user.id
+            const role = user.role
+            const exp = process.env.JWT_REFRESH_EXP
+
             const tokens = {
-                access_token: jwt.sign({ id: user.id, pass: bcrypt.hashSync(user.password, 9) }, process.env.JWT_SECRET, {
+                access_token: jwt.sign({ id, username, role, remember, ip, ua, pass: bcrypt.hashSync(user.password, 9) }, process.env.JWT_SECRET, {
                     expiresIn: process.env.JWT_ACCESS_EXP
                 }),
                 refresh_token: jwt.sign({ id: user.id, pass: bcrypt.hashSync(user.password, 9) }, process.env.JWT_SECRET, {
@@ -76,19 +81,13 @@ export default function (app) {
             }
             if (!tokens.access_token.length || !tokens.refresh_token.length) { return res.error(401, "Bad tokens"); }
 
-            const refresh = jwt.verify(tokens.refresh_token, process.env.JWT_SECRET);
-            const ip = req.connection.remoteAddress
-            const ua = req.headers['user-agent']
-            const { id } = user
-            const { exp } = refresh
             const session = { id, username, remember, ...tokens, exp, ip, ua }
 
             if (session) {
-                await lowdb('sessions').then(lowdb => {
-                    lowdb.defaults({ items: [] }).write()
-                    lowdb.get('items').remove(o => o.username === session.username).write()
-                    lowdb.get('items').push(session).write()
-                })
+                await lowdb('sessions').read()
+                lowdb('sessions').data.items.filter(o => o.username !== session.username).push(session)
+                await lowdb('sessions').write()
+
                 if (remember) {
                     console.log(process.env.JWT_COOKIE_EXP)
                     const cookie_token = jwt.sign({ id: user.id, pass: bcrypt.hashSync(user.password, 9) }, process.env.JWT_SECRET, {
@@ -127,12 +126,9 @@ export default function (app) {
             const verified = jwt.verify(token, process.env.JWT_SECRET);
 
             if (verified) {
-                const user = await lowdb().then(lowdb => {
-                    return lowdb
-                        .get('items')
-                        .find({ id: verified.id })
-                        .value()
-                })
+                await lowdb('users').read()
+                const user = lowdb('users').data.items.find(i => i.id === verified.id)
+
                 // req.cookies = cookie.parse(req.headers.cookie || '');
                 // const access = req.cookies.sid
                 // const acc = jwt.verify(access, 'secret');

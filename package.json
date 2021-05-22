@@ -2,7 +2,7 @@
     "name": "pg",
     "version": "0.1.0",
     "description": "SvelteJS + SpectreCSS client, Derver BFF, LowDB base.json & JWT auth simple headless CMS, bundeled with ESBuild",
-    "main": "server/server.js",
+    "main": "index.js",
     "type": "commonjs",
     "scripts": {
         "build": "node esbuild",
@@ -19,18 +19,20 @@
         "aovi": "^2.0.2",
         "aovi-svelte": "^0.2.0",
         "bcryptjs": "^2.4.3",
+        "cookie": "^0.4.1",
         "cors": "^2.8.5",
+        "crypto-js": "^4.0.0",
         "derver": "^0.4.15",
         "dotenv": "^9.0.2",
         "esbuild": "^0.12.1",
         "esbuild-svelte": "^0.5.1",
         "jsonwebtoken": "^8.5.1",
-        "lodash-id": "^0.14.0",
-        "lowdb": "^1.0.0",
+        "lodash": "^4.17.21",
+        "lowdb": "^2.0.3",
         "nanoid": "^3.1.23",
         "node-watch": "^0.7.1",
-        "postcss": "^8.2.15",
-        "sass": "^1.32.13",
+        "postcss": "^8.3.0",
+        "sass": "^1.33.0",
         "sortablejs": "^1.13.0",
         "spectre.css": "^0.5.9",
         "svelte": "^3.38.2",
@@ -40,12 +42,7 @@
         "svelte-pathfinder": "^3.1.3",
         "svelte-preprocess": "^4.7.3",
         "svelte-session-manager": "^1.4.2",
-        "svelte-tabular-table": "^1.0.6"
-    },
-    "dependencies": {
-        "cookie": "^0.4.1",
-        "crypto-js": "^4.0.0",
-        "esbuild-envfile-plugin": "^1.0.1",
+        "svelte-tabular-table": "^1.0.6",
         "svelte-viewpoint": "^1.4.3"
     }
 }

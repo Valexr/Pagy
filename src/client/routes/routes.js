@@ -104,6 +104,8 @@ export const routes = readable([
 
 export const page = derived([routes, pattern], ([$routes, $pattern]) => $routes.find((route) => $pattern(route.match)) || null)
 
+// export const history = derived([page, history, url], ([$page, $history, $url]) => $history[$page.alias] = $url)
+
 export const history = writable(JSON.parse(sessionStorage.getItem("history")) || { lang: 'en' });
 history.subscribe(val => sessionStorage.setItem("history", JSON.stringify(val)));
 

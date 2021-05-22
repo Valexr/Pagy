@@ -114,9 +114,10 @@ export async function cookie() {
     const path = `${base}/cookie`;
     const options = {
         method: "GET",
-        // credentials: 'include',
+        credentials: 'include',
         headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${get(session).refresh_token}`,
         }
     }
 

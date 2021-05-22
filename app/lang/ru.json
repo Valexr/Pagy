@@ -1,5 +1,5 @@
 {
-    "welcome-to-pagy": "Добро пожаловать в Pagy!",
+    "welcome-to-pg": "Добро пожаловать в Pg!",
     "login-please": "Авторизуйтесь пожалуйста",
     "jwt-expired": "Сессия истекла",
     "authenticate-please": "Подтвердите пароль",
@@ -13,7 +13,5 @@
     "invalid-password": "Неверный пароль",
     "forget-password": "Забыли пароль?",
     "footer": "Футер",
-    "error404": "ошибка404",
-    "menu": "Menu",
-    "foot": "{count} {count, plural, =1 {foot} other {feet}}"
+    "error404": "ошибка404"
 }

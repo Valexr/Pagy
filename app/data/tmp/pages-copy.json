@@ -1,0 +1,171 @@
+{
+    "filters": {
+        "locale": [
+            "en",
+            "fr",
+            "de",
+            "ru"
+        ],
+        "menu": [
+            "header",
+            "main",
+            "footer"
+        ]
+    },
+    "items": [
+        {
+            "id": 1620224581569,
+            "title": "title👍🏻",
+            "url": "/title",
+            "author": "author",
+            "description": "valexr@gmail.com",
+            "locale": "en",
+            "menu": "header",
+            "parents": [],
+            "children": [],
+            "create": {
+                "date": "date",
+                "user": "user.id"
+            },
+            "history": [
+                {
+                    "date": "date",
+                    "user": "user.id"
+                }
+            ],
+            "seo": {
+                "title": "title",
+                "keywords": "keywords",
+                "description": "description"
+            },
+            "options": {
+                "visible": true,
+                "disabled": false,
+                "secured": false,
+                "blank": true,
+                "redirect": "",
+                "alias": ""
+            },
+            "widgets": {
+                "text": [
+                    {
+                        "title": "title",
+                        "alias": "alias",
+                        "content": "content"
+                    }
+                ],
+                "richtext": [
+                    {
+                        "title": "title",
+                        "alias": "alias",
+                        "content": "url"
+                    }
+                ],
+                "img": [
+                    {
+                        "title": "title",
+                        "alias": "alias",
+                        "small": "url",
+                        "medium": "url",
+                        "big": "url"
+                    }
+                ]
+            },
+            "collections": {
+                "list": [],
+                "gallery": []
+            },
+            "update": 1621094304142
+        },
+        {
+            "title": "Title 0",
+            "author": "Author0",
+            "description": "Description0",
+            "id": 1618931740218,
+            "create": 1618931740218,
+            "update": 1620204842523,
+            "locale": "en",
+            "menu": "header"
+        },
+        {
+            "title": "Title 1",
+            "author": "Author1",
+            "description": "Description1",
+            "id": 1618931755826,
+            "create": 1618931755826,
+            "update": 1620204847463,
+            "locale": "en",
+            "menu": "header"
+        },
+        {
+            "title": "Title 2",
+            "author": "Author2",
+            "description": "Description2",
+            "id": 1618932277306,
+            "create": 1618932277306,
+            "update": 1620204853414,
+            "locale": "en",
+            "menu": "header"
+        },
+        {
+            "title": "Title 3🤓",
+            "author": "Author3",
+            "description": "Description3",
+            "id": 1618939397284,
+            "create": 1618939397284,
+            "update": 1620204859735,
+            "locale": "en",
+            "menu": "header"
+        },
+        {
+            "title": "Title 4",
+            "author": "Author4",
+            "description": "Description4",
+            "id": 1618939406905,
+            "create": 1618939406905,
+            "update": 1620204865264,
+            "locale": "en",
+            "menu": "header"
+        },
+        {
+            "title": " Title 5",
+            "author": "Author5",
+            "description": "Description5",
+            "id": 1618939498039,
+            "create": 1618939498039,
+            "update": 1620204878356,
+            "locale": "en",
+            "menu": "header"
+        },
+        {
+            "title": "Title 6",
+            "author": "Author6",
+            "description": "Description6",
+            "id": 1618939518069,
+            "create": 1618939518069,
+            "update": 1620204891820,
+            "locale": "en",
+            "menu": "header"
+        },
+        {
+            "title": "FR",
+            "author": "FR",
+            "description": "FR",
+            "id": 1620200354263,
+            "create": 1620200354263,
+            "update": 1620307180463,
+            "locale": "fr",
+            "menu": "header"
+        },
+        {
+            "title": "Title 7",
+            "author": "Author7",
+            "description": "Description7",
+            "id": 1621186261091,
+            "create": 1621186261091,
+            "update": 1621186273216,
+            "locale": "en",
+            "menu": "header"
+        }
+    ]
+}

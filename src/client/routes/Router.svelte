@@ -31,7 +31,7 @@
         // registerLang($history.lang);
     }
 
-    $: !$authed ? goto(`/auth`) : goto(`/users?role=admin`);
+    $: !$authed && goto(`/auth`);
 
     $: if (!$pattern("/:lang/*")) $path = `/${$history.lang + $path}`;
 

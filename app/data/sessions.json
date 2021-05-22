@@ -12,9 +12,9 @@
       "id": 1618914837935,
       "username": "valexr@gmail.com",
       "remember": false,
-      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwicGFzcyI6IiQyYSQwOSRkMVY1QkNVWWM4NC9EM2tHYTI5Y3EuRmdHV3FsSHFEellJMTlSMWJKYlZOZlcvaElmNUFTSyIsImlhdCI6MTYyMTQ4NTk1NSwiZXhwIjoxNjIxNDg1OTcwfQ._BIGouki815lpzDgSxHIm_7MXcWRuFMD1e9erqk8Tas",
-      "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwicGFzcyI6IiQyYSQwOSR6LnRYSGd5M0MuZzdzdUNSRGFGWGNPZTJaMkFuei56dWJQRURKQVFvb2ZiOVhuaW1UZjgwLiIsImlhdCI6MTYyMTQ4NTk1NSwiZXhwIjoxNjIxNDg2MDE1fQ.38WreXlSJvaXTsZ8mAZz9zm4ClWAax-AYjmuJlNzFXI",
-      "exp": 1621486015,
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwidXNlcm5hbWUiOiJ2YWxleHJAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicmVtZW1iZXIiOmZhbHNlLCJpcCI6IjEyNy4wLjAuMSIsInVhIjoiTW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTAuMTU7IHJ2Ojg5LjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvODkuMCIsInBhc3MiOiIkMmEkMDkkcjhWcm4yWUpNOTBCYkl4MDhtU1NhT216RzNjRXZyb0FCNE8xMDlTTzUubGNLWVA5dzc5WFciLCJpYXQiOjE2MjE2MjM5MTQsImV4cCI6MTYyMTYyMzkyOX0.qE9aNJoeaI5RTkXfzOdaDUiWoKfsBZZwZXrKvlNf96g",
+      "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwicGFzcyI6IiQyYSQwOSRsN0lVTVhQNy4wQno0MzRSTVoyazB1TURrMFpDcm5IczFaS2Q2eU5wdGhTVWR0OWFqNklyRyIsImlhdCI6MTYyMTYyMzkxNCwiZXhwIjoxNjIxNjIzOTc0fQ.LndaZUNLm8TfgG-Z8O3YxmlhHWtx0z4MiyCyTRlRJ1Q",
+      "exp": "1m",
       "ip": "127.0.0.1",
       "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0"
     }
