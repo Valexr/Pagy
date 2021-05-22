@@ -112,8 +112,8 @@ history.subscribe(val => sessionStorage.setItem("history", JSON.stringify(val)))
 export const authed = derived(
     [session, page],
     ([$session, $page], set) => {
-        if ($session.access_token) {
-            const refreshable = $session.refresh_token && $session.refresh_token !== "undefined"
+        if ($session.access) {
+            const refreshable = $session.refresh && $session.refresh !== "undefined"
             if (refreshable) {
                 set(true)
             }

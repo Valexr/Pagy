@@ -1,7 +1,10 @@
+import { Low, JSONFile } from 'lowdb'
+// import lodash from 'lodash'
+
 const dbs = {}
-function db(file) {
+export function db(file) {
     dbs[file] ||= new Low(new JSONFile(`data/${file}.json`))
     return dbs[file]
 }
 
-table.find(i => i.id === +req.query.id)
+export const lowdb = (file) => new Low(new JSONFile(`data/${file}.json`))

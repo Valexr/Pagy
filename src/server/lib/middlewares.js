@@ -1,4 +1,3 @@
-
 function log(req, res, next) {
     console.log({
         'req': {
@@ -20,7 +19,6 @@ function log(req, res, next) {
     });
     next();
 }
-
 
 function json(req, res, next) {
     res.json = (obj) => {

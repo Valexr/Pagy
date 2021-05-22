@@ -12,8 +12,8 @@ $off-canvas-breakpoint: 840px;
 // Import full Spectre source code
 @import "../../node_modules/spectre.css/src/spectre";
 @import "../../node_modules/spectre.css/src/spectre-icons";
-@import "../../node_modules/spectre.css/src/spectre-exp";
-@import "../../node_modules/spectre.css/src/_variables";
+// @import "../../node_modules/spectre.css/src/spectre-exp";
+// @import "../../node_modules/spectre.css/src/_variables";
 
 :root {
     --primary-color: $primary-color;

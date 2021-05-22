@@ -1,10 +1,9 @@
-<script context="module">
+<!-- <script context="module">
     export async function preload({ path, query }) {
-        const data = await locales.get("locales", query.split("&id")[0]);
+        const data = await db.get("locales", query.split("&id")[0]);
         return { data };
     }
-</script>
-
+</script> -->
 <script>
     import { onMount } from "svelte";
     import { media } from "svelte-match-media";
@@ -14,8 +13,10 @@
 
     onMount(async () => ($filters = await db.get("/locales/filters")));
 
-    export let data;
-    $items = data;
+    // export let data;
+
+    // $items = data;
+
     $: get($query);
 
     async function get() {

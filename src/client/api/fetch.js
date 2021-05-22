@@ -8,7 +8,7 @@ export default async function (url, { ...options }, body = undefined) {
         return fetch(base + url, {
             ...options,
             headers: {
-                Authorization: `Baerer ${get(session).access_token}`,
+                Authorization: `Baerer ${get(session).access}`,
                 "Content-Type": "application/json",
             },
             ...(body && { body: JSON.stringify(body) })

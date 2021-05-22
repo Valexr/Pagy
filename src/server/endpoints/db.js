@@ -1,23 +1,13 @@
-import { Low, JSONFile } from 'lowdb'
-// import lodash from 'lodash'
+import { db } from "$lib/db"
 import { omatch, osome } from '$lib/utils'
 
 let base, table, pattern = '/:base/:table'
 
-const dbs = {}
-function db(file) {
-    dbs[file] ||= new Low(new JSONFile(`data/${file}.json`))
-    return dbs[file]
-}
-const lowdb = (file) => new Low(new JSONFile(`data/${file}.json`))
-
 async function connect(req, res, next) {
-    // base = lowdb(req.params.base)
     base = db(req.params.base)
     await base.read()
     table = req.params.table
     // const { items } = base.data
-    // console.log(base.data)
     next()
 }
 

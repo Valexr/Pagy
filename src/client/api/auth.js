@@ -117,7 +117,7 @@ export async function cookie() {
         credentials: 'include',
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${get(session).refresh_token}`,
+            Authorization: `Bearer ${get(session).refresh}`,
         }
     }
 
@@ -158,7 +158,7 @@ export async function refresh(token) {
         method: "GET",
         // credentials: 'include',
         headers: {
-            Authorization: `Bearer ${get(session).refresh_token}`,
+            Authorization: `Bearer ${get(session).refresh}`,
         },
     }
     try {
@@ -168,8 +168,8 @@ export async function refresh(token) {
         if (res.status === 200) {
             session.update(session => session = {
                 username: user.username,
-                access_token: user.access_token,
-                refresh_token: session.refresh_token,
+                access: user.access,
+                refresh: session.refresh,
             });
             // session.update(user.access_token);
         } else {

@@ -10,7 +10,7 @@
         id={$page.alias}
         class:bg-gray={$page.alias === "auth"}
         class="container"
-        in:fade={{ duration: duration, delay: 100 }}
+        in:fade|local={{ duration: duration, delay: 100 }}
     >
         <slot />
     </main>
