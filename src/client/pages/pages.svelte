@@ -1,17 +1,7 @@
 <script>
     import { onMount, onDestroy } from "svelte";
     import { slide } from "svelte/transition";
-    import {
-        url,
-        path,
-        pattern,
-        query,
-        fragment,
-        click,
-        state,
-        back,
-        goto,
-    } from "svelte-pathfinder";
+    import { query, fragment } from "svelte-pathfinder";
     import { date } from "@utils";
     import * as db from "@api/db";
     import { media } from "svelte-match-media";

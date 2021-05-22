@@ -32,8 +32,8 @@
             "$EP/*": [
                 "src/server/endpoints/*"
             ],
-            "$utils": [
-                "src/server/utils.js"
+            "$lib/*": [
+                "src/server/lib/*"
             ],
         }
     }

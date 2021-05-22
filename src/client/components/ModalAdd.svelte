@@ -3,21 +3,13 @@
     import { Modal } from "@cmp";
     import { addopen, addBookForm } from "@stores/pages";
     import { items } from "@stores/store";
-    import * as pages from "@api/pages";
-    import {
-        url,
-        path,
-        pattern,
-        query,
-        fragment,
-        click,
-        state,
-    } from "svelte-pathfinder";
+    import * as db from "@api/db";
+    import { query } from "svelte-pathfinder";
 
     onMount(() => ($addBookForm = {}));
 
     async function addPage() {
-        $items = await pages.add("items", $addBookForm, $query);
+        $items = await db.add("items", $addBookForm, $query);
         $addopen = !$addopen;
     }
 </script>

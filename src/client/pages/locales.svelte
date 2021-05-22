@@ -8,25 +8,15 @@
 <script>
     import { onMount } from "svelte";
     import { media } from "svelte-match-media";
-    import { date } from "@utils";
     import * as db from "@api/db";
-    import * as locales from "@api/locales";
     import { items, filters } from "@stores/store";
-    import {
-        url,
-        path,
-        pattern,
-        query,
-        fragment,
-        click,
-        state,
-        back,
-        goto,
-    } from "svelte-pathfinder";
-
-    let func = `o.id = Date.now() + i`;
+    import { query, fragment } from "svelte-pathfinder";
 
     onMount(async () => ($filters = await db.get("/locales/filters")));
+
+    export let data;
+    $items = data;
+    $: get($query);
 
     async function get() {
         // db.patch(`locales/items?patch=${func}`);
@@ -37,27 +27,6 @@
         $query.params.id = locale.id;
         $fragment = "#sidebar";
     }
-    export let data;
-    $items = data;
-    $: get($query);
-    // $: console.log($items);
-
-    // let locales = [];
-
-    // onMount(async () => (locales = await data.db("locales", "locales")));
-
-    // function sortby() {
-    //     $items = locales.sort((a, b) => a.region - b.region);
-    //     // console.log("sort");
-    // }
-
-    // $: console.log([
-    //     ...new Set(
-    //         locales.map((l) => l.subregion).filter(Boolean)
-    //         // .flat()
-    //         // .sort()
-    //     ),
-    // ]);
 </script>
 
 {#await $items}

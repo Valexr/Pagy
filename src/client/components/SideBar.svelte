@@ -2,24 +2,11 @@
     import { onDestroy, onMount, tick } from "svelte";
     import { fly, fade } from "svelte/transition";
     import { quintOut } from "svelte/easing";
-    import {
-        url,
-        path,
-        pattern,
-        query,
-        fragment,
-        click,
-        state,
-        back,
-    } from "svelte-pathfinder";
+    import { query, fragment } from "svelte-pathfinder";
     import { clickout } from "@utils";
     import { page } from "@routes";
-    // import { editForm } from "@stores/pages";
     import { items } from "@stores/store";
     import * as db from "@api/db";
-    import * as users from "@api/users";
-    import * as pages from "@api/pages";
-    import * as locales from "@api/locales";
 
     let aside = null,
         form = null,

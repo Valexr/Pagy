@@ -1,6 +1,6 @@
 import { Low, JSONFile } from 'lowdb'
 import lodash from 'lodash'
-import { omatch, osome } from '$utils'
+import { omatch, osome } from '$lib/utils'
 
 let base, table, pattern = '/:base/:table'
 
@@ -64,21 +64,14 @@ export default function (app) {
 
     app.patch(pattern, async (req, res, next) => {
         fn = req.query.patch
-        // console.log(fn)
-        // lowdb
-        //     .get(req.params.data)
-        //     .each((o, i) => o[req.query.patch] = Object.values(o))
-        //     .write()
-        //     .then(items => res.json(items))
     })
 
     app.delete(pattern, async (req, res) => {
-        const items = req.query.prop
+        base.data[table] = req.query.prop
             ? base.data[table].forEach(o => delete o[req.query.prop])
             : base.data[table].filter(o => !omatch(o, req.query))
-        base.data[table] = items
         await base.write()
-        res.json(items)
+        res.json(base.data[table])
     })
 
 }
