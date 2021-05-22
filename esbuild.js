@@ -18,7 +18,7 @@ const { build } = require("esbuild");
 const { createRemote } = require("derver");
 const watch = require("node-watch");
 const path = require("path");
-// const fs = require('fs/promises');
+const fs = require('fs/promises');
 const CWD = process.cwd();
 const remote = DEV && createRemote('svelte_derver_starter');
 

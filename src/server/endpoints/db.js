@@ -1,5 +1,5 @@
 import { Low, JSONFile } from 'lowdb'
-import lodash from 'lodash'
+// import lodash from 'lodash'
 import { omatch, osome } from '$lib/utils'
 
 let base, table, pattern = '/:base/:table'
