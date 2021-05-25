@@ -1,8 +1,11 @@
 <script>
     import { onMount } from "svelte";
     import { routes, history } from "@routes";
-    import { navbar } from "@stores/store";
+    import { navbar, filters } from "@stores/store";
     import Sortable from "sortablejs";
+
+    $filters = [];
+
     let pagelist = {},
         pagelist1 = {},
         options = {

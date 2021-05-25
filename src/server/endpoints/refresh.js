@@ -1,10 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import cookie from "cookie";
-import { db } from "$lib/db"
-
-const users = db('users')
-const sessions = db('sessions')
+import DB from "$lib/db"
 
 export default async function (req, res, next) {
     try {
@@ -12,8 +9,8 @@ export default async function (req, res, next) {
         const verified = jwt.verify(token, process.env.JWT_SECRET);
 
         if (verified) {
-            await users.read()
-            const user = users.data.items.find(i => i.id === verified.id)
+            const USERS = await DB.connect('users')
+            const user = USERS.id(verified.id)
 
             // req.cookies = cookie.parse(req.headers.cookie || '');
             // const access = req.cookies.sid

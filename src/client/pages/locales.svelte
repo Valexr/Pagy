@@ -11,17 +11,14 @@
     import { items, filters } from "@stores/store";
     import { query, fragment } from "svelte-pathfinder";
 
-    onMount(async () => ($filters = await db.get("/locales/filters")));
+    $: getData($query);
 
-    // export let data;
-
-    // $items = data;
-
-    $: get($query);
-
-    async function get() {
-        // db.patch(`locales/items?patch=${func}`);
-        $items = db.get(`/locales/items${$query.split("&id")[0]}`);
+    async function getData(q) {
+        // await db.patch(`/locales/items?patch=language`);
+        const res = await db.get(`/locales/items${q.split("&id")[0]}`);
+        console.log(res);
+        $items = res.items;
+        $filters = res.filters;
     }
 
     function edit(locale) {

@@ -1,98 +1,49 @@
 <script>
     import { fade } from "svelte/transition";
     import { path, query } from "svelte-pathfinder";
-    import { filters } from "@stores/store";
+    import { filters, items } from "@stores/store";
     import { DropDown, Search, Add } from "@cmp";
     import { media } from "svelte-match-media";
 
-    let addLocale = { action: () => console.log("addLocale"), title: "Locale" },
-        addMenu = { action: () => console.log("addMenu"), title: "Menu" },
-        addRole = { action: () => console.log("addRole"), title: "Role" };
+    $: downbut = {
+        role: { action: () => console.log("addRole"), title: "Role" },
+        menu: { action: () => console.log("addMenu"), title: "Menu" },
+        locale: { action: () => console.log("addLocale"), title: "Locale" },
+    };
+
+    $: filterLink = (key, val, item, query) => {
+        function qpath() {
+            const path = Object.entries($filters).map(([k, v], i) => {
+                return key === k ? `${k}=${item}` : `${k}=${qsub(k, v)}`;
+            });
+            return path.join("&");
+        }
+        function qsub(k, v) {
+            // if (query[k] !== v) query[k] = v;
+            return Object.values(query).filter((q) => v.some((v) => v === q));
+        }
+        return `${$path}?${qpath()}`;
+    };
 </script>
 
 <nav class="navbar container p-sticky bg-light" in:fade={{ duration: 500 }}>
     <section class="navbar-section ">
-        {#if $query.params.role}
+        {#each Object.entries($filters) as [k, v]}
             <div class="column col-auto">
                 <DropDown
-                    openbut={{ name: $query.params.role }}
-                    items={$filters.role}
-                    downbut={addRole}
-                    let:item
-                >
-                    <a
-                        href={`${$path}?role=${item}`}
-                        class:active={item === $query.params.role}
-                    >
-                        {item}
-                        <button
-                            class="btn btn-link btn-sm p-relative float-right sm-acts"
-                            on:click|preventDefault|stopPropagation
-                        >
-                            <i class="icon icon-edit" />
-                        </button>
-                    </a>
-                </DropDown>
-            </div>
-        {/if}
-        {#if $query.params.locale}
-            <div class="column col-auto">
-                <DropDown
-                    openbut={{ name: $query.params.locale.toUpperCase() }}
-                    items={$filters.locale}
-                    downbut={addLocale}
-                    let:item
-                >
-                    <a
-                        href={`${$path}?locale=${item}&menu=${$query.params.menu}`}
-                        class:active={item === $query.params.locale}
-                    >
-                        {item.toUpperCase()}
-                        <button
-                            class="btn btn-link btn-sm p-relative float-right sm-acts"
-                            on:click|preventDefault|stopPropagation
-                        >
-                            <i class="icon icon-edit" />
-                        </button>
-                    </a>
-                </DropDown>
-            </div>
-        {/if}
-        {#if $query.params.menu}
-            <div class="column col-auto">
-                <DropDown
-                    openbut={{ name: $query.params.menu }}
-                    items={$filters.menu}
-                    downbut={addMenu}
-                    let:item
-                >
-                    <a
-                        href={`${$path}?locale=${$query.params.locale}&menu=${item}`}
-                        class:active={item === $query.params.menu}
-                    >
-                        {item}
-                        <button
-                            class="btn btn-link btn-sm p-relative float-right sm-acts"
-                            on:click|preventDefault|stopPropagation
-                        >
-                            <i class="icon icon-edit" />
-                        </button>
-                    </a>
-                </DropDown>
-            </div>
-        {/if}
-        {#if $query.params.region}
-            <div class="column col-auto">
-                <DropDown
-                    openbut={{ name: $query.params.region }}
-                    items={$filters.region}
-                    downbut={false}
+                    openbut={{
+                        name: $query.params[k] ? $query.params[k] : k,
+                    }}
+                    items={v}
+                    downbut={downbut[k]}
                     auto
                     let:item
                 >
                     <a
-                        href={`${$path}?region=${item}`}
-                        class:active={item === $query.params.region}
+                        href={filterLink(k, v, item, $query.params)}
+                        class="no-wrap"
+                        class:active={item === $query.params[k]}
+                        on:click={() => ($query.params[k] = item)}
                     >
                         {item}
                         <!-- <button
@@ -104,7 +55,7 @@
                     </a>
                 </DropDown>
             </div>
-        {/if}
+        {/each}
     </section>
     <section class="navbar-center ">
         <div class="column col-auto">
@@ -126,5 +77,8 @@
         z-index: 99;
         height: 4em;
         top: 0;
+        .no-wrap {
+            white-space: nowrap;
+        }
     }
 </style>

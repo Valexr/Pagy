@@ -235,7 +235,12 @@
                 }
             ],
             "cioc": "AFG",
-            "id": 1620236307420
+            "id": 1620236307420,
+            "language": [
+                "Pashto",
+                "Uzbek",
+                "Turkmen"
+            ]
         },
         {
             "name": "Åland Islands",
@@ -307,7 +312,10 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307421
+            "id": 1620236307421,
+            "language": [
+                "Swedish"
+            ]
         },
         {
             "name": "Albania",
@@ -384,7 +392,10 @@
                 }
             ],
             "cioc": "ALB",
-            "id": 1620236307422
+            "id": 1620236307422,
+            "language": [
+                "Albanian"
+            ]
         },
         {
             "name": "Algeria",
@@ -479,7 +490,10 @@
                 }
             ],
             "cioc": "ALG",
-            "id": 1620236307423
+            "id": 1620236307423,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "American Samoa",
@@ -550,7 +564,11 @@
             "flag": "https://restcountries.eu/data/asm.svg",
             "regionalBlocs": [],
             "cioc": "ASA",
-            "id": 1620236307424
+            "id": 1620236307424,
+            "language": [
+                "English",
+                "Samoan"
+            ]
         },
         {
             "name": "Andorra",
@@ -617,7 +635,10 @@
             "flag": "https://restcountries.eu/data/and.svg",
             "regionalBlocs": [],
             "cioc": "AND",
-            "id": 1620236307425
+            "id": 1620236307425,
+            "language": [
+                "Catalan"
+            ]
         },
         {
             "name": "Angola",
@@ -699,7 +720,10 @@
                 }
             ],
             "cioc": "ANG",
-            "id": 1620236307426
+            "id": 1620236307426,
+            "language": [
+                "Portuguese"
+            ]
         },
         {
             "name": "Anguilla",
@@ -761,7 +785,10 @@
             "flag": "https://restcountries.eu/data/aia.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307427
+            "id": 1620236307427,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Antarctica",
@@ -839,7 +866,11 @@
             "flag": "https://restcountries.eu/data/ata.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307428
+            "id": 1620236307428,
+            "language": [
+                "English",
+                "Russian"
+            ]
         },
         {
             "name": "Antigua and Barbuda",
@@ -912,7 +943,10 @@
                 }
             ],
             "cioc": "ANT",
-            "id": 1620236307429
+            "id": 1620236307429,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Argentina",
@@ -1004,7 +1038,11 @@
                 }
             ],
             "cioc": "ARG",
-            "id": 1620236307430
+            "id": 1620236307430,
+            "language": [
+                "Spanish",
+                "Guaraní"
+            ]
         },
         {
             "name": "Armenia",
@@ -1089,7 +1127,11 @@
                 }
             ],
             "cioc": "ARM",
-            "id": 1620236307431
+            "id": 1620236307431,
+            "language": [
+                "Armenian",
+                "Russian"
+            ]
         },
         {
             "name": "Aruba",
@@ -1157,7 +1199,11 @@
             "flag": "https://restcountries.eu/data/abw.svg",
             "regionalBlocs": [],
             "cioc": "ARU",
-            "id": 1620236307432
+            "id": 1620236307432,
+            "language": [
+                "Dutch",
+                "(Eastern) Punjabi"
+            ]
         },
         {
             "name": "Australia",
@@ -1226,7 +1272,10 @@
             "flag": "https://restcountries.eu/data/aus.svg",
             "regionalBlocs": [],
             "cioc": "AUS",
-            "id": 1620236307433
+            "id": 1620236307433,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Austria",
@@ -1307,7 +1356,10 @@
                 }
             ],
             "cioc": "AUT",
-            "id": 1620236307434
+            "id": 1620236307434,
+            "language": [
+                "German"
+            ]
         },
         {
             "name": "Azerbaijan",
@@ -1377,7 +1429,10 @@
             "flag": "https://restcountries.eu/data/aze.svg",
             "regionalBlocs": [],
             "cioc": "AZE",
-            "id": 1620236307435
+            "id": 1620236307435,
+            "language": [
+                "Azerbaijani"
+            ]
         },
         {
             "name": "Bahamas",
@@ -1451,7 +1506,10 @@
                 }
             ],
             "cioc": "BAH",
-            "id": 1620236307436
+            "id": 1620236307436,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Bahrain",
@@ -1526,7 +1584,10 @@
                 }
             ],
             "cioc": "BRN",
-            "id": 1620236307437
+            "id": 1620236307437,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "Bangladesh",
@@ -1600,7 +1661,10 @@
                 }
             ],
             "cioc": "BAN",
-            "id": 1620236307438
+            "id": 1620236307438,
+            "language": [
+                "Bengali"
+            ]
         },
         {
             "name": "Barbados",
@@ -1673,7 +1737,10 @@
                 }
             ],
             "cioc": "BAR",
-            "id": 1620236307439
+            "id": 1620236307439,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Belarus",
@@ -1767,7 +1834,11 @@
                 }
             ],
             "cioc": "BLR",
-            "id": 1620236307440
+            "id": 1620236307440,
+            "language": [
+                "Belarusian",
+                "Russian"
+            ]
         },
         {
             "name": "Belgium",
@@ -1861,7 +1932,12 @@
                 }
             ],
             "cioc": "BEL",
-            "id": 1620236307441
+            "id": 1620236307441,
+            "language": [
+                "Dutch",
+                "French",
+                "German"
+            ]
         },
         {
             "name": "Belize",
@@ -1953,7 +2029,11 @@
                 }
             ],
             "cioc": "BIZ",
-            "id": 1620236307442
+            "id": 1620236307442,
+            "language": [
+                "English",
+                "Spanish"
+            ]
         },
         {
             "name": "Benin",
@@ -2035,7 +2115,10 @@
                 }
             ],
             "cioc": "BEN",
-            "id": 1620236307443
+            "id": 1620236307443,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Bermuda",
@@ -2100,7 +2183,10 @@
             "flag": "https://restcountries.eu/data/bmu.svg",
             "regionalBlocs": [],
             "cioc": "BER",
-            "id": 1620236307444
+            "id": 1620236307444,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Bhutan",
@@ -2178,7 +2264,10 @@
                 }
             ],
             "cioc": "BHU",
-            "id": 1620236307445
+            "id": 1620236307445,
+            "language": [
+                "Dzongkha"
+            ]
         },
         {
             "name": "Bolivia (Plurinational State of)",
@@ -2281,7 +2370,12 @@
                 }
             ],
             "cioc": "BOL",
-            "id": 1620236307446
+            "id": 1620236307446,
+            "language": [
+                "Spanish",
+                "Aymara",
+                "Quechua"
+            ]
         },
         {
             "name": "Bonaire, Sint Eustatius and Saba",
@@ -2345,7 +2439,10 @@
             "flag": "https://restcountries.eu/data/bes.svg",
             "regionalBlocs": [],
             "cioc": null,
-            "id": 1620236307447
+            "id": 1620236307447,
+            "language": [
+                "Dutch"
+            ]
         },
         {
             "name": "Bosnia and Herzegovina",
@@ -2432,7 +2529,12 @@
                 }
             ],
             "cioc": "BIH",
-            "id": 1620236307448
+            "id": 1620236307448,
+            "language": [
+                "Bosnian",
+                "Croatian",
+                "Serbian"
+            ]
         },
         {
             "name": "Botswana",
@@ -2520,7 +2622,11 @@
                 }
             ],
             "cioc": "BOT",
-            "id": 1620236307449
+            "id": 1620236307449,
+            "language": [
+                "English",
+                "Tswana"
+            ]
         },
         {
             "name": "Bouvet Island",
@@ -2596,7 +2702,12 @@
             "flag": "https://restcountries.eu/data/bvt.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307450
+            "id": 1620236307450,
+            "language": [
+                "Norwegian",
+                "Norwegian Bokmål",
+                "Norwegian Nynorsk"
+            ]
         },
         {
             "name": "Brazil",
@@ -2691,7 +2802,10 @@
                 }
             ],
             "cioc": "BRA",
-            "id": 1620236307451
+            "id": 1620236307451,
+            "language": [
+                "Portuguese"
+            ]
         },
         {
             "name": "British Indian Ocean Territory",
@@ -2766,7 +2880,10 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307452
+            "id": 1620236307452,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "United States Minor Outlying Islands",
@@ -2827,7 +2944,10 @@
             "flag": "https://restcountries.eu/data/umi.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307453
+            "id": 1620236307453,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Virgin Islands (British)",
@@ -2894,7 +3014,10 @@
             "flag": "https://restcountries.eu/data/vgb.svg",
             "regionalBlocs": [],
             "cioc": "IVB",
-            "id": 1620236307454
+            "id": 1620236307454,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Virgin Islands (U.S.)",
@@ -2959,7 +3082,10 @@
             "flag": "https://restcountries.eu/data/vir.svg",
             "regionalBlocs": [],
             "cioc": "ISV",
-            "id": 1620236307455
+            "id": 1620236307455,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Brunei Darussalam",
@@ -3037,7 +3163,10 @@
                 }
             ],
             "cioc": "BRU",
-            "id": 1620236307456
+            "id": 1620236307456,
+            "language": [
+                "Malay"
+            ]
         },
         {
             "name": "Bulgaria",
@@ -3114,7 +3243,10 @@
                 }
             ],
             "cioc": "BUL",
-            "id": 1620236307457
+            "id": 1620236307457,
+            "language": [
+                "Bulgarian"
+            ]
         },
         {
             "name": "Burkina Faso",
@@ -3202,7 +3334,11 @@
                 }
             ],
             "cioc": "BUR",
-            "id": 1620236307458
+            "id": 1620236307458,
+            "language": [
+                "French",
+                "Fula"
+            ]
         },
         {
             "name": "Burundi",
@@ -3290,7 +3426,11 @@
                 }
             ],
             "cioc": "BDI",
-            "id": 1620236307459
+            "id": 1620236307459,
+            "language": [
+                "French",
+                "Kirundi"
+            ]
         },
         {
             "name": "Cambodia",
@@ -3369,7 +3509,10 @@
                 }
             ],
             "cioc": "CAM",
-            "id": 1620236307460
+            "id": 1620236307460,
+            "language": [
+                "Khmer"
+            ]
         },
         {
             "name": "Cameroon",
@@ -3459,7 +3602,11 @@
                 }
             ],
             "cioc": "CMR",
-            "id": 1620236307461
+            "id": 1620236307461,
+            "language": [
+                "English",
+                "French"
+            ]
         },
         {
             "name": "Canada",
@@ -3544,7 +3691,11 @@
                 }
             ],
             "cioc": "CAN",
-            "id": 1620236307462
+            "id": 1620236307462,
+            "language": [
+                "English",
+                "French"
+            ]
         },
         {
             "name": "Cabo Verde",
@@ -3621,7 +3772,10 @@
                 }
             ],
             "cioc": "CPV",
-            "id": 1620236307463
+            "id": 1620236307463,
+            "language": [
+                "Portuguese"
+            ]
         },
         {
             "name": "Cayman Islands",
@@ -3683,7 +3837,10 @@
             "flag": "https://restcountries.eu/data/cym.svg",
             "regionalBlocs": [],
             "cioc": "CAY",
-            "id": 1620236307464
+            "id": 1620236307464,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Central African Republic",
@@ -3773,7 +3930,11 @@
                 }
             ],
             "cioc": "CAF",
-            "id": 1620236307465
+            "id": 1620236307465,
+            "language": [
+                "French",
+                "Sango"
+            ]
         },
         {
             "name": "Chad",
@@ -3864,7 +4025,11 @@
                 }
             ],
             "cioc": "CHA",
-            "id": 1620236307466
+            "id": 1620236307466,
+            "language": [
+                "French",
+                "Arabic"
+            ]
         },
         {
             "name": "Chile",
@@ -3957,7 +4122,10 @@
                 }
             ],
             "cioc": "CHI",
-            "id": 1620236307467
+            "id": 1620236307467,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "China",
@@ -4041,7 +4209,10 @@
             "flag": "https://restcountries.eu/data/chn.svg",
             "regionalBlocs": [],
             "cioc": "CHN",
-            "id": 1620236307468
+            "id": 1620236307468,
+            "language": [
+                "Chinese"
+            ]
         },
         {
             "name": "Christmas Island",
@@ -4104,7 +4275,10 @@
             "flag": "https://restcountries.eu/data/cxr.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307469
+            "id": 1620236307469,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Cocos (Keeling) Islands",
@@ -4168,7 +4342,10 @@
             "flag": "https://restcountries.eu/data/cck.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307470
+            "id": 1620236307470,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Colombia",
@@ -4262,7 +4439,10 @@
                 }
             ],
             "cioc": "COL",
-            "id": 1620236307471
+            "id": 1620236307471,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Comoros",
@@ -4357,7 +4537,11 @@
                 }
             ],
             "cioc": "COM",
-            "id": 1620236307472
+            "id": 1620236307472,
+            "language": [
+                "Arabic",
+                "French"
+            ]
         },
         {
             "name": "Congo",
@@ -4445,7 +4629,11 @@
                 }
             ],
             "cioc": "CGO",
-            "id": 1620236307473
+            "id": 1620236307473,
+            "language": [
+                "French",
+                "Lingala"
+            ]
         },
         {
             "name": "Congo (Democratic Republic of the)",
@@ -4558,7 +4746,14 @@
                 }
             ],
             "cioc": "COD",
-            "id": 1620236307474
+            "id": 1620236307474,
+            "language": [
+                "French",
+                "Lingala",
+                "Kongo",
+                "Swahili",
+                "Luba-Katanga"
+            ]
         },
         {
             "name": "Cook Islands",
@@ -4626,7 +4821,10 @@
             "flag": "https://restcountries.eu/data/cok.svg",
             "regionalBlocs": [],
             "cioc": "COK",
-            "id": 1620236307475
+            "id": 1620236307475,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Costa Rica",
@@ -4704,7 +4902,10 @@
                 }
             ],
             "cioc": "CRC",
-            "id": 1620236307476
+            "id": 1620236307476,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Croatia",
@@ -4782,7 +4983,10 @@
                 }
             ],
             "cioc": "CRO",
-            "id": 1620236307477
+            "id": 1620236307477,
+            "language": [
+                "Croatian"
+            ]
         },
         {
             "name": "Cuba",
@@ -4851,7 +5055,10 @@
             "flag": "https://restcountries.eu/data/cub.svg",
             "regionalBlocs": [],
             "cioc": "CUB",
-            "id": 1620236307478
+            "id": 1620236307478,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Curaçao",
@@ -4930,7 +5137,12 @@
             "flag": "https://restcountries.eu/data/cuw.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307479
+            "id": 1620236307479,
+            "language": [
+                "Dutch",
+                "(Eastern) Punjabi",
+                "English"
+            ]
         },
         {
             "name": "Cyprus",
@@ -5018,7 +5230,12 @@
                 }
             ],
             "cioc": "CYP",
-            "id": 1620236307480
+            "id": 1620236307480,
+            "language": [
+                "Greek (modern)",
+                "Turkish",
+                "Armenian"
+            ]
         },
         {
             "name": "Czech Republic",
@@ -5100,7 +5317,11 @@
                 }
             ],
             "cioc": "CZE",
-            "id": 1620236307481
+            "id": 1620236307481,
+            "language": [
+                "Czech",
+                "Slovak"
+            ]
         },
         {
             "name": "Denmark",
@@ -5178,7 +5399,10 @@
                 }
             ],
             "cioc": "DEN",
-            "id": 1620236307482
+            "id": 1620236307482,
+            "language": [
+                "Danish"
+            ]
         },
         {
             "name": "Djibouti",
@@ -5279,7 +5503,11 @@
                 }
             ],
             "cioc": "DJI",
-            "id": 1620236307483
+            "id": 1620236307483,
+            "language": [
+                "French",
+                "Arabic"
+            ]
         },
         {
             "name": "Dominica",
@@ -5344,7 +5572,10 @@
             "flag": "https://restcountries.eu/data/dma.svg",
             "regionalBlocs": [],
             "cioc": "DMA",
-            "id": 1620236307484
+            "id": 1620236307484,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Dominican Republic",
@@ -5431,7 +5662,10 @@
                 }
             ],
             "cioc": "DOM",
-            "id": 1620236307485
+            "id": 1620236307485,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Ecuador",
@@ -5515,7 +5749,10 @@
                 }
             ],
             "cioc": "ECU",
-            "id": 1620236307486
+            "id": 1620236307486,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Egypt",
@@ -5605,7 +5842,10 @@
                 }
             ],
             "cioc": "EGY",
-            "id": 1620236307487
+            "id": 1620236307487,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "El Salvador",
@@ -5683,7 +5923,10 @@
                 }
             ],
             "cioc": "ESA",
-            "id": 1620236307488
+            "id": 1620236307488,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Equatorial Guinea",
@@ -5771,7 +6014,11 @@
                 }
             ],
             "cioc": "GEQ",
-            "id": 1620236307489
+            "id": 1620236307489,
+            "language": [
+                "Spanish",
+                "French"
+            ]
         },
         {
             "name": "Eritrea",
@@ -5868,7 +6115,12 @@
                 }
             ],
             "cioc": "ERI",
-            "id": 1620236307490
+            "id": 1620236307490,
+            "language": [
+                "Tigrinya",
+                "Arabic",
+                "English"
+            ]
         },
         {
             "name": "Estonia",
@@ -5943,7 +6195,10 @@
                 }
             ],
             "cioc": "EST",
-            "id": 1620236307491
+            "id": 1620236307491,
+            "language": [
+                "Estonian"
+            ]
         },
         {
             "name": "Ethiopia",
@@ -6028,7 +6283,10 @@
                 }
             ],
             "cioc": "ETH",
-            "id": 1620236307492
+            "id": 1620236307492,
+            "language": [
+                "Amharic"
+            ]
         },
         {
             "name": "Falkland Islands (Malvinas)",
@@ -6107,7 +6365,10 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307493
+            "id": 1620236307493,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Faroe Islands",
@@ -6183,7 +6444,10 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307494
+            "id": 1620236307494,
+            "language": [
+                "Faroese"
+            ]
         },
         {
             "name": "Fiji",
@@ -6267,7 +6531,13 @@
             "flag": "https://restcountries.eu/data/fji.svg",
             "regionalBlocs": [],
             "cioc": "FIJ",
-            "id": 1620236307495
+            "id": 1620236307495,
+            "language": [
+                "English",
+                "Fijian",
+                "Hindi",
+                "Urdu"
+            ]
         },
         {
             "name": "Finland",
@@ -6350,7 +6620,11 @@
                 }
             ],
             "cioc": "FIN",
-            "id": 1620236307496
+            "id": 1620236307496,
+            "language": [
+                "Finnish",
+                "Swedish"
+            ]
         },
         {
             "name": "France",
@@ -6441,7 +6715,10 @@
                 }
             ],
             "cioc": "FRA",
-            "id": 1620236307497
+            "id": 1620236307497,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "French Guiana",
@@ -6530,7 +6807,10 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307498
+            "id": 1620236307498,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "French Polynesia",
@@ -6597,7 +6877,10 @@
             "flag": "https://restcountries.eu/data/pyf.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307499
+            "id": 1620236307499,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "French Southern Territories",
@@ -6672,7 +6955,10 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307500
+            "id": 1620236307500,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Gabon",
@@ -6753,7 +7039,10 @@
                 }
             ],
             "cioc": "GAB",
-            "id": 1620236307501
+            "id": 1620236307501,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Gambia",
@@ -6831,7 +7120,10 @@
                 }
             ],
             "cioc": "GAM",
-            "id": 1620236307502
+            "id": 1620236307502,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Georgia",
@@ -6899,7 +7191,10 @@
             "flag": "https://restcountries.eu/data/geo.svg",
             "regionalBlocs": [],
             "cioc": "GEO",
-            "id": 1620236307503
+            "id": 1620236307503,
+            "language": [
+                "Georgian"
+            ]
         },
         {
             "name": "Germany",
@@ -6980,7 +7275,10 @@
                 }
             ],
             "cioc": "GER",
-            "id": 1620236307504
+            "id": 1620236307504,
+            "language": [
+                "German"
+            ]
         },
         {
             "name": "Ghana",
@@ -7059,7 +7357,10 @@
                 }
             ],
             "cioc": "GHA",
-            "id": 1620236307505
+            "id": 1620236307505,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Gibraltar",
@@ -7130,7 +7431,10 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307506
+            "id": 1620236307506,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Greece",
@@ -7207,7 +7511,10 @@
                 }
             ],
             "cioc": "GRE",
-            "id": 1620236307507
+            "id": 1620236307507,
+            "language": [
+                "Greek (modern)"
+            ]
         },
         {
             "name": "Greenland",
@@ -7273,7 +7580,10 @@
             "flag": "https://restcountries.eu/data/grl.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307508
+            "id": 1620236307508,
+            "language": [
+                "Kalaallisut"
+            ]
         },
         {
             "name": "Grenada",
@@ -7346,7 +7656,10 @@
                 }
             ],
             "cioc": "GRN",
-            "id": 1620236307509
+            "id": 1620236307509,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Guadeloupe",
@@ -7409,7 +7722,10 @@
             "flag": "https://restcountries.eu/data/glp.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307510
+            "id": 1620236307510,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Guam",
@@ -7484,7 +7800,12 @@
             "flag": "https://restcountries.eu/data/gum.svg",
             "regionalBlocs": [],
             "cioc": "GUM",
-            "id": 1620236307511
+            "id": 1620236307511,
+            "language": [
+                "English",
+                "Chamorro",
+                "Spanish"
+            ]
         },
         {
             "name": "Guatemala",
@@ -7562,7 +7883,10 @@
                 }
             ],
             "cioc": "GUA",
-            "id": 1620236307512
+            "id": 1620236307512,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Guernsey",
@@ -7637,7 +7961,11 @@
             "flag": "https://restcountries.eu/data/ggy.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307513
+            "id": 1620236307513,
+            "language": [
+                "English",
+                "French"
+            ]
         },
         {
             "name": "Guinea",
@@ -7727,7 +8055,11 @@
                 }
             ],
             "cioc": "GUI",
-            "id": 1620236307514
+            "id": 1620236307514,
+            "language": [
+                "French",
+                "Fula"
+            ]
         },
         {
             "name": "Guinea-Bissau",
@@ -7807,7 +8139,10 @@
                 }
             ],
             "cioc": "GBS",
-            "id": 1620236307515
+            "id": 1620236307515,
+            "language": [
+                "Portuguese"
+            ]
         },
         {
             "name": "Guyana",
@@ -7900,7 +8235,10 @@
                 }
             ],
             "cioc": "GUY",
-            "id": 1620236307516
+            "id": 1620236307516,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Haiti",
@@ -7984,7 +8322,11 @@
                 }
             ],
             "cioc": "HAI",
-            "id": 1620236307517
+            "id": 1620236307517,
+            "language": [
+                "French",
+                "Haitian"
+            ]
         },
         {
             "name": "Heard Island and McDonald Islands",
@@ -8047,7 +8389,10 @@
             "flag": "https://restcountries.eu/data/hmd.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307518
+            "id": 1620236307518,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Holy See",
@@ -8131,7 +8476,13 @@
             "flag": "https://restcountries.eu/data/vat.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307519
+            "id": 1620236307519,
+            "language": [
+                "Latin",
+                "Italian",
+                "French",
+                "German"
+            ]
         },
         {
             "name": "Honduras",
@@ -8210,7 +8561,10 @@
                 }
             ],
             "cioc": "HON",
-            "id": 1620236307520
+            "id": 1620236307520,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Hong Kong",
@@ -8281,7 +8635,11 @@
             "flag": "https://restcountries.eu/data/hkg.svg",
             "regionalBlocs": [],
             "cioc": "HKG",
-            "id": 1620236307521
+            "id": 1620236307521,
+            "language": [
+                "English",
+                "Chinese"
+            ]
         },
         {
             "name": "Hungary",
@@ -8358,7 +8716,10 @@
                 }
             ],
             "cioc": "HUN",
-            "id": 1620236307522
+            "id": 1620236307522,
+            "language": [
+                "Hungarian"
+            ]
         },
         {
             "name": "Iceland",
@@ -8430,7 +8791,10 @@
                 }
             ],
             "cioc": "ISL",
-            "id": 1620236307523
+            "id": 1620236307523,
+            "language": [
+                "Icelandic"
+            ]
         },
         {
             "name": "India",
@@ -8517,7 +8881,11 @@
                 }
             ],
             "cioc": "IND",
-            "id": 1620236307524
+            "id": 1620236307524,
+            "language": [
+                "Hindi",
+                "English"
+            ]
         },
         {
             "name": "Indonesia",
@@ -8594,7 +8962,10 @@
                 }
             ],
             "cioc": "INA",
-            "id": 1620236307525
+            "id": 1620236307525,
+            "language": [
+                "Indonesian"
+            ]
         },
         {
             "name": "Côte d'Ivoire",
@@ -8678,7 +9049,10 @@
                 }
             ],
             "cioc": "CIV",
-            "id": 1620236307527
+            "id": 1620236307527,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Iran (Islamic Republic of)",
@@ -8750,7 +9124,10 @@
             "flag": "https://restcountries.eu/data/irn.svg",
             "regionalBlocs": [],
             "cioc": "IRI",
-            "id": 1620236307528
+            "id": 1620236307528,
+            "language": [
+                "Persian (Farsi)"
+            ]
         },
         {
             "name": "Iraq",
@@ -8838,7 +9215,11 @@
                 }
             ],
             "cioc": "IRQ",
-            "id": 1620236307529
+            "id": 1620236307529,
+            "language": [
+                "Arabic",
+                "Kurdish"
+            ]
         },
         {
             "name": "Ireland",
@@ -8918,7 +9299,11 @@
                 }
             ],
             "cioc": "IRL",
-            "id": 1620236307530
+            "id": 1620236307530,
+            "language": [
+                "Irish",
+                "English"
+            ]
         },
         {
             "name": "Isle of Man",
@@ -9001,7 +9386,11 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307531
+            "id": 1620236307531,
+            "language": [
+                "English",
+                "Manx"
+            ]
         },
         {
             "name": "Israel",
@@ -9076,7 +9465,11 @@
             "flag": "https://restcountries.eu/data/isr.svg",
             "regionalBlocs": [],
             "cioc": "ISR",
-            "id": 1620236307532
+            "id": 1620236307532,
+            "language": [
+                "Hebrew (modern)",
+                "Arabic"
+            ]
         },
         {
             "name": "Italy",
@@ -9154,7 +9547,10 @@
                 }
             ],
             "cioc": "ITA",
-            "id": 1620236307533
+            "id": 1620236307533,
+            "language": [
+                "Italian"
+            ]
         },
         {
             "name": "Jamaica",
@@ -9227,7 +9623,10 @@
                 }
             ],
             "cioc": "JAM",
-            "id": 1620236307534
+            "id": 1620236307534,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Japan",
@@ -9291,7 +9690,10 @@
             "flag": "https://restcountries.eu/data/jpn.svg",
             "regionalBlocs": [],
             "cioc": "JPN",
-            "id": 1620236307535
+            "id": 1620236307535,
+            "language": [
+                "Japanese"
+            ]
         },
         {
             "name": "Jersey",
@@ -9367,7 +9769,11 @@
             "flag": "https://restcountries.eu/data/jey.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307536
+            "id": 1620236307536,
+            "language": [
+                "English",
+                "French"
+            ]
         },
         {
             "name": "Jordan",
@@ -9447,7 +9853,10 @@
                 }
             ],
             "cioc": "JOR",
-            "id": 1620236307537
+            "id": 1620236307537,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "Kazakhstan",
@@ -9540,7 +9949,11 @@
                 }
             ],
             "cioc": "KAZ",
-            "id": 1620236307538
+            "id": 1620236307538,
+            "language": [
+                "Kazakh",
+                "Russian"
+            ]
         },
         {
             "name": "Kenya",
@@ -9629,7 +10042,11 @@
                 }
             ],
             "cioc": "KEN",
-            "id": 1620236307539
+            "id": 1620236307539,
+            "language": [
+                "English",
+                "Swahili"
+            ]
         },
         {
             "name": "Kiribati",
@@ -9700,7 +10117,10 @@
             "flag": "https://restcountries.eu/data/kir.svg",
             "regionalBlocs": [],
             "cioc": "KIR",
-            "id": 1620236307540
+            "id": 1620236307540,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Kuwait",
@@ -9778,7 +10198,10 @@
                 }
             ],
             "cioc": "KUW",
-            "id": 1620236307541
+            "id": 1620236307541,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "Kyrgyzstan",
@@ -9864,7 +10287,11 @@
                 }
             ],
             "cioc": "KGZ",
-            "id": 1620236307542
+            "id": 1620236307542,
+            "language": [
+                "Kyrgyz",
+                "Russian"
+            ]
         },
         {
             "name": "Lao People's Democratic Republic",
@@ -9943,7 +10370,10 @@
                 }
             ],
             "cioc": "LAO",
-            "id": 1620236307543
+            "id": 1620236307543,
+            "language": [
+                "Lao"
+            ]
         },
         {
             "name": "Latvia",
@@ -10019,7 +10449,10 @@
                 }
             ],
             "cioc": "LAT",
-            "id": 1620236307544
+            "id": 1620236307544,
+            "language": [
+                "Latvian"
+            ]
         },
         {
             "name": "Lebanon",
@@ -10103,7 +10536,11 @@
                 }
             ],
             "cioc": "LIB",
-            "id": 1620236307545
+            "id": 1620236307545,
+            "language": [
+                "Arabic",
+                "French"
+            ]
         },
         {
             "name": "Lesotho",
@@ -10193,7 +10630,11 @@
                 }
             ],
             "cioc": "LES",
-            "id": 1620236307546
+            "id": 1620236307546,
+            "language": [
+                "English",
+                "Southern Sotho"
+            ]
         },
         {
             "name": "Liberia",
@@ -10273,7 +10714,10 @@
                 }
             ],
             "cioc": "LBR",
-            "id": 1620236307547
+            "id": 1620236307547,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Libya",
@@ -10367,7 +10811,10 @@
                 }
             ],
             "cioc": "LBA",
-            "id": 1620236307548
+            "id": 1620236307548,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "Liechtenstein",
@@ -10441,7 +10888,10 @@
                 }
             ],
             "cioc": "LIE",
-            "id": 1620236307549
+            "id": 1620236307549,
+            "language": [
+                "German"
+            ]
         },
         {
             "name": "Lithuania",
@@ -10517,7 +10967,10 @@
                 }
             ],
             "cioc": "LTU",
-            "id": 1620236307550
+            "id": 1620236307550,
+            "language": [
+                "Lithuanian"
+            ]
         },
         {
             "name": "Luxembourg",
@@ -10606,7 +11059,12 @@
                 }
             ],
             "cioc": "LUX",
-            "id": 1620236307551
+            "id": 1620236307551,
+            "language": [
+                "French",
+                "German",
+                "Luxembourgish"
+            ]
         },
         {
             "name": "Macao",
@@ -10680,7 +11138,11 @@
             "flag": "https://restcountries.eu/data/mac.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307552
+            "id": 1620236307552,
+            "language": [
+                "Chinese",
+                "Portuguese"
+            ]
         },
         {
             "name": "Macedonia (the former Yugoslav Republic of)",
@@ -10757,7 +11219,10 @@
                 }
             ],
             "cioc": "MKD",
-            "id": 1620236307553
+            "id": 1620236307553,
+            "language": [
+                "Macedonian"
+            ]
         },
         {
             "name": "Madagascar",
@@ -10841,7 +11306,11 @@
                 }
             ],
             "cioc": "MAD",
-            "id": 1620236307554
+            "id": 1620236307554,
+            "language": [
+                "French",
+                "Malagasy"
+            ]
         },
         {
             "name": "Malawi",
@@ -10927,7 +11396,11 @@
                 }
             ],
             "cioc": "MAW",
-            "id": 1620236307555
+            "id": 1620236307555,
+            "language": [
+                "English",
+                "Chichewa"
+            ]
         },
         {
             "name": "Malaysia",
@@ -11000,7 +11473,10 @@
                 }
             ],
             "cioc": "MAS",
-            "id": 1620236307556
+            "id": 1620236307556,
+            "language": [
+                "Malaysian"
+            ]
         },
         {
             "name": "Maldives",
@@ -11072,7 +11548,10 @@
                 }
             ],
             "cioc": "MDV",
-            "id": 1620236307557
+            "id": 1620236307557,
+            "language": [
+                "Divehi"
+            ]
         },
         {
             "name": "Mali",
@@ -11157,7 +11636,10 @@
                 }
             ],
             "cioc": "MLI",
-            "id": 1620236307558
+            "id": 1620236307558,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Malta",
@@ -11234,7 +11716,11 @@
                 }
             ],
             "cioc": "MLT",
-            "id": 1620236307559
+            "id": 1620236307559,
+            "language": [
+                "Maltese",
+                "English"
+            ]
         },
         {
             "name": "Marshall Islands",
@@ -11304,7 +11790,11 @@
             "flag": "https://restcountries.eu/data/mhl.svg",
             "regionalBlocs": [],
             "cioc": "MHL",
-            "id": 1620236307560
+            "id": 1620236307560,
+            "language": [
+                "English",
+                "Marshallese"
+            ]
         },
         {
             "name": "Martinique",
@@ -11366,7 +11856,10 @@
             "flag": "https://restcountries.eu/data/mtq.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307561
+            "id": 1620236307561,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Mauritania",
@@ -11458,7 +11951,10 @@
                 }
             ],
             "cioc": "MTN",
-            "id": 1620236307562
+            "id": 1620236307562,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "Mauritius",
@@ -11535,7 +12031,10 @@
                 }
             ],
             "cioc": "MRI",
-            "id": 1620236307563
+            "id": 1620236307563,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Mayotte",
@@ -11612,7 +12111,10 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307564
+            "id": 1620236307564,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Mexico",
@@ -11701,7 +12203,10 @@
                 }
             ],
             "cioc": "MEX",
-            "id": 1620236307565
+            "id": 1620236307565,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Micronesia (Federated States of)",
@@ -11770,7 +12275,10 @@
             "flag": "https://restcountries.eu/data/fsm.svg",
             "regionalBlocs": [],
             "cioc": "FSM",
-            "id": 1620236307566
+            "id": 1620236307566,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Moldova (Republic of)",
@@ -11844,7 +12352,10 @@
                 }
             ],
             "cioc": "MDA",
-            "id": 1620236307567
+            "id": 1620236307567,
+            "language": [
+                "Romanian"
+            ]
         },
         {
             "name": "Monaco",
@@ -11910,7 +12421,10 @@
             "flag": "https://restcountries.eu/data/mco.svg",
             "regionalBlocs": [],
             "cioc": "MON",
-            "id": 1620236307568
+            "id": 1620236307568,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Mongolia",
@@ -11976,7 +12490,10 @@
             "flag": "https://restcountries.eu/data/mng.svg",
             "regionalBlocs": [],
             "cioc": "MGL",
-            "id": 1620236307569
+            "id": 1620236307569,
+            "language": [
+                "Mongolian"
+            ]
         },
         {
             "name": "Montenegro",
@@ -12070,7 +12587,13 @@
                 }
             ],
             "cioc": "MNE",
-            "id": 1620236307570
+            "id": 1620236307570,
+            "language": [
+                "Serbian",
+                "Bosnian",
+                "Albanian",
+                "Croatian"
+            ]
         },
         {
             "name": "Montserrat",
@@ -12143,7 +12666,10 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307571
+            "id": 1620236307571,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Morocco",
@@ -12234,7 +12760,10 @@
                 }
             ],
             "cioc": "MAR",
-            "id": 1620236307572
+            "id": 1620236307572,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "Mozambique",
@@ -12318,7 +12847,10 @@
                 }
             ],
             "cioc": "MOZ",
-            "id": 1620236307573
+            "id": 1620236307573,
+            "language": [
+                "Portuguese"
+            ]
         },
         {
             "name": "Myanmar",
@@ -12396,7 +12928,10 @@
                 }
             ],
             "cioc": "MYA",
-            "id": 1620236307574
+            "id": 1620236307574,
+            "language": [
+                "Burmese"
+            ]
         },
         {
             "name": "Namibia",
@@ -12489,7 +13024,11 @@
                 }
             ],
             "cioc": "NAM",
-            "id": 1620236307575
+            "id": 1620236307575,
+            "language": [
+                "English",
+                "Afrikaans"
+            ]
         },
         {
             "name": "Nauru",
@@ -12566,7 +13105,11 @@
             "flag": "https://restcountries.eu/data/nru.svg",
             "regionalBlocs": [],
             "cioc": "NRU",
-            "id": 1620236307576
+            "id": 1620236307576,
+            "language": [
+                "English",
+                "Nauruan"
+            ]
         },
         {
             "name": "Nepal",
@@ -12640,7 +13183,10 @@
                 }
             ],
             "cioc": "NEP",
-            "id": 1620236307577
+            "id": 1620236307577,
+            "language": [
+                "Nepali"
+            ]
         },
         {
             "name": "Netherlands",
@@ -12715,7 +13261,10 @@
                 }
             ],
             "cioc": "NED",
-            "id": 1620236307578
+            "id": 1620236307578,
+            "language": [
+                "Dutch"
+            ]
         },
         {
             "name": "New Caledonia",
@@ -12777,7 +13326,10 @@
             "flag": "https://restcountries.eu/data/ncl.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307579
+            "id": 1620236307579,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "New Zealand",
@@ -12850,7 +13402,11 @@
             "flag": "https://restcountries.eu/data/nzl.svg",
             "regionalBlocs": [],
             "cioc": "NZL",
-            "id": 1620236307580
+            "id": 1620236307580,
+            "language": [
+                "English",
+                "Māori"
+            ]
         },
         {
             "name": "Nicaragua",
@@ -12928,7 +13484,10 @@
                 }
             ],
             "cioc": "NCA",
-            "id": 1620236307581
+            "id": 1620236307581,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Niger",
@@ -13014,7 +13573,10 @@
                 }
             ],
             "cioc": "NIG",
-            "id": 1620236307582
+            "id": 1620236307582,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Nigeria",
@@ -13097,7 +13659,10 @@
                 }
             ],
             "cioc": "NGR",
-            "id": 1620236307583
+            "id": 1620236307583,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Niue",
@@ -13164,7 +13729,10 @@
             "flag": "https://restcountries.eu/data/niu.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307584
+            "id": 1620236307584,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Norfolk Island",
@@ -13228,7 +13796,10 @@
             "flag": "https://restcountries.eu/data/nfk.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307585
+            "id": 1620236307585,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Korea (Democratic People's Republic of)",
@@ -13297,7 +13868,10 @@
             "flag": "https://restcountries.eu/data/prk.svg",
             "regionalBlocs": [],
             "cioc": "PRK",
-            "id": 1620236307586
+            "id": 1620236307586,
+            "language": [
+                "Korean"
+            ]
         },
         {
             "name": "Northern Mariana Islands",
@@ -13367,7 +13941,11 @@
             "flag": "https://restcountries.eu/data/mnp.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307587
+            "id": 1620236307587,
+            "language": [
+                "English",
+                "Chamorro"
+            ]
         },
         {
             "name": "Norway",
@@ -13457,7 +14035,12 @@
                 }
             ],
             "cioc": "NOR",
-            "id": 1620236307588
+            "id": 1620236307588,
+            "language": [
+                "Norwegian",
+                "Norwegian Bokmål",
+                "Norwegian Nynorsk"
+            ]
         },
         {
             "name": "Oman",
@@ -13536,7 +14119,10 @@
                 }
             ],
             "cioc": "OMA",
-            "id": 1620236307589
+            "id": 1620236307589,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "Pakistan",
@@ -13619,7 +14205,11 @@
                 }
             ],
             "cioc": "PAK",
-            "id": 1620236307590
+            "id": 1620236307590,
+            "language": [
+                "English",
+                "Urdu"
+            ]
         },
         {
             "name": "Palau",
@@ -13688,7 +14278,10 @@
             "flag": "https://restcountries.eu/data/plw.svg",
             "regionalBlocs": [],
             "cioc": "PLW",
-            "id": 1620236307591
+            "id": 1620236307591,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Palestine, State of",
@@ -13767,7 +14360,10 @@
                 }
             ],
             "cioc": "PLE",
-            "id": 1620236307592
+            "id": 1620236307592,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "Panama",
@@ -13850,7 +14446,10 @@
                 }
             ],
             "cioc": "PAN",
-            "id": 1620236307593
+            "id": 1620236307593,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Papua New Guinea",
@@ -13916,7 +14515,10 @@
             "flag": "https://restcountries.eu/data/png.svg",
             "regionalBlocs": [],
             "cioc": "PNG",
-            "id": 1620236307594
+            "id": 1620236307594,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Paraguay",
@@ -14007,7 +14609,11 @@
                 }
             ],
             "cioc": "PAR",
-            "id": 1620236307595
+            "id": 1620236307595,
+            "language": [
+                "Spanish",
+                "Guaraní"
+            ]
         },
         {
             "name": "Peru",
@@ -14101,7 +14707,10 @@
                 }
             ],
             "cioc": "PER",
-            "id": 1620236307596
+            "id": 1620236307596,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Philippines",
@@ -14172,7 +14781,10 @@
                 }
             ],
             "cioc": "PHI",
-            "id": 1620236307597
+            "id": 1620236307597,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Pitcairn",
@@ -14240,7 +14852,10 @@
             "flag": "https://restcountries.eu/data/pcn.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307598
+            "id": 1620236307598,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Poland",
@@ -14319,7 +14934,10 @@
                 }
             ],
             "cioc": "POL",
-            "id": 1620236307599
+            "id": 1620236307599,
+            "language": [
+                "Polish"
+            ]
         },
         {
             "name": "Portugal",
@@ -14394,7 +15012,10 @@
                 }
             ],
             "cioc": "POR",
-            "id": 1620236307600
+            "id": 1620236307600,
+            "language": [
+                "Portuguese"
+            ]
         },
         {
             "name": "Puerto Rico",
@@ -14465,7 +15086,11 @@
             "flag": "https://restcountries.eu/data/pri.svg",
             "regionalBlocs": [],
             "cioc": "PUR",
-            "id": 1620236307601
+            "id": 1620236307601,
+            "language": [
+                "Spanish",
+                "English"
+            ]
         },
         {
             "name": "Qatar",
@@ -14542,7 +15167,10 @@
                 }
             ],
             "cioc": "QAT",
-            "id": 1620236307602
+            "id": 1620236307602,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "Republic of Kosovo",
@@ -14623,7 +15251,11 @@
                 }
             ],
             "cioc": null,
-            "id": 1620236307603
+            "id": 1620236307603,
+            "language": [
+                "Albanian",
+                "Serbian"
+            ]
         },
         {
             "name": "Réunion",
@@ -14699,7 +15331,10 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307604
+            "id": 1620236307604,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Romania",
@@ -14777,7 +15412,10 @@
                 }
             ],
             "cioc": "ROU",
-            "id": 1620236307605
+            "id": 1620236307605,
+            "language": [
+                "Romanian"
+            ]
         },
         {
             "name": "Russian Federation",
@@ -14875,7 +15513,10 @@
                 }
             ],
             "cioc": "RUS",
-            "id": 1620236307606
+            "id": 1620236307606,
+            "language": [
+                "Russian"
+            ]
         },
         {
             "name": "Rwanda",
@@ -14970,7 +15611,12 @@
                 }
             ],
             "cioc": "RWA",
-            "id": 1620236307607
+            "id": 1620236307607,
+            "language": [
+                "Kinyarwanda",
+                "English",
+                "French"
+            ]
         },
         {
             "name": "Saint Barthélemy",
@@ -15035,7 +15681,10 @@
             "flag": "https://restcountries.eu/data/blm.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307608
+            "id": 1620236307608,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Saint Helena, Ascension and Tristan da Cunha",
@@ -15110,7 +15759,10 @@
                 }
             ],
             "cioc": null,
-            "id": 1620236307609
+            "id": 1620236307609,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Saint Kitts and Nevis",
@@ -15184,7 +15836,10 @@
                 }
             ],
             "cioc": "SKN",
-            "id": 1620236307610
+            "id": 1620236307610,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Saint Lucia",
@@ -15257,7 +15912,10 @@
                 }
             ],
             "cioc": "LCA",
-            "id": 1620236307611
+            "id": 1620236307611,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Saint Martin (French part)",
@@ -15338,7 +15996,12 @@
             "flag": "https://restcountries.eu/data/maf.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307612
+            "id": 1620236307612,
+            "language": [
+                "English",
+                "French",
+                "Dutch"
+            ]
         },
         {
             "name": "Saint Pierre and Miquelon",
@@ -15401,7 +16064,10 @@
             "flag": "https://restcountries.eu/data/spm.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307613
+            "id": 1620236307613,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Saint Vincent and the Grenadines",
@@ -15474,7 +16140,10 @@
                 }
             ],
             "cioc": "VIN",
-            "id": 1620236307614
+            "id": 1620236307614,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Samoa",
@@ -15544,7 +16213,11 @@
             "flag": "https://restcountries.eu/data/wsm.svg",
             "regionalBlocs": [],
             "cioc": "SAM",
-            "id": 1620236307615
+            "id": 1620236307615,
+            "language": [
+                "Samoan",
+                "English"
+            ]
         },
         {
             "name": "San Marino",
@@ -15610,7 +16283,10 @@
             "flag": "https://restcountries.eu/data/smr.svg",
             "regionalBlocs": [],
             "cioc": "SMR",
-            "id": 1620236307616
+            "id": 1620236307616,
+            "language": [
+                "Italian"
+            ]
         },
         {
             "name": "Sao Tome and Principe",
@@ -15687,7 +16363,10 @@
                 }
             ],
             "cioc": "STP",
-            "id": 1620236307617
+            "id": 1620236307617,
+            "language": [
+                "Portuguese"
+            ]
         },
         {
             "name": "Saudi Arabia",
@@ -15770,7 +16449,10 @@
                 }
             ],
             "cioc": "KSA",
-            "id": 1620236307618
+            "id": 1620236307618,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "Senegal",
@@ -15853,7 +16535,10 @@
                 }
             ],
             "cioc": "SEN",
-            "id": 1620236307619
+            "id": 1620236307619,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Serbia",
@@ -15935,7 +16620,10 @@
                 }
             ],
             "cioc": "SRB",
-            "id": 1620236307620
+            "id": 1620236307620,
+            "language": [
+                "Serbian"
+            ]
         },
         {
             "name": "Seychelles",
@@ -16019,7 +16707,11 @@
                 }
             ],
             "cioc": "SEY",
-            "id": 1620236307621
+            "id": 1620236307621,
+            "language": [
+                "French",
+                "English"
+            ]
         },
         {
             "name": "Sierra Leone",
@@ -16098,7 +16790,10 @@
                 }
             ],
             "cioc": "SLE",
-            "id": 1620236307622
+            "id": 1620236307622,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Singapore",
@@ -16193,7 +16888,13 @@
                 }
             ],
             "cioc": "SIN",
-            "id": 1620236307623
+            "id": 1620236307623,
+            "language": [
+                "English",
+                "Malay",
+                "Tamil",
+                "Chinese"
+            ]
         },
         {
             "name": "Sint Maarten (Dutch part)",
@@ -16263,7 +16964,11 @@
             "flag": "https://restcountries.eu/data/sxm.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307624
+            "id": 1620236307624,
+            "language": [
+                "Dutch",
+                "English"
+            ]
         },
         {
             "name": "Slovakia",
@@ -16340,7 +17045,10 @@
                 }
             ],
             "cioc": "SVK",
-            "id": 1620236307625
+            "id": 1620236307625,
+            "language": [
+                "Slovak"
+            ]
         },
         {
             "name": "Slovenia",
@@ -16416,7 +17124,10 @@
                 }
             ],
             "cioc": "SLO",
-            "id": 1620236307626
+            "id": 1620236307626,
+            "language": [
+                "Slovene"
+            ]
         },
         {
             "name": "Solomon Islands",
@@ -16478,7 +17189,10 @@
             "flag": "https://restcountries.eu/data/slb.svg",
             "regionalBlocs": [],
             "cioc": "SOL",
-            "id": 1620236307627
+            "id": 1620236307627,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Somalia",
@@ -16577,7 +17291,11 @@
                 }
             ],
             "cioc": "SOM",
-            "id": 1620236307628
+            "id": 1620236307628,
+            "language": [
+                "Somali",
+                "Arabic"
+            ]
         },
         {
             "name": "South Africa",
@@ -16716,7 +17434,19 @@
                 }
             ],
             "cioc": "RSA",
-            "id": 1620236307629
+            "id": 1620236307629,
+            "language": [
+                "Afrikaans",
+                "English",
+                "Southern Ndebele",
+                "Southern Sotho",
+                "Swati",
+                "Tswana",
+                "Tsonga",
+                "Venda",
+                "Xhosa",
+                "Zulu"
+            ]
         },
         {
             "name": "South Georgia and the South Sandwich Islands",
@@ -16800,7 +17530,10 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307630
+            "id": 1620236307630,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Korea (Republic of)",
@@ -16865,7 +17598,10 @@
             "flag": "https://restcountries.eu/data/kor.svg",
             "regionalBlocs": [],
             "cioc": "KOR",
-            "id": 1620236307631
+            "id": 1620236307631,
+            "language": [
+                "Korean"
+            ]
         },
         {
             "name": "South Sudan",
@@ -16947,7 +17683,10 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307632
+            "id": 1620236307632,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Spain",
@@ -17025,7 +17764,10 @@
                 }
             ],
             "cioc": "ESP",
-            "id": 1620236307633
+            "id": 1620236307633,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Sri Lanka",
@@ -17104,7 +17846,11 @@
                 }
             ],
             "cioc": "SRI",
-            "id": 1620236307634
+            "id": 1620236307634,
+            "language": [
+                "Sinhalese",
+                "Tamil"
+            ]
         },
         {
             "name": "Sudan",
@@ -17205,7 +17951,11 @@
                 }
             ],
             "cioc": "SUD",
-            "id": 1620236307635
+            "id": 1620236307635,
+            "language": [
+                "Arabic",
+                "English"
+            ]
         },
         {
             "name": "Suriname",
@@ -17302,7 +18052,10 @@
                 }
             ],
             "cioc": "SUR",
-            "id": 1620236307636
+            "id": 1620236307636,
+            "language": [
+                "Dutch"
+            ]
         },
         {
             "name": "Svalbard and Jan Mayen",
@@ -17365,7 +18118,10 @@
             "flag": "https://restcountries.eu/data/sjm.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307637
+            "id": 1620236307637,
+            "language": [
+                "Norwegian"
+            ]
         },
         {
             "name": "Swaziland",
@@ -17454,7 +18210,11 @@
                 }
             ],
             "cioc": "SWZ",
-            "id": 1620236307638
+            "id": 1620236307638,
+            "language": [
+                "English",
+                "Swati"
+            ]
         },
         {
             "name": "Sweden",
@@ -17528,7 +18288,10 @@
                 }
             ],
             "cioc": "SWE",
-            "id": 1620236307639
+            "id": 1620236307639,
+            "language": [
+                "Swedish"
+            ]
         },
         {
             "name": "Switzerland",
@@ -17620,7 +18383,12 @@
                 }
             ],
             "cioc": "SUI",
-            "id": 1620236307640
+            "id": 1620236307640,
+            "language": [
+                "German",
+                "French",
+                "Italian"
+            ]
         },
         {
             "name": "Syrian Arab Republic",
@@ -17701,7 +18469,10 @@
                 }
             ],
             "cioc": "SYR",
-            "id": 1620236307641
+            "id": 1620236307641,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "Taiwan",
@@ -17767,7 +18538,10 @@
             "flag": "https://restcountries.eu/data/twn.svg",
             "regionalBlocs": [],
             "cioc": "TPE",
-            "id": 1620236307642
+            "id": 1620236307642,
+            "language": [
+                "Chinese"
+            ]
         },
         {
             "name": "Tajikistan",
@@ -17844,7 +18618,11 @@
             "flag": "https://restcountries.eu/data/tjk.svg",
             "regionalBlocs": [],
             "cioc": "TJK",
-            "id": 1620236307643
+            "id": 1620236307643,
+            "language": [
+                "Tajik",
+                "Russian"
+            ]
         },
         {
             "name": "Tanzania, United Republic of",
@@ -17936,7 +18714,11 @@
                 }
             ],
             "cioc": "TAN",
-            "id": 1620236307644
+            "id": 1620236307644,
+            "language": [
+                "Swahili",
+                "English"
+            ]
         },
         {
             "name": "Thailand",
@@ -18015,7 +18797,10 @@
                 }
             ],
             "cioc": "THA",
-            "id": 1620236307645
+            "id": 1620236307645,
+            "language": [
+                "Thai"
+            ]
         },
         {
             "name": "Timor-Leste",
@@ -18088,7 +18873,10 @@
             "flag": "https://restcountries.eu/data/tls.svg",
             "regionalBlocs": [],
             "cioc": "TLS",
-            "id": 1620236307646
+            "id": 1620236307646,
+            "language": [
+                "Portuguese"
+            ]
         },
         {
             "name": "Togo",
@@ -18170,7 +18958,10 @@
                 }
             ],
             "cioc": "TOG",
-            "id": 1620236307647
+            "id": 1620236307647,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Tokelau",
@@ -18232,7 +19023,10 @@
             "flag": "https://restcountries.eu/data/tkl.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307648
+            "id": 1620236307648,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Tonga",
@@ -18300,7 +19094,11 @@
             "flag": "https://restcountries.eu/data/ton.svg",
             "regionalBlocs": [],
             "cioc": "TGA",
-            "id": 1620236307649
+            "id": 1620236307649,
+            "language": [
+                "English",
+                "Tonga (Tonga Islands)"
+            ]
         },
         {
             "name": "Trinidad and Tobago",
@@ -18374,7 +19172,10 @@
                 }
             ],
             "cioc": "TTO",
-            "id": 1620236307650
+            "id": 1620236307650,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Tunisia",
@@ -18464,7 +19265,10 @@
                 }
             ],
             "cioc": "TUN",
-            "id": 1620236307651
+            "id": 1620236307651,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "Turkey",
@@ -18538,7 +19342,10 @@
             "flag": "https://restcountries.eu/data/tur.svg",
             "regionalBlocs": [],
             "cioc": "TUR",
-            "id": 1620236307652
+            "id": 1620236307652,
+            "language": [
+                "Turkish"
+            ]
         },
         {
             "name": "Turkmenistan",
@@ -18611,7 +19418,11 @@
             "flag": "https://restcountries.eu/data/tkm.svg",
             "regionalBlocs": [],
             "cioc": "TKM",
-            "id": 1620236307653
+            "id": 1620236307653,
+            "language": [
+                "Turkmen",
+                "Russian"
+            ]
         },
         {
             "name": "Turks and Caicos Islands",
@@ -18673,7 +19484,10 @@
             "flag": "https://restcountries.eu/data/tca.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307654
+            "id": 1620236307654,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Tuvalu",
@@ -18740,7 +19554,10 @@
             "flag": "https://restcountries.eu/data/tuv.svg",
             "regionalBlocs": [],
             "cioc": "TUV",
-            "id": 1620236307655
+            "id": 1620236307655,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Uganda",
@@ -18829,7 +19646,11 @@
                 }
             ],
             "cioc": "UGA",
-            "id": 1620236307656
+            "id": 1620236307656,
+            "language": [
+                "English",
+                "Swahili"
+            ]
         },
         {
             "name": "Ukraine",
@@ -18900,7 +19721,10 @@
             "flag": "https://restcountries.eu/data/ukr.svg",
             "regionalBlocs": [],
             "cioc": "UKR",
-            "id": 1620236307657
+            "id": 1620236307657,
+            "language": [
+                "Ukrainian"
+            ]
         },
         {
             "name": "United Arab Emirates",
@@ -18977,7 +19801,10 @@
                 }
             ],
             "cioc": "UAE",
-            "id": 1620236307658
+            "id": 1620236307658,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "United Kingdom of Great Britain and Northern Ireland",
@@ -19058,7 +19885,10 @@
                 }
             ],
             "cioc": "GBR",
-            "id": 1620236307659
+            "id": 1620236307659,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "United States of America",
@@ -19145,7 +19975,10 @@
                 }
             ],
             "cioc": "USA",
-            "id": 1620236307660
+            "id": 1620236307660,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Uruguay",
@@ -19228,7 +20061,10 @@
                 }
             ],
             "cioc": "URU",
-            "id": 1620236307661
+            "id": 1620236307661,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Uzbekistan",
@@ -19305,7 +20141,11 @@
             "flag": "https://restcountries.eu/data/uzb.svg",
             "regionalBlocs": [],
             "cioc": "UZB",
-            "id": 1620236307662
+            "id": 1620236307662,
+            "language": [
+                "Uzbek",
+                "Russian"
+            ]
         },
         {
             "name": "Vanuatu",
@@ -19382,7 +20222,12 @@
             "flag": "https://restcountries.eu/data/vut.svg",
             "regionalBlocs": [],
             "cioc": "VAN",
-            "id": 1620236307663
+            "id": 1620236307663,
+            "language": [
+                "Bislama",
+                "English",
+                "French"
+            ]
         },
         {
             "name": "Venezuela (Bolivarian Republic of)",
@@ -19466,7 +20311,10 @@
                 }
             ],
             "cioc": "VEN",
-            "id": 1620236307664
+            "id": 1620236307664,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Viet Nam",
@@ -19541,7 +20389,10 @@
                 }
             ],
             "cioc": "VIE",
-            "id": 1620236307665
+            "id": 1620236307665,
+            "language": [
+                "Vietnamese"
+            ]
         },
         {
             "name": "Wallis and Futuna",
@@ -19605,7 +20456,10 @@
             "flag": "https://restcountries.eu/data/wlf.svg",
             "regionalBlocs": [],
             "cioc": "",
-            "id": 1620236307666
+            "id": 1620236307666,
+            "language": [
+                "French"
+            ]
         },
         {
             "name": "Western Sahara",
@@ -19690,7 +20544,10 @@
                 }
             ],
             "cioc": "",
-            "id": 1620236307667
+            "id": 1620236307667,
+            "language": [
+                "Spanish"
+            ]
         },
         {
             "name": "Yemen",
@@ -19768,7 +20625,10 @@
                 }
             ],
             "cioc": "YEM",
-            "id": 1620236307668
+            "id": 1620236307668,
+            "language": [
+                "Arabic"
+            ]
         },
         {
             "name": "Zambia",
@@ -19853,7 +20713,10 @@
                 }
             ],
             "cioc": "ZAM",
-            "id": 1620236307669
+            "id": 1620236307669,
+            "language": [
+                "English"
+            ]
         },
         {
             "name": "Zimbabwe",
@@ -19986,7 +20849,12 @@
                 }
             ],
             "cioc": "ZIM",
-            "id": 1620236307670
+            "id": 1620236307670,
+            "language": [
+                "English",
+                "Shona",
+                "Northern Ndebele"
+            ]
         }
     ]
 }

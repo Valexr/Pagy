@@ -1,18 +1,15 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import cookie from "cookie";
-import { db } from "$lib/db"
-
-const users = db('users')
-const sessions = db('sessions')
+import DB from "$lib/db"
 
 
 export default async function (req, res, next) {
     try {
         const { username, password, remember } = req.body;
 
-        await users.read()
-        const user = users.data.items.find(i => i.username === username)
+        const USERS = await DB.connect('users')
+        const user = USERS.one({ username })
         if (!user) { return res.error(400, "User not found") }
 
         const pass = await bcrypt.compare(password, user.password);
@@ -35,12 +32,12 @@ export default async function (req, res, next) {
         }
         if (!token.access.length || !token.refresh.length) { return res.error(401, "Bad tokens"); }
 
-        const session = { id, username, remember, ...token, exp, ip, ua }
+        const session = { id, username, remember, ...token, exp, ip, ua, date: new Date() }
 
         if (session) {
-            await sessions.read()
-            sessions.data.items.filter(o => o.username !== session.username).push(session)
-            await sessions.write()
+
+            const SESSIONS = await DB.connect('sessions')
+            await SESSIONS.replace({ username }, session)
 
             if (remember) {
                 const cookie_token = jwt.sign({ id: user.id, pass: bcrypt.hashSync(user.password, 9) }, process.env.JWT_SECRET, {

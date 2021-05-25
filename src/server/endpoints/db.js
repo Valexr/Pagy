@@ -1,13 +1,9 @@
-import { db } from "$lib/db"
-import { omatch, osome } from '$lib/utils'
+import DB from "$lib/db"
 
-let base, table, pattern = '/:base/:table'
+let base, pattern = '/:base/:table'
 
-async function connect(req, res, next) {
-    base = db(req.params.base)
-    await base.read()
-    table = req.params.table
-    // const { items } = base.data
+async function connect(req, _res, next) {
+    base = await DB.connect(req.params.base, req.params.table)
     next()
 }
 
@@ -20,48 +16,49 @@ export default function (app) {
         const all = req.params.table === 'all'
 
         if (hasquery) {
-            const items =
-                req.query.id
-                    ? base.data[table].find(i => i.id === +req.query.id)
-                    : req.query.q
-                        ? base.data[table].filter(o => osome(o, req.query.q))
-                        : base.data[table].filter(o => omatch(o, req.query))
-            res.json(items)
+            const filters = base.filters(req.query)
+            const items = req.query.q
+                ? base.search(req.query.q)
+                : base.match(req.query)
+            req.query.id
+                ? res.json(base.id(req.query.id))
+                : res.json({ items, filters })
 
         } else if (all) {
-            // await base.read()
-            res.json(base.data.filters.role)
+            res.json(base.data)
 
         } else {
-            // const items = table
-            res.json(base.data[table])
+            res.json(base.table)
         }
     })
 
-    app.post(pattern, async (req, res, next) => {
+    app.post(pattern, async (req, res, _next) => {
         const meta = { id: Date.now(), create: Date.now(), update: Date.now(), role: req.query.role }
-        base.data[table].push({ ...req.body, ...meta })
-        await base.write()
-        res.json(base.data[table])
+        await base.insert({ ...req.body, ...meta })
+        const items = base.match(req.query)
+        res.json(items)
     })
 
-    app.put(pattern, async (req, res, next) => {
+    app.put(pattern, async (req, res, _next) => {
         const meta = { ...req.body, update: Date.now() }
-        base.data[table].forEach(i => i.id === +req.query.id && Object.assign(i, meta))
-        await base.write()
-        res.json(base.data[table])
+        await base.update(req.query.id, meta)
+        const items = base.match(req.query)
+        res.json(items)
     })
 
-    app.patch(pattern, async (req, res, next) => {
-        fn = req.query.patch
+    app.patch(pattern, async (req, _res, next) => {
+        base.path(req.query.patch)
+        await base.write()
+        next()
     })
 
-    app.delete(pattern, async (req, res) => {
-        base.data[table] = req.query.prop
-            ? base.data[table].forEach(o => delete o[req.query.prop])
-            : base.data[table].filter(o => !omatch(o, req.query))
-        await base.write()
-        res.json(base.data[table])
+    app.delete(pattern, async (req, res, _next) => {
+        req.query.prop
+            ? await base.deleteprop(req.query.prop)
+            : await base.delete(req.query)
+        delete req.query.id
+        const items = base.match(req.query)
+        res.json(items)
     })
 
 }

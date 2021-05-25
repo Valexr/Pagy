@@ -9,12 +9,12 @@
     // import { Table } from "svelte-tabular-table";
     // import { TableCmps } from "@cmp";
 
-    $: if ($fragment !== "sidebar" && !$query.params.id)
-        $query.params.role && getItems($query.params.role);
+    $: getData($query);
 
-    async function getItems() {
-        $items = db.get(`/users/items${$query.split("&id")[0]}`);
-        $filters = await db.get("/users/filters");
+    async function getData(q) {
+        const res = await db.get(`/users/items${q.split("&id")[0]}`);
+        $items = res.items;
+        $filters = res.filters;
         const all = await db.get("/users/all");
         console.log(all);
     }

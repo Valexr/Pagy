@@ -18,8 +18,7 @@ async function patch(url, payload) {
 }
 
 async function del(url) {
-    await fetch(url, { method: "DELETE" })
-    return get(url.split("&id")[0])
+    return fetch(url, { method: "DELETE" })
 }
 
 export { get, add, set, patch, del }

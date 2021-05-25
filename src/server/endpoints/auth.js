@@ -1,4 +1,4 @@
-import cookie from "$lib/cookie";
+import cookie from "$EP/cookie";
 import login from "$EP/login";
 import refresh from "$EP/refresh";
 import os from 'os'

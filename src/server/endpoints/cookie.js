@@ -1,9 +1,6 @@
 import cookie from "cookie";
 import jwt from "jsonwebtoken";
-import { db } from "$lib/db"
-
-const users = db('users')
-const sessions = db('sessions')
+import DB from "$lib/db"
 
 export default async function (req, res, next) {
     console.log(req.headers.cookie)
@@ -11,12 +8,13 @@ export default async function (req, res, next) {
         try {
             const cookies = cookie.parse(req.headers.cookie)
             const verified = jwt.verify(cookies.sid, process.env.JWT_SECRET);
+
             if (verified) {
-                await users.read()
-                const user = users.data.items.find(i => i.id === verified.id)
+                const USERS = await DB.connect('users')
+                const user = USERS.id(verified.id)
                 const pass = await bcrypt.compare(user.password, verified.pass)
                 if (!pass) { return res.error(401, "Bad password"); }
-                console.log('cookies: ', cookies, verified, user)
+                // console.log('cookies: ', cookies, verified, user)
                 res.json(user)
             }
 

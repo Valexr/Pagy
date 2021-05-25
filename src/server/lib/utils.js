@@ -34,13 +34,18 @@ export function okey(o, k) {
 
 }
 
+function oparse(v) {
+    return JSON.stringify(v).replace(/"|{|}|\[|]/g, "").split(',').map((b) => b.split(':')[1])
+}
+function sparse(v) { return v.toString().split(',') }
+
 export function omatch(o, q) {
     const match = Object.entries(o).map(([k, v]) => {
         if (k in q) {
-            // console.log(JSON.stringify(v))
+            // console.log(q[k] + ': ', typeof v)
             const
                 qa = q[k].split(','),
-                va = v.toString().split(','),
+                va = typeof v === 'string' || 'number' || v.length ? sparse(v) : oparse(v),
                 m = adiff(qa, va)
             return m
         }
@@ -63,4 +68,57 @@ export function osome(o, q) {
         const compare = (o, q) => JSON.stringify(o).toLowerCase().includes(q.toLowerCase())
         return q.includes(',') ? qa.some(q => compare(oa, q.trim())) : qa.every(q => compare(o, q))
     }
+}
+
+export function group(arr, keys) {
+    return arr.reduce((storage, item) => {
+        const objKey = keys.map((key) => `${item[key]}`).join(":"); //should be some unique delimiter that wont appear in your keys
+        if (storage[objKey]) {
+            storage[objKey].push(item);
+        } else {
+            storage[objKey] = [item];
+        }
+        return storage;
+    }, {});
+}
+
+export async function filters(q) {
+    const itms = await db.get(`/locales/items`);
+    const fltrs = await db.get(`/locales/filters`);
+    const diff = () => {
+        return q.includes("&q") ? "&q" : "&id";
+    };
+    const query = q.split(diff())[0];
+    console.log(query);
+    function getQuery(i) {
+        return query.split("&").slice(0, [i]).join("&");
+    }
+    const filters = await Object.keys(q.params)
+        .filter((q) => q !== "q" && q !== "id")
+        .reduce(async (acc, k, i) => {
+            const items = await db.get(`/locales/items${getQuery(i)}`);
+            console.log(
+                k,
+                fltrs,
+                itms,
+                Object.entries(fltrs)
+                    .map(([key, val]) => {
+                        if (
+                            key === k
+                            // && itms.some((it) => it[key].includes(val))
+                        )
+                            return val;
+                    })
+                    .filter(Boolean)
+                    .flat(),
+                items
+            );
+            const vals = Object.keys(group(items, [k])).filter(Boolean);
+            const a = await acc;
+            const val = [...new Set(`${vals}`.split(",").sort())];
+            return { ...a, [k]: val };
+        }, Promise.resolve({}));
+
+    console.log("filters:", filters, "query: ", getQuery(3));
+    return filters;
 }

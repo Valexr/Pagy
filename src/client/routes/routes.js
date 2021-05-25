@@ -1,14 +1,5 @@
 import { readable, writable, derived, get } from 'svelte/store';
-import {
-    url,
-    path,
-    query,
-    pattern,
-    fragment,
-    state,
-    click,
-    goto,
-} from "svelte-pathfinder";
+import { pattern } from "svelte-pathfinder";
 import { session, refresh } from "@api/auth";
 
 export const routes = readable([
@@ -64,7 +55,7 @@ export const routes = readable([
     },
     {
         match: '/:lang/locales',
-        default: '/locales?region=Europe',
+        default: '/locales?region=Europe&subregion=Northern Europe&language=English',
         alias: 'locales',
         menu: true,
         navbar: true,
@@ -104,38 +95,11 @@ export const routes = readable([
 
 export const page = derived([routes, pattern], ([$routes, $pattern]) => $routes.find((route) => $pattern(route.match)) || null)
 
-// export const history = derived([page, history, url], ([$page, $history, $url]) => $history[$page.alias] = $url)
-
 export const history = writable(JSON.parse(sessionStorage.getItem("history")) || { lang: 'en' });
 history.subscribe(val => sessionStorage.setItem("history", JSON.stringify(val)));
 
-export const authed = derived(
-    [session, page],
-    ([$session, $page], set) => {
-        if ($session.access) {
-            const refreshable = $session.refresh && $session.refresh !== "undefined"
-            if (refreshable) {
-                set(true)
-            }
-            else {
-                set(false)
-            }
-            // if (!$session.isValid && refreshable) {
-            //     refresh().then((res) => {
-            //         const { status, user } = res;
-            //         switch (status) {
-            //             case 401:
-            //                 set(false)
-            //                 break;
-            //             case 200:
-            //                 set(true)
-            //                 break;
-            //         }
-            //     })
-            // } else if ($session.isValid && refreshable) {
-            //     set(true)
-            // } else if (!$session.isValid && !refreshable) (
-            //     set(false)
-            // )
-        } else set(false)
-    }, false);
+export const authed = derived(session, ($session, set) => {
+    if ($session.access) {
+        set($session.refresh ? true : false)
+    } else set(false)
+}, false);

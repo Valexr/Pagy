@@ -7,17 +7,14 @@
     import { media } from "svelte-match-media";
     import { items, filters } from "@stores/store";
 
-    onMount(async () => {
-        $filters = await db.get("/pages/filters");
-        // db.del(`pages/items${$query}&prop=undefined`);
-        // pages.del("items", "?prop=sq");
-        // pages.patch("items", "", "?patch=sq");
-    });
+    $: getData($query);
 
-    async function get() {
-        $items = await db.get(`/pages/items${$query.split("&id")[0]}`);
+    async function getData(q) {
+        const res = await db.get(`/pages/items${q.split("&id")[0]}`);
+        console.log(res);
+        $items = res.items;
+        $filters = res.filters;
     }
-    $: get($query);
 
     function editPage(page) {
         $query.params.id = page.id;

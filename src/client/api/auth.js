@@ -5,6 +5,20 @@ const base = '/api/v1/auth'
 export const session = writable(JSON.parse(sessionStorage.getItem('session')) || {});
 session.subscribe(val => sessionStorage.session = JSON.stringify(val));
 
+// export const authed = derived(
+//     [session],
+//     ([$session], set) => {
+//         if ($session.access) {
+//             const refreshable = $session.refresh && $session.refresh !== "undefined"
+//             if (refreshable) {
+//                 set(true)
+//             }
+//             else {
+//                 set(false)
+//             }
+//         } else set(false)
+//     }, false);
+
 // export const session = writable({})
 
 // const getsession = (data) => { return get(session)[data] }
@@ -167,6 +181,7 @@ export async function refresh(token) {
         const status = res.status
         if (res.status === 200) {
             session.update(session => session = {
+                id: user.id,
                 username: user.username,
                 access: user.access,
                 refresh: session.refresh,

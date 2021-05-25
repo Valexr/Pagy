@@ -86,13 +86,11 @@
                         Title
                     </label>
                     <div class="accordion-body column">
-                        <!-- Accordions content -->
                         <form
                             class="form"
                             on:submit|preventDefault={updatePage}
                             bind:this={form}
                         >
-                            <!-- {#if editForm.title} -->
                             <div class="form-group">
                                 <label class="form-label" for="newTitle"
                                     >Title</label
@@ -129,7 +127,6 @@
                                     placeholder="page description"
                                 />
                             </div>
-                            <!-- form select control -->
                             <div class="form-group">
                                 <select class="form-select">
                                     <option>Choose an option</option>
@@ -146,7 +143,6 @@
                                     <option>Hipchat</option>
                                 </select>
                             </div>
-                            <!-- form radio control -->
                             <div class="form-group">
                                 <legend class="form-label">Gender</legend>
                                 <label class="form-radio">
@@ -158,7 +154,6 @@
                                     <i class="form-icon" /> Female
                                 </label>
                             </div>
-                            <!-- form switch control -->
                             <div class="form-group">
                                 <label class="form-switch">
                                     <input type="checkbox" />
@@ -166,7 +161,6 @@
                                     and tips
                                 </label>
                             </div>
-                            <!-- form checkbox control -->
                             <div class="form-group">
                                 <label class="form-checkbox">
                                     <input type="checkbox" />

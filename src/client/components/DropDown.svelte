@@ -14,13 +14,13 @@
         opener = false,
         openbut = {
             name: "Open",
-            icon: "",
+            icon: "icon-caret",
             class: "",
             badge: "",
             initial: "",
         },
         items = [],
-        downbut = {},
+        downbut = false,
         right = false,
         auto = false;
     // const open = () => (opener = !opener);
@@ -38,7 +38,8 @@
 </script>
 
 <div
-    class="dropdown {right ? 'dropdown-right' : ''}"
+    class="dropdown"
+    class:dropdown-right={right}
     class:dropdown-auto={auto}
     class:active={opener}
 >
@@ -48,16 +49,6 @@
         data-initial={openbut.initial}
         on:click|stopPropagation={toggle}
     >
-        <!-- <slot name="img">
-            <figure
-                class="avatar badge column col-auto"
-                data-badge="8"
-                data-initial="YZ"
-            >
-                <i class="icon icon-people" />
-                <img src="favicon.png" alt="YZ" />
-            </figure>
-        </slot> -->
         {openbut.name}
         <i class="icon {openbut.icon ? openbut.icon : 'icon-caret'}" />
     </button>

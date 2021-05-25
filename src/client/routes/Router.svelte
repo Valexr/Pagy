@@ -2,6 +2,8 @@
     import { url, path, query, pattern, click, goto } from "svelte-pathfinder";
     import Viewpoint from "svelte-viewpoint";
     import { page, authed, history, Transition } from "@routes";
+    import { items, filters } from "@stores/store";
+    import * as db from "@api/db";
     import Auth from "@pages/auth.svelte";
     import {
         init,
@@ -30,6 +32,21 @@
         // }
         // registerLang($history.lang);
     }
+
+    // async function getData(query, page) {
+    //     // $items = db.get(`/users/items${$query.split("&id")[0]}`);
+    //     // $filters = await db.get("/users/filters");
+    //     const res = await db.get(
+    //         `/${page.alias}/items${query.split("&id")[0]}`
+    //     );
+    //     console.log(res);
+    //     $items = res.items;
+    //     $filters = res.filters;
+    //     const all = await db.get("/users/all");
+    //     console.log(all);
+    // }
+
+    // $: $page && getData($query, $page);
 
     $: !$authed && goto(`/auth`);
 

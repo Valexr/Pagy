@@ -1,5 +1,6 @@
 // Define variables to override default ones
-// $primary-color: #9b51e0;
+
+// $primary-color: #4d1ed3;
 // $primary-color: #4240d4;
 // $error-color: #c02020;
 // $font-size: 0.9rem;
@@ -10,9 +11,10 @@
 $off-canvas-breakpoint: 840px;
 
 // Import full Spectre source code
+
 @import "../../node_modules/spectre.css/src/spectre";
 @import "../../node_modules/spectre.css/src/spectre-icons";
-// @import "../../node_modules/spectre.css/src/spectre-exp";
+@import "../../node_modules/spectre.css/src/spectre-exp";
 // @import "../../node_modules/spectre.css/src/_variables";
 
 :root {
