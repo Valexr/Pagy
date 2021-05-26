@@ -23,7 +23,7 @@
 
     function edit(locale) {
         $query.params.id = locale.id;
-        $fragment = "#sidebar";
+        $fragment = "#sidebar-edit";
     }
 </script>
 

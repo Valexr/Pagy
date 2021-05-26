@@ -54,15 +54,22 @@ async function connect(file, table = 'items') {
             return base.data[table]
         },
         filters: (query) => {
-            const qa = Object.entries(query).map(([k, v]) => { return { [k]: v } })
-            const filters = Object.keys(query)
-                .filter((q) => q !== "q" && q !== "id")
-                .reduce((a, k, i) => {
-                    const items = i === 0 ? base.data[table] : base.data[table].filter(o => omatch(o, qa[i - 1]))
-                    const vals = Object.keys(group(items, [k])).filter(Boolean);
-                    const val = [...new Set(`${vals}`.split(",").sort())];
-                    return { ...a, [k]: val };
-                }, {});
+            const qa =
+                typeof query === 'string'
+                    ? query.slice(1).split("&").map(q => { const s = q.split('='); return { [s[0]]: s[1] } })
+                    : Object.entries(query).map(([k, v]) => { return { [k]: v } })
+            const filters =
+                Object.keys(query)
+                    .filter((q) => q !== "q" && q !== "id")
+                    .reduce((a, k, i) => {
+                        const items =
+                            i === 0
+                                ? base.data[table]
+                                : base.data[table].filter(o => omatch(o, qa[i - 1]))
+                        const vals = Object.keys(group(items, [k])).filter(Boolean);
+                        const val = [...new Set(`${vals}`.split(",").sort())];
+                        return { ...a, [k]: val };
+                    }, {});
 
             return filters;
         }

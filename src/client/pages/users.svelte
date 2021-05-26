@@ -21,7 +21,7 @@
 
     function editUser(page) {
         $query.params.id = page.id;
-        $fragment = "#sidebar";
+        $fragment = "#sidebar-edit";
     }
 
     async function copyUser(user) {

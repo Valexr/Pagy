@@ -1,26 +1,18 @@
 <script>
     import { onDestroy, onMount, tick } from "svelte";
-    import { fly, fade } from "svelte/transition";
-    import { quintOut } from "svelte/easing";
-    import { query, fragment } from "svelte-pathfinder";
-    import { clickout } from "@utils";
+    import { path, query, fragment } from "svelte-pathfinder";
     import { page } from "@routes";
-    import { items } from "@stores/store";
+    import { items, filters } from "@stores/store";
     import * as db from "@api/db";
+    import { SideBar } from "@cmp";
 
-    let aside = null,
-        form = null,
-        right = true,
+    let form = null,
         editForm = {
             id: "",
             title: "",
             author: "",
             description: "",
-        },
-        isOpen = false,
-        width = 0;
-
-    const close = () => (($query = $query.split("&id")[0]), ($fragment = ""));
+        };
 
     async function getPage() {
         await tick();
@@ -33,48 +25,61 @@
 
     async function updatePage() {
         $items = await db.set(`/pages/items${$query}`, editForm);
-        close();
+        $fragment = "";
     }
-    $: if (aside && isOpen) width = aside.clientWidth;
-    // $: isOpen && getPage();
+
+    $: filterLink = (key, val, item, query) => {
+        function qpath() {
+            const path = Object.entries($filters).map(([k, v], i) => {
+                return key === k
+                    ? `${k}=${item}`
+                    : `${k}=${qsub(k, v) || v[0]}`;
+            });
+            return [...new Set(path)].join("&");
+        }
+        function qsub(k, v) {
+            // if (query[k] !== v) query[k] = v;
+            return Object.values(query).filter((q) => v.some((v) => v === q));
+        }
+        return `${$path}?${qpath()}${$fragment}`;
+    };
 </script>
 
-<aside
-    class="container p-fixed"
-    transition:fly={{
-        delay: 0,
-        duration: 500,
-        x: right ? 490 : -490,
-        y: 0,
-        opacity: 1,
-        // easing: quintOut,
-    }}
-    on:introend={() => (isOpen = true)}
-    on:outrostart={() => (isOpen = false)}
-    bind:this={aside}
-    use:clickout={aside}
-    on:clickout={close}
-    class:right
->
-    {#await getPage()}
+<SideBar backdrop={false}>
+    {#await $filters}
         <div class="docs-demo columns">
             <div class="column col-12 text-center">
                 <div class="loading loading-lg" />
             </div>
         </div>
-    {:then}
+    {:then filters}
         <div class="columns">
             <div class="column col-12">
-                <h3>{editForm.title}</h3>
-                <button
-                    class="btn btn-clear"
-                    aria-label="Close"
-                    id="close"
-                    on:click={close}
-                />
+                <h3>Filters</h3>
             </div>
             <div class="column col-12">
-                <div class="accordion">
+                {#each Object.entries(filters) as [k, v]}
+                    <ul class="menu">
+                        <li class="divider" data-content={k.toUpperCase()} />
+                        {#each v as link}
+                            <li class="menu-item">
+                                <a
+                                    href={filterLink(k, v, link, $query.params)}
+                                    class:active={link === $query.params[k]}
+                                >
+                                    <!-- <i class="icon icon-link" /> -->
+                                    {link}
+                                </a>
+                            </li>
+                        {/each}
+                    </ul>
+                {/each}
+                <pre
+                    class="code hide-xs"
+                    data-lang="JSON">
+                <code>{JSON.stringify(filters, 0, 2)}</code>
+            </pre>
+                <!-- <div class="accordion">
                     <input
                         type="checkbox"
                         id="accordion-1"
@@ -198,45 +203,48 @@
                             <code contenteditable="true">{JSON.stringify(editForm, 0, 2)}</code>
                         </pre>
                     </div>
-                </details>
+                </details> -->
             </div>
         </div>
     {/await}
-</aside>
-<div class="aside-backdrop" transition:fade />
+</SideBar>
 
 <style lang="scss">
-    aside {
-        top: 0;
-        bottom: 0;
-        width: 100%;
-        max-width: 490px;
-        z-index: 400;
-        box-shadow: 0 0.2rem 0.5rem rgba(48, 55, 66, 0.3);
-        background: white;
-        overflow-y: auto;
-        padding: 1.6rem;
-        button#close {
-            position: absolute;
-            top: 1.6rem;
-            right: 1.6rem;
-        }
-        &.right {
-            right: 0;
-        }
+    .menu {
+        box-shadow: none;
+        padding: 0;
     }
-    .aside-backdrop {
-        background: rgba(247, 248, 249, 0.75);
-        bottom: 0;
-        cursor: default;
-        display: block;
-        left: 0;
-        position: fixed;
-        right: 0;
-        top: 0;
-        z-index: 300;
-    }
-    .accordion .accordion-body {
-        overflow: auto;
-    }
+    // aside {
+    //     top: 0;
+    //     bottom: 0;
+    //     width: 100%;
+    //     max-width: 490px;
+    //     z-index: 400;
+    //     box-shadow: 0 0.2rem 0.5rem rgba(48, 55, 66, 0.3);
+    //     background: white;
+    //     overflow-y: auto;
+    //     padding: 1.6rem;
+    //     button#close {
+    //         position: absolute;
+    //         top: 1.6rem;
+    //         right: 1.6rem;
+    //     }
+    //     &.right {
+    //         right: 0;
+    //     }
+    // }
+    // .aside-backdrop {
+    //     background: rgba(247, 248, 249, 0.75);
+    //     bottom: 0;
+    //     cursor: default;
+    //     display: block;
+    //     left: 0;
+    //     position: fixed;
+    //     right: 0;
+    //     top: 0;
+    //     z-index: 300;
+    // }
+    // .accordion .accordion-body {
+    //     overflow: auto;
+    // }
 </style>

@@ -4,7 +4,7 @@
     import { DropDown } from "@cmp";
 </script>
 
-{#if $media.xs}
+{#if $media.sm}
     <DropDown
         openbut={{
             name: "",

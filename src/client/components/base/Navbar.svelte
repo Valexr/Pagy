@@ -2,7 +2,7 @@
     import { fade } from "svelte/transition";
     import { path, query } from "svelte-pathfinder";
     import { filters, items } from "@stores/store";
-    import { DropDown, Search, Add } from "@cmp";
+    import { DropDown, Search, Add, Filters } from "@cmp";
     import { media } from "svelte-match-media";
 
     $: downbut = {
@@ -28,7 +28,10 @@
 
 <nav class="navbar container p-sticky bg-light" in:fade={{ duration: 500 }}>
     <section class="navbar-section ">
-        {#each Object.entries($filters) as [k, v]}
+        <div class="column col-auto">
+            <Filters />
+        </div>
+        <!-- {#each Object.entries($filters) as [k, v]}
             <div class="column col-auto">
                 <DropDown
                     openbut={{
@@ -46,16 +49,10 @@
                         on:click={() => ($query.params[k] = item)}
                     >
                         {item}
-                        <!-- <button
-                            class="btn btn-link btn-sm p-relative float-right sm-acts"
-                            on:click|preventDefault|stopPropagation
-                        >
-                            <i class="icon icon-edit" />
-                        </button> -->
                     </a>
                 </DropDown>
             </div>
-        {/each}
+        {/each} -->
     </section>
     <section class="navbar-center ">
         <div class="column col-auto">
@@ -65,7 +62,7 @@
     <section class="navbar-section ">
         <div
             class="column"
-            class:col-auto={(!$media.md && !$media.sm) || $media.xs}
+            class:col-10={(!$media.md && !$media.sm) || $media.xs}
         >
             <Search />
         </div>

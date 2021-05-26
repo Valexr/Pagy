@@ -18,7 +18,7 @@
 
     function editPage(page) {
         $query.params.id = page.id;
-        $fragment = "#sidebar";
+        $fragment = "#sidebar-edit";
     }
     async function copyPage(page) {
         const add = await db.get(`/pages/items${$query}&id=${page.id}`);

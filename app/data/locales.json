@@ -803,7 +803,7 @@
             "capital": "",
             "altSpellings": [],
             "region": "Polar",
-            "subregion": "",
+            "subregion": "Antarctica",
             "population": 1000,
             "latlng": [
                 -74.65,
@@ -2644,8 +2644,8 @@
                 "Bouvetøya",
                 "Bouvet-øya"
             ],
-            "region": "",
-            "subregion": "",
+            "region": "Polar",
+            "subregion": "Island",
             "population": 0,
             "latlng": [
                 -54.43333333,
@@ -8343,8 +8343,8 @@
             "altSpellings": [
                 "HM"
             ],
-            "region": "",
-            "subregion": "",
+            "region": "Oceania",
+            "subregion": "Australia and New Zealand",
             "population": 0,
             "latlng": [
                 -53.1,

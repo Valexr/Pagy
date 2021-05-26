@@ -11,13 +11,13 @@
     {
       "id": 1618914837935,
       "username": "valexr@gmail.com",
-      "remember": true,
-      "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwidXNlcm5hbWUiOiJ2YWxleHJAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicmVtZW1iZXIiOnRydWUsImlwIjoiMTcyLjE4LjAuMSIsInVhIjoiTW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTBfMTVfNykgQXBwbGVXZWJLaXQvNjA1LjEuMTUgKEtIVE1MLCBsaWtlIEdlY2tvKSBWZXJzaW9uLzE0LjEuMSBTYWZhcmkvNjA1LjEuMTUiLCJwYXNzIjoiJDJhJDA5JERTaEFBeEF1L2JIZ1lMV2xlbHpYR2V6ME9nMlQ5bnlsMXRuZDRlaHMzV21GcmRmQ0NYQm9hIiwiaWF0IjoxNjIxOTczNTk2LCJleHAiOjE2MjE5NzM2MTF9.dO3oF3POa6_vkwwpqbfLbILIMohfzLI8mkvo8NhBJwY",
-      "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwicGFzcyI6IiQyYSQwOSRBSTVnbGZhRlBQWUdidE5nSVZ6eXJlSS56RFo3b2NXLnlCQlJNWVlTRWRCLjVZeVVnVmh6SyIsImlhdCI6MTYyMTk3MzU5NiwiZXhwIjoxNjIxOTc3MTk2fQ.ExTlp0LDEIi3aQoPDtFuIRp_48h_ZdNItFuZ-Dw2zT0",
+      "remember": false,
+      "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwidXNlcm5hbWUiOiJ2YWxleHJAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicmVtZW1iZXIiOmZhbHNlLCJpcCI6IjE5Mi4xNjguODguMjQzIiwidWEiOiJNb3ppbGxhLzUuMCAoaVBob25lOyBDUFUgaVBob25lIE9TIDE0XzYgbGlrZSBNYWMgT1MgWCkgQXBwbGVXZWJLaXQvNjA1LjEuMTUgKEtIVE1MLCBsaWtlIEdlY2tvKSBWZXJzaW9uLzE0LjEuMSBNb2JpbGUvMTVFMTQ4IFNhZmFyaS82MDQuMSIsInBhc3MiOiIkMmEkMDkkZjF6VFZldWtRbWV1Y1BNN3kuL1YxdXBmRFVJMHFtcTlyZW9GWS5oR2xqejM3QThvQTUwMHUiLCJpYXQiOjE2MjIwMjQ5MzksImV4cCI6MTYyMjAyNDk1NH0.X3ZIjUg3HeRcjdonyXVdIakUB7eNdxj8MAUJjQajdk0",
+      "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwicGFzcyI6IiQyYSQwOSRaanhuVFNEZUpvcU9SZ3ZhRjNYLjllZjlnQmRDQnVIV20zNjBKMlhkWHk2TE5NSmc3NWU4dSIsImlhdCI6MTYyMjAyNDkzOSwiZXhwIjoxNjIyMDI4NTM5fQ.aA_G5Vfx45yRHjIfpo0d2cRqKAlKhspWmrTHs0_ya6Y",
       "exp": "60m",
-      "ip": "172.18.0.1",
-      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15",
-      "date": "2021-05-25T20:13:16.896Z"
+      "ip": "192.168.88.243",
+      "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1",
+      "date": "2021-05-26T10:28:59.708Z"
     }
   ]
 }

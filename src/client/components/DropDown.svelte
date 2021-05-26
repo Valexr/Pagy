@@ -40,6 +40,7 @@
 <div
     class="dropdown"
     class:dropdown-right={right}
+    class:float-right={right}
     class:dropdown-auto={auto}
     class:active={opener}
 >
