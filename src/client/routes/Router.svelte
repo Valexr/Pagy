@@ -5,6 +5,7 @@
     import { items, filters } from "@stores/store";
     import * as db from "@api/db";
     import Auth from "@pages/auth.svelte";
+    import { Loader } from "@cmp";
     import {
         init,
         register,
@@ -33,20 +34,20 @@
         // registerLang($history.lang);
     }
 
-    // async function getData(query, page) {
-    //     // $items = db.get(`/users/items${$query.split("&id")[0]}`);
-    //     // $filters = await db.get("/users/filters");
-    //     const res = await db.get(
-    //         `/${page.alias}/items${query.split("&id")[0]}`
-    //     );
-    //     console.log(res);
-    //     $items = res.items;
-    //     $filters = res.filters;
-    //     const all = await db.get("/users/all");
-    //     console.log(all);
-    // }
+    async function getData(query, page) {
+        try {
+            const data = await db.get(
+                `/${page.alias}/items${query.split("&id")[0]}`
+            );
+            $items = data.items;
+            $filters = data.filters;
+            return data;
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
-    // $: $page && getData($query, $page);
+    // $: async () => await getData($query, $page);
 
     $: !$authed && goto(`/auth`);
 
@@ -57,24 +58,29 @@
 
 <svelte:window on:click={click} />
 
-<Transition>
-    {#if !$authed}<Auth />{:else}
-        <Viewpoint
-            delay={500}
+{#if !$authed}<Auth />{:else}
+    {#await $page.component()}
+        <Loader />
+    {:then Cmp}
+        {#await getData($query, $page)}
+            <Loader />
+        {:then data}
+            <Transition>
+                <svelte:component this={Cmp.default} {data} />
+            </Transition>
+        {/await}
+    {/await}
+    <!-- <Viewpoint
+            delay={0}
             timeout={500}
             {...$page}
             query={$query}
             path={$path}
+            res={getData($query, $page)}
         >
-            <svelte:fragment slot="loading">
-                <div class="columns">
-                    <div class="column col-12 text-center">
-                        <div class="loading loading-lg" />
-                    </div>
-                </div>
-            </svelte:fragment>
-        </Viewpoint>
-    {/if}
-</Transition>
+            <Loader slot="loading" />
+            <Loader slot="waiting" />
+        </Viewpoint> -->
+{/if}
 
 <style lang="scss"></style>

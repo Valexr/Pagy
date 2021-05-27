@@ -106,7 +106,7 @@
 >
     <slot slot="static">
         <a
-            href={`users?role=admin&id=${$session.id}#sidebar`}
+            href={`users?role=admin#sidebarEdit-${$session.id}`}
             class="btn btn-link"
             on:click={() => (user = !user)}
         >

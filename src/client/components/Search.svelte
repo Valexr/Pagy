@@ -2,6 +2,35 @@
     import { query } from "svelte-pathfinder";
     import { media } from "svelte-match-media";
     import { DropDown } from "@cmp";
+
+    $: qsearch = $query
+        .slice(1)
+        .split("&")
+        .map((q) => {
+            const s = q.split("=");
+            return `${s[0]}:${s[1]}`;
+        })
+        .join("; ");
+
+    $: qs = Object.entries($query.params).reduce((acc, [k, v], i) => {
+        const o = `${k}:${v}`;
+        acc.push(o);
+        return acc;
+    }, []);
+
+    function setQuery(e) {
+        const q = e.target.value
+            .split(";")
+            .map((q) => {
+                const s = q.trim().split(":");
+                return `${s[0]}=${s[1]}`;
+            })
+            .join("&");
+        console.log(e.target.value, q);
+        $query = decodeURI(`?${q}`);
+    }
+
+    $: console.log(decodeURI($query), decodeURI(qs.join(" ")), qsearch);
 </script>
 
 {#if $media.sm}
@@ -30,9 +59,11 @@
         <input
             class="form-input"
             type="text"
-            placeholder="...case insensitive"
-            bind:value={$query.params.q}
-        /><i
+            placeholder="key:val,val... key:val..."
+            value={decodeURI(qsearch)}
+            on:change={setQuery}
+        />
+        <i
             class="form-icon icon icon-search text-{$query.params.q
                 ? 'primary'
                 : 'gray'}"

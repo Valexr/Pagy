@@ -4,39 +4,27 @@
     import { page } from "@routes";
     import { items } from "@stores/store";
     import * as db from "@api/db";
-    import { SideBar } from "@cmp";
+    import { SideBar, Loader } from "@cmp";
 
-    let form = null,
-        editForm = {
-            id: "",
-            title: "",
-            author: "",
-            description: "",
-        };
+    let editForm = { title: "" };
+    $: id = $fragment.split("-")[1];
 
-    async function getPage() {
-        await tick();
-        if ($page.alias === "locales")
-            editForm = await db.get(`/locales/items${$query}`);
-        else if ($page.alias === "users")
-            editForm = await db.get(`/users/items${$query}`);
-        else editForm = await db.get(`/pages/items${$query}`);
+    async function getForm(items) {
+        // await tick();
+        // await db.get(
+        //     `/${$page.alias}/items${$query}#sidebarEdit-1620236307611`
+        // );
+        editForm = await items.find((i) => i.id === +id);
     }
 
     async function updatePage() {
-        $items = await db.set(`/pages/items${$query}`, editForm);
+        $items = await db.set(`/pages/items${$query}&id=${id}`, editForm);
         $fragment = "";
     }
 </script>
 
-<SideBar right="true">
-    {#await getPage()}
-        <div class="docs-demo columns">
-            <div class="column col-12 text-center">
-                <div class="loading loading-lg" />
-            </div>
-        </div>
-    {:then}
+<SideBar right="true" data={getForm($items)}>
+    {#if editForm}
         <div class="columns">
             <div class="column col-12">
                 <h3>{editForm.title}</h3>
@@ -57,7 +45,6 @@
                         <form
                             class="form"
                             on:submit|preventDefault={updatePage}
-                            bind:this={form}
                         >
                             <div class="form-group">
                                 <label class="form-label" for="newTitle"
@@ -146,7 +133,8 @@
                                 </button>
                                 <button
                                     class="btn btn-link"
-                                    on:click|preventDefault={close}
+                                    on:click|preventDefault={() =>
+                                        ($fragment = "")}
                                 >
                                     Cancel
                                 </button>
@@ -169,41 +157,11 @@
                 </details>
             </div>
         </div>
-    {/await}
+    {/if}
 </SideBar>
 
 <style lang="scss">
-    // aside {
-    //     top: 0;
-    //     bottom: 0;
-    //     width: 100%;
-    //     max-width: 490px;
-    //     z-index: 400;
-    //     box-shadow: 0 0.2rem 0.5rem rgba(48, 55, 66, 0.3);
-    //     background: white;
-    //     overflow-y: auto;
-    //     padding: 1.6rem;
-    //     button#close {
-    //         position: absolute;
-    //         top: 1.6rem;
-    //         right: 1.6rem;
-    //     }
-    //     &.right {
-    //         right: 0;
-    //     }
-    // }
-    // .aside-backdrop {
-    //     background: rgba(247, 248, 249, 0.75);
-    //     bottom: 0;
-    //     cursor: default;
-    //     display: block;
-    //     left: 0;
-    //     position: fixed;
-    //     right: 0;
-    //     top: 0;
-    //     z-index: 300;
-    // }
-    // .accordion .accordion-body {
-    //     overflow: auto;
-    // }
+    .accordion .accordion-body {
+        overflow: auto;
+    }
 </style>

@@ -3,8 +3,8 @@
     import { SideBarEdit, SideBarFilters } from "@cmp";
 </script>
 
-{#if $fragment === "#sidebar-edit"}
+{#if $fragment.includes("#sidebarEdit")}
     <SideBarEdit />
-{:else if $fragment === "#sidebar-filters"}
+{:else if $fragment === "#sidebarFilters"}
     <SideBarFilters />
 {/if}

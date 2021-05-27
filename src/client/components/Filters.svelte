@@ -5,14 +5,14 @@
     import { items, filters } from "@stores/store";
 
     function toggle() {
-        $fragment = "#sidebar-filters";
+        $fragment = "#sidebarFilters";
     }
 </script>
 
 <button
     class="btn btn-primary badge"
     class:btn-action={$media.xs}
-    data-badge={Object.keys($filters).length}
+    data-badge={$filters && Object.keys($filters).length}
     on:click|stopPropagation={toggle}
 >
     <i class="icon icon-more-vert" />

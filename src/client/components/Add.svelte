@@ -12,7 +12,7 @@
 <button
     class="btn btn-primary badge"
     class:btn-action={$media.xs}
-    data-badge={$items.length}
+    data-badge={$items && $items.length}
     on:click|stopPropagation={addtoggle}
 >
     <i class="icon icon-plus" />

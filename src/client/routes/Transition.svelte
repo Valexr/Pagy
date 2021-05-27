@@ -2,7 +2,7 @@
     import { fade } from "svelte/transition";
     import { page } from "@routes";
 
-    export let duration = 500;
+    export let duration = 250;
 </script>
 
 {#key $page}
@@ -10,7 +10,7 @@
         id={$page.alias}
         class:bg-gray={$page.alias === "auth"}
         class="container"
-        in:fade|local={{ duration: duration, delay: 100 }}
+        in:fade={{ duration: duration, delay: 0 }}
     >
         <slot />
     </main>

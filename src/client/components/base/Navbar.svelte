@@ -62,7 +62,7 @@
     <section class="navbar-section ">
         <div
             class="column"
-            class:col-10={(!$media.md && !$media.sm) || $media.xs}
+            class:col-12={(!$media.md && !$media.sm) || $media.xs}
         >
             <Search />
         </div>

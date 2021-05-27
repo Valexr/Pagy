@@ -12,12 +12,12 @@
       "id": 1618914837935,
       "username": "valexr@gmail.com",
       "remember": false,
-      "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwidXNlcm5hbWUiOiJ2YWxleHJAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicmVtZW1iZXIiOmZhbHNlLCJpcCI6IjE5Mi4xNjguODguMjQzIiwidWEiOiJNb3ppbGxhLzUuMCAoaVBob25lOyBDUFUgaVBob25lIE9TIDE0XzYgbGlrZSBNYWMgT1MgWCkgQXBwbGVXZWJLaXQvNjA1LjEuMTUgKEtIVE1MLCBsaWtlIEdlY2tvKSBWZXJzaW9uLzE0LjEuMSBNb2JpbGUvMTVFMTQ4IFNhZmFyaS82MDQuMSIsInBhc3MiOiIkMmEkMDkkZjF6VFZldWtRbWV1Y1BNN3kuL1YxdXBmRFVJMHFtcTlyZW9GWS5oR2xqejM3QThvQTUwMHUiLCJpYXQiOjE2MjIwMjQ5MzksImV4cCI6MTYyMjAyNDk1NH0.X3ZIjUg3HeRcjdonyXVdIakUB7eNdxj8MAUJjQajdk0",
-      "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwicGFzcyI6IiQyYSQwOSRaanhuVFNEZUpvcU9SZ3ZhRjNYLjllZjlnQmRDQnVIV20zNjBKMlhkWHk2TE5NSmc3NWU4dSIsImlhdCI6MTYyMjAyNDkzOSwiZXhwIjoxNjIyMDI4NTM5fQ.aA_G5Vfx45yRHjIfpo0d2cRqKAlKhspWmrTHs0_ya6Y",
+      "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwidXNlcm5hbWUiOiJ2YWxleHJAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwicmVtZW1iZXIiOmZhbHNlLCJpcCI6IjEyNy4wLjAuMSIsInVhIjoiTW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTAuMTU7IHJ2Ojg5LjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvODkuMCIsInBhc3MiOiIkMmEkMDkkTk4wN0VpZUQwdXVnbXNiYm9OQ210LlNWb01mYVRFa2RuZWJZT0FyeEU1czBGazcvQUZ4UDYiLCJpYXQiOjE2MjIxNDM1NzUsImV4cCI6MTYyMjE0MzU5MH0.F38NgqXRXe0Myd12VdxeQOIks0uETsKjGE-TY1K09Qk",
+      "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwicGFzcyI6IiQyYSQwOSQ3WkZhbDNCZ3BlRHlWNnBlNzNaVWxPOE9LcHQzZDJQSTlxMUdmSVFpT2NDYXJhMmovWDVXVyIsImlhdCI6MTYyMjE0MzU3NSwiZXhwIjoxNjIyMTQ3MTc1fQ.qiNM67hXWrywt5pbmt-w6siMa4sZg7KuynMPsQuJwIo",
       "exp": "60m",
-      "ip": "192.168.88.243",
-      "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1",
-      "date": "2021-05-26T10:28:59.708Z"
+      "ip": "127.0.0.1",
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0",
+      "date": "2021-05-27T19:26:15.716Z"
     }
   ]
 }

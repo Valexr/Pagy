@@ -27,14 +27,17 @@
     </section>
     <section class="navbar-section ">
         <div class="column col-auto">
-            <Lang />
             {#if $authed}
-                <User />
                 <Button
-                    but={{ class: "btn-link s-circle", icon: "shutdown" }}
+                    but={{
+                        class: "btn-link s-circle float-right",
+                        icon: "shutdown",
+                    }}
                     on:click={logout}
                 />
+                <User />
             {/if}
+            <Lang />
         </div>
     </section>
 </header>

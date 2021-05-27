@@ -1,32 +1,8 @@
 <script>
     import { onDestroy, onMount, tick } from "svelte";
     import { path, query, fragment } from "svelte-pathfinder";
-    import { page } from "@routes";
-    import { items, filters } from "@stores/store";
-    import * as db from "@api/db";
+    import { filters } from "@stores/store";
     import { SideBar } from "@cmp";
-
-    let form = null,
-        editForm = {
-            id: "",
-            title: "",
-            author: "",
-            description: "",
-        };
-
-    async function getPage() {
-        await tick();
-        if ($page.alias === "locales")
-            editForm = await db.get(`/locales/items${$query}`);
-        else if ($page.alias === "users")
-            editForm = await db.get(`/users/items${$query}`);
-        else editForm = await db.get(`/pages/items${$query}`);
-    }
-
-    async function updatePage() {
-        $items = await db.set(`/pages/items${$query}`, editForm);
-        $fragment = "";
-    }
 
     $: filterLink = (key, val, item, query) => {
         function qpath() {
@@ -45,41 +21,34 @@
     };
 </script>
 
-<SideBar backdrop={false}>
-    {#await $filters}
-        <div class="docs-demo columns">
-            <div class="column col-12 text-center">
-                <div class="loading loading-lg" />
-            </div>
+<SideBar backdrop={false} data={$filters}>
+    <div class="columns">
+        <div class="column col-12">
+            <h3>Filters</h3>
         </div>
-    {:then filters}
-        <div class="columns">
-            <div class="column col-12">
-                <h3>Filters</h3>
-            </div>
-            <div class="column col-12">
-                {#each Object.entries(filters) as [k, v]}
-                    <ul class="menu">
-                        <li class="divider" data-content={k.toUpperCase()} />
-                        {#each v as link}
-                            <li class="menu-item">
-                                <a
-                                    href={filterLink(k, v, link, $query.params)}
-                                    class:active={link === $query.params[k]}
-                                >
-                                    <!-- <i class="icon icon-link" /> -->
-                                    {link}
-                                </a>
-                            </li>
-                        {/each}
-                    </ul>
-                {/each}
-                <pre
-                    class="code hide-xs"
-                    data-lang="JSON">
-                <code>{JSON.stringify(filters, 0, 2)}</code>
+        <div class="column col-12">
+            {#each Object.entries($filters) as [k, v]}
+                <ul class="menu">
+                    <li class="divider" data-content={k.toUpperCase()} />
+                    {#each v as link}
+                        <li class="menu-item">
+                            <a
+                                href={filterLink(k, v, link, $query.params)}
+                                class:active={link === $query.params[k]}
+                            >
+                                <!-- <i class="icon icon-link" /> -->
+                                {link}
+                            </a>
+                        </li>
+                    {/each}
+                </ul>
+            {/each}
+            <pre
+                class="code hide-xs"
+                data-lang="JSON">
+                <code>{JSON.stringify($filters, 0, 2)}</code>
             </pre>
-                <!-- <div class="accordion">
+            <!-- <div class="accordion">
                     <input
                         type="checkbox"
                         id="accordion-1"
@@ -204,9 +173,8 @@
                         </pre>
                     </div>
                 </details> -->
-            </div>
         </div>
-    {/await}
+    </div>
 </SideBar>
 
 <style lang="scss">
@@ -214,37 +182,4 @@
         box-shadow: none;
         padding: 0;
     }
-    // aside {
-    //     top: 0;
-    //     bottom: 0;
-    //     width: 100%;
-    //     max-width: 490px;
-    //     z-index: 400;
-    //     box-shadow: 0 0.2rem 0.5rem rgba(48, 55, 66, 0.3);
-    //     background: white;
-    //     overflow-y: auto;
-    //     padding: 1.6rem;
-    //     button#close {
-    //         position: absolute;
-    //         top: 1.6rem;
-    //         right: 1.6rem;
-    //     }
-    //     &.right {
-    //         right: 0;
-    //     }
-    // }
-    // .aside-backdrop {
-    //     background: rgba(247, 248, 249, 0.75);
-    //     bottom: 0;
-    //     cursor: default;
-    //     display: block;
-    //     left: 0;
-    //     position: fixed;
-    //     right: 0;
-    //     top: 0;
-    //     z-index: 300;
-    // }
-    // .accordion .accordion-body {
-    //     overflow: auto;
-    // }
 </style>

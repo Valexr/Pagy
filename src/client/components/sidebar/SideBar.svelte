@@ -5,22 +5,18 @@
     import { query, fragment } from "svelte-pathfinder";
     import { clickout } from "@utils";
     import { media } from "svelte-match-media";
+    import { Loader } from "@cmp";
 
     export let right = false,
-        backdrop = true;
+        backdrop = true,
+        data = new Promise();
 
     let aside = null,
         form = null,
-        editForm = {
-            id: "",
-            title: "",
-            author: "",
-            description: "",
-        },
         isOpen = false,
         width = 0;
 
-    const close = () => (($query = $query.split("&id")[0]), ($fragment = ""));
+    const close = () => ($fragment = "");
 
     $: if (aside && isOpen) width = aside.clientWidth;
 </script>
@@ -34,7 +30,7 @@
         x: right ? 490 : -490,
         y: 0,
         opacity: 1,
-        // easing: quintOut,
+        easing: quintOut,
     }}
     on:introend={() => (isOpen = true)}
     on:outrostart={() => (isOpen = false)}
@@ -49,7 +45,11 @@
         id="close"
         on:click={close}
     />
-    <slot />
+    {#await data}
+        <Loader />
+    {:then}
+        <slot />
+    {/await}
 </aside>
 
 {#if backdrop}
@@ -69,7 +69,7 @@
         box-shadow: 0 0.2rem 0.5rem rgba(48, 55, 66, 0.3);
         background: white;
         overflow-y: auto;
-        padding: 3em 1.6rem;
+        padding: 1.6rem;
         button#close {
             position: absolute;
             top: 1.6rem;
@@ -89,8 +89,5 @@
         right: 0;
         top: 0;
         z-index: 300;
-    }
-    .accordion .accordion-body {
-        overflow: auto;
     }
 </style>
