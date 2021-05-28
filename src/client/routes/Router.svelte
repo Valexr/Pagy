@@ -35,42 +35,48 @@
     }
 
     async function getData(query, page) {
-        try {
-            const data = await db.get(
-                `/${page.alias}/items${query.split("&id")[0]}`
-            );
-            $items = data.items;
-            $filters = data.filters;
-            return data;
-        } catch (err) {
-            console.log(err);
-        }
+        if (query.length > 0)
+            try {
+                const data = await db.get(
+                    `/${page.alias}/items${query.split("&id")[0]}`
+                );
+                // console.log(data instanceof Array, query);
+                $items = Array.isArray(data) ? data : data.items;
+                $filters = Array.isArray(data)
+                    ? await db.get(`/${page.alias}/filters`)
+                    : data.filters;
+                return data;
+            } catch (err) {
+                console.log(err);
+            }
     }
 
-    // $: async () => await getData($query, $page);
+    $: {
+        !$authed
+            ? goto(`/auth`)
+            : $pattern("/:lang/auth") && goto($history.users);
 
-    $: !$authed && goto(`/auth`);
+        if (!$pattern("/:lang/*")) $path = `/${$history.lang + $path}`;
 
-    $: if (!$pattern("/:lang/*")) $path = `/${$history.lang + $path}`;
-
-    $: if ($page && $history) $history[$page.alias] = $url;
+        $history[$page.alias] = $url;
+    }
 </script>
 
 <svelte:window on:click={click} />
 
-{#if !$authed}<Auth />{:else}
-    {#await $page.component()}
+{#await $page.component()}
+    <Loader />
+{:then Cmp}
+    {#await getData($query, $page)}
         <Loader />
-    {:then Cmp}
-        {#await getData($query, $page)}
-            <Loader />
-        {:then data}
-            <Transition>
-                <svelte:component this={Cmp.default} {data} />
-            </Transition>
-        {/await}
+    {:then data}
+        <Transition>
+            <svelte:component this={Cmp.default} {data} />
+        </Transition>
     {/await}
-    <!-- <Viewpoint
+{/await}
+
+<!-- <Viewpoint
             delay={0}
             timeout={500}
             {...$page}
@@ -81,6 +87,4 @@
             <Loader slot="loading" />
             <Loader slot="waiting" />
         </Viewpoint> -->
-{/if}
-
 <style lang="scss"></style>

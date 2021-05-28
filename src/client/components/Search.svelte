@@ -3,34 +3,47 @@
     import { media } from "svelte-match-media";
     import { DropDown } from "@cmp";
 
-    $: qsearch = $query
-        .slice(1)
-        .split("&")
-        .map((q) => {
-            const s = q.split("=");
-            return `${s[0]}:${s[1]}`;
-        })
-        .join("; ");
+    // let myQuery = '',prevParams = null,prevMyQuery = '';
 
-    $: qs = Object.entries($query.params).reduce((acc, [k, v], i) => {
-        const o = `${k}:${v}`;
-        acc.push(o);
-        return acc;
-    }, []);
+    // $: {
+    // if (prevParams !== $query.params) {
+    // myQuery = Object.entries($query.params).reduce(…);
+    // prevParams = $query.params;
+    // }
+
+    // if (prevMyQuery !== myQuery) {
+    // $query = myQuery.split(' ').reduce(…);
+    // prevMyQuery = myQuery;
+    // }
+    // }
+
+    // $: qsearch = $query
+    //     .slice(1)
+    //     .split("&")
+    //     .map((q) => {
+    //         const s = q.split("=");
+    //         return `${s[0]}:${s[1]}`;
+    //     })
+    //     .join("; ");
+
+    // $: qs = Object.entries($query.params)
+    //     .reduce((acc, [k, v], i) => [...acc, `${k}:${decodeURI(v)}`], [])
+    //     .join("; ");
+
+    function getQuery(q) {
+        const qs = Object.entries(q.params)
+            .reduce((a, [k, v]) => [...a, `${k}:${decodeURI(v)}`], [])
+            .join("; ");
+        return qs.includes("undefined") ? "" : qs;
+    }
 
     function setQuery(e) {
         const q = e.target.value
             .split(";")
-            .map((q) => {
-                const s = q.trim().split(":");
-                return `${s[0]}=${s[1]}`;
-            })
+            .reduce((a, c) => [...a, c.trim().split(":").join("=")], [])
             .join("&");
-        console.log(e.target.value, q);
-        $query = decodeURI(`?${q}`);
+        $query = q.includes("undefined") ? "" : encodeURI(`?${q}`);
     }
-
-    $: console.log(decodeURI($query), decodeURI(qs.join(" ")), qsearch);
 </script>
 
 {#if $media.sm}
@@ -60,7 +73,7 @@
             class="form-input"
             type="text"
             placeholder="key:val,val... key:val..."
-            value={decodeURI(qsearch)}
+            value={getQuery($query)}
             on:change={setQuery}
         />
         <i

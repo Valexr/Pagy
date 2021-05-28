@@ -72,7 +72,7 @@ export function osome(o, q) {
 
 export function group(arr, keys) {
     return arr.reduce((storage, item) => {
-        const objKey = keys.map((key) => `${item[key]}`).join(":"); //should be some unique delimiter that wont appear in your keys
+        const objKey = keys.map((key) => `${item[key]}`).join(":");
         if (storage[objKey]) {
             storage[objKey].push(item);
         } else {
