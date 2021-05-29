@@ -4,11 +4,8 @@
     import { items } from "@stores/store";
     import { Table, TableActions } from "@cmp";
 
-    export let data = [];
-
-    const table = {
-        keys: ["title", "author", "description", "create", "update"],
-        actions: [
+    const keys = ["title", "author", "description", "create", "update"],
+        actions = [
             {
                 class: "btn-action tooltip",
                 tooltip: "Edit",
@@ -26,8 +23,7 @@
                 icon: "delete",
                 action: (e) => del(e),
             },
-        ],
-    };
+        ];
 
     function edit(id) {
         $fragment = `#sidebarEdit-${id}`;
@@ -50,8 +46,8 @@
 <h1 class="flex-centered">Pages</h1>
 
 <section class="container">
-    <Table keys={table.keys} items={$items} let:item>
-        <TableActions slot="actions" actions={table.actions} index={item.id} />
+    <Table {keys} items={$items} let:item>
+        <TableActions slot="actions" {actions} index={item.id} />
     </Table>
 </section>
 

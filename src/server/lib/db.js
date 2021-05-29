@@ -27,7 +27,6 @@ async function connect(file, table = 'items') {
             insert: async (obj, meta) => {
                 base.data[table].push({ ...obj, ...meta })
                 await base.write()
-                console.log(base.data[table])
                 return base.data[table]
             },
             update: async (id, meta) => {

@@ -6,5 +6,6 @@ app/client/build
 *.map
 app.js
 
+app/.env
 .DS_Store
-.env
+Icon?

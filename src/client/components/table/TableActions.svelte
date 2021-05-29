@@ -5,7 +5,6 @@
 
 {#each actions as item}
     <button
-        id={index}
         class="btn {item.class}"
         data-tooltip={item.tooltip}
         on:click|stopPropagation={item.action(index)}

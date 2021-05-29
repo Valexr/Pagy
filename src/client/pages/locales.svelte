@@ -29,6 +29,26 @@
                 class: "btn-action btn-link text-error",
                 icon: "delete",
             },
+        ],
+        menu = [
+            {
+                icon: "edit",
+                name: "Edit",
+                class: "text-primary",
+                action: (e) => edit(e),
+            },
+            {
+                icon: "copy",
+                name: "Copy",
+                class: "text-gray",
+                action: (e) => console.log(e),
+            },
+            {
+                icon: "delete",
+                name: "Delete",
+                class: "text-error",
+                action: (e) => console.log(e),
+            },
         ];
     console.log(data.items.reduce((a, c, i) => Object.keys(c), []));
 
@@ -40,7 +60,7 @@
 <h1 class="flex-centered">Locales</h1>
 
 <section class="container">
-    <Table {keys} items={data.items} let:item>
+    <Table {keys} items={data.items} {menu} let:item>
         <figure class="avatar avatar mr-2" slot="img">
             <img src={item.flag} alt={item.name} />
         </figure>

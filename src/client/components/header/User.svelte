@@ -80,7 +80,7 @@
     const jwt64 =
             "eyJpZCI6MTcxMjMyLCJlbWFpbCI6InNkc2RmZHNAd3NzZGYuc2RmIiwiY3JlYXRlZEF0IjoiMjAyMS0wNS0yMVQwODoyNTozMy4zNTVaIiwidXBkYXRlZEF0IjoiMjAyMS0wNS0yMVQwODoyNTozMy4zNjFaIiwidXNlcm5hbWUiOiJhcXdyZXF3d3FlIiwiYmlvIjpudWxsLCJpbWFnZSI6bnVsbCwidG9rZW4iOiJleUowZVhBaU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuZXlKcFpDSTZNVGN4TWpNeUxDSjFjMlZ5Ym1GdFpTSTZJbUZ4ZDNKbGNYZDNjV1VpTENKbGVIQWlPakUyTWpZM05qazFNek45LnlyUkIzSG5KMHBINldtWktKY2IxQ0FWZWk1Zl9LZkxxZEk4VkYwYVNkRmsifQ==",
         jwt =
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTcxMjMyLCJ1c2VybmFtZSI6ImFxd3JlcXd3cWUiLCJleHAiOjE2MjY3Njk1MzN9.yrRB3HnJ0pH6WmZKJcb1CAVei5f_KfLqdI8VF0aSdFk";
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwicGFzcyI6IiQyYSQwOSR3bnJtelQ3WEtKNFMxSEhKajdJWGVPenRaUmFodkNuay9lRUxiWE03Lm9aeTRaUzlvbWFUcSIsImlhdCI6MTYyMjI2NzEzOSwiZXhwIjoxNjIyMjcwNzM5fQ.0HVFYKmI6ODrzzhh5pzzntfIdQNWeQs85H3qMO7m6zw";
     $: console.log(
         JSON.parse(atob(jwt64)),
         parseJwt(jwt)

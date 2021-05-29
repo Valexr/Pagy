@@ -74,8 +74,8 @@
         z-index: 99;
         height: 4em;
         top: 0;
-        .no-wrap {
-            white-space: nowrap;
-        }
+        // .no-wrap {
+        //     white-space: nowrap;
+        // }
     }
 </style>

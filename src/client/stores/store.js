@@ -7,6 +7,11 @@ export const items = writable([])
 export const filters = writable({})
 export const navbar = writable(false)
 export const sidebar = writable(false)
+export const contextMenu = writable({
+    isOpen: false,
+    id: 0,
+    pos: { x: 0, y: 0 }
+});
 
 export const asyncData = asyncable(async ($path) => {
     return getData(`/api/${$path.toString()}`);

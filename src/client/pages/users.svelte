@@ -1,11 +1,9 @@
 <script>
-    import { onMount } from "svelte";
     import { query, fragment } from "svelte-pathfinder";
     import * as db from "@api/db";
     import { items } from "@stores/store";
     import { Table, TableActions } from "@cmp";
 
-    export let data = {};
     const keys = ["username", "create", "update"],
         actions = [
             {

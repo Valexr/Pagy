@@ -1,10 +1,30 @@
 <script>
     import { slide } from "svelte/transition";
     import { media } from "svelte-match-media";
+    import { date, longpress } from "@utils";
+    import { contextMenu } from "@stores/store";
+    import { ContextMenu } from "@cmp";
 
     export let keys = [],
-        items = [];
+        items = [],
+        menu = [];
 
+    function oncontextMenu(e, item) {
+        console.log(item, e);
+        $contextMenu = {
+            isOpen: true,
+            item: item,
+            pos: { x: e.pageX, y: e.pageY },
+        };
+    }
+    function onlongPress(e, item) {
+        console.log(item, e);
+        $contextMenu = {
+            isOpen: true,
+            item: item,
+            pos: { x: e.detail.X, y: e.detail.Y },
+        };
+    }
     $: sub = Array.from(Array(items.length).keys());
     function openSub(i) {
         console.log(sub, i);
@@ -30,7 +50,11 @@
     </thead>
     <tbody>
         {#each items as item, i (item.id)}
-            <tr>
+            <tr
+                on:contextmenu|preventDefault={(e) => oncontextMenu(e, item)}
+                use:longpress
+                on:longpress|preventDefault={(e) => onlongPress(e, item)}
+            >
                 <td>
                     <button
                         class="btn btn-link btn-action tooltip c-move"
@@ -42,11 +66,16 @@
                 </td>
                 <td>{i}</td>
                 {#each keys as key}
+                    <!-- {typeof item[key]} -->
                     {#if `${item[key]}`.includes("https:")}
                         <td><slot name="img" {item} /></td>
                     {:else if Array.isArray(item[key])}
                         <td>
                             {item[key].join(", ")}
+                        </td>
+                    {:else if typeof item[key] === "number"}
+                        <td>
+                            {date(item[key])}
                         </td>
                     {:else}
                         <td contenteditable="true" bind:textContent={item[key]}>
@@ -67,9 +96,7 @@
                     <td colspan="8">
                         <div class="columns">
                             <div class="column col-5">
-                                <p>
-                                    {p}
-                                </p>
+                                <p>{p}</p>
                             </div>
                             <div class="column col-2">
                                 <img
@@ -79,9 +106,7 @@
                                 />
                             </div>
                             <div class="column col-5">
-                                <p>
-                                    {p}
-                                </p>
+                                <p>{p}</p>
                             </div>
                         </div>
                     </td>
@@ -90,6 +115,10 @@
         {/each}
     </tbody>
 </table>
+
+{#if $contextMenu.isOpen === true}
+    <ContextMenu {menu} />
+{/if}
 
 <style lang="scss">
     .sub {
@@ -101,7 +130,7 @@
             // display: table-row;
         }
     }
-    @import "../../../node_modules/spectre.css/src/variables";
+    @import "../../../../node_modules/spectre.css/src/variables";
     table {
         td {
             &:focus-visible {

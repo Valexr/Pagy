@@ -1,7 +1,5 @@
 import server from '@server';
-import auth from '$EP/auth'
-import db from '$EP/db'
-import token from '$lib/token'
+import { cookie, auth, token, db } from '$EP'
 import middlewares from '$lib/middlewares'
 
 const DEV = process.env.NODE_ENV === 'dev';
@@ -16,6 +14,7 @@ const app = server({
 app.sub('/api', (app) => {
     app.sub('/v1', app => {
         app.use(...middlewares)
+        app.use(cookie)
         app.sub('/auth', auth)
         app.use(token)
         app.sub('/db', db)

@@ -1,8 +1,7 @@
 <script>
-    import { onDestroy, onMount, tick } from "svelte";
     import { fly, fade } from "svelte/transition";
     import { quintOut } from "svelte/easing";
-    import { query, fragment } from "svelte-pathfinder";
+    import { fragment } from "svelte-pathfinder";
     import { clickout } from "@utils";
     import { media } from "svelte-match-media";
     import { Loader } from "@cmp";
@@ -12,7 +11,6 @@
         data = new Promise();
 
     let aside = null,
-        form = null,
         isOpen = false,
         width = 0;
 

@@ -1,14 +1,15 @@
 import jwt from "jsonwebtoken";
 
 export default function token(req, res, next) {
-    if (req.headers.authorization) {
+    if (req.headers.cookie) next()
+    else if (req.headers.authorization) {
         try {
             const token = req.headers.authorization.split(' ')[1];
             const verified = jwt.verify(token, process.env.JWT_SECRET);
             const ip = req.connection.remoteAddress
             const agent = req.headers['user-agent']
 
-            console.log('verified: ', verified, ip, agent)
+            console.log('token: ', verified, ip, agent)
             next();
         } catch (err) {
             switch (err.message) {

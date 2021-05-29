@@ -1,16 +1,11 @@
-import cookie from "$EP/cookie";
-import login from "$EP/login";
-import refresh from "$EP/refresh";
+import { cookie, login, logout, refresh } from "$EP";
 import os from 'os'
 
 // console.log('mac: ', os.networkInterfaces())
 
 export default function (app) {
-
     app.get('/cookie', cookie)
-
     app.post('/login', login)
-
+    app.post('/logout', logout)
     app.get('/refresh', refresh)
-
 }

@@ -29,8 +29,8 @@
             "@spectre/*": [
                 "node_modules/spectre.css/src/*"
             ],
-            "$EP/*": [
-                "src/server/endpoints/*"
+            "$EP": [
+                "src/server/endpoints/index.js"
             ],
             "$lib/*": [
                 "src/server/lib/*"

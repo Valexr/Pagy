@@ -4,7 +4,7 @@
     import { page } from "@routes";
     import { items } from "@stores/store";
     import * as db from "@api/db";
-    import { SideBar, Loader } from "@cmp";
+    import { SideBar, Code } from "@cmp";
 
     let editForm = { title: "" };
     $: id = $fragment.split("-")[1];
@@ -27,10 +27,11 @@
     {#if editForm}
         <div class="columns">
             <div class="column col-12">
-                <h3>{editForm.title}</h3>
+                <h3>{Object.values(editForm)[0]}</h3>
             </div>
             <div class="column col-12">
-                <div class="accordion">
+                <Code data={editForm} />
+                <!-- <div class="accordion">
                     <input
                         type="checkbox"
                         id="accordion-1"
@@ -141,27 +142,22 @@
                             </div>
                         </form>
                     </div>
-                </div>
-                <details class="accordion" open>
+                </div> -->
+                <!-- <details class="accordion" open>
                     <summary class="accordion-header">
                         <i class="icon icon-arrow-right mr-1" />
                         Title
                     </summary>
                     <div class="accordion-body">
-                        <pre
-                            class="code"
-                            data-lang="JSON">
-                            <code contenteditable="true">{JSON.stringify(editForm, 0, 2)}</code>
-                        </pre>
                     </div>
-                </details>
+                </details> -->
             </div>
         </div>
     {/if}
 </SideBar>
 
 <style lang="scss">
-    .accordion .accordion-body {
-        overflow: auto;
-    }
+    // .accordion .accordion-body {
+    //     overflow: auto;
+    // }
 </style>

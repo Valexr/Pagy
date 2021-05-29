@@ -37,7 +37,7 @@ function body(req, res, next, data = '') {
             // console.log(chunk, data)
         })
         req.on('end', (decode) => {
-            console.log(data)
+            // console.log(data)
             // decode = decodeURIComponent(data);
             if (data) req.body = JSON.parse(data);
             next()
