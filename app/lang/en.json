@@ -3,6 +3,8 @@
     "login-please": "Login please",
     "jwt-expired": "Session expired",
     "authenticate-please": "Authenticate please",
+    "session-changed": "Session changed",
+    "authenticate-compromised": "Authenticate compromised. \n If not you, change password.",
     "expires": "Expires ",
     "email": "Email",
     "password": "Password",

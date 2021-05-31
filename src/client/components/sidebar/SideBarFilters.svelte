@@ -21,13 +21,13 @@
     };
 </script>
 
-<SideBar backdrop={false} data={$filters}>
+<SideBar backdrop={false} data={$filters && $filters}>
     <div class="columns">
         <div class="column col-12">
             <h3>Filters</h3>
         </div>
         <div class="column col-12">
-            {#each Object.entries($filters) as [k, v]}
+            {#each $filters && Object.entries($filters) as [k, v]}
                 <ul class="menu">
                     <li class="divider" data-content={k.toUpperCase()} />
                     {#each v as link}

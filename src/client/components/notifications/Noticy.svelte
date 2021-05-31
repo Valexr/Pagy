@@ -65,5 +65,8 @@
             transform: scaleX(0);
             transform-origin: bottom right;
         }
+        p {
+            white-space: pre-line;
+        }
     }
 </style>

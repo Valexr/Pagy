@@ -99,7 +99,7 @@ export const history = writable(JSON.parse(sessionStorage.getItem("history")) ||
 history.subscribe(val => sessionStorage.setItem("history", JSON.stringify(val)));
 
 export const authed = derived(session, ($session, set) => {
-    if ($session.access) {
-        set($session.refresh ? true : false)
+    if ($session.userid) {
+        set($session.userid ? true : false)
     } else set(false)
 }, false);

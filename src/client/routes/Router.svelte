@@ -4,9 +4,12 @@
     import { page, authed, history, Transition } from "@routes";
     import { items, filters } from "@stores/store";
     import * as db from "@api/db";
+    import { session, logout } from "@api/auth";
     import Auth from "@pages/auth.svelte";
     import { Loader } from "@cmp";
+    import { noticy } from "@cmp";
     import {
+        t,
         init,
         register,
         addMessages,
@@ -40,12 +43,16 @@
                 const data = await db.get(
                     `/${page.alias}/items${query.split("&id")[0]}`
                 );
-                // console.log(data instanceof Array, query);
-                $items = Array.isArray(data) ? data : data.items;
-                $filters = Array.isArray(data)
-                    ? await db.get(`/${page.alias}/filters`)
-                    : data.filters;
-                return data;
+                console.log(data);
+                if (data.status === 400) {
+                    await logout();
+                } else {
+                    $items = Array.isArray(data) ? data : data.items;
+                    $filters = Array.isArray(data)
+                        ? await db.get(`/${page.alias}/filters`)
+                        : data.filters;
+                    return data;
+                }
             } catch (err) {
                 console.log(err);
             }
@@ -60,9 +67,13 @@
 
         $history[$page.alias] = $url;
     }
+    async function unload() {
+        await logout();
+        return "Do you really want to close?";
+    }
 </script>
 
-<svelte:window on:click={click} />
+<svelte:window on:click={click} on:beforeunload={unload} />
 
 {#await $page.component()}
     <Loader />

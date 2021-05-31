@@ -20,7 +20,7 @@ async function connect(file, table = 'items') {
             write: async () => await base.write(),
             data: base.data,
             table: base.data[table],
-            id: (id) => base.data[table].find(i => i.id === +id),
+            id: (id) => base.data[table].find(i => i.id === id),
             one: (prop) => base.data[table].find(i => Object.entries(prop).every(([k, v]) => i[k] === v)),
             search: (query) => base.data[table].filter(o => osome(o, query)),
             match: (query) => base.data[table].filter(o => omatch(o, query)),
@@ -30,7 +30,7 @@ async function connect(file, table = 'items') {
                 return base.data[table]
             },
             update: async (id, meta) => {
-                base.data[table].forEach(i => i.id === +id && Object.assign(i, meta))
+                base.data[table].forEach(i => i.id === id && Object.assign(i, meta))
                 await base.write()
                 return base.data[table]
             },

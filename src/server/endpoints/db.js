@@ -7,7 +7,7 @@ async function connect(req, _res, next) {
         base = await DB.connect(req.params.base, req.params.table)
         next()
     } catch (err) {
-        console.log('error: ', err)
+        console.log('dbERR: ', err)
         next()
     }
 }
@@ -26,7 +26,7 @@ export default function (app) {
                     ? base.search(req.query.q)
                     : base.match(req.query)
                 req.query.id
-                    ? res.json(base.id(req.query.id))
+                    ? res.json(base.id(+req.query.id))
                     : res.json({ items, filters })
 
             } else if (all) {
@@ -36,7 +36,7 @@ export default function (app) {
                 res.json(base.table)
             }
         } catch (err) {
-            console.log('error: ', err)
+            console.log('dbERR: ', err)
             next()
         }
     })
@@ -49,7 +49,7 @@ export default function (app) {
             const items = base.match(req.query)
             res.json(items)
         } catch (err) {
-            console.log('error: ', err)
+            console.log('dbERR: ', err)
             next()
         }
     })
@@ -57,28 +57,28 @@ export default function (app) {
     app.put(pattern, async (req, res, next) => {
         const meta = { ...req.body, update: Date.now() }
         try {
-            await base.update(req.query.id, meta)
+            await base.update(+req.query.id, meta)
             delete req.query.id
             const items = base.match(req.query)
             res.json(items)
         } catch (err) {
-            console.log('error: ', err)
+            console.log('dbERR: ', err)
             next()
         }
     })
 
-    app.patch(pattern, async (req, _res, next) => {
+    app.patch(pattern, async (req, res, next) => {
         try {
             base.patch(req.query.patch)
             await base.write()
             next()
         } catch (err) {
-            console.log('error: ', err)
+            console.log('dbERR: ', err)
             next()
         }
     })
 
-    app.delete(pattern, async (req, res, _next) => {
+    app.delete(pattern, async (req, res, next) => {
         try {
             req.query.prop
                 ? await base.deleteprop(req.query.prop)
@@ -87,7 +87,7 @@ export default function (app) {
             const items = base.match(req.query)
             res.json(items)
         } catch (err) {
-            console.log('error: ', err)
+            console.log('dbERR: ', err)
             next()
         }
     })

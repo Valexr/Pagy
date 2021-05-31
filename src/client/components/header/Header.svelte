@@ -1,9 +1,12 @@
 <script>
+    import { tick } from "svelte";
     import { page, authed } from "@routes";
     import { Menu, Lang, User, Navbar, BreadCrumbs, Button } from "@cmp";
-    import { session } from "@api/auth";
+    import { session, logout } from "@api/auth";
 
-    function logout() {
+    function logouts() {
+        logout();
+        // await tick();
         session.set({ username: $session.username });
     }
 </script>
@@ -33,7 +36,7 @@
                         class: "btn-link s-circle float-right",
                         icon: "shutdown",
                     }}
-                    on:click={logout}
+                    on:click={logouts}
                 />
                 <User />
             {/if}

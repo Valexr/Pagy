@@ -1,7 +1,7 @@
 <script>
-    import { url, path } from "svelte-pathfinder";
+    import { url, path, goto } from "svelte-pathfinder";
     import { DropDown } from "@cmp";
-    import { session } from "@api/auth";
+    import { session, logout } from "@api/auth";
 
     let user = false;
 
@@ -83,7 +83,8 @@
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwicGFzcyI6IiQyYSQwOSR3bnJtelQ3WEtKNFMxSEhKajdJWGVPenRaUmFodkNuay9lRUxiWE03Lm9aeTRaUzlvbWFUcSIsImlhdCI6MTYyMjI2NzEzOSwiZXhwIjoxNjIyMjcwNzM5fQ.0HVFYKmI6ODrzzhh5pzzntfIdQNWeQs85H3qMO7m6zw";
     $: console.log(
         JSON.parse(atob(jwt64)),
-        parseJwt(jwt)
+        parseJwt(jwt),
+        jwt.split(".").map((t, i) => (i < 2 ? atob(t) : t))
         // jwtDecode(jwt)
         // JSON.parse(Buffer.from(jwt, "base64").toString("utf-8"))
     );
@@ -97,7 +98,7 @@
         class: "btn-link s-circle",
     }}
     downbut={{
-        action: () => ($session = { username: $session.username }),
+        action: () => (logout(), ($session = { username: $session.username })),
         title: "Logout",
         icon: "shutdown",
     }}
@@ -106,7 +107,7 @@
 >
     <slot slot="static">
         <a
-            href={`users?role=admin#sidebarEdit-${$session.id}`}
+            href={`users?role=admin#sidebarEdit-${$session.userid}`}
             class="btn btn-link"
             on:click={() => (user = !user)}
         >

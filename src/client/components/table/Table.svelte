@@ -34,10 +34,7 @@
         "The responsive layout also provides fixed-width containers. Use grid-xs(480px), grid-sm(600px), grid-md(840px), grid-lg(960px) or grid-xl(1280px) to the container for a fixed-width container with the specific max-width.";
 </script>
 
-<table
-    class="table table-striped table-hover table-scroll"
-    class:table-scroll={$media.md}
->
+<table class="table table-hover table-scroll" class:table-scroll={$media.md}>
     <thead>
         <tr>
             <th />

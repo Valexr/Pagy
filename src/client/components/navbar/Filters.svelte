@@ -5,7 +5,7 @@
     import { items, filters } from "@stores/store";
 
     function toggle() {
-        $fragment = "#sidebarFilters";
+        $fragment = $fragment === "#sidebarFilters" ? "" : "#sidebarFilters";
     }
 </script>
 

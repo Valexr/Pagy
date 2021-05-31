@@ -53,7 +53,7 @@
     onMount(async () => {
         $form.valid = false;
         const cookies = await cookie();
-        console.log(cookies.ok);
+        console.log(cookies);
         if (cookies.ok) {
             const user = await cookies.json();
             noticy.warning($t("authenticate-please"), 0, $t("jwt-expired"));
@@ -65,6 +65,13 @@
                 $form.err.password = $t("authenticate-please");
                 password.focus();
             }
+        } else if (!cookie.ok) {
+            noticy.warning(
+                $t("authenticate-compromised"),
+                0,
+                $t("session-changed")
+            );
+            username.focus();
         } else if ($session.username) {
             noticy.error($t("authenticate-please"), 5000, $t("jwt-expired"));
             $form.username = $session.username;

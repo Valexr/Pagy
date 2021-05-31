@@ -1,12 +1,19 @@
 <script>
     import { onDestroy, onMount, tick } from "svelte";
+    import { fade } from "svelte/transition";
     import { query, fragment } from "svelte-pathfinder";
     import { page } from "@routes";
     import { items } from "@stores/store";
     import * as db from "@api/db";
-    import { SideBar, Code } from "@cmp";
+    import { SideBar, Code, Form } from "@cmp";
 
-    let editForm = { title: "" };
+    let editForm = { title: "" },
+        atab = Code,
+        tabs = [
+            { name: "JSON", comp: Code },
+            { name: "Form", comp: Form },
+        ];
+
     $: id = $fragment.split("-")[1];
 
     async function getForm(items) {
@@ -30,7 +37,24 @@
                 <h3>{Object.values(editForm)[0]}</h3>
             </div>
             <div class="column col-12">
-                <Code data={editForm} />
+                <ul class="tab tab-block">
+                    {#each tabs as tab}
+                        <li class="tab-item" class:active={atab == tab.comp}>
+                            <a
+                                href="#_"
+                                on:click|preventDefault={() =>
+                                    (atab = tab.comp)}
+                            >
+                                {tab.name}
+                            </a>
+                        </li>
+                    {/each}
+                </ul>
+                {#key atab}
+                    <div in:fade>
+                        <svelte:component this={atab} data={editForm} />
+                    </div>
+                {/key}
                 <!-- <div class="accordion">
                     <input
                         type="checkbox"

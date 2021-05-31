@@ -7,6 +7,7 @@ export default async function (url, { ...options }, body = undefined) {
     function req() {
         return fetch(base + url, {
             ...options,
+            // credentials: 'include',
             headers: {
                 Authorization: `Baerer ${get(session).access}`,
                 "Content-Type": "application/json",
@@ -24,7 +25,7 @@ export default async function (url, { ...options }, body = undefined) {
                 return { status: 400 }
                 // goto(`/${get(history).lang}/auth`);
             }
-        }
+        } else if (res.status === 400) return { status: 400 }
         return res.json();
     } catch (err) {
         console.log("err: ", err)

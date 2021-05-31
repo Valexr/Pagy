@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
+import cookie from "cookie";
 
 export default function token(req, res, next) {
-    if (req.headers.cookie) next()
-    else if (req.headers.authorization) {
+    console.log(req.headers.cookie)
+    if (req.headers.authorization) {
         try {
             const token = req.headers.authorization.split(' ')[1];
             const verified = jwt.verify(token, process.env.JWT_SECRET);
@@ -18,7 +19,15 @@ export default function token(req, res, next) {
                 default: res.error(400, err.message) // invalid signature, jwt malformed, jwt must be provided
                     break
             }
-            console.log("error: ", err.message, err.expiredAt)
+            console.log("tokenERR: ", err.message, err.expiredAt)
+        }
+    } else if (req.headers.cookie) {
+        try {
+            const cookies = cookie.parse(req.headers.cookie)
+            if (cookies.sid.length) next()
+            else return
+        } catch (err) {
+            console.log(err)
         }
     } else {
         res.error(400, 'token not provided')

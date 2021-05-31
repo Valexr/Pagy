@@ -14,8 +14,8 @@ const app = server({
 app.sub('/api', (app) => {
     app.sub('/v1', app => {
         app.use(...middlewares)
-        app.use(cookie)
         app.sub('/auth', auth)
+        app.use(cookie)
         app.use(token)
         app.sub('/db', db)
     })
