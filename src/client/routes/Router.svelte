@@ -1,49 +1,58 @@
 <script>
-    import { url, path, query, pattern, click, goto } from "svelte-pathfinder";
-    import Viewpoint from "svelte-viewpoint";
+    import { beforeUpdate } from "svelte";
+    import {
+        url,
+        path,
+        query,
+        pattern,
+        click,
+        redirect,
+        state,
+    } from "svelte-pathfinder";
     import { page, authed, history, Transition } from "@routes";
     import { items, filters } from "@stores/store";
     import * as db from "@api/db";
-    import { session, logout } from "@api/auth";
-    import Auth from "@pages/auth.svelte";
+    import { logout, session, cookie } from "@api/auth";
     import { Loader } from "@cmp";
-    import { noticy } from "@cmp";
-    import {
-        t,
-        init,
-        register,
-        addMessages,
-        getLocaleFromPathname,
-        getLocaleFromNavigator,
-    } from "svelte-intl-precompile";
-    import en from "@lang/en.json";
-    import ru from "@lang/ru.json";
+
+    $: console.log($authed, $session, $state);
+
+    $: getSession();
+
+    beforeUpdate(() => {
+        if (!$pattern("/:lang/*")) {
+            path.set(`/${$history.lang}${$path}`);
+        }
+    });
 
     $: if ($page) {
-        addMessages("en", en);
-        addMessages("ru", ru);
-        init({
-            fallbackLocale: "en",
-            initialLocale: $history.lang,
-        });
-        // async function registerLang(lang) {
-        //     await register("en", () => import("@lang/en.json"));
-        //     await register("ru", () => import("@lang/ru.json"));
-        //     init({
-        //         fallbackLocale: "en",
-        //         initialLocale: lang,
-        //     });
-        // }
-        // registerLang($history.lang);
+        $history = { ...$history, prev: $url, [$page.alias]: $url };
+        if ($authed && $pattern("/:lang/auth"))
+            redirect($state.prev || $history.users);
+    }
+
+    async function getSession() {
+        const auth = () =>
+            !$pattern("/:lang/auth") &&
+            redirect(`/auth`, { prev: $history.prev });
+        try {
+            const user = await cookie();
+            if (user && user.userid) {
+                session.set(user);
+                state.set(user);
+            } else auth();
+        } catch (err) {
+            console.log(err);
+            auth();
+        }
     }
 
     async function getData(query, page) {
+        console.log(page.alias);
         if (query.length > 0)
             try {
-                const data = await db.get(
-                    `/${page.alias}/items${query.split("&id")[0]}`
-                );
-                console.log(data);
+                const path = `/${page.alias}/items${query.split("&id")[0]}`;
+                const data = await db.get(path);
                 if (data.status === 400) {
                     await logout();
                 } else {
@@ -57,23 +66,9 @@
                 console.log(err);
             }
     }
-
-    $: {
-        !$authed
-            ? goto(`/auth`)
-            : $pattern("/:lang/auth") && goto($history.users);
-
-        if (!$pattern("/:lang/*")) $path = `/${$history.lang + $path}`;
-
-        $history[$page.alias] = $url;
-    }
-    async function unload() {
-        await logout();
-        return "Do you really want to close?";
-    }
 </script>
 
-<svelte:window on:click={click} on:beforeunload={unload} />
+<svelte:window on:click={click} on:beforeunload={!$session.maxAge && logout} />
 
 {#await $page.component()}
     <Loader />
@@ -87,15 +82,4 @@
     {/await}
 {/await}
 
-<!-- <Viewpoint
-            delay={0}
-            timeout={500}
-            {...$page}
-            query={$query}
-            path={$path}
-            res={getData($query, $page)}
-        >
-            <Loader slot="loading" />
-            <Loader slot="waiting" />
-        </Viewpoint> -->
 <style lang="scss"></style>

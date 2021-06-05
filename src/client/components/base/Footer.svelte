@@ -10,7 +10,7 @@
     } from "svelte-pathfinder";
     import { t } from "svelte-intl-precompile";
     import slugify from "@sindresorhus/slugify";
-    import { history, page, authed } from "@routes";
+    import { history, page } from "@routes";
     import { session } from "@api/auth";
 
     $: log = {
@@ -18,12 +18,10 @@
         path: $path,
         query: $query,
         fragment: $fragment,
-        authed: $authed,
         session: $session,
-        // history: $history,
     };
 
-    let logopen = false;
+    let logopen = true;
 
     // $: console.dir(log);
 </script>

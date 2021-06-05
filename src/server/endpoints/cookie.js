@@ -1,9 +1,12 @@
-import bcrypt from "bcryptjs";
 import cookie from "cookie";
-import jwt from "jsonwebtoken";
+import crypto from 'crypto'
 import DB from "$lib/db"
 
 export default async function (req, res, next) {
+    console.log(crypto.randomUUID(), crypto.scrypt('password', 'salt', 64, (err, derivedKey) => {
+        if (err) throw err;
+        console.log(derivedKey.toString('hex'));
+    }))
     if (req.headers.cookie) {
         try {
             const cookies = cookie.parse(req.headers.cookie)
@@ -15,19 +18,19 @@ export default async function (req, res, next) {
                 const session = SESSIONS.id(atob(cookies.sid))
                 if (session.id) {
                     const verified = ip.localeCompare(session.ip) === 0 && ua.normalize() === session.ua.normalize()
-                    // const access = jwt.verify(session.access, process.env.JWT_SECRET);
-                    // const refresh = jwt.verify(session.refresh, process.env.JWT_SECRET);
-                    // const pass = await bcrypt.compare(user.password, verified.pass)
-                    // if (!pass) { return res.error(401, "Bad password"); }
-                    const user = { userid: session.userid, username: session.username }
+                    const user = { userid: session.userid, username: session.username, role: session.role }
                     console.log('cookie: ', cookies, session, user, verified)
-                    req.url.includes('cookie') ? res.json(user) : verified && next()
+                    req.url.includes('cookie')
+                        ? res.json(user)
+                        : verified
+                            ? next()
+                            : res.error(400, 'cookie invalid');
                 }
             } else next()
 
         } catch (err) {
             console.log("cookieERR: ", err)
-            res.error(400, err, {
+            res.error(400, 'cookie invalid', {
                 'Set-Cookie': cookie.serialize('sid', '', { maxAge: 0, path: '/' })
             });
         }

@@ -17,7 +17,7 @@
 
 <ul class="breadcrumb">
     <li class="breadcrumb-item">
-        <a href="/home"> <i class="icon icon-home" /></a>
+        <a href="/"> <i class="icon icon-home" /></a>
     </li>
     {#each crumbs as link}
         <li class="breadcrumb-item">

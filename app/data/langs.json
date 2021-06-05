@@ -1,0 +1,39 @@
+{
+    "en": {
+        "welcome-to-pg": "Welcome to Pg!",
+        "login-please": "Login please",
+        "jwt-expired": "Session expired",
+        "authenticate-please": "Authenticate please",
+        "session-changed": "Session changed",
+        "authenticate-compromised": "Authenticate compromised. \n If not you, change password.",
+        "expires": "Expires ",
+        "email": "Email",
+        "password": "Password",
+        "remember-me": "Remember me",
+        "uses-cookies": "Uses cookies",
+        "sign-in": "Sign in",
+        "user-not-found": "User not found",
+        "invalid-password": "Invalid password",
+        "forget-password": "Forget password?",
+        "footer": "Footer",
+        "error404": "error404"
+    },
+    "ru": {
+        "welcome-to-pg": "Добро пожаловать в Pg!",
+        "login-please": "Авторизуйтесь пожалуйста",
+        "jwt-expired": "Сессия истекла",
+        "authenticate-please": "Подтвердите пароль",
+        "expires": "Истекает ",
+        "email": "Электропочта",
+        "password": "Пароль",
+        "remember-me": "Запомнить меня",
+        "uses-cookies": "Используются cookies",
+        "sign-in": "Войти",
+        "user-not-found": "Пользователь не найден",
+        "invalid-password": "Неверный пароль",
+        "forget-password": "Забыли пароль?",
+        "footer": "Футер",
+        "error404": "ошибка404"
+    },
+    "fr": {}
+}

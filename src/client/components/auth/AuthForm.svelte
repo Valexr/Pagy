@@ -3,20 +3,10 @@
     import { aoviSvelte } from "aovi-svelte";
     import { t } from "svelte-intl-precompile";
     import { noticy } from "@cmp";
-    import { login, refresh, session, cookie } from "@api/auth";
-    // import { login } from "@api/login";
-    import { date, time } from "@utils";
+    import { login, session, cookie } from "@api/auth";
+    import { date, time, createTimer } from "@utils";
     import { history, authed } from "@routes";
-    import {
-        url,
-        path,
-        query,
-        pattern,
-        fragment,
-        state,
-        click,
-        goto,
-    } from "svelte-pathfinder";
+    import { goto } from "svelte-pathfinder";
 
     const form = aoviSvelte({
         username: "",
@@ -37,31 +27,35 @@
 
     onMount(async () => {
         $form.valid = false;
-        const res = await cookie();
-        if (res.ok) {
-            const user = await res.json();
-            noticy.warning($t("authenticate-please"), 0, $t("jwt-expired"));
-            $form.username = user.username;
-            $form.remember = true;
-            if (password && !password.value) {
-                $form.err.password = $t("authenticate-please");
-                password.focus();
-            }
-        } else if ($session.username) {
-            noticy.error($t("authenticate-please"), 0, $t("jwt-expired"));
+        // const cookies = await cookie();
+        // console.log(cookies);
+        // if (cookies.ok) {
+        //     const user = await cookies.json();
+        //     noticy.warning($t("authenticate-please"), 0, $t("jwt-expired"));
+        //     $form.username = user.username;
+        //     $form.remember = true;
+        //     console.log(user);
+
+        //     if (password && !password.value) {
+        //         $form.err.password = $t("authenticate-please");
+        //         password.focus();
+        //     }
+        // } else
+        if ($session.username) {
+            noticy.error($t("authenticate-please"), 5000, $t("jwt-expired"));
             $form.username = $session.username;
+
             if (password && !password.value) {
                 $form.err.password = $t("authenticate-please");
                 password.focus();
             }
         } else {
-            noticy.primary($t("login-please"), 0, $t("welcome-to-pagy"));
+            noticy.primary($t("login-please"), 10000, $t("welcome-to-pg"));
             username.focus();
         }
     });
 
     async function submit() {
-        // patch("items");
         form.aovi
             .check("username")
             .required("Email?")
@@ -92,8 +86,9 @@
                         case 200:
                             noticy.success(
                                 $form.username,
-                                2500,
-                                $t("expires") + time(res.user.exp * 1000)
+                                5000,
+                                $t("expires") +
+                                    date(res.user.maxAge * 1000 + Date.now())
                             );
                             goto(`/users?role=admin`);
                             break;
@@ -149,7 +144,7 @@
             {#if $form.err.username}
                 <span class="form-input-hint">{$form.err.username}</span>
                 <!-- {:else if $good_username}
-                <span class="form-input-hint">Good email!</span> -->
+                        <span class="form-input-hint">Good email!</span> -->
             {/if}
         </div>
         <div
@@ -234,6 +229,7 @@
     >
         {$t("sign-in")}
     </button>
+    <button class="btn btn-link btn-block">{$t("forget-password")}</button>
 </form>
 
 <style lang="scss">

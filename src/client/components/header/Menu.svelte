@@ -10,7 +10,7 @@
 <DropDown
     bind:opener={menu}
     openbut={{ name: "", icon: "icon-apps", class: "btn-link" }}
-    items={$routes.filter((r) => r.menu)}
+    items={routes.filter((r) => r.menu)}
     downbut={null}
     let:item
 >

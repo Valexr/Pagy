@@ -6,7 +6,7 @@
 
 <svelte:head>
     {#if $page.props}
-        <title>{`${name} — ${$page.props.title + $url}`}</title>
+        <title>{`${name} — ${$page.props.title} + ${$url}`}</title>
         <meta name="keywords" content={$page.props.keywords} />
         <meta name="description" content={$page.props.description} />
     {/if}

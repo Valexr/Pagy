@@ -1,8 +1,11 @@
 {
     "welcome-to-pg": "Добро пожаловать в Pg!",
     "login-please": "Авторизуйтесь пожалуйста",
-    "jwt-expired": "Сессия истекла",
+    "jwt-expired": "Токен просрочен",
     "authenticate-please": "Подтвердите пароль",
+    "session-logout": "Сессия завершена",
+    "session-changed": "Сессия изменилась",
+    "session-compromised": "Сессия скомпрометирована. \n Если это не вы, измените пароль.",
     "expires": "Истекает ",
     "email": "Электропочта",
     "password": "Пароль",

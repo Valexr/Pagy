@@ -14,7 +14,6 @@
             .flat()
             .filter((k) => k.length > 3)
             .join(" ")}`;
-    // $: console.log($media, keys);
 </script>
 
 <Head {name} />

@@ -1,30 +1,28 @@
 {
   "items": [
     {
-      "id": "45meOF51X3c_PkzTOR2a-",
+      "id": "08T69WbNwMpS2fzVtgcfZ",
+      "userid": 1618914837935,
+      "role": "admin",
+      "username": "valexr@gmail.com",
+      "remember": true,
+      "maxAge": 31536000,
+      "ip": "127.0.0.1",
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:90.0) Gecko/20100101 Firefox/90.0",
+      "create": "Sat Jun 05 2021 17:13:59 GMT+0300 (Moscow Standard Time)",
+      "exp": "Sun Jun 05 2022 17:13:59 GMT+0300 (Moscow Standard Time)"
+    },
+    {
+      "id": "NXSRnjukFhFCNMqojqugm",
       "userid": 1619468162034,
       "role": "developer",
       "username": "tarzan@mail.ru",
       "remember": true,
-      "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjE2MTk0NjgxNjIwMzQsInVzZXJuYW1lIjoidGFyemFuQG1haWwucnUiLCJyb2xlIjoiZGV2ZWxvcGVyIiwicmVtZW1iZXIiOnRydWUsImlwIjoiMTI3LjAuMC4xIiwidWEiOiJNb3ppbGxhLzUuMCAoTWFjaW50b3NoOyBJbnRlbCBNYWMgT1MgWCAxMC4xNTsgcnY6ODkuMCkgR2Vja28vMjAxMDAxMDEgRmlyZWZveC84OS4wIiwicGFzcyI6IiQyYSQwOSRjYVl4YmlvdlRna2FRaFRwdk5IY0xPek5abW41QUZqNXpRQ3lrZ2Z0eHVJVFNYMDRwTkRzTyIsImlhdCI6MTYyMjM2ODgxMSwiZXhwIjoxNjIyMzY4ODcxfQ.8gt_OzpKLs9bIAXEWOM7she6H0oxwYR1SgOG94dm0MQ",
-      "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjE2MTk0NjgxNjIwMzQsInBhc3MiOiIkMmEkMDkkWkdRdVhXNmtxdkNSaGxXWXZ1cTI4dW9vSnpKWHJXbExxTUFKMVYzalRBVEE5a3JUc3JZRDYiLCJpYXQiOjE2MjIzNjg4MTEsImV4cCI6MTYyMjM3MjQxMX0.edRKS8lXaFltIrWp851S2aihrWn6AmvcukXh5HHyGrw",
-      "exp": "60m",
-      "ip": "127.0.0.1",
-      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0",
-      "date": "Sun May 30 2021 13:00:11 GMT+0300 (Moscow Standard Time)"
-    },
-    {
-      "id": "B60KjkKLf3NFTkLxzL6MC",
-      "userid": 1618914837935,
-      "role": "admin",
-      "username": "valexr@gmail.com",
-      "remember": false,
-      "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjE2MTg5MTQ4Mzc5MzUsInVzZXJuYW1lIjoidmFsZXhyQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInJlbWVtYmVyIjpmYWxzZSwiaXAiOiIxMjcuMC4wLjEiLCJ1YSI6Ik1vemlsbGEvNS4wIChNYWNpbnRvc2g7IEludGVsIE1hYyBPUyBYIDEwLjE1OyBydjo4OS4wKSBHZWNrby8yMDEwMDEwMSBGaXJlZm94Lzg5LjAiLCJwYXNzIjoiJDJhJDA5JE03TS5FUDJ5S2tDQVZBQXpxUVgvc2V5UTlNcFNwck9YRzRncWQuRHdWbE0ueThpbUF0Qm1LIiwiaWF0IjoxNjIyNDYxNzg4LCJleHAiOjE2MjI0NjE4NDh9.8DbhFdKP0ilAUOxPBKJhTiJ8ha-Wr2tvHvx1js-Vfj4",
-      "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjE2MTg5MTQ4Mzc5MzUsInBhc3MiOiIkMmEkMDkkYloudU5iTnE5bHhteGZkU3ZvVFhOLlljVlEuZVlNbWw1amRWLldETzF1NkJ3MWY5eFZSVEMiLCJpYXQiOjE2MjI0NjE3ODgsImV4cCI6MTYyMjQ2NTM4OH0.huW41Eug0oJ_C5RrNL0VfgIj2PtUj2nN0Uzf8QLMPig",
-      "exp": "60m",
-      "ip": "127.0.0.1",
-      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0",
-      "date": "Mon May 31 2021 14:49:48 GMT+0300 (Moscow Standard Time)"
+      "maxAge": 31536000,
+      "ip": "192.168.88.243",
+      "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1",
+      "create": "Sat Jun 05 2021 18:17:09 GMT+0300 (Moscow Standard Time)",
+      "exp": "Sun Jun 05 2022 18:17:09 GMT+0300 (Moscow Standard Time)"
     }
   ]
 }

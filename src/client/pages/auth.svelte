@@ -1,37 +1,11 @@
-<!-- <script context="module">
-    import { cookie } from "@api/auth";
-    export async function preload({ path, query }) {
-        const data = await locales.get("locales", query.split("&id")[0]);
-        return { data };
-    }
-    cookie().then(async (res) => {
-        if (res.ok) {
-            noticy.default(JSON.stringify(await res.json(), 0, 2), 5000);
-        }
-    });
-</script> -->
 <script>
-    import { onMount, tick } from "svelte";
+    import { onMount } from "svelte";
+    import { redirect } from "svelte-pathfinder";
     import { aoviSvelte } from "aovi-svelte";
     import { t } from "svelte-intl-precompile";
+    import { login, session } from "@api/auth";
+    import { date } from "@utils";
     import { noticy } from "@cmp";
-    import { login, refresh, session, cookie } from "@api/auth";
-    import { date, time, createTimer } from "@utils";
-    import { history, authed } from "@routes";
-    import { goto } from "svelte-pathfinder";
-    import CryptoJS from "crypto-js";
-
-    // Encrypt
-    const ciphertext = CryptoJS.AES.encrypt(
-        JSON.stringify($session),
-        "secret key 123"
-    ).toString();
-
-    // Decrypt
-    const bytes = CryptoJS.AES.decrypt(ciphertext, "secret key 123");
-    const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-
-    console.log(ciphertext, decryptedData); // [{id: 1}, {id: 2}]
 
     const form = aoviSvelte({
         username: "",
@@ -50,38 +24,23 @@
         $form.err.username ||
         $form.err.password;
 
-    onMount(async () => {
+    onMount(() => {
         $form.valid = false;
-        const cookies = await cookie();
-        console.log(cookies);
-        if (cookies.ok) {
-            const user = await cookies.json();
-            noticy.warning($t("authenticate-please"), 0, $t("jwt-expired"));
-            $form.username = user.username;
-            $form.remember = true;
-            console.log(user);
-
-            if (password && !password.value) {
-                $form.err.password = $t("authenticate-please");
-                password.focus();
-            }
-        } else if (!cookie.ok) {
+        if ($session.username) {
             noticy.warning(
-                $t("authenticate-compromised"),
-                0,
-                $t("session-changed")
+                $t("authenticate-please"),
+                5000,
+                $t("session-logout")
             );
-            username.focus();
-        } else if ($session.username) {
-            noticy.error($t("authenticate-please"), 5000, $t("jwt-expired"));
             $form.username = $session.username;
+            $form.remember = true;
 
             if (password && !password.value) {
                 $form.err.password = $t("authenticate-please");
                 password.focus();
             }
         } else {
-            noticy.primary($t("login-please"), 10000, $t("welcome-to-pg"));
+            noticy.primary($t("login-please"), 5000, $t("welcome-to-pg"));
             username.focus();
         }
     });
@@ -102,6 +61,7 @@
             onAuth = true;
             login(form.get())
                 .then((res) => {
+                    console.log(res);
                     onAuth = false;
                     switch (res.status) {
                         case 400:
@@ -115,12 +75,15 @@
                             password.focus();
                             break;
                         case 200:
+                            const exp = res.user.maxAge
+                                ? date(res.user.maxAge * 1000 + Date.now())
+                                : "Session";
                             noticy.success(
                                 $form.username,
                                 5000,
-                                $t("expires") + time(res.user.exp * 1000)
+                                $t("expires") + exp
                             );
-                            goto(`/users?role=admin`);
+                            redirect(`/users?role=${res.user.role}`);
                             break;
                     }
                 })

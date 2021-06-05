@@ -1,8 +1,8 @@
-import { readable, writable, derived, get } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 import { pattern } from "svelte-pathfinder";
-import { session, refresh } from "@api/auth";
+import { session } from "@api/auth";
 
-export const routes = readable([
+export const routes = [
     {
         match: '/:lang/auth',
         default: '/auth',
@@ -10,12 +10,13 @@ export const routes = readable([
         menu: false,
         navbar: false,
         icon: 'emoji',
+        auth: true,
         component: () => import('@pages/auth.svelte'),
         props: { title: 'auth', keywords: 'keywords', description: 'description' }
     },
     {
-        match: '/:lang/home',
-        default: '/home',
+        match: '/:lang/',
+        default: '/',
         alias: 'home',
         menu: true,
         navbar: false,
@@ -74,6 +75,26 @@ export const routes = readable([
         props: { title: 'repository', keywords: 'keywords', description: 'description' }
     },
     {
+        match: '/:lang/translation',
+        default: '/translation',
+        alias: 'translation',
+        menu: true,
+        navbar: true,
+        icon: 'flag',
+        component: () => import('@pages/translation.svelte'),
+        props: { title: 'translation', keywords: 'keywords', description: 'description' }
+    },
+    {
+        match: '/:lang/tokens',
+        default: '/tokens',
+        alias: 'tokens',
+        menu: true,
+        navbar: true,
+        icon: 'share',
+        component: () => import('@pages/tokens.svelte'),
+        props: { title: 'tokens', keywords: 'keywords', description: 'description' }
+    },
+    {
         match: '/:lang/system',
         default: '/system',
         alias: 'system',
@@ -91,15 +112,13 @@ export const routes = readable([
         component: () => import('@pages/404.svelte'),
         props: { title: '404', keywords: 'keywords', description: 'description' }
     },
-]);
-
-export const page = derived([routes, pattern], ([$routes, $pattern]) => $routes.find((route) => $pattern(route.match)) || null)
+];
 
 export const history = writable(JSON.parse(sessionStorage.getItem("history")) || { lang: 'en' });
 history.subscribe(val => sessionStorage.setItem("history", JSON.stringify(val)));
 
 export const authed = derived(session, ($session, set) => {
-    if ($session.userid) {
-        set($session.userid ? true : false)
-    } else set(false)
+    if ($session) $session.userid ? set(true) : set(false)
 }, false);
+
+export const page = derived([pattern], ([$pattern]) => routes.find((route) => $pattern(route.match)) || null)

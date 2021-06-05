@@ -1,1 +1,5 @@
-*.map
+# !/app
+
+**/*.map
+**/.DS_Store*
+**/tmp*
