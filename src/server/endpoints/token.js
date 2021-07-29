@@ -20,10 +20,10 @@ export default function token(req, res, next) {
     } else if (req.headers.cookie) {
         try {
             const cookies = cookie.parse(req.headers.cookie)
-            if (cookies.sid.length) next()
-            else return
+            if (cookies.sid && cookies.sid.length) next()
+            else res.error(400, 'cookie invalid');
         } catch (err) {
-            console.log(err)
+            console.log('tokenERR:', err)
         }
     } else {
         res.error(400, 'token not provided')

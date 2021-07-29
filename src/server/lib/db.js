@@ -76,7 +76,7 @@ async function connect(file, table = 'items') {
             }
         }
     } catch (err) {
-        console.log(err)
+        console.log('dbERR:', err)
     }
 }
 

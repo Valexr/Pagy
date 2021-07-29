@@ -26,14 +26,14 @@ export default function (app) {
                     ? base.search(req.query.q)
                     : base.match(req.query)
                 req.query.id
-                    ? res.json(base.id(+req.query.id))
-                    : res.json({ items, filters })
+                    ? res.send(base.id(+req.query.id))
+                    : res.send({ items, filters })
 
             } else if (all) {
-                res.json(base.data)
+                res.send(base.data)
 
             } else {
-                res.json(base.table)
+                res.send(base.table)
             }
         } catch (err) {
             console.log('dbERR: ', err)
@@ -47,7 +47,7 @@ export default function (app) {
             await base.insert({ ...req.body, ...meta })
             delete req.query.id
             const items = base.match(req.query)
-            res.json(items)
+            res.send(items)
         } catch (err) {
             console.log('dbERR: ', err)
             next()
@@ -60,7 +60,7 @@ export default function (app) {
             await base.update(+req.query.id, meta)
             delete req.query.id
             const items = base.match(req.query)
-            res.json(items)
+            res.send(items)
         } catch (err) {
             console.log('dbERR: ', err)
             next()
@@ -85,7 +85,7 @@ export default function (app) {
                 : await base.delete(req.query)
             delete req.query.id
             const items = base.match(req.query)
-            res.json(items)
+            res.send(items)
         } catch (err) {
             console.log('dbERR: ', err)
             next()

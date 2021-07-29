@@ -1,0 +1,142 @@
+// Define variables to override default ones
+
+// $primary-color: #3c50c8;
+// $primary-color: #4d1ed3;
+// $primary-color: #4240d4;
+// $primary-color: #302ecc;
+// $error-color: #c02020;
+// $font-size: 0.9rem;
+// $font-size-sm: .8rem;
+// $font-size-lg: 1rem;
+// $light-color: #303742 !default;
+// $dark-color: #fff !default;
+$off-canvas-breakpoint: 840px;
+
+// Variables and mixins
+@import "./spectre/variables";
+@import "./spectre/mixins";
+
+// Reset and dependencies
+@import "./spectre/normalize";
+@import "./spectre/base";
+
+// Elements
+@import "./spectre/typography";
+@import "./spectre/tables";
+@import "./spectre/buttons";
+@import "./spectre/forms";
+@import "./spectre/labels";
+@import "./spectre/codes";
+@import "./spectre/media";
+
+// Layout
+@import "./spectre/layout";
+@import "./spectre/hero";
+@import "./spectre/navbar";
+
+// Components
+@import "./spectre/accordions";
+@import "./spectre/avatars";
+@import "./spectre/badges";
+// @import "./spectre/breadcrumbs";
+// @import "./spectre/bars";
+@import "./spectre/cards";
+// @import "./spectre/chips";
+@import "./spectre/dropdowns";
+// @import "./spectre/empty";
+@import "./spectre/menus";
+@import "./spectre/modals";
+@import "./spectre/navs";
+// @import "./spectre/pagination";
+// @import "./spectre/panels";
+// @import "./spectre/popovers";
+// @import "./spectre/steps";
+@import "./spectre/tabs";
+// @import "./spectre/tiles";
+@import "./spectre/toasts";
+@import "./spectre/tooltips";
+
+// Utility classes
+@import "./spectre/animations";
+@import "./spectre/utilities";
+
+@import "./spectre/spectre-icons";
+// @import "./spectre/spectre-exp";
+
+// ROOT
+:root {
+    // Core colors
+    --primary-color: #{$primary-color};
+    --primary-color-dark: #{$primary-color-dark};
+    --primary-color-light: #{$primary-color-light};
+    --secondary-color: #{$secondary-color};
+    --secondary-color-dark: #{$secondary-color-dark};
+    --secondary-color-light: #{$secondary-color-light};
+
+    // Gray colors
+    --dark-color: #{$dark-color};
+    --light-color: #{$light-color};
+    --gray-color: #{$gray-color};
+    --gray-color-dark: #{$gray-color-dark};
+    --gray-color-light: #{$gray-color-light};
+
+    --border-color: #{$border-color};
+    --border-color-dark: #{$border-color-dark};
+    --border-color-light: #{$border-color-light};
+    --bg-color: #{$bg-color};
+    --bg-color-dark: #{$bg-color-dark};
+    --bg-color-light: #{$bg-color-light};
+
+    // Control colors
+    --success-color: #{$success-color};
+    --warning-color: #{$warning-color};
+    --error-color: #{$error-color};
+
+    // Other colors
+    --code-color: #{$code-color};
+    --highlight-color: #{$highlight-color};
+    --body-bg: #{$body-bg};
+    --body-font-color: #{$body-font-color};
+    --link-color: #{$link-color};
+    --link-color-dark: #{$link-color-dark};
+    --link-color-light: #{$link-color-light};
+}
+
+.icon-edit::before {
+    border-width: 0.1rem;
+    transform: translate(-45%, -65%) rotate(-45deg);
+}
+.sm-acts {
+    top: -2px;
+}
+.form-select {
+    -webkit-appearance: none;
+}
+
+@include bg-color-variant(".bg-light", $light-color);
+@include bg-color-variant(".bg-gray-dark", $gray-color-dark);
+@include bg-color-variant(".bg-gray-light", $gray-color-light);
+@include bg-color-variant(".bg-gray", $gray-color);
+
+@include text-color-variant(".text-ligh", $light-color);
+
+.modal.modal-lg {
+    .modal-overlay {
+        background: rgba(247, 248, 249, 0.75);
+    }
+    .modal-container {
+        max-height: 97vh;
+        height: 100%;
+    }
+}
+.dropdown-auto {
+    .menu {
+        min-width: auto;
+    }
+}
+.menu .menu-item > a {
+    white-space: nowrap;
+}
+.code {
+    margin: 0;
+}

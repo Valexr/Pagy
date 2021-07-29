@@ -50,7 +50,7 @@
                 password.focus();
             }
         } else {
-            noticy.primary($t("login-please"), 10000, $t("welcome-to-pg"));
+            noticy.primary($t("login-please"), 10000, $t("welcome-to-pagy"));
             username.focus();
         }
     });

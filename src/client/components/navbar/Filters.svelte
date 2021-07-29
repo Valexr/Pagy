@@ -10,7 +10,7 @@
 </script>
 
 <button
-    class="btn btn-primary badge"
+    class="btn badge"
     class:btn-action={$media.xs}
     data-badge={$filters && Object.keys($filters).length}
     on:click|stopPropagation={toggle}

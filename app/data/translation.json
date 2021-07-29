@@ -1,4 +1,10 @@
 {
+    "filters": {
+        "lang": [
+            "en",
+            "ru"
+        ]
+    },
     "en": {
         "welcome-to-pg": "Welcome to Pg!",
         "login-please": "Login please",

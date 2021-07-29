@@ -1,28 +1,26 @@
 {
   "items": [
     {
-      "id": "08T69WbNwMpS2fzVtgcfZ",
-      "userid": 1618914837935,
-      "role": "admin",
-      "username": "valexr@gmail.com",
-      "remember": true,
-      "maxAge": 31536000,
-      "ip": "127.0.0.1",
-      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:90.0) Gecko/20100101 Firefox/90.0",
-      "create": "Sat Jun 05 2021 17:13:59 GMT+0300 (Moscow Standard Time)",
-      "exp": "Sun Jun 05 2022 17:13:59 GMT+0300 (Moscow Standard Time)"
-    },
-    {
-      "id": "NXSRnjukFhFCNMqojqugm",
+      "id": "a70b4f4d-efa2-4c77-996e-bd70dde4799f",
       "userid": 1619468162034,
       "role": "developer",
       "username": "tarzan@mail.ru",
-      "remember": true,
-      "maxAge": 31536000,
-      "ip": "192.168.88.243",
-      "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1",
-      "create": "Sat Jun 05 2021 18:17:09 GMT+0300 (Moscow Standard Time)",
-      "exp": "Sun Jun 05 2022 18:17:09 GMT+0300 (Moscow Standard Time)"
+      "remember": false,
+      "ip": "127.0.0.1",
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:90.0) Gecko/20100101 Firefox/90.0",
+      "create": "Wed Jun 16 2021 12:44:17 GMT+0300 (Moscow Standard Time)",
+      "exp": "Session"
+    },
+    {
+      "id": "7a0c02e8-279d-46e0-9f91-e1a023093d5e",
+      "userid": 1618914837935,
+      "role": "admin",
+      "username": "valexr@gmail.com",
+      "remember": false,
+      "ip": "172.18.0.1",
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Safari/605.1.15",
+      "create": "Mon Jul 05 2021 07:06:20 GMT+0000 (Coordinated Universal Time)",
+      "exp": "Session"
     }
   ]
 }

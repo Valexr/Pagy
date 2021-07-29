@@ -26,33 +26,38 @@
     };
 </script>
 
-<nav class="navbar container p-sticky bg-light" in:fade={{ duration: 500 }}>
+<nav
+    class="navbar container p-sticky bg-{$media.dark ? 'dark' : 'light'}"
+    in:fade={{ duration: 500 }}
+>
     <section class="navbar-section ">
         <div class="column col-auto">
             <Filters />
         </div>
-        <!-- {#each Object.entries($filters) as [k, v]}
-            <div class="column col-auto">
-                <DropDown
-                    openbut={{
-                        name: $query.params[k] ? $query.params[k] : k,
-                    }}
-                    items={v}
-                    downbut={downbut[k]}
-                    auto
-                    let:item
-                >
-                    <a
-                        href={filterLink(k, v, item, $query.params)}
-                        class="no-wrap"
-                        class:active={item === $query.params[k]}
-                        on:click={() => ($query.params[k] = item)}
+        {#if !$media.lg}
+            {#each Object.entries($filters) as [k, v]}
+                <div class="column col-auto">
+                    <DropDown
+                        openbut={{
+                            name: $query.params[k] ? $query.params[k] : k,
+                        }}
+                        items={v}
+                        downbut={downbut[k]}
+                        auto
+                        let:item
                     >
-                        {item}
-                    </a>
-                </DropDown>
-            </div>
-        {/each} -->
+                        <a
+                            href={filterLink(k, v, item, $query.params)}
+                            class="no-wrap"
+                            class:active={item === $query.params[k]}
+                            on:click={() => ($query.params[k] = item)}
+                        >
+                            {item}
+                        </a>
+                    </DropDown>
+                </div>
+            {/each}
+        {/if}
     </section>
     <section class="navbar-center ">
         <div class="column col-auto">
@@ -62,7 +67,7 @@
     <section class="navbar-section ">
         <div
             class="column"
-            class:col-12={(!$media.md && !$media.sm) || $media.xs}
+            class:col-11={(!$media.md && !$media.sm) || $media.xs}
         >
             <Search />
         </div>
@@ -70,6 +75,7 @@
 </nav>
 
 <style lang="scss">
+    @import "../../sass/spectre/variables";
     .navbar {
         z-index: 99;
         height: 4em;
@@ -77,5 +83,8 @@
         // .no-wrap {
         //     white-space: nowrap;
         // }
+        :global(.bg-dark) & {
+            background: rgba($gray-color-dark, 0.27);
+        }
     }
 </style>

@@ -18,6 +18,7 @@ export async function cookie() {
     try {
         const res = await fetch(path, options)
         if (res.ok) return res.json()
+        else console.log(res);
     } catch (err) {
         console.log("err: ", err)
     }

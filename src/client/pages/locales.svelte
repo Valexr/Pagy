@@ -1,8 +1,9 @@
 <script>
     import { fragment } from "svelte-pathfinder";
+    import { items } from "@stores/store";
     import { Table, TableActions } from "@cmp";
 
-    export let data = {};
+    // export let data = {};
 
     const keys = [
             "region",
@@ -50,7 +51,7 @@
                 action: (e) => console.log(e),
             },
         ];
-    console.log(data.items.reduce((a, c, i) => Object.keys(c), []));
+    console.log($items.reduce((a, c, i) => Object.keys(c), []));
 
     function edit(id) {
         $fragment = `#sidebarEdit-${id}`;
@@ -60,7 +61,7 @@
 <h1 class="flex-centered">Locales</h1>
 
 <section class="container">
-    <Table {keys} items={data.items} {menu} let:item>
+    <Table {keys} items={$items} {menu} let:item>
         <figure class="avatar avatar mr-2" slot="img">
             <img src={item.flag} alt={item.name} />
         </figure>

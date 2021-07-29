@@ -11,6 +11,9 @@
             "@cmp": [
                 "src/client/components/index.js"
             ],
+            "@svectre": [
+                "src/client/svectre/index.js"
+            ],
             "@pages/*": [
                 "src/client/pages/*"
             ],

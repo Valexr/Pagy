@@ -90,7 +90,7 @@
                     class="sub bg-gray"
                     class:sub-open={sub[i] === true}
                 >
-                    <td colspan="8">
+                    <td colspan={keys.length + 3}>
                         <div class="columns">
                             <div class="column col-5">
                                 <p>{p}</p>
@@ -118,6 +118,7 @@
 {/if}
 
 <style lang="scss">
+    @import "../../sass/spectre/variables";
     .sub {
         height: 0;
         transition: height 500ms ease 500ms;
@@ -127,8 +128,18 @@
             // display: table-row;
         }
     }
-    @import "../../../../node_modules/spectre.css/src/variables";
     table {
+        &.table-hover {
+            tbody {
+                tr {
+                    &:hover {
+                        :global(.bg-dark) & {
+                            background: rgba($gray-color-dark, 0.27);
+                        }
+                    }
+                }
+            }
+        }
         td {
             &:focus-visible {
                 outline-color: $primary-color;

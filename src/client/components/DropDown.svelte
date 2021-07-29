@@ -10,7 +10,8 @@
     import { clickout } from "@utils";
     import { media } from "svelte-match-media";
 
-    export let ul = null,
+    export let ul = { node: null, class: "" },
+        li = { class: "" },
         opener = false,
         openbut = {
             name: "Open",
@@ -23,7 +24,7 @@
         downbut = false,
         right = false,
         auto = false;
-    // const open = () => (opener = !opener);
+
     onMount(() => {
         const fn = () => (opener = false);
         list.add(fn);
@@ -45,7 +46,7 @@
     class:active={opener}
 >
     <button
-        class="btn text-capitalize {openbut.class}"
+        class="btn {openbut.class}"
         data-badge={openbut.badge}
         data-initial={openbut.initial}
         on:click|stopPropagation={toggle}
@@ -55,14 +56,14 @@
     </button>
     {#if opener}
         <ul
-            class="menu"
-            bind:this={ul}
-            use:clickout={ul}
+            class="menu {ul.class}"
+            bind:this={ul.node}
+            use:clickout={ul.node}
             on:clickout={() => (opener = !opener)}
         >
             {#if items.length}
                 {#each items as item}
-                    <li class="menu-item text-capitalize">
+                    <li class="menu-item {li.class}">
                         <slot {item}>
                             <a
                                 href={item.href}
@@ -91,7 +92,7 @@
                 <li class="divider" />
                 <li class="menu-item">
                     <button
-                        class="btn btn-primary btn-block text-light"
+                        class="btn btn-block {downbut.class}"
                         on:click={downbut.action}
                     >
                         <i

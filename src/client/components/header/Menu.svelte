@@ -1,6 +1,7 @@
 <script>
     import { tick } from "svelte";
     import { pattern } from "svelte-pathfinder";
+    import { media } from "svelte-match-media";
     import { DropDown } from "@cmp";
     import { routes, history } from "@routes";
 
@@ -12,6 +13,8 @@
     openbut={{ name: "", icon: "icon-apps", class: "btn-link" }}
     items={routes.filter((r) => r.menu)}
     downbut={null}
+    ul={$media.dark && { class: "bg-dark" }}
+    li={{ class: "text-capitalize" }}
     let:item
 >
     <a
@@ -21,10 +24,7 @@
         on:click={() => tick().then(() => (menu = !menu))}
     >
         {#if item.icon}
-            <i
-                class=" menu-icon icon icon-{item.icon}
-                {$pattern(item.match) ? 'text-primary' : 'text-gray'}"
-            />
+            <i class="menu-icon icon icon-{item.icon}" />
         {/if}
         <span class="px-1">{item.props.title}</span>
     </a>

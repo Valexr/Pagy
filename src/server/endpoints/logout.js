@@ -8,7 +8,8 @@ export default async function (req, res, next) {
             const SESSIONS = await DB.connect('sessions', 'items')
             const session = SESSIONS.id(atob(cookies.sid))
             const message = session.maxAge ? { username: session.username } : {}
-            !session.maxAge && res.setHeader('Set-Cookie', 'sid=; max-age=0; path=/');
+            // !session.maxAge && 
+            res.setHeader('Set-Cookie', 'sid=; max-age=0; path=/');
             res.end(JSON.stringify(message))
 
         } catch (err) {

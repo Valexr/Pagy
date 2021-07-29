@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import { nanoid } from 'nanoid';
+import crypto from 'crypto'
 import cookie from "cookie";
 import DB from "$lib/db";
 
@@ -17,7 +18,7 @@ export default async function (req, res, next) {
 
         const ip = req.connection.remoteAddress
         const ua = req.headers['user-agent']
-        const sessionid = nanoid()
+        const sessionid = crypto.randomUUID() //nanoid()
         const session = {
             id: sessionid,
             userid: user.id,

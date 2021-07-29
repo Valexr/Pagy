@@ -1,4 +1,5 @@
 <script>
+    import { slide } from "svelte/transition";
     import {
         url,
         path,
@@ -8,6 +9,7 @@
         click,
         state,
     } from "svelte-pathfinder";
+    import { media } from "svelte-match-media";
     import { t } from "svelte-intl-precompile";
     import slugify from "@sindresorhus/slugify";
     import { history, page } from "@routes";
@@ -26,21 +28,13 @@
     // $: console.dir(log);
 </script>
 
-<footer class="container navbar p-fixed bg-gray p-2">
-    {#if logopen}
-        <pre
-            class="code hide-xs"
-            data-lang="JSON">
-            <code>routing: {JSON.stringify(log, 0, 2)}</code>
-            <code>page: {JSON.stringify($page, 0, 2)}</code>
-            <!-- <code>query: {JSON.stringify($query, 0, 2)}</code> -->
-            <code>history: {JSON.stringify($history, 0, 2)}</code>
-    </pre>
-    {/if}
+<footer class="container navbar p-fixed p-2">
     <section class="navbar-section">
         <div class="column col-auto">
             <button
-                class="btn btn-action btn-sm"
+                class="btn btn-sm"
+                class:bg-dark={$media.dark}
+                class:text-gray={$media.dark}
                 on:click={() => (logopen = !logopen)}
             >
                 <i class="icon icon-arrow-{logopen ? 'down' : 'up'}" />
@@ -54,6 +48,19 @@
         </div>
     </section>
     <section class="navbar-section" />
+    {#if logopen}
+        <pre
+            transition:slide
+            class="code hide-xs"
+            class:bg-dark={$media.dark}
+            class:text-gray={$media.dark}
+            data-lang="JSON">
+            <code class:bg-dark={$media.dark}>routing: {JSON.stringify(log, 0, 2)}</code>
+            <code class:bg-dark={$media.dark}>page: {JSON.stringify($page, 0, 2)}</code>
+            <!-- <code>query: {JSON.stringify($query, 0, 2)}</code> -->
+            <code class:bg-dark={$media.dark}>history: {JSON.stringify($history, 0, 2)}</code>
+        </pre>
+    {/if}
 </footer>
 
 <style lang="scss">

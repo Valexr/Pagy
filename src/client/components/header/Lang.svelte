@@ -1,8 +1,9 @@
 <script>
-    import { onMount } from "svelte";
+    import { onMount, tick } from "svelte";
     import { url } from "svelte-pathfinder";
-    import { init, addMessages } from "svelte-intl-precompile";
-    import { history } from "@routes";
+    import { media } from "svelte-match-media";
+    import { init, addMessages, register } from "svelte-intl-precompile";
+    import { history, page, authed } from "@routes";
     import { DropDown } from "@cmp";
 
     let lang = false,
@@ -16,8 +17,10 @@
     });
 
     async function registerLang(lang) {
-        const lg = langs.find((l) => l.name === lang);
-        addMessages(lang, await lg.dict());
+        const lng = langs.find((l) => l.name === lang);
+        const dict = await lng.dict();
+        addMessages(lang, dict);
+        // register(lang, lng.dict);
         init({
             fallbackLocale: "en",
             initialLocale: lang,
@@ -35,13 +38,13 @@
     bind:opener={lang}
     openbut={{
         name: $history.lang,
-        icon: "icon-location",
+        icon: "icon-flag",
         class: "btn-link",
     }}
     items={langs}
     downbut={null}
-    right={true}
     auto={true}
+    ul={$media.dark && { class: "bg-dark" }}
     let:item
 >
     <a

@@ -10,46 +10,59 @@
         state,
     } from "svelte-pathfinder";
     import { page, authed, history, Transition } from "@routes";
+    import { logout, session, cookie } from "@api/auth";
     import { items, filters } from "@stores/store";
     import * as db from "@api/db";
-    import { logout, session, cookie } from "@api/auth";
     import { Loader } from "@cmp";
 
     $: console.log($authed, $session, $state);
 
-    $: getSession();
-
     beforeUpdate(() => {
-        if (!$pattern("/:lang/*")) {
-            path.set(`/${$history.lang}${$path}`);
-        }
+        setLang();
+        setHistory();
+        setRedirect();
     });
 
-    $: if ($page) {
-        $history = { ...$history, prev: $url, [$page.alias]: $url };
-        if ($authed && $pattern("/:lang/auth"))
-            redirect($state.prev || $history.users);
+    function setLang() {
+        !$pattern("/:lang/*") && path.set(`/${$history.lang}${$path}`);
+    }
+
+    function setHistory() {
+        // if ($page.alias !== "404")
+        $history = { ...$history, [$page.alias]: $url.substring(3) };
+    }
+
+    function setRedirect() {
+        if ($authed) {
+            $pattern("/:lang/auth") && redirect($history.users);
+            $path.length <= 4 && redirect("/home");
+        }
     }
 
     async function getSession() {
-        const auth = () =>
-            !$pattern("/:lang/auth") &&
-            redirect(`/auth`, { prev: $history.prev });
-        try {
-            const user = await cookie();
-            if (user && user.userid) {
-                session.set(user);
-                state.set(user);
-            } else auth();
-        } catch (err) {
-            console.log(err);
-            auth();
+        const auth = () => !$pattern("/:lang/auth") && redirect(`/auth`);
+        const users = () =>
+            ($pattern("/:lang/auth") || $path.length <= 4) &&
+            redirect($history.users);
+        if (!$session.userid) {
+            try {
+                const user = await cookie();
+                if (user && user.userid) {
+                    session.set(user);
+                    users();
+                    return user;
+                } else auth();
+            } catch (err) {
+                console.log(err);
+                auth();
+            }
         }
     }
 
     async function getData(query, page) {
         console.log(page.alias);
-        if (query.length > 0)
+        // if (query.length > 0)
+        if (page.alias !== "auth" && page.alias !== "404")
             try {
                 const path = `/${page.alias}/items${query.split("&id")[0]}`;
                 const data = await db.get(path);
@@ -70,15 +83,16 @@
 
 <svelte:window on:click={click} on:beforeunload={!$session.maxAge && logout} />
 
-{#await $page.component()}
-    <Loader />
-{:then Cmp}
+{#await getSession() then session}
     {#await getData($query, $page)}
         <Loader />
     {:then data}
-        <Transition>
-            <svelte:component this={Cmp.default} {data} />
-        </Transition>
+        {#await $page.component() then { default: Route }}
+            <Transition>
+                <Route {data} {session} />
+                <!-- <svelte:component this={Route.default} {data} {session} /> -->
+            </Transition>
+        {/await}
     {/await}
 {/await}
 

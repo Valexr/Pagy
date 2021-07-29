@@ -8,8 +8,14 @@ const svelteConfig = {
     },
     preprocess: [
         sveltePreprocess({
+            // sourceMap: DEV,
+            // scss: {
+            //     prependData: `
+            //     @import './src/client/sass/spectre/variables';
+            //     @import './src/client/sass/spectre/mixins';
+            // `,
+            // },
             // postcss: true,
-            // scss: { includePath: ['src', 'scss'] }
         })
     ]
 }

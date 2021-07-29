@@ -15,8 +15,8 @@ export const routes = [
         props: { title: 'auth', keywords: 'keywords', description: 'description' }
     },
     {
-        match: '/:lang/',
-        default: '/',
+        match: '/:lang/home',
+        default: '/home',
         alias: 'home',
         menu: true,
         navbar: false,
@@ -99,10 +99,20 @@ export const routes = [
         default: '/system',
         alias: 'system',
         menu: true,
-        navbar: false,
+        navbar: true,
         icon: 'time',
         component: () => import('@pages/system.svelte'),
         props: { title: 'system', keywords: 'keywords', description: 'description' }
+    },
+    {
+        match: '/:lang/svectre',
+        default: '/svectre',
+        alias: 'svectre',
+        menu: true,
+        navbar: true,
+        icon: 'upward',
+        component: () => import('@pages/svectre.svelte'),
+        props: { title: 'svectre', keywords: 'keywords', description: 'description' }
     },
     {
         match: '*',

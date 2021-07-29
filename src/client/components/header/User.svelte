@@ -1,27 +1,31 @@
 <script>
     import { url, path, goto } from "svelte-pathfinder";
+    import { media } from "svelte-match-media";
     import { DropDown } from "@cmp";
     import { session, logout } from "@api/auth";
 </script>
 
 <DropDown
     openbut={{
-        name: "",
+        name: !$media.sm ? $session.username : "",
         icon: "icon-people",
-        class: "btn-link s-circle",
+        class: "btn-link",
     }}
     downbut={{
         action: () => logout(),
         title: "Logout",
         icon: "shutdown",
+        class: "btn-primary",
     }}
     right={true}
+    auto={true}
+    ul={$media.dark && { class: "bg-dark" }}
     let:item
 >
     <slot slot="static">
         <a
             href={`users?role=${$session.role}#sidebarEdit-${$session.userid}`}
-            class="btn btn-link"
+            class="btn btn-link text-light"
         >
             {$session.username}
         </a>

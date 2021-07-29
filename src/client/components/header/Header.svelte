@@ -1,10 +1,11 @@
 <script>
     import { page, authed } from "@routes";
     import { logout } from "@api/auth";
-    import { Menu, Lang, User, Navbar, BreadCrumbs, Button } from "@cmp";
+    import { Menu, Lang, User, Navbar, BreadCrumbs } from "@cmp";
+    import { Button } from "@svectre";
 </script>
 
-<header class="navbar container p-sticky bg-gray">
+<header class="navbar container p-sticky">
     <section class="navbar-section">
         <div class="column col-auto">
             {#if $authed}
@@ -17,12 +18,13 @@
             {#if $authed}
                 <BreadCrumbs />
             {:else}
-                <h5 class="text-primary my-1">Pg</h5>
+                <h5 class="text-primary my-1">Pagy</h5>
             {/if}
         </div>
     </section>
     <section class="navbar-section ">
         <div class="column col-auto">
+            <Lang />
             {#if $authed}
                 <Button
                     but={{
@@ -33,7 +35,6 @@
                 />
                 <User />
             {/if}
-            <Lang />
         </div>
     </section>
 </header>
@@ -46,5 +47,6 @@
     header {
         z-index: 100;
         top: -3em;
+        height: 3em;
     }
 </style>

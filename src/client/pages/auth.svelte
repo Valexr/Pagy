@@ -1,6 +1,7 @@
 <script>
-    import { onMount } from "svelte";
-    import { redirect } from "svelte-pathfinder";
+    import { onMount, beforeUpdate, tick } from "svelte";
+    import { redirect, pattern, path } from "svelte-pathfinder";
+    import { media } from "svelte-match-media";
     import { aoviSvelte } from "aovi-svelte";
     import { t } from "svelte-intl-precompile";
     import { login, session } from "@api/auth";
@@ -39,8 +40,8 @@
                 $form.err.password = $t("authenticate-please");
                 password.focus();
             }
-        } else {
-            noticy.primary($t("login-please"), 5000, $t("welcome-to-pg"));
+        } else if ($pattern("/:lang/auth") && $path.length > 5) {
+            noticy.primary($t("login-please"), 5000, $t("welcome-to-pagy"));
             username.focus();
         }
     });
@@ -128,7 +129,7 @@
                     autocapitalize="off"
                     autocomplete="username"
                     id="username"
-                    class="form-input"
+                    class="form-input {$media.dark && 'bg-dark'}"
                     type="email"
                     placeholder="Email"
                     bind:this={username}
@@ -158,7 +159,7 @@
                             autocapitalize="off"
                             autocomplete="current-password"
                             id="password"
-                            class="form-input"
+                            class="form-input {$media.dark && 'bg-dark'}"
                             type="text"
                             placeholder="Password"
                             bind:value={$form.password}
@@ -178,7 +179,7 @@
                             autocapitalize="off"
                             autocomplete="current-password"
                             id="password"
-                            class="form-input"
+                            class="form-input {$media.dark && 'bg-dark'}"
                             type="password"
                             placeholder="Password"
                             bind:this={password}
@@ -208,7 +209,10 @@
                         type="checkbox"
                         bind:checked={$form.remember}
                         on:focus={() => ($form.err.remember = false)}
-                    /><i class="form-icon" />
+                    /><i
+                        class="form-icon"
+                        class:bg-dark={$media.dark && $form.remember === false}
+                    />
                     {$t("remember-me")}
                 </label>
                 {#if $form.err.remember}

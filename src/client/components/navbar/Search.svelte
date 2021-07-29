@@ -17,19 +17,6 @@
     // }
     // }
 
-    // $: qsearch = $query
-    //     .slice(1)
-    //     .split("&")
-    //     .map((q) => {
-    //         const s = q.split("=");
-    //         return `${s[0]}:${s[1]}`;
-    //     })
-    //     .join("; ");
-
-    // $: qs = Object.entries($query.params)
-    //     .reduce((acc, [k, v], i) => [...acc, `${k}:${decodeURI(v)}`], [])
-    //     .join("; ");
-
     function getQuery(q) {
         const qs = Object.entries(q.params)
             .reduce((a, [k, v]) => [...a, `${k}:${decodeURI(v)}`], [])
@@ -51,7 +38,7 @@
         openbut={{
             name: "",
             icon: "icon-search",
-            class: "btn-primary btn-action",
+            class: "btn-action",
         }}
         right="true"
         downbut={null}
@@ -71,15 +58,15 @@
     <div class="has-icon-right">
         <input
             class="form-input"
+            class:bg-dark={$media.dark}
             type="text"
-            placeholder="key:val,val... key:val..."
+            placeholder="key:val,val...; key:val..."
             value={getQuery($query)}
             on:change={setQuery}
         />
         <i
-            class="form-icon icon icon-search text-{$query.params.q
-                ? 'primary'
-                : 'gray'}"
+            class="form-icon icon icon-search 
+                   text-{$query.length > 2 ? 'primary' : 'gray'}"
         />
     </div>
 {/if}

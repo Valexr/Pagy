@@ -2,7 +2,7 @@ version: '3.9'
 services:
   pagy:
     build: .
-    ports: [1313:1313]
+    ports: [127.0.0.1:1313:1313]
     volumes: [./app:/app]
-    image: pg:latest
-    container_name: pg
+    image: pagy:latest
+    container_name: pagy

@@ -59,4 +59,4 @@ function errors(req, res, next) {
 }
 
 
-export default [log, json, body, errors]
+export default [log, errors]

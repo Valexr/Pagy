@@ -1,5 +1,6 @@
 node_modules
 app/client/build
+src/client/sass/spectre
 # app/json
 
 *-lock.*

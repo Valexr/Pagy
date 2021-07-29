@@ -4,7 +4,7 @@
 
     let keys, langs;
     onMount(async () => {
-        langs = await db.get("/langs/all");
+        langs = await db.get("/translation/all");
         console.log(langs);
     });
 </script>
@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            {#await db.get("/langs/en") then lang}
+            {#await db.get("/translation/en") then lang}
                 {#each Object.entries(lang) as [k, v], i}
                     <tr>
                         <td>{i}</td>
