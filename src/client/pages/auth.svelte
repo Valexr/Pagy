@@ -42,6 +42,7 @@
             }
         } else if ($pattern("/:lang/auth") && $path.length > 5) {
             noticy.primary($t("login-please"), 5000, $t("welcome-to-pagy"));
+            // tick().then(() => username.focus());
             username.focus();
         }
     });

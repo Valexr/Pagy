@@ -12,14 +12,14 @@
       "exp": "Session"
     },
     {
-      "id": "7a0c02e8-279d-46e0-9f91-e1a023093d5e",
+      "id": "08acd415-6749-4bfa-838a-53b5ffb6ae89",
       "userid": 1618914837935,
       "role": "admin",
       "username": "valexr@gmail.com",
       "remember": false,
-      "ip": "172.18.0.1",
+      "ip": "127.0.0.1",
       "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Safari/605.1.15",
-      "create": "Mon Jul 05 2021 07:06:20 GMT+0000 (Coordinated Universal Time)",
+      "create": "Sun Aug 08 2021 12:25:20 GMT+0300 (Moscow Standard Time)",
       "exp": "Session"
     }
   ]
