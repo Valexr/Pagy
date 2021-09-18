@@ -9,7 +9,7 @@ export async function cookie() {
     const path = `${base}/cookie`;
     const options = {
         method: "GET",
-        credentials: 'include',
+        // credentials: 'include',
         headers: {
             "Content-Type": "application/json",
         }
@@ -28,7 +28,7 @@ export async function login(form) {
     const path = `${base}/login`;
     const options = {
         method: "POST",
-        credentials: 'include',
+        // credentials: 'include',
         headers: {
             "Content-Type": "application/json",
         },

@@ -19,13 +19,12 @@
     }}
     right={true}
     auto={true}
-    ul={$media.dark && { class: "bg-dark" }}
     let:item
 >
     <slot slot="static">
         <a
             href={`users?role=${$session.role}#sidebarEdit-${$session.userid}`}
-            class="btn btn-link text-light"
+            class="btn btn-link"
         >
             {$session.username}
         </a>

@@ -13,7 +13,6 @@
     openbut={{ name: "", icon: "icon-apps", class: "btn-link" }}
     items={routes.filter((r) => r.menu)}
     downbut={null}
-    ul={$media.dark && { class: "bg-dark" }}
     li={{ class: "text-capitalize" }}
     let:item
 >

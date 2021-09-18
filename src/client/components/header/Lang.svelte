@@ -44,7 +44,6 @@
     items={langs}
     downbut={null}
     auto={true}
-    ul={$media.dark && { class: "bg-dark" }}
     let:item
 >
     <a

@@ -26,10 +26,7 @@
     };
 </script>
 
-<nav
-    class="navbar container p-sticky bg-{$media.dark ? 'dark' : 'light'}"
-    in:fade={{ duration: 500 }}
->
+<nav class="navbar container p-sticky bg-light" in:fade={{ duration: 500 }}>
     <section class="navbar-section ">
         <div class="column col-auto">
             <Filters />

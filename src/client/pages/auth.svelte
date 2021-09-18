@@ -130,7 +130,7 @@
                     autocapitalize="off"
                     autocomplete="username"
                     id="username"
-                    class="form-input {$media.dark && 'bg-dark'}"
+                    class="form-input"
                     type="email"
                     placeholder="Email"
                     bind:this={username}
@@ -160,7 +160,7 @@
                             autocapitalize="off"
                             autocomplete="current-password"
                             id="password"
-                            class="form-input {$media.dark && 'bg-dark'}"
+                            class="form-input"
                             type="text"
                             placeholder="Password"
                             bind:value={$form.password}
@@ -180,7 +180,7 @@
                             autocapitalize="off"
                             autocomplete="current-password"
                             id="password"
-                            class="form-input {$media.dark && 'bg-dark'}"
+                            class="form-input"
                             type="password"
                             placeholder="Password"
                             bind:this={password}
@@ -210,10 +210,7 @@
                         type="checkbox"
                         bind:checked={$form.remember}
                         on:focus={() => ($form.err.remember = false)}
-                    /><i
-                        class="form-icon"
-                        class:bg-dark={$media.dark && $form.remember === false}
-                    />
+                    /><i class="form-icon" />
                     {$t("remember-me")}
                 </label>
                 {#if $form.err.remember}

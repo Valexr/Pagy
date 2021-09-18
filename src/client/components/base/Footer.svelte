@@ -31,12 +31,7 @@
 <footer class="container navbar p-fixed p-2">
     <section class="navbar-section">
         <div class="column col-auto">
-            <button
-                class="btn btn-sm"
-                class:bg-dark={$media.dark}
-                class:text-gray={$media.dark}
-                on:click={() => (logopen = !logopen)}
-            >
+            <button class="btn btn-sm" on:click={() => (logopen = !logopen)}>
                 <i class="icon icon-arrow-{logopen ? 'down' : 'up'}" />
             </button>
         </div>
@@ -52,13 +47,11 @@
         <pre
             transition:slide
             class="code hide-xs"
-            class:bg-dark={$media.dark}
-            class:text-gray={$media.dark}
             data-lang="JSON">
-            <code class:bg-dark={$media.dark}>routing: {JSON.stringify(log, 0, 2)}</code>
-            <code class:bg-dark={$media.dark}>page: {JSON.stringify($page, 0, 2)}</code>
+            <code>routing: {JSON.stringify(log, 0, 2)}</code>
+            <code>page: {JSON.stringify($page, 0, 2)}</code>
             <!-- <code>query: {JSON.stringify($query, 0, 2)}</code> -->
-            <code class:bg-dark={$media.dark}>history: {JSON.stringify($history, 0, 2)}</code>
+            <code>history: {JSON.stringify($history, 0, 2)}</code>
         </pre>
     {/if}
 </footer>

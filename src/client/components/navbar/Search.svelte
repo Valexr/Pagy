@@ -58,7 +58,6 @@
     <div class="has-icon-right">
         <input
             class="form-input"
-            class:bg-dark={$media.dark}
             type="text"
             placeholder="key:val,val...; key:val..."
             value={getQuery($query)}

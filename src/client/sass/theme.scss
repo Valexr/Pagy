@@ -140,3 +140,24 @@ $off-canvas-breakpoint: 840px;
 .code {
     margin: 0;
 }
+
+// icon-home
+.icon-home {
+    &::before {
+        border: $icon-border-width solid currentColor;
+        border-bottom: 0;
+        border-right: 0;
+        transform: translate(-50%, -40%) rotate(45deg);
+        width: 0.8em;
+        height: 0.8em;
+    }
+
+    &::after {
+        transform: translate(-50%, -10%);
+        border-bottom: $icon-border-width solid currentColor;
+        border-right: $icon-border-width solid currentColor;
+        border-left: $icon-border-width solid currentColor;
+        height: 0.6em;
+        width: 0.8em;
+    }
+}
