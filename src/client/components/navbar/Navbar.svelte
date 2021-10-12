@@ -77,11 +77,5 @@
         z-index: 99;
         height: 4em;
         top: 0;
-        // .no-wrap {
-        //     white-space: nowrap;
-        // }
-        :global(.bg-dark) & {
-            background: rgba($gray-color-dark, 0.27);
-        }
     }
 </style>

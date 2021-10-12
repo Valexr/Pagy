@@ -14,7 +14,6 @@
             .flat()
             .filter((k) => k.length > 3)
             .join(" ")}`;
-    // $: document.body.classList.toggle("bg-dark", $media.dark);
 </script>
 
 <Head {name} />
