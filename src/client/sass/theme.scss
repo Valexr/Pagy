@@ -12,6 +12,9 @@
 // $dark-color: #fff !default;
 $off-canvas-breakpoint: 840px;
 
+//DARK
+@import "dark";
+
 // Variables and mixins
 @import "./spectre/variables";
 @import "./spectre/mixins";

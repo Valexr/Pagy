@@ -28,7 +28,7 @@
         </div>
         <div class="column col-12">
             {#each $filters && Object.entries($filters) as [k, v]}
-                <ul class="menu">
+                <ul class="menu menu-nav">
                     <li class="divider" data-content={k.toUpperCase()} />
                     {#each v as link}
                         <li class="menu-item">
@@ -43,9 +43,7 @@
                     {/each}
                 </ul>
             {/each}
-            <pre
-                class="code hide-xs"
-                data-lang="JSON">
+            <pre class="code hide-xs" data-lang="JSON">
                 <code>{JSON.stringify($filters, 0, 2)}</code>
             </pre>
             <!-- <div class="accordion">
@@ -178,8 +176,8 @@
 </SideBar>
 
 <style lang="scss">
-    .menu {
-        box-shadow: none;
-        padding: 0;
-    }
+    // .menu {
+    // box-shadow: none;
+    // padding: 0;
+    // }
 </style>

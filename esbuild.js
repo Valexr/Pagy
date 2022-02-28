@@ -13,6 +13,7 @@ const svelteConfig = {
             //     prependData: `
             //     @import './src/client/sass/spectre/variables';
             //     @import './src/client/sass/spectre/mixins';
+            //     @import './src/client/sass/dark';
             // `,
             // },
             // postcss: true,
