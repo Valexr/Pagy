@@ -2,7 +2,7 @@ const DEV = process.argv.includes('--dev');
 const sveltePlugin = require("esbuild-svelte");
 const sveltePreprocess = require("svelte-preprocess");
 const svelteConfig = {
-    compileOptions: {
+    compilerOptions: {
         dev: DEV,
         css: false  //use `css:true` to inline CSS in `bundle.js`
     },
