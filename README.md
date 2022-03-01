@@ -1,4 +1,4 @@
-# Pagy
+# 📚 Pagy
 
 SvelteJS + SpectreCSS on client, Derver BFF, LowDB base.json & JWT auth simple
 headless CMS, bundeled by ESBuild
