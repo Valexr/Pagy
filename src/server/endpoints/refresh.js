@@ -1,7 +1,7 @@
-import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import cookie from "cookie";
+// import cookie from "cookie";
 import DB from "$lib/db"
+import { hashPassword } from '$lib/crypto'
 
 export default async function (req, res, next) {
     try {
@@ -16,7 +16,7 @@ export default async function (req, res, next) {
             // const access = req.cookies.sid
             // const acc = jwt.verify(access, 'secret');
 
-            const access = jwt.sign({ userid: user.id, pass: bcrypt.hashSync(user.password, 9) }, process.env.JWT_SECRET, {
+            const access = jwt.sign({ userid: user.id, pass: hashPassword(user.password) }, process.env.JWT_SECRET, {
                 expiresIn: process.env.JWT_ACCESS_EXP
             });
             res.send({ access, userid: user.id, username: user.username, refreshexp: verified.exp })

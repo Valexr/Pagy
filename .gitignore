@@ -6,6 +6,8 @@ src/client/sass/spectre
 *-lock.*
 *.map
 app.js
+sessions.json
+users.json
 
 app/.env
 .DS_Store

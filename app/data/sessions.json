@@ -1,3 +1,15 @@
 {
-    "items": []
+  "items": [
+    {
+      "id": "245a926a-a208-4427-a31f-fc58d2db1d41",
+      "userid": 1618914837935,
+      "role": "admin",
+      "username": "valexr@gmail.com",
+      "remember": false,
+      "ip": "127.0.0.1",
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0",
+      "create": "Tue Mar 01 2022 14:23:52 GMT+0300 (Moscow Standard Time)",
+      "exp": "Session"
+    }
+  ]
 }

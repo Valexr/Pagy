@@ -1,10 +1,20 @@
 {
-    "filters": {
-        "role": [
-            "admin",
-            "publisher",
-            "developer"
-        ]
-    },
-    "items": []
+  "filters": {
+    "role": [
+      "admin",
+      "publisher",
+      "developer"
+    ]
+  },
+  "items": [
+    {
+      "username": "valexr@gmail.com",
+      "password": "d5f39db4f9d8b6d33fa6f8300d8eeee8266082240c5e316e2fa2d9ad206ed65925b31c0c7f3ab5fb52ce0f4bc64103cd",
+      "role": "admin",
+      "id": 1618914837935,
+      "create": 1618914837935,
+      "update": 1619464130061,
+      "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwiaWF0IjoxNjIwODA3OTU2LCJleHAiOjE2MjA4MDgwMTZ9.AfoaUbNzAvPZzjJnWyhVNKZRx6HEm3qjk-XOVv3sWhE"
+    }
+  ]
 }

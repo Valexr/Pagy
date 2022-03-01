@@ -23,7 +23,7 @@
         session: $session,
     };
 
-    let logopen = true;
+    let logopen = false;
 
     // $: console.dir(log);
 </script>
@@ -44,10 +44,7 @@
     </section>
     <section class="navbar-section" />
     {#if logopen}
-        <pre
-            transition:slide
-            class="code hide-xs"
-            data-lang="JSON">
+        <pre transition:slide class="code hide-xs" data-lang="JSON">
             <code>routing: {JSON.stringify(log, 0, 2)}</code>
             <code>page: {JSON.stringify($page, 0, 2)}</code>
             <!-- <code>query: {JSON.stringify($query, 0, 2)}</code> -->

@@ -17,7 +17,6 @@
         "@sindresorhus/slugify": "^2.1.0",
         "aovi": "^2.0.5",
         "aovi-svelte": "^0.2.5",
-        "bcryptjs": "^2.4.3",
         "cookie": "^0.4.2",
         "cors": "^2.8.5",
         "derver": "^0.5.3",
@@ -25,9 +24,7 @@
         "esbuild": "^0.13.15",
         "esbuild-svelte": "^0.6.3",
         "jsonwebtoken": "^8.5.1",
-        "lodash": "^4.17.21",
         "lowdb": "^3.0.0",
-        "nanoid": "^3.3.1",
         "node-watch": "^0.7.3",
         "postcss": "^8.4.7",
         "sass": "^1.49.9",
@@ -38,7 +35,6 @@
         "svelte-intl-precompile": "^0.8.1",
         "svelte-match-media": "^1.2.1",
         "svelte-pathfinder": "^3.3.0",
-        "svelte-preprocess": "^4.10.4",
-        "svelte-viewpoint": "^1.4.3"
+        "svelte-preprocess": "^4.10.4"
     }
 }

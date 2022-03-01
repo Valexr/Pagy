@@ -1,10 +1,7 @@
-import bcrypt from "bcryptjs";
-import { nanoid } from 'nanoid';
-import crypto from 'crypto'
 import cookie from "cookie";
 import DB from "$lib/db";
 import { btoa } from '$lib/utils'
-
+import { matchPassword, UUID } from '$lib/crypto'
 
 export default async function (req, res, next) {
     try {
@@ -14,12 +11,12 @@ export default async function (req, res, next) {
         const user = USERS.one({ username })
         if (!user) { return res.error(400, "User not found") }
 
-        const pass = await bcrypt.compare(password, user.password);
+        const pass = matchPassword(password, user.password);
         if (!pass) { return res.error(401, "Bad password") }
 
         const ip = req.connection.remoteAddress
         const ua = req.headers['user-agent']
-        const sessionid = crypto.randomUUID() //nanoid()
+        const sessionid = UUID()
         const session = {
             id: sessionid,
             userid: user.id,
