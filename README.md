@@ -1,6 +1,7 @@
 # Pg
 
-SvelteJS + SpectreCSS on client, Derver BFF, LowDB base.json & JWT auth simple headless CMS, bundeled by ESBuild
+SvelteJS + SpectreCSS on client, Derver BFF, LowDB base.json & JWT auth simple
+headless CMS, bundeled by ESBuild
 
 ### Features:
 
@@ -19,10 +20,13 @@ npm install
 npm run dev
 ```
 
-Then open browser on `http://localhost:1313`, change files in the `src` and watch the changes.
+Then open browser on `http://localhost:3131`, change files in the `src` and
+watch the changes.
 
 ### Building
 
 Run your application in production mode with `npm start` command.
 
-Or run `npm run build` and optimized application will be in the `dist` directory. Then you may copy it anywhere and run with `node app.js` inside this directory.
+Or run `npm run build` and optimized application will be in the `dist`
+directory. Then you may copy it anywhere and run with `node app.js` inside this
+directory.
