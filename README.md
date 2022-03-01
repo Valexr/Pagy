@@ -19,6 +19,8 @@ npx degit valexr/pagy myapp
 cd myapp
 npm install
 npm run dev
+
+# democreds - valexr@gmail.com/valexr@gmail.com
 ```
 
 Then open browser on `http://localhost:3131`, change files in the `src` and
