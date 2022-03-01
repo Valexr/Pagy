@@ -1,6 +1,7 @@
 import cookie from "cookie";
 import crypto from 'crypto'
 import DB from "$lib/db"
+import { atob } from '$lib/utils'
 
 export default async function (req, res, next) {
     // console.log(crypto.randomUUID(), crypto.scrypt('password', 'salt', 64, (err, derivedKey) => {

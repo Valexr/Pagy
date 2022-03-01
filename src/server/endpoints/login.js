@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import crypto from 'crypto'
 import cookie from "cookie";
 import DB from "$lib/db";
+import { btoa } from '$lib/utils'
 
 
 export default async function (req, res, next) {

@@ -23,7 +23,7 @@
         "derver": "^0.5.3",
         "dotenv": "^10.0.0",
         "esbuild": "^0.13.15",
-        "esbuild-svelte": "^0.6.2",
+        "esbuild-svelte": "^0.6.3",
         "jsonwebtoken": "^8.5.1",
         "lodash": "^4.17.21",
         "lowdb": "^3.0.0",

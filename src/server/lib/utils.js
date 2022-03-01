@@ -122,3 +122,11 @@ export async function filters(q) {
     console.log("filters:", filters, "query: ", getQuery(3));
     return filters;
 }
+
+export function btoa(text) {
+    return Buffer.from(text, 'binary').toString('base64');
+};
+
+export function atob(base64) {
+    return Buffer.from(base64, 'base64').toString('binary');
+};

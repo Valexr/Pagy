@@ -204,7 +204,7 @@ $dark-highlight: darken($highlight-color, 50%);
     .form-input,
     .form-select {
         background-color: $dark-background !important;
-        border-color: $gray-color-dark !important;
+        border-color: $gray-color-dark;
         color: $dark-text !important;
     }
     .form-checkbox .form-icon,
@@ -437,7 +437,7 @@ $dark-highlight: darken($highlight-color, 50%);
     .form-input,
     .form-select {
         background-color: $dark-background !important;
-        border-color: $gray-color-dark !important;
+        border-color: $gray-color-dark;
         color: $dark-text !important;
     }
     .form-checkbox .form-icon,

@@ -26,6 +26,9 @@ const storeKeys = ["username", "access_token", "refresh_token"];
  * @property {string} refresh_token refresh token
  * @property {SessionData} store backing store to use for save same as data param
  */
+
+import { atob } from '$lib/utils'
+
 export class Session {
     constructor(data) {
         let expirationTimer;

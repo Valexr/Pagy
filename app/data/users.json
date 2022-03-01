@@ -1,0 +1,10 @@
+{
+    "filters": {
+        "role": [
+            "admin",
+            "publisher",
+            "developer"
+        ]
+    },
+    "items": []
+}

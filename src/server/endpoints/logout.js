@@ -1,5 +1,6 @@
 import cookie from "cookie";
 import DB from "$lib/db"
+import { atob } from '$lib/utils'
 
 export default async function (req, res, next) {
     if (req.headers.cookie)
