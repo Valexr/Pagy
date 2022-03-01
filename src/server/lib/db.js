@@ -1,6 +1,5 @@
 import { Low, JSONFile } from 'lowdb'
 import { omatch, osome, group } from '$lib/utils'
-// import lodash from 'lodash'
 
 export default { connect }
 
@@ -14,6 +13,8 @@ async function connect(file, table = 'items') {
     try {
         const base = db(file)
         await base.read()
+
+        base.data ||= { filters: {}, items: [] }
 
         return {
             base,
