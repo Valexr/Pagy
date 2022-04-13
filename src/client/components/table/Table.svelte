@@ -1,6 +1,6 @@
 <script>
     import { slide } from "svelte/transition";
-    import { media } from "svelte-match-media";
+    import { media } from "@stores/media";
     import { date, longpress } from "@utils";
     import { contextMenu } from "@stores/store";
     import { ContextMenu } from "@cmp";

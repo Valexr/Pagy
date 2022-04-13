@@ -3,7 +3,7 @@
     import { path, query } from "svelte-pathfinder";
     import { filters, items } from "@stores/store";
     import { DropDown, Search, Add, Filters } from "@cmp";
-    import { media } from "svelte-match-media";
+    import { media } from "@stores/media";
 
     $: downbut = {
         role: { action: () => console.log("addRole"), title: "Role" },

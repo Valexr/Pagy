@@ -1,6 +1,6 @@
 <script>
     import { fragment } from "svelte-pathfinder";
-    import { media } from "svelte-match-media";
+    import { media } from "@stores/media";
     import { page } from "@routes";
     import { items, filters } from "@stores/store";
 

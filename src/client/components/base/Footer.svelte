@@ -9,7 +9,7 @@
         click,
         state,
     } from "svelte-pathfinder";
-    import { media } from "svelte-match-media";
+    import { media } from "@stores/media";
     import { t } from "svelte-intl-precompile";
     import slugify from "@sindresorhus/slugify";
     import { history, page } from "@routes";

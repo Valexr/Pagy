@@ -1,7 +1,7 @@
 <script>
     import { tick } from "svelte";
     import { pattern } from "svelte-pathfinder";
-    import { media } from "svelte-match-media";
+    import { media } from "@stores/media";
     import { DropDown } from "@cmp";
     import { routes, history } from "@routes";
 

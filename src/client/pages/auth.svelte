@@ -1,7 +1,7 @@
 <script>
     import { onMount, beforeUpdate, tick } from "svelte";
     import { redirect, pattern, path } from "svelte-pathfinder";
-    import { media } from "svelte-match-media";
+    import { media } from "@stores/media";
     import { aoviSvelte } from "aovi-svelte";
     import { t } from "svelte-intl-precompile";
     import { login, session } from "@api/auth";

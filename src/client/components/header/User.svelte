@@ -1,6 +1,6 @@
 <script>
     import { url, path, goto } from "svelte-pathfinder";
-    import { media } from "svelte-match-media";
+    import { media } from "@stores/media";
     import { DropDown } from "@cmp";
     import { session, logout } from "@api/auth";
 </script>

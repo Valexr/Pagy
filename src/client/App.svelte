@@ -1,7 +1,7 @@
 <script>
     import { Head, Header, Footer, Modals, SideBars, Noticys } from "@cmp";
     import { Router } from "@routes";
-    import { media } from "svelte-match-media";
+    import { media } from "@stores/media";
 
     export let name;
 

@@ -1,6 +1,6 @@
 <script>
     import { query } from "svelte-pathfinder";
-    import { media } from "svelte-match-media";
+    import { media } from "@stores/media";
     import { DropDown } from "@cmp";
 
     // let myQuery = '',prevParams = null,prevMyQuery = '';

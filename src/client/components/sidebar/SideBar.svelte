@@ -3,7 +3,7 @@
     import { quintOut } from "svelte/easing";
     import { fragment } from "svelte-pathfinder";
     import { clickout } from "@utils";
-    import { media } from "svelte-match-media";
+    import { media } from "@stores/media";
     import { Loader } from "@cmp";
 
     export let right = false,

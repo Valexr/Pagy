@@ -1,7 +1,7 @@
 <script>
     import { onMount, tick } from "svelte";
     import { url } from "svelte-pathfinder";
-    import { media } from "svelte-match-media";
+    import { media } from "@stores/media";
     import { init, addMessages, register } from "svelte-intl-precompile";
     import { history, page, authed } from "@routes";
     import { DropDown } from "@cmp";

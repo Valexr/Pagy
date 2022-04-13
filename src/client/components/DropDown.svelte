@@ -8,7 +8,7 @@
 <script>
     import { onMount } from "svelte";
     import { clickout } from "@utils";
-    import { media } from "svelte-match-media";
+    import { media } from "@stores/media";
 
     export let ul = { node: null, class: "" },
         li = { class: "" },
