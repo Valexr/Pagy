@@ -59,15 +59,15 @@ async function connect(file, table = 'items') {
                 const qa =
                     typeof query === 'string'
                         ? query
-                              .slice(1)
-                              .split('&')
-                              .map((q) => {
-                                  const s = q.split('=');
-                                  return { [s[0]]: s[1] };
-                              })
+                            .slice(1)
+                            .split('&')
+                            .map((q) => {
+                                const s = q.split('=');
+                                return { [s[0]]: s[1] };
+                            })
                         : Object.entries(query).map(([k, v]) => {
-                              return { [k]: v };
-                          });
+                            return { [k]: v };
+                        });
                 const filters = Object.keys(query)
                     .filter((q) => q !== 'q' && q !== 'id')
                     .reduce((a, k, i) => {

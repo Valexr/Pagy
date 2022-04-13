@@ -18,7 +18,12 @@ const svelteConfig = {
     },
     preprocess: [
         sveltePreprocess({
-            typescript: true
+            sourceMap: DEV,
+            typescript: true,
+            scss: {
+                quietDeps: true,
+                renderSync: true
+            }
         })
     ]
 };

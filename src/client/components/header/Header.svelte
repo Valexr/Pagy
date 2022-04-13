@@ -39,7 +39,7 @@
 <script lang="ts">
     import { page, authed } from '@routes';
     import { logout } from '@api/auth';
-    import { Menu, Lang, User, Navbar, BreadCrumbs } from '@/client/components';
+    import { Menu, Lang, User, Navbar, BreadCrumbs } from '@cmp';
     import { Button } from '@svectre';
 </script>
 

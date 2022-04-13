@@ -20,7 +20,7 @@
     import { logout, session, cookie } from '@api/auth';
     import { items, filters } from '@stores/store';
     import * as db from '@api/db';
-    import { Loader } from '@/client/components';
+    import { Loader } from '@cmp';
 
     $: console.log($authed, $session, $state);
 

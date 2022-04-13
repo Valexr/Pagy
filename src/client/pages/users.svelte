@@ -13,7 +13,7 @@
     import { query, fragment } from 'svelte-pathfinder';
     import * as db from '@api/db';
     import { items } from '@stores/store';
-    import { Table, TableActions } from '@/client/components';
+    import { Table, TableActions } from '@cmp';
 
     const keys = ['username', 'create', 'update'],
         actions = [

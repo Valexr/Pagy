@@ -5,7 +5,7 @@
 
 <script lang="ts">
     import { navbar, filters } from '@stores/store';
-    import { Cards } from '@/client/components';
+    import { Cards } from '@cmp';
 
     $filters = [];
 </script>

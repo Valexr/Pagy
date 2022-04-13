@@ -26,22 +26,22 @@
                 "./src/client/api/*"
             ],
             "@cmp": [
-                "./src/client/components/index.js"
+                "./src/client/components"
             ],
             "@svectre": [
-                "./src/client/svectre/index.js"
+                "./src/client/svectre"
             ],
             "@pages/*": [
                 "./src/client/pages/*"
             ],
             "@routes": [
-                "./src/client/routes/index.js"
+                "./src/client/routes"
             ],
             "@stores/*": [
                 "./src/client/stores/*"
             ],
             "@utils": [
-                "./src/client/utils/index.js"
+                "./src/client/utils"
             ],
             "@lang/*": [
                 "./app/lang/*"
@@ -50,7 +50,7 @@
                 "./node_modules/spectre.css/src/*"
             ],
             "$EP": [
-                "./src/server/endpoints/index.js"
+                "./src/server/endpoints"
             ],
             "$lib/*": [
                 "./src/server/lib/*"

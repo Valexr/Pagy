@@ -37,7 +37,7 @@
 <script lang="ts">
     import { query } from 'svelte-pathfinder';
     import { media } from '@stores/media';
-    import { DropDown } from '@/client/components';
+    import { DropDown } from '@cmp';
 
     // let myQuery = '',prevParams = null,prevMyQuery = '';
 

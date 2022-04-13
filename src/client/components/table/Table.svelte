@@ -78,7 +78,7 @@
     import { media } from '@stores/media';
     import { date, longpress } from '@utils';
     import { contextMenu } from '@stores/store';
-    import { ContextMenu } from '@/client/components';
+    import { ContextMenu } from '@cmp';
 
     export let keys = [],
         items = [],

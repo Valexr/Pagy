@@ -7,7 +7,7 @@
 <Noticys />
 
 <script lang="ts">
-    import { Head, Header, Footer, Modals, SideBars, Noticys } from '@/client/components';
+    import { Head, Header, Footer, Modals, SideBars, Noticys } from '@cmp';
     import { Router } from '@routes';
     import { media } from '@stores/media';
 

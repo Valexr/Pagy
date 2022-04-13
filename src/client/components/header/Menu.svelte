@@ -23,7 +23,7 @@
     import { tick } from 'svelte';
     import { pattern } from 'svelte-pathfinder';
     import { media } from '@stores/media';
-    import { DropDown } from '@/client/components';
+    import { DropDown } from '@cmp';
     import { routes, history } from '@routes';
 
     let menu = false;

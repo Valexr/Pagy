@@ -6,5 +6,5 @@
 
 <script lang="ts">
     import { fragment } from 'svelte-pathfinder';
-    import { SideBarEdit, SideBarFilters } from '@/client/components';
+    import { SideBarEdit, SideBarFilters } from '@cmp';
 </script>

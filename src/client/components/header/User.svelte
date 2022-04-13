@@ -24,6 +24,6 @@
 <script lang="ts">
     import { url, path, goto } from 'svelte-pathfinder';
     import { media } from '@stores/media';
-    import { DropDown } from '@/client/components';
+    import { DropDown } from '@cmp';
     import { session, logout } from '@api/auth';
 </script>
