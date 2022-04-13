@@ -2,14 +2,14 @@ import assert from 'assert';
 // export const slug = (...args: (string | number)[]): string => {
 export function slugify(...args) {
     return args
-        .join(" ")
-        .normalize("NFD") // split an accented letter in the base letter and the acent
-        .replace(/[\u0300-\u036f]/g, "") // remove all previously split accents
+        .join(' ')
+        .normalize('NFD') // split an accented letter in the base letter and the acent
+        .replace(/[\u0300-\u036f]/g, '') // remove all previously split accents
         .toLowerCase()
         .trim()
-        .replace(/[^a-zа-я0-9 ]/g, "") // remove all chars not letters, numbers and spaces (to be replaced)
-        .replace(/\s+/g, "-"); // separator
-};
+        .replace(/[^a-zа-я0-9 ]/g, '') // remove all chars not letters, numbers and spaces (to be replaced)
+        .replace(/\s+/g, '-'); // separator
+}
 
 // export function objMatch(obj, query) {
 //     return Object.entries(obj).reduce((t, [k, v]) => {
@@ -30,49 +30,54 @@ export function slugify(...args) {
 //     return true;
 // }
 
-export function okey(o, k) {
-
-}
+export function okey(o, k) {}
 
 function oparse(v) {
-    return JSON.stringify(v).replace(/"|{|}|\[|]/g, "").split(',').map((b) => b.split(':')[1])
+    return JSON.stringify(v)
+        .replace(/"|{|}|\[|]/g, '')
+        .split(',')
+        .map((b) => b.split(':')[1]);
 }
-function sparse(v) { return v.toString().split(',') }
+function sparse(v) {
+    return v.toString().split(',');
+}
 
 export function omatch(o, q) {
-    const match = Object.entries(o).map(([k, v]) => {
-        if (k in q) {
-            // console.log(q[k] + ': ', typeof v)
-            const
-                qa = q[k].split(','),
-                va = typeof v === 'string' || 'number' || v.length ? sparse(v) : oparse(v),
-                m = adiff(qa, va)
-            return m
-        }
-    }).filter(i => typeof i === 'boolean').every(i => i === true)
-    return match
+    const match = Object.entries(o)
+        .map(([k, v]) => {
+            if (k in q) {
+                // console.log(q[k] + ': ', typeof v)
+                const qa = q[k].split(','),
+                    va = typeof v === 'string' || 'number' || v.length ? sparse(v) : oparse(v),
+                    m = adiff(qa, va);
+                return m;
+            }
+        })
+        .filter((i) => typeof i === 'boolean')
+        .every((i) => i === true);
+    return match;
 }
 
 function adiff(a, b, same = true, bool = true) {
     if (a.length && b.length) {
         const d = b.map((b) => b);
-        a = a.filter((a) => same ? d.includes(a) : !d.includes(a));
-        return a.length ? bool ? true : a : false
+        a = a.filter((a) => (same ? d.includes(a) : !d.includes(a)));
+        return a.length ? (bool ? true : a) : false;
     }
 }
 
 export function osome(o, q) {
     if (o && q) {
-        const oa = Object.values(o)
-        const qa = q.includes(',') ? q.split(',') : q.split(' ')
-        const compare = (o, q) => JSON.stringify(o).toLowerCase().includes(q.toLowerCase())
-        return q.includes(',') ? qa.some(q => compare(oa, q.trim())) : qa.every(q => compare(o, q))
+        const oa = Object.values(o);
+        const qa = q.includes(',') ? q.split(',') : q.split(' ');
+        const compare = (o, q) => JSON.stringify(o).toLowerCase().includes(q.toLowerCase());
+        return q.includes(',') ? qa.some((q) => compare(oa, q.trim())) : qa.every((q) => compare(o, q));
     }
 }
 
 export function group(arr, keys) {
     return arr.reduce((storage, item) => {
-        const objKey = keys.map((key) => `${item[key]}`).join(":");
+        const objKey = keys.map((key) => `${item[key]}`).join(':');
         if (storage[objKey]) {
             storage[objKey].push(item);
         } else {
@@ -86,15 +91,15 @@ export async function filters(q) {
     const itms = await db.get(`/locales/items`);
     const fltrs = await db.get(`/locales/filters`);
     const diff = () => {
-        return q.includes("&q") ? "&q" : "&id";
+        return q.includes('&q') ? '&q' : '&id';
     };
     const query = q.split(diff())[0];
     console.log(query);
     function getQuery(i) {
-        return query.split("&").slice(0, [i]).join("&");
+        return query.split('&').slice(0, [i]).join('&');
     }
     const filters = await Object.keys(q.params)
-        .filter((q) => q !== "q" && q !== "id")
+        .filter((q) => q !== 'q' && q !== 'id')
         .reduce(async (acc, k, i) => {
             const items = await db.get(`/locales/items${getQuery(i)}`);
             console.log(
@@ -115,18 +120,18 @@ export async function filters(q) {
             );
             const vals = Object.keys(group(items, [k])).filter(Boolean);
             const a = await acc;
-            const val = [...new Set(`${vals}`.split(",").sort())];
+            const val = [...new Set(`${vals}`.split(',').sort())];
             return { ...a, [k]: val };
         }, Promise.resolve({}));
 
-    console.log("filters:", filters, "query: ", getQuery(3));
+    console.log('filters:', filters, 'query: ', getQuery(3));
     return filters;
 }
 
 export function btoa(text) {
     return Buffer.from(text, 'binary').toString('base64');
-};
+}
 
 export function atob(base64) {
     return Buffer.from(base64, 'base64').toString('binary');
-};
+}

@@ -56,7 +56,6 @@
         </div>
     </form>
 </Modal> -->
-
 <script lang="ts">
     import { ModalAdd } from '@cmp';
     import { addopen, addBookForm } from '@stores/pages';

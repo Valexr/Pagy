@@ -27,8 +27,8 @@ function watchMedia(mediaQueries: MediaQuery, storeKey: string) {
 
     for (const query in mediaQueries) {
         const media = window.matchMedia(mediaQueries[query] as string);
-        setMatches(media, query)
-        media.onchange = (e) => setMatches(e, query)
+        setMatches(media, query);
+        media.onchange = (e) => setMatches(e, query);
     }
 
     function setMatches(source: MediaQueryList | MediaQueryListEvent, query: string) {
@@ -41,6 +41,8 @@ function watchMedia(mediaQueries: MediaQuery, storeKey: string) {
     subscribe((match): void => sessionStorage.setItem(storeKey, JSON.stringify(match)));
 
     return {
-        subscribe, set, update
-    }
+        subscribe,
+        set,
+        update,
+    };
 }

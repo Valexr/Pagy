@@ -1,6 +1,6 @@
 import { writable, derived } from 'svelte/store';
-import { pattern } from "svelte-pathfinder";
-import { session } from "@api/auth";
+import { pattern } from 'svelte-pathfinder';
+import { session } from '@api/auth';
 
 export const routes = [
     {
@@ -12,7 +12,7 @@ export const routes = [
         icon: 'emoji',
         auth: true,
         component: () => import('@pages/auth.svelte'),
-        props: { title: 'auth', keywords: 'keywords', description: 'description' }
+        props: { title: 'auth', keywords: 'keywords', description: 'description' },
     },
     {
         match: '/:lang/home',
@@ -22,7 +22,7 @@ export const routes = [
         navbar: false,
         icon: 'home',
         component: () => import('@pages/home.svelte'),
-        props: { title: 'home', keywords: 'keywords', description: 'description' }
+        props: { title: 'home', keywords: 'keywords', description: 'description' },
     },
     {
         match: '/:lang/users',
@@ -32,7 +32,7 @@ export const routes = [
         navbar: true,
         icon: 'people',
         component: () => import('@pages/users.svelte'),
-        props: { title: 'users', keywords: 'keywords', description: 'description' }
+        props: { title: 'users', keywords: 'keywords', description: 'description' },
     },
     {
         match: '/:lang/pages',
@@ -42,7 +42,7 @@ export const routes = [
         navbar: true,
         icon: 'bookmark',
         component: () => import('@pages/pages.svelte'),
-        props: { title: 'pages', keywords: 'keywords', description: 'description' }
+        props: { title: 'pages', keywords: 'keywords', description: 'description' },
     },
     {
         match: '/:lang/plugins',
@@ -52,7 +52,7 @@ export const routes = [
         navbar: true,
         icon: 'link',
         component: () => import('@pages/plugins.svelte'),
-        props: { title: 'plugins', keywords: 'keywords', description: 'description' }
+        props: { title: 'plugins', keywords: 'keywords', description: 'description' },
     },
     {
         match: '/:lang/locales',
@@ -62,7 +62,7 @@ export const routes = [
         navbar: true,
         icon: 'location',
         component: () => import('@pages/locales.svelte'),
-        props: { title: 'locales', keywords: 'keywords', description: 'description' }
+        props: { title: 'locales', keywords: 'keywords', description: 'description' },
     },
     {
         match: '/:lang/repository',
@@ -72,7 +72,7 @@ export const routes = [
         navbar: true,
         icon: 'photo',
         component: () => import('@pages/repository.svelte'),
-        props: { title: 'repository', keywords: 'keywords', description: 'description' }
+        props: { title: 'repository', keywords: 'keywords', description: 'description' },
     },
     {
         match: '/:lang/translation',
@@ -82,7 +82,7 @@ export const routes = [
         navbar: true,
         icon: 'flag',
         component: () => import('@pages/translation.svelte'),
-        props: { title: 'translation', keywords: 'keywords', description: 'description' }
+        props: { title: 'translation', keywords: 'keywords', description: 'description' },
     },
     {
         match: '/:lang/tokens',
@@ -92,7 +92,7 @@ export const routes = [
         navbar: true,
         icon: 'share',
         component: () => import('@pages/tokens.svelte'),
-        props: { title: 'tokens', keywords: 'keywords', description: 'description' }
+        props: { title: 'tokens', keywords: 'keywords', description: 'description' },
     },
     {
         match: '/:lang/system',
@@ -102,7 +102,7 @@ export const routes = [
         navbar: true,
         icon: 'time',
         component: () => import('@pages/system.svelte'),
-        props: { title: 'system', keywords: 'keywords', description: 'description' }
+        props: { title: 'system', keywords: 'keywords', description: 'description' },
     },
     {
         match: '/:lang/svectre',
@@ -112,7 +112,7 @@ export const routes = [
         navbar: true,
         icon: 'upward',
         component: () => import('@pages/svectre.svelte'),
-        props: { title: 'svectre', keywords: 'keywords', description: 'description' }
+        props: { title: 'svectre', keywords: 'keywords', description: 'description' },
     },
     {
         match: '*',
@@ -120,15 +120,19 @@ export const routes = [
         menu: false,
         navbar: false,
         component: () => import('@pages/404.svelte'),
-        props: { title: '404', keywords: 'keywords', description: 'description' }
+        props: { title: '404', keywords: 'keywords', description: 'description' },
     },
 ];
 
-export const history = writable(JSON.parse(sessionStorage.getItem("history")) || { lang: 'en' });
-history.subscribe(val => sessionStorage.setItem("history", JSON.stringify(val)));
+export const history = writable(JSON.parse(sessionStorage.getItem('history')) || { lang: 'en' });
+history.subscribe((val) => sessionStorage.setItem('history', JSON.stringify(val)));
 
-export const authed = derived(session, ($session, set) => {
-    if ($session) $session.userid ? set(true) : set(false)
-}, false);
+export const authed = derived(
+    session,
+    ($session, set) => {
+        if ($session) $session.userid ? set(true) : set(false);
+    },
+    false
+);
 
-export const page = derived([pattern], ([$pattern]) => routes.find((route) => $pattern(route.match)) || null)
+export const page = derived([pattern], ([$pattern]) => routes.find((route) => $pattern(route.match)) || null);

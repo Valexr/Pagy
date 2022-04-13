@@ -26,26 +26,26 @@ function jwtDecode(jwt) {
             atob(str).replace(/(.)/g, function (m, p) {
                 var code = p.charCodeAt(0).toString(16).toUpperCase();
                 if (code.length < 2) {
-                    code = "0" + code;
+                    code = '0' + code;
                 }
-                return "%" + code;
+                return '%' + code;
             })
         );
     }
 
     function decode(str) {
-        var output = str.replace(/-/g, "+").replace(/_/g, "/");
+        var output = str.replace(/-/g, '+').replace(/_/g, '/');
         switch (output.length % 4) {
             case 0:
                 break;
             case 2:
-                output += "==";
+                output += '==';
                 break;
             case 3:
-                output += "=";
+                output += '=';
                 break;
             default:
-                throw "Illegal base64url string!";
+                throw 'Illegal base64url string!';
         }
 
         try {
@@ -55,7 +55,7 @@ function jwtDecode(jwt) {
         }
     }
 
-    var jwtArray = jwt.split(".");
+    var jwtArray = jwt.split('.');
 
     return {
         header: decode(jwtArray[0]),
@@ -66,20 +66,20 @@ function jwtDecode(jwt) {
 
 const parseJwt = (token) => {
     try {
-        return JSON.parse(atob(token.split(".")[1]));
+        return JSON.parse(atob(token.split('.')[1]));
     } catch (e) {
         return null;
     }
 };
 
 const jwt64 =
-    "eyJpZCI6MTcxMjMyLCJlbWFpbCI6InNkc2RmZHNAd3NzZGYuc2RmIiwiY3JlYXRlZEF0IjoiMjAyMS0wNS0yMVQwODoyNTozMy4zNTVaIiwidXBkYXRlZEF0IjoiMjAyMS0wNS0yMVQwODoyNTozMy4zNjFaIiwidXNlcm5hbWUiOiJhcXdyZXF3d3FlIiwiYmlvIjpudWxsLCJpbWFnZSI6bnVsbCwidG9rZW4iOiJleUowZVhBaU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuZXlKcFpDSTZNVGN4TWpNeUxDSjFjMlZ5Ym1GdFpTSTZJbUZ4ZDNKbGNYZDNjV1VpTENKbGVIQWlPakUyTWpZM05qazFNek45LnlyUkIzSG5KMHBINldtWktKY2IxQ0FWZWk1Zl9LZkxxZEk4VkYwYVNkRmsifQ==",
+        'eyJpZCI6MTcxMjMyLCJlbWFpbCI6InNkc2RmZHNAd3NzZGYuc2RmIiwiY3JlYXRlZEF0IjoiMjAyMS0wNS0yMVQwODoyNTozMy4zNTVaIiwidXBkYXRlZEF0IjoiMjAyMS0wNS0yMVQwODoyNTozMy4zNjFaIiwidXNlcm5hbWUiOiJhcXdyZXF3d3FlIiwiYmlvIjpudWxsLCJpbWFnZSI6bnVsbCwidG9rZW4iOiJleUowZVhBaU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuZXlKcFpDSTZNVGN4TWpNeUxDSjFjMlZ5Ym1GdFpTSTZJbUZ4ZDNKbGNYZDNjV1VpTENKbGVIQWlPakUyTWpZM05qazFNek45LnlyUkIzSG5KMHBINldtWktKY2IxQ0FWZWk1Zl9LZkxxZEk4VkYwYVNkRmsifQ==',
     jwt =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwicGFzcyI6IiQyYSQwOSR3bnJtelQ3WEtKNFMxSEhKajdJWGVPenRaUmFodkNuay9lRUxiWE03Lm9aeTRaUzlvbWFUcSIsImlhdCI6MTYyMjI2NzEzOSwiZXhwIjoxNjIyMjcwNzM5fQ.0HVFYKmI6ODrzzhh5pzzntfIdQNWeQs85H3qMO7m6zw";
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYxODkxNDgzNzkzNSwicGFzcyI6IiQyYSQwOSR3bnJtelQ3WEtKNFMxSEhKajdJWGVPenRaUmFodkNuay9lRUxiWE03Lm9aeTRaUzlvbWFUcSIsImlhdCI6MTYyMjI2NzEzOSwiZXhwIjoxNjIyMjcwNzM5fQ.0HVFYKmI6ODrzzhh5pzzntfIdQNWeQs85H3qMO7m6zw';
 $: console.log(
     JSON.parse(atob(jwt64)),
     parseJwt(jwt),
-    jwt.split(".").map((t, i) => (i < 2 ? atob(t) : t))
+    jwt.split('.').map((t, i) => (i < 2 ? atob(t) : t))
     // jwtDecode(jwt)
     // JSON.parse(Buffer.from(jwt, "base64").toString("utf-8"))
 );

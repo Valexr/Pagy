@@ -6,14 +6,15 @@
     "scripts": {
         "build": "node esbuild.mjs",
         "dev": "NODE_ENV=dev node esbuild.mjs --dev",
-        "prestart": "node esbuild.mjs",
+        "prestart": "npm run build",
         "start": "cd app && node app",
+        "check": "svelte-check --tsconfig ./tsconfig.json",
         "lint": "eslint './src/**/*.{js,ts,svelte}'",
         "lint:fix": "eslint --fix './src/**/*.{js,ts,svelte}'",
         "prelint": "pnpm run format",
         "format": "prettier --ignore-path .gitignore --write './src/**/*.{js,ts,md,json,html,css,svelte}'",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "compose": "node esbuild && docker compose up -d --no-deps --build"
+        "compose": "npm run build && docker compose up -d --no-deps --build && docker scan pagy"
     },
     "eslintConfig": {
         "extends": [

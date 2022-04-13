@@ -11,25 +11,25 @@
 export async function login(session, endpoint, username, password) {
     try {
         const response = await fetch(endpoint, {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 username,
-                password
-            })
+                password,
+            }),
         });
         if (response.ok) {
             const data = await response.json();
             if (!data.access_token) {
-                return "missing access_token";
+                return 'missing access_token';
             }
 
             session.update({
                 username,
                 access_token: data.access_token,
-                refresh_token: data.refresh_token
+                refresh_token: data.refresh_token,
             });
             session.save();
         } else {
@@ -48,12 +48,10 @@ export async function login(session, endpoint, username, password) {
  * @return {string}
  */
 export async function handleFailedResponse(response) {
-    const wa = response.headers.get("WWW-Authenticate");
+    const wa = response.headers.get('WWW-Authenticate');
 
     if (wa) {
-        const o = Object.fromEntries(
-            wa.split(/\s*,\s*/).map(entry => entry.split(/=/))
-        );
+        const o = Object.fromEntries(wa.split(/\s*,\s*/).map((entry) => entry.split(/=/)));
         if (o.error_description) {
             return o.error_description;
         }
@@ -61,18 +59,18 @@ export async function handleFailedResponse(response) {
 
     let message = response.statusText;
 
-    const ct = response.headers.get("Content-Type").replace(/;.*/, "");
+    const ct = response.headers.get('Content-Type').replace(/;.*/, '');
 
     switch (ct) {
-        case "text/plain":
-            status = response.status
-            message += "\n" + (await response.text());
+        case 'text/plain':
+            status = response.status;
+            message += '\n' + (await response.text());
             break;
-        case "text/html":
-            const root = document.createElement("html");
+        case 'text/html':
+            const root = document.createElement('html');
             root.innerHTML = await response.text();
 
-            for (const tag of ["title", "h1", "h2"]) {
+            for (const tag of ['title', 'h1', 'h2']) {
                 for (const item of root.getElementsByTagName(tag)) {
                     const text = item.innerText;
                     if (text) {

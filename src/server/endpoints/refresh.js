@@ -1,7 +1,7 @@
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 // import cookie from "cookie";
-import DB from "$lib/db"
-import { hashPassword } from '$lib/crypto'
+import DB from '$lib/db';
+import { hashPassword } from '$lib/crypto';
 
 export default async function (req, res, next) {
     try {
@@ -9,24 +9,24 @@ export default async function (req, res, next) {
         const verified = jwt.verify(token, process.env.JWT_SECRET);
 
         if (verified) {
-            const USERS = await DB.connect('users')
-            const user = USERS.id(verified.userid)
+            const USERS = await DB.connect('users');
+            const user = USERS.id(verified.userid);
 
             // req.cookies = cookie.parse(req.headers.cookie || '');
             // const access = req.cookies.sid
             // const acc = jwt.verify(access, 'secret');
 
             const access = jwt.sign({ userid: user.id, pass: hashPassword(user.password) }, process.env.JWT_SECRET, {
-                expiresIn: process.env.JWT_ACCESS_EXP
+                expiresIn: process.env.JWT_ACCESS_EXP,
             });
-            res.send({ access, userid: user.id, username: user.username, refreshexp: verified.exp })
+            res.send({ access, userid: user.id, username: user.username, refreshexp: verified.exp });
             // console.log(user, verified)
         } else {
-            console.log("Token filed")
-            res.error(401, "Token filed");
+            console.log('Token filed');
+            res.error(401, 'Token filed');
         }
     } catch (err) {
-        console.log("refreshERR: ", err)
+        console.log('refreshERR: ', err);
         res.error(401, err);
     }
 }

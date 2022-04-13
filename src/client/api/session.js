@@ -6,7 +6,7 @@
  * @property {string} refresh_token JWT token
  */
 
-const storeKeys = ["username", "access_token", "refresh_token"];
+const storeKeys = ['username', 'access_token', 'refresh_token'];
 
 /**
  * User session
@@ -27,7 +27,7 @@ const storeKeys = ["username", "access_token", "refresh_token"];
  * @property {SessionData} store backing store to use for save same as data param
  */
 
-import { atob } from '$lib/utils'
+import { atob } from '$lib/utils';
 
 export class Session {
     constructor(data) {
@@ -37,28 +37,28 @@ export class Session {
         Object.defineProperties(this, {
             store: {
                 get: () => data,
-                set: v => (data = v)
+                set: (v) => (data = v),
             },
             subscriptions: {
-                value: new Set()
+                value: new Set(),
             },
             entitlements: {
-                value: new Set()
+                value: new Set(),
             },
             expirationDate: {
-                value: new Date(0)
+                value: new Date(0),
             },
             expirationTimer: {
                 get: () => expirationTimer,
-                set: v => (expirationTimer = v)
+                set: (v) => (expirationTimer = v),
             },
             refreshExpirationDate: {
-                value: new Date(0)
+                value: new Date(0),
             },
             refreshExpirationTimer: {
                 get: () => refreshExpirationTimer,
-                set: v => (refreshExpirationTimer = v)
-            }
+                set: (v) => (refreshExpirationTimer = v),
+            },
         });
 
         this.update(data);
@@ -87,8 +87,7 @@ export class Session {
             for (const key of storeKeys) {
                 if (data[key] === undefined) {
                     delete this[key];
-                }
-                else {
+                } else {
                     this[key] = data[key];
                 }
             }
@@ -98,14 +97,11 @@ export class Session {
             if (decoded) {
                 this.expirationDate.setUTCSeconds(decoded.exp);
 
-                const expiresInMilliSeconds =
-                    this.expirationDate.valueOf() - Date.now();
+                const expiresInMilliSeconds = this.expirationDate.valueOf() - Date.now();
 
                 if (expiresInMilliSeconds > 0) {
                     if (decoded.entitlements) {
-                        decoded.entitlements
-                            .split(/,/)
-                            .forEach(e => this.entitlements.add(e));
+                        decoded.entitlements.split(/,/).forEach((e) => this.entitlements.add(e));
                     }
 
                     this.expirationTimer = setTimeout(() => {
@@ -119,8 +115,7 @@ export class Session {
                 const decoded = decode(data.refresh_token);
                 if (decoded) {
                     this.refreshExpirationDate.setUTCSeconds(decoded.exp);
-                    const expiresInMilliSeconds =
-                        this.refreshExpirationDate.valueOf() - Date.now();
+                    const expiresInMilliSeconds = this.refreshExpirationDate.valueOf() - Date.now();
                     if (expiresInMilliSeconds > 0) {
                         this.refreshExpirationTimer = setTimeout(() => {
                             this.refresh();
@@ -134,7 +129,7 @@ export class Session {
     }
 
     refresh() {
-        console.log("not implemented");
+        console.log('not implemented');
     }
 
     /**
@@ -156,7 +151,7 @@ export class Session {
      * @return {string} header.Authorization The Bearer access token.
      */
     get authorizationHeader() {
-        return this.isValid ? { Authorization: "Bearer " + this.access_token } : {};
+        return this.isValid ? { Authorization: 'Bearer ' + this.access_token } : {};
     }
 
     /**
@@ -185,7 +180,7 @@ export class Session {
     }
 
     emit() {
-        this.subscriptions.forEach(subscription => subscription(this));
+        this.subscriptions.forEach((subscription) => subscription(this));
     }
 
     /**
@@ -200,7 +195,5 @@ export class Session {
 }
 
 function decode(token) {
-    return token === undefined || token === "undefined"
-        ? undefined
-        : JSON.parse(atob(token.split(".")[1]));
+    return token === undefined || token === 'undefined' ? undefined : JSON.parse(atob(token.split('.')[1]));
 }
