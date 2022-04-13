@@ -1,36 +1,4 @@
-<script>
-    import { onDestroy, onMount, tick } from "svelte";
-    import { fade } from "svelte/transition";
-    import { query, fragment } from "svelte-pathfinder";
-    import { page } from "@routes";
-    import { items } from "@stores/store";
-    import * as db from "@api/db";
-    import { SideBar, Code, Form } from "@cmp";
-
-    let editForm = { title: "" },
-        atab = Code,
-        tabs = [
-            { name: "JSON", comp: Code },
-            { name: "Form", comp: Form },
-        ];
-
-    $: id = $fragment.split("-")[1];
-
-    async function getForm(items) {
-        // await tick();
-        // await db.get(
-        //     `/${$page.alias}/items${$query}#sidebarEdit-1620236307611`
-        // );
-        editForm = await items.find((i) => i.id === +id);
-    }
-
-    async function updatePage() {
-        $items = await db.set(`/pages/items${$query}&id=${id}`, editForm);
-        $fragment = "";
-    }
-</script>
-
-<SideBar right="true" data={getForm($items)}>
+<SideBar right="true" data="{getForm($items)}">
     {#if editForm}
         <div class="columns">
             <div class="column col-12">
@@ -39,12 +7,8 @@
             <div class="column col-12">
                 <ul class="tab tab-block">
                     {#each tabs as tab}
-                        <li class="tab-item" class:active={atab == tab.comp}>
-                            <a
-                                href="#_"
-                                on:click|preventDefault={() =>
-                                    (atab = tab.comp)}
-                            >
+                        <li class="tab-item" class:active="{atab == tab.comp}">
+                            <a href="#_" on:click|preventDefault="{() => (atab = tab.comp)}">
                                 {tab.name}
                             </a>
                         </li>
@@ -52,7 +16,7 @@
                 </ul>
                 {#key atab}
                     <div in:fade>
-                        <svelte:component this={atab} data={editForm} />
+                        <svelte:component this="{atab}" data="{editForm}" />
                     </div>
                 {/key}
                 <!-- <div class="accordion">
@@ -179,6 +143,38 @@
         </div>
     {/if}
 </SideBar>
+
+<script lang="ts">
+    import { onDestroy, onMount, tick } from 'svelte';
+    import { fade } from 'svelte/transition';
+    import { query, fragment } from 'svelte-pathfinder';
+    import { page } from '@routes';
+    import { items } from '@stores/store';
+    import * as db from '@api/db';
+    import { SideBar, Code, Form } from '@cmp';
+
+    let editForm = { title: '' },
+        atab = Code,
+        tabs = [
+            { name: 'JSON', comp: Code },
+            { name: 'Form', comp: Form },
+        ];
+
+    $: id = $fragment.split('-')[1];
+
+    async function getForm(items) {
+        // await tick();
+        // await db.get(
+        //     `/${$page.alias}/items${$query}#sidebarEdit-1620236307611`
+        // );
+        editForm = await items.find((i) => i.id === +id);
+    }
+
+    async function updatePage() {
+        $items = await db.set(`/pages/items${$query}&id=${id}`, editForm);
+        $fragment = '';
+    }
+</script>
 
 <style lang="scss">
     // .accordion .accordion-body {

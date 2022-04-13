@@ -1,15 +1,3 @@
-<script>
-    import { ModalAdd } from "@cmp";
-    import { addopen, addBookForm } from "@stores/pages";
-    import { items } from "@stores/store";
-    import { path, fragment } from "svelte-pathfinder";
-
-    async function addPage() {
-        $items = await data.add($path.params.menu, $addBookForm);
-        $addopen = !$addopen;
-    }
-</script>
-
 {#if $fragment === `#modal-add`}
     <ModalAdd />
 {/if}
@@ -68,3 +56,15 @@
         </div>
     </form>
 </Modal> -->
+
+<script lang="ts">
+    import { ModalAdd } from '@cmp';
+    import { addopen, addBookForm } from '@stores/pages';
+    import { items } from '@stores/store';
+    import { path, fragment } from 'svelte-pathfinder';
+
+    async function addPage() {
+        $items = await data.add($path.params.menu, $addBookForm);
+        $addopen = !$addopen;
+    }
+</script>

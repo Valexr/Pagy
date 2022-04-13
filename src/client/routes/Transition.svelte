@@ -1,19 +1,15 @@
-<script>
-    import { fade } from "svelte/transition";
-    import { page } from "@routes";
-
-    export let duration = 250;
-</script>
-
 {#key $page}
-    <main
-        id={$page.alias}
-        class="container"
-        in:fade={{ duration: duration, delay: 100 }}
-    >
+    <main id="{$page.alias}" class="container" in:fade="{{ duration: duration, delay: 100 }}">
         <slot />
     </main>
 {/key}
+
+<script lang="ts">
+    import { fade } from 'svelte/transition';
+    import { page } from '@routes';
+
+    export let duration = 250;
+</script>
 
 <style lang="scss">
     main {

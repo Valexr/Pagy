@@ -1,10 +1,40 @@
-<script>
-    import { fly, fade } from "svelte/transition";
-    import { quintOut } from "svelte/easing";
-    import { fragment } from "svelte-pathfinder";
-    import { clickout } from "@utils";
-    import { media } from "@stores/media";
-    import { Loader } from "@cmp";
+<aside
+    class="container p-fixed"
+    class:w90="{$media.xs}"
+    transition:fly="{{
+        delay: 0,
+        duration: 500,
+        x: right ? 490 : -490,
+        y: 0,
+        opacity: 1,
+        easing: quintOut,
+    }}"
+    on:introend="{() => (isOpen = true)}"
+    on:outrostart="{() => (isOpen = false)}"
+    bind:this="{aside}"
+    use:clickout="{aside}"
+    on:clickout="{close}"
+    class:right
+>
+    <button class="btn btn-clear" aria-label="Close" id="close" on:click="{close}"></button>
+    {#await data}
+        <Loader />
+    {:then}
+        <slot />
+    {/await}
+</aside>
+
+{#if backdrop}
+    <div class="aside-backdrop" transition:fade></div>
+{/if}
+
+<script lang="ts">
+    import { fly, fade } from 'svelte/transition';
+    import { quintOut } from 'svelte/easing';
+    import { fragment } from 'svelte-pathfinder';
+    import { clickout } from '@utils';
+    import { media } from '@stores/media';
+    import { Loader } from '@cmp';
 
     export let right = false,
         backdrop = true,
@@ -14,45 +44,10 @@
         isOpen = false,
         width = 0;
 
-    const close = () => ($fragment = "");
+    const close = () => ($fragment = '');
 
     $: if (aside && isOpen) width = aside.clientWidth;
 </script>
-
-<aside
-    class="container p-fixed"
-    class:w90={$media.xs}
-    transition:fly={{
-        delay: 0,
-        duration: 500,
-        x: right ? 490 : -490,
-        y: 0,
-        opacity: 1,
-        easing: quintOut,
-    }}
-    on:introend={() => (isOpen = true)}
-    on:outrostart={() => (isOpen = false)}
-    bind:this={aside}
-    use:clickout={aside}
-    on:clickout={close}
-    class:right
->
-    <button
-        class="btn btn-clear"
-        aria-label="Close"
-        id="close"
-        on:click={close}
-    />
-    {#await data}
-        <Loader />
-    {:then}
-        <slot />
-    {/await}
-</aside>
-
-{#if backdrop}
-    <div class="aside-backdrop" transition:fade />
-{/if}
 
 <style lang="scss">
     .w90 {

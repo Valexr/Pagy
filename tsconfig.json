@@ -1,0 +1,67 @@
+{
+    "extends": "@tsconfig/svelte/tsconfig.json",
+    "compilerOptions": {
+        "sourceMap": true,
+        "declarationDir": "app/",
+        "skipLibCheck": true,
+        "preserveValueImports": true,
+        "typeRoots": [
+            "src/@types",
+            "/.node_modules/@types"
+        ],
+        "types": [
+            "svelte",
+            "node",
+            "@types"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ],
+            "@types/*": [
+                "./src/@types/*"
+            ],
+            "@api/*": [
+                "./src/client/api/*"
+            ],
+            "@cmp": [
+                "./src/client/components/index.js"
+            ],
+            "@svectre": [
+                "./src/client/svectre/index.js"
+            ],
+            "@pages/*": [
+                "./src/client/pages/*"
+            ],
+            "@routes": [
+                "./src/client/routes/index.js"
+            ],
+            "@stores/*": [
+                "./src/client/stores/*"
+            ],
+            "@utils": [
+                "./src/client/utils/index.js"
+            ],
+            "@lang/*": [
+                "./app/lang/*"
+            ],
+            "@spectre/*": [
+                "./node_modules/spectre.css/src/*"
+            ],
+            "$EP": [
+                "./src/server/endpoints/index.js"
+            ],
+            "$lib/*": [
+                "./src/server/lib/*"
+            ],
+        }
+    },
+    "include": [
+        "src/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "app"
+    ],
+}

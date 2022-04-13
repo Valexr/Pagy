@@ -1,14 +1,3 @@
-<script>
-    import { onMount } from "svelte";
-    import * as db from "@api/db";
-
-    let keys, langs;
-    onMount(async () => {
-        langs = await db.get("/translation/all");
-        console.log(langs);
-    });
-</script>
-
 <h1 class="flex-centered">Translation</h1>
 
 <section class="container">
@@ -21,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            {#await db.get("/translation/en") then lang}
+            {#await db.get('/translation/en') then lang}
                 {#each Object.entries(lang) as [k, v], i}
                     <tr>
                         <td>{i}</td>
@@ -33,3 +22,14 @@
         </tbody>
     </table>
 </section>
+
+<script lang="ts">
+    import { onMount } from 'svelte';
+    import * as db from '@api/db';
+
+    let keys, langs;
+    onMount(async () => {
+        langs = await db.get('/translation/all');
+        console.log(langs);
+    });
+</script>

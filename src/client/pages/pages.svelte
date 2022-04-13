@@ -1,26 +1,34 @@
-<script>
-    import { query, fragment } from "svelte-pathfinder";
-    import * as db from "@api/db";
-    import { items } from "@stores/store";
-    import { Table, TableActions } from "@cmp";
+<h1 class="flex-centered">Pages</h1>
 
-    const keys = ["title", "author", "description", "create", "update"],
+<section class="container">
+    <Table keys="{keys}" items="{$items}" let:item>
+        <TableActions slot="actions" actions="{actions}" index="{item.id}" />
+    </Table>
+</section>
+
+<script lang="ts">
+    import { query, fragment } from 'svelte-pathfinder';
+    import * as db from '@api/db';
+    import { items } from '@stores/store';
+    import { Table, TableActions } from '@/client/components';
+
+    const keys = ['title', 'author', 'description', 'create', 'update'],
         actions = [
             {
-                class: "btn-action tooltip",
-                tooltip: "Edit",
-                icon: "edit",
+                class: 'btn-action tooltip',
+                tooltip: 'Edit',
+                icon: 'edit',
                 action: (e) => edit(e),
             },
             {
-                class: "btn-action btn-link tooltip",
-                tooltip: "Copy",
-                icon: "copy",
+                class: 'btn-action btn-link tooltip',
+                tooltip: 'Copy',
+                icon: 'copy',
                 action: (e) => copy(e),
             },
             {
-                class: "btn-action btn-link text-error",
-                icon: "delete",
+                class: 'btn-action btn-link text-error',
+                icon: 'delete',
                 action: (e) => del(e),
             },
         ];
@@ -42,13 +50,5 @@
         });
     }
 </script>
-
-<h1 class="flex-centered">Pages</h1>
-
-<section class="container">
-    <Table {keys} items={$items} let:item>
-        <TableActions slot="actions" {actions} index={item.id} />
-    </Table>
-</section>
 
 <style lang="scss"></style>

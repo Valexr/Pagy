@@ -1,6 +1,3 @@
-<script>
-</script>
-
 <h1 class="flex-centered">System</h1>
 
 <section class="container">
@@ -27,5 +24,8 @@
         <button class="btn">Email</button>
     </nav>
 </section>
+
+<script lang="ts">
+</script>
 
 <style lang="scss"></style>

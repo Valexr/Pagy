@@ -1,7 +1,3 @@
-<script>
-    import * as db from "@api/db";
-</script>
-
 <h1 class="flex-centered">Tokens</h1>
 <nav>
     <ul class="tab tab-block">
@@ -19,3 +15,7 @@
         </li>
     </ul>
 </nav>
+
+<script lang="ts">
+    import * as db from '@api/db';
+</script>

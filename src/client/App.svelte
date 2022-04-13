@@ -1,7 +1,15 @@
-<script>
-    import { Head, Header, Footer, Modals, SideBars, Noticys } from "@cmp";
-    import { Router } from "@routes";
-    import { media } from "@stores/media";
+<Head name="{name}" />
+<Header />
+<Router />
+<Footer />
+<SideBars />
+<Modals />
+<Noticys />
+
+<script lang="ts">
+    import { Head, Header, Footer, Modals, SideBars, Noticys } from '@/client/components';
+    import { Router } from '@routes';
+    import { media } from '@stores/media';
 
     export let name;
 
@@ -13,17 +21,9 @@
         `${keys[0][0]} ${keys
             .flat()
             .filter((k) => k.length > 3)
-            .join(" ")}`;
+            .join(' ')}`;
 </script>
 
-<Head {name} />
-<Header />
-<Router />
-<Footer />
-<SideBars />
-<Modals />
-<Noticys />
-
 <style lang="scss" global>
-    @import "./sass/global.scss";
+    @import './sass/global.scss';
 </style>

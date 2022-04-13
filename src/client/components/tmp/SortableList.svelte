@@ -1,7 +1,31 @@
-<script>
-    import { quintOut } from "svelte/easing";
-    import { crossfade } from "svelte/transition";
-    import { flip } from "svelte/animate";
+{#if list && list.length}
+    <ul>
+        {#each list as item, index (getKey(item))}
+            <li
+                data-index="{index}"
+                data-id="{JSON.stringify(getKey(item))}"
+                draggable="true"
+                on:dragstart="{start}"
+                on:dragover="{over}"
+                on:dragleave="{leave}"
+                on:drop="{drop}"
+                in:receive="{{ key: getKey(item) }}"
+                out:send="{{ key: getKey(item) }}"
+                animate:flip="{{ duration: 300 }}"
+                class:over="{getKey(item) === isOver}"
+            >
+                <slot item="{item}" index="{index}">
+                    <p>{getKey(item)}</p>
+                </slot>
+            </li>
+        {/each}
+    </ul>
+{/if}
+
+<script lang="ts">
+    import { quintOut } from 'svelte/easing';
+    import { crossfade } from 'svelte/transition';
+    import { flip } from 'svelte/animate';
 
     // FLIP ANIMATION
     const [send, receive] = crossfade({
@@ -9,7 +33,7 @@
 
         fallback(node, params) {
             const style = getComputedStyle(node);
-            const transform = style.transform === "none" ? "" : style.transform;
+            const transform = style.transform === 'none' ? '' : style.transform;
 
             return {
                 duration: 600,
@@ -25,11 +49,9 @@
     // DRAG AND DROP
     let isOver = false;
     const getDraggedParent = (node) =>
-        node.dataset && node.dataset.index
-            ? node.dataset
-            : getDraggedParent(node.parentNode);
+        node.dataset && node.dataset.index ? node.dataset : getDraggedParent(node.parentNode);
     const start = (ev) => {
-        ev.dataTransfer.setData("source", ev.target.dataset.index);
+        ev.dataTransfer.setData('source', ev.target.dataset.index);
     };
     const over = (ev) => {
         ev.preventDefault();
@@ -44,19 +66,19 @@
         isOver = false;
         ev.preventDefault();
         let dragged = getDraggedParent(ev.target);
-        let from = ev.dataTransfer.getData("source");
+        let from = ev.dataTransfer.getData('source');
         let to = dragged.index;
         reorder({ from, to });
     };
 
     // DISPATCH REORDER
-    import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();
     const reorder = ({ from, to }) => {
         let newList = [...list];
         newList[from] = [newList[to], (newList[to] = newList[from])][0];
 
-        dispatch("sort", newList);
+        dispatch('sort', newList);
     };
 
     // UTILS
@@ -66,30 +88,6 @@
     export let list;
     export let key;
 </script>
-
-{#if list && list.length}
-    <ul>
-        {#each list as item, index (getKey(item))}
-            <li
-                data-index={index}
-                data-id={JSON.stringify(getKey(item))}
-                draggable="true"
-                on:dragstart={start}
-                on:dragover={over}
-                on:dragleave={leave}
-                on:drop={drop}
-                in:receive={{ key: getKey(item) }}
-                out:send={{ key: getKey(item) }}
-                animate:flip={{ duration: 300 }}
-                class:over={getKey(item) === isOver}
-            >
-                <slot {item} {index}>
-                    <p>{getKey(item)}</p>
-                </slot>
-            </li>
-        {/each}
-    </ul>
-{/if}
 
 <style>
     ul {

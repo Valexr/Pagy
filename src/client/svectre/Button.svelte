@@ -1,25 +1,20 @@
-<script>
-    export let but = {
-        class: "",
-        badge: "",
-        title: "",
-        icon: "",
-        tooltip: "",
-    };
-</script>
-
-<button
-    class="btn {but.class}"
-    data-badge={but.badge}
-    data-tooltip={but.tooltip}
-    on:click
->
+<button class="btn {but.class}" data-badge="{but.badge}" data-tooltip="{but.tooltip}" on:click>
     <slot />
-    {but.title ? but.title : ""}
+    {but.title ? but.title : ''}
     {#if but.icon}
-        <i class="icon icon-{but.icon}" />
+        <i class="icon icon-{but.icon}"></i>
     {/if}
 </button>
+
+<script lang="ts">
+    export let but = {
+        class: '',
+        badge: '',
+        title: '',
+        icon: '',
+        tooltip: '',
+    };
+</script>
 
 <style lang="scss">
     // // Buttons

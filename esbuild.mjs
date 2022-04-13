@@ -1,11 +1,11 @@
-const { build } = require("esbuild");
-const { fork } = require("child_process");
-const { createRemote } = require("derver");
-const path = require("path");
-const watch = require("node-watch");
-const sveltePlugin = require("esbuild-svelte");
-const sveltePreprocess = require("svelte-preprocess");
-const { eslintPlugin } = require('esbuild-plugin-eslinter');
+import { build } from "esbuild";
+import { fork } from "child_process";
+import { createRemote } from "derver";
+import { join } from "path";
+import watch from "node-watch";
+import sveltePlugin from "esbuild-svelte";
+import sveltePreprocess from "svelte-preprocess";
+import { eslintPlugin } from 'esbuild-plugin-eslinter';
 
 const CWD = process.cwd();
 const DEV = process.argv.includes('--dev');
@@ -17,7 +17,9 @@ const svelteConfig = {
         css: false
     },
     preprocess: [
-        sveltePreprocess()
+        sveltePreprocess({
+            typescript: true
+        })
     ]
 };
 
@@ -27,9 +29,9 @@ const svelteConfig = {
 
     if (DEV) {
 
-        nodemon(path.join(CWD, 'app', 'app.js'), { cwd: path.join(CWD, 'app') });
+        nodemon(join(CWD, 'app', 'app.js'), { cwd: join(CWD, 'app') });
 
-        watch(path.join(CWD, 'src', 'client'), { recursive: true }, async function () {
+        watch(join(CWD, 'src', 'client'), { recursive: true }, async function () {
             try {
                 await bundleClient.rebuild();
             } catch (err) {
@@ -37,7 +39,7 @@ const svelteConfig = {
             }
         });
 
-        watch(path.join(CWD, 'src', 'server'), { recursive: true }, async function () {
+        watch(join(CWD, 'src', 'server'), { recursive: true }, async function () {
             await bundleServer.rebuild();
             await bundleClient.rebuild();
             console.log('Restarting server...');

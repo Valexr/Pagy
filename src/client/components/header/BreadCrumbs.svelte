@@ -1,23 +1,6 @@
-<script>
-    import {
-        url,
-        path,
-        pattern,
-        query,
-        fragment,
-        click,
-        state,
-        back,
-    } from "svelte-pathfinder";
-
-    export let crumbs = [];
-    $: crumbs = $path.split("/").filter(Boolean);
-    // $: console.log(crumbs);
-</script>
-
 <ul class="breadcrumb">
     <li class="breadcrumb-item">
-        <a href="/"> <i class="icon icon-home" /></a>
+        <a href="/"> <i class="icon icon-home"></i></a>
     </li>
     {#each crumbs as link}
         <li class="breadcrumb-item">
@@ -26,8 +9,16 @@
     {/each}
 </ul>
 
+<script lang="ts">
+    import { url, path, pattern, query, fragment, click, state, back } from 'svelte-pathfinder';
+
+    export let crumbs = [];
+    $: crumbs = $path.split('/').filter(Boolean);
+    // $: console.log(crumbs);
+</script>
+
 <style lang="scss">
-    @import "../../sass/spectre/variables";
+    @import '../../sass/spectre/variables';
     .breadcrumb {
         list-style: none;
         margin: $unit-1 0;
@@ -49,7 +40,7 @@
             &:not(:first-child) {
                 &::before {
                     color: $gray-color-dark;
-                    content: "/";
+                    content: '/';
                     padding-right: $unit-2;
                 }
             }

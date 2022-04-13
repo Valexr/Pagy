@@ -1,27 +1,4 @@
-<script>
-    import { onDestroy, onMount, tick } from "svelte";
-    import { path, query, fragment } from "svelte-pathfinder";
-    import { filters } from "@stores/store";
-    import { SideBar } from "@cmp";
-
-    $: filterLink = (key, val, item, query) => {
-        function qpath() {
-            const path = Object.entries($filters).map(([k, v], i) => {
-                return key === k
-                    ? `${k}=${item}`
-                    : `${k}=${qsub(k, v) || v[0]}`;
-            });
-            return [...new Set(path)].join("&");
-        }
-        function qsub(k, v) {
-            // if (query[k] !== v) query[k] = v;
-            return Object.values(query).filter((q) => v.some((v) => v === q));
-        }
-        return `${$path}?${qpath()}${$fragment}`;
-    };
-</script>
-
-<SideBar backdrop={false} data={$filters && $filters}>
+<SideBar backdrop="{false}" data="{$filters && $filters}">
     <div class="columns">
         <div class="column col-12">
             <h3>Filters</h3>
@@ -29,12 +6,12 @@
         <div class="column col-12">
             {#each $filters && Object.entries($filters) as [k, v]}
                 <ul class="menu menu-nav">
-                    <li class="divider" data-content={k.toUpperCase()} />
+                    <li class="divider" data-content="{k.toUpperCase()}"></li>
                     {#each v as link}
                         <li class="menu-item">
                             <a
-                                href={filterLink(k, v, link, $query.params)}
-                                class:active={link === $query.params[k]}
+                                href="{filterLink(k, v, link, $query.params)}"
+                                class:active="{link === $query.params[k]}"
                             >
                                 <!-- <i class="icon icon-link" /> -->
                                 {link}
@@ -174,6 +151,27 @@
         </div>
     </div>
 </SideBar>
+
+<script lang="ts">
+    import { onDestroy, onMount, tick } from 'svelte';
+    import { path, query, fragment } from 'svelte-pathfinder';
+    import { filters } from '@stores/store';
+    import { SideBar } from '@cmp';
+
+    $: filterLink = (key, val, item, query) => {
+        function qpath() {
+            const path = Object.entries($filters).map(([k, v], i) => {
+                return key === k ? `${k}=${item}` : `${k}=${qsub(k, v) || v[0]}`;
+            });
+            return [...new Set(path)].join('&');
+        }
+        function qsub(k, v) {
+            // if (query[k] !== v) query[k] = v;
+            return Object.values(query).filter((q) => v.some((v) => v === q));
+        }
+        return `${$path}?${qpath()}${$fragment}`;
+    };
+</script>
 
 <style lang="scss">
     // .menu {
