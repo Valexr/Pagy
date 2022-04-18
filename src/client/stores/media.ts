@@ -1,9 +1,6 @@
-import { writable } from 'svelte/store';
+import { media as mediaStore } from '@slidy/media'
 
-type MediaQuery = {
-    [key: string]: boolean | string;
-};
-const mediaQueries: MediaQuery = {
+const queries = {
     xs: '(max-width: 480px)',
     sm: '(max-width: 600px)',
     md: '(max-width: 840px)',
@@ -15,34 +12,6 @@ const mediaQueries: MediaQuery = {
     dark: '(prefers-color-scheme: dark)',
     light: '(prefers-color-scheme: light)',
     mouse: '(hover: hover)',
-    touch: '(hover: none)',
-};
-
-export const media = watchMedia(mediaQueries, 'pagy-media');
-
-function watchMedia(mediaQueries: MediaQuery, storeKey: string) {
-    const { subscribe, set, update } = writable(mediaQueries);
-
-    const match: MediaQuery = JSON.parse(sessionStorage.getItem(storeKey) as string) || {};
-
-    for (const query in mediaQueries) {
-        const media = window.matchMedia(mediaQueries[query] as string);
-        setMatches(media, query);
-        media.onchange = (e) => setMatches(e, query);
-    }
-
-    function setMatches(source: MediaQueryList | MediaQueryListEvent, query: string) {
-        if ('target' in source) match[query] = source.matches;
-        else match[query] ??= source.matches;
-        set(match);
-        sessionStorage.setItem(storeKey, JSON.stringify(match));
-    }
-
-    subscribe((match): void => sessionStorage.setItem(storeKey, JSON.stringify(match)));
-
-    return {
-        subscribe,
-        set,
-        update,
-    };
+    touch: '(hover: none)'
 }
+export const media = mediaStore({ queries })
