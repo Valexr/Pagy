@@ -9,3 +9,10 @@ export type Page = {
     component: () => void;
     props: { title: string; keywords: string; description: string };
 };
+
+export type Session = {
+    userid: string,
+    username: string,
+    access: string,
+    refresh: string
+}

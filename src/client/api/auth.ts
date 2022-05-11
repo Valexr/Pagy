@@ -1,9 +1,10 @@
 import { writable } from 'svelte/store';
 import { redirect } from 'svelte-pathfinder';
+import type { Session } from '@types/client.ts';
 
 const base = '/api/v1/auth';
 
-export const session = writable({});
+export const session = writable<Session>({});
 
 export async function cookie() {
     const path = `${base}/cookie`;
@@ -61,19 +62,19 @@ export async function refresh(token) {
         if (res.status === 200) {
             session.update(
                 (session) =>
-                    (session = {
-                        userid: user.userid,
-                        username: user.username,
-                        access: user.access,
-                        refresh: session.refresh,
-                    })
+                (session = {
+                    userid: user.userid,
+                    username: user.username,
+                    access: user.access,
+                    refresh: session.refresh,
+                })
             );
         } else {
             session.update(
                 (session) =>
-                    (session = {
-                        username: session.username,
-                    })
+                (session = {
+                    username: session.username,
+                })
             );
         }
         return { status, user };
