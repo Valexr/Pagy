@@ -1,6 +1,7 @@
 {
     "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
+        "module": "esnext",
         "sourceMap": true,
         "declarationDir": "app/",
         "skipLibCheck": true,

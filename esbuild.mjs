@@ -10,7 +10,7 @@ import { eslintPlugin } from 'esbuild-plugin-eslinter';
 const CWD = process.cwd();
 const DEV = process.argv.includes('--dev');
 const remote = DEV && createRemote('svelte_derver_starter');
-
+console.log(process.env);
 const svelteConfig = {
     compilerOptions: {
         dev: DEV,

@@ -11,7 +11,7 @@
     import { Router } from '@routes';
     import { media } from '@stores/media';
 
-    export let name;
+    export let name = '';
 
     $: keys = Object.entries($media).filter(([k, v]) => {
         if (v === true) return k;
