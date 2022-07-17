@@ -92,7 +92,7 @@
         "esbuild": "^0.14.49",
         "esbuild-plugin-eslinter": "^0.1.2",
         "esbuild-svelte": "^0.7.1",
-        "eslint": "^8.19.0",
+        "eslint": "^8.20.0",
         "eslint-plugin-svelte3": "^4.0.0",
         "jsonwebtoken": "^8.5.1",
         "lowdb": "^3.0.0",

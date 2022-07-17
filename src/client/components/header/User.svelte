@@ -1,7 +1,7 @@
 <DropDown
     openbut="{{
         name: !$media.sm ? $session.username : '',
-        icon: 'icon-people',
+        icon: $media.sm ? 'icon-people' : '',
         class: 'btn-link',
     }}"
     downbut="{{
