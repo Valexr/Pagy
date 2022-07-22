@@ -69,7 +69,6 @@
 </script>
 
 <style lang="scss">
-    @import '../../sass/spectre/variables';
     .navbar {
         z-index: 99;
         height: 4em;

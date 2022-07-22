@@ -16,55 +16,55 @@ $off-canvas-breakpoint: 840px;
 @import "dark";
 
 // Variables and mixins
-@import "./spectre/variables";
-@import "./spectre/mixins";
+@import "../../node_modules/spectre.css/src/variables";
+@import "../../node_modules/spectre.css/src/mixins";
 
 // Reset and dependencies
-@import "./spectre/normalize";
-@import "./spectre/base";
+@import "../../node_modules/spectre.css/src/normalize";
+@import "../../node_modules/spectre.css/src/base";
 
 // Elements
-@import "./spectre/typography";
-@import "./spectre/tables";
-@import "./spectre/buttons";
-@import "./spectre/forms";
-@import "./spectre/labels";
-@import "./spectre/codes";
-@import "./spectre/media";
+@import "../../node_modules/spectre.css/src/typography";
+@import "../../node_modules/spectre.css/src/tables";
+@import "../../node_modules/spectre.css/src/buttons";
+@import "../../node_modules/spectre.css/src/forms";
+@import "../../node_modules/spectre.css/src/labels";
+@import "../../node_modules/spectre.css/src/codes";
+@import "../../node_modules/spectre.css/src/media";
 
 // Layout
-@import "./spectre/layout";
-@import "./spectre/hero";
-@import "./spectre/navbar";
+@import "../../node_modules/spectre.css/src/layout";
+@import "../../node_modules/spectre.css/src/hero";
+@import "../../node_modules/spectre.css/src/navbar";
 
 // Components
-@import "./spectre/accordions";
-@import "./spectre/avatars";
-@import "./spectre/badges";
-// @import "./spectre/breadcrumbs";
-// @import "./spectre/bars";
-@import "./spectre/cards";
-// @import "./spectre/chips";
-@import "./spectre/dropdowns";
-// @import "./spectre/empty";
-@import "./spectre/menus";
-@import "./spectre/modals";
-@import "./spectre/navs";
-// @import "./spectre/pagination";
-// @import "./spectre/panels";
-// @import "./spectre/popovers";
-// @import "./spectre/steps";
-@import "./spectre/tabs";
-// @import "./spectre/tiles";
-@import "./spectre/toasts";
-@import "./spectre/tooltips";
+@import "../../node_modules/spectre.css/src/accordions";
+@import "../../node_modules/spectre.css/src/avatars";
+@import "../../node_modules/spectre.css/src/badges";
+// @import "../../node_modules/spectre.css/src/breadcrumbs";
+// @import "../../node_modules/spectre.css/src/bars";
+@import "../../node_modules/spectre.css/src/cards";
+// @import "../../node_modules/spectre.css/src/chips";
+@import "../../node_modules/spectre.css/src/dropdowns";
+// @import "../../node_modules/spectre.css/src/empty";
+@import "../../node_modules/spectre.css/src/menus";
+@import "../../node_modules/spectre.css/src/modals";
+@import "../../node_modules/spectre.css/src/navs";
+// @import "../../node_modules/spectre.css/src/pagination";
+// @import "../../node_modules/spectre.css/src/panels";
+// @import "../../node_modules/spectre.css/src/popovers";
+// @import "../../node_modules/spectre.css/src/steps";
+@import "../../node_modules/spectre.css/src/tabs";
+// @import "../../node_modules/spectre.css/src/tiles";
+@import "../../node_modules/spectre.css/src/toasts";
+@import "../../node_modules/spectre.css/src/tooltips";
 
 // Utility classes
-@import "./spectre/animations";
-@import "./spectre/utilities";
+@import "../../node_modules/spectre.css/src/animations";
+@import "../../node_modules/spectre.css/src/utilities";
 
-@import "./spectre/spectre-icons";
-// @import "./spectre/spectre-exp";
+@import "../../node_modules/spectre.css/src/spectre-icons";
+// @import "../../node_modules/spectre.css/src/spectre-exp";
 
 // ROOT
 :root {

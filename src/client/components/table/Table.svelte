@@ -110,7 +110,6 @@
 </script>
 
 <style lang="scss">
-    @import '../../sass/spectre/variables';
     .sub {
         height: 0;
         transition: height 500ms ease 500ms;

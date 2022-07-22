@@ -18,7 +18,6 @@
 </script>
 
 <style lang="scss">
-    @import '../../sass/spectre/variables';
     .breadcrumb {
         list-style: none;
         margin: $unit-1 0;

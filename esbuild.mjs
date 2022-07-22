@@ -22,7 +22,11 @@ const svelteConfig = {
             typescript: true,
             scss: {
                 quietDeps: true,
-                renderSync: true
+                renderSync: true,
+                prependData: `
+                    @import './node_modules/spectre.css/src/variables';
+                    @import './node_modules/spectre.css/src/mixins';
+                `,
             }
         })
     ]
