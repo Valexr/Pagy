@@ -1,5 +1,7 @@
 # 📚 Pagy
 
+... in progress 👨🏻‍💻
+
 <img align="right" width="180" height="180" src="Pagy.png">
 SvelteJS + SpectreCSS on client, Derver BFF, LowDB base.json & JWT auth simple
 headless CMS, bundeled by ESBuild
