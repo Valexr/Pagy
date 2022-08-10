@@ -89,7 +89,7 @@
         "cors": "^2.8.5",
         "derver": "^0.5.3",
         "dotenv": "^16.0.1",
-        "esbuild": "^0.14.54",
+        "esbuild": "^0.15.0",
         "esbuild-plugin-eslinter": "^0.1.2",
         "esbuild-svelte": "^0.7.1",
         "eslint": "^8.21.0",
