@@ -3,9 +3,9 @@ import { fork } from "child_process";
 import { createRemote } from "derver";
 import { join } from "path";
 import watch from "node-watch";
-import sveltePlugin from "esbuild-svelte";
-import sveltePreprocess from "svelte-preprocess";
-import { eslintPlugin } from 'esbuild-plugin-eslinter';
+import svelte from "esbuild-svelte";
+import preprocess from "svelte-preprocess";
+import eslint from './eslint.mjs';
 
 const CWD = process.cwd();
 const DEV = process.argv.includes('--dev');
@@ -17,7 +17,7 @@ const svelteConfig = {
         css: false
     },
     preprocess: [
-        sveltePreprocess({
+        preprocess({
             sourceMap: DEV,
             typescript: true,
             scss: {
@@ -69,8 +69,8 @@ async function build_server() {
         legalComments: 'none',
         plugins: [
             // envPlugin(),
-            serverPlugin(),
-            eslintPlugin()
+            server(),
+            eslint()
         ]
     });
 }
@@ -87,13 +87,13 @@ async function build_client() {
         external: ['../img/*'],
         legalComments: 'none',
         plugins: [
-            sveltePlugin(svelteConfig),
-            eslintPlugin()
+            svelte(svelteConfig),
+            eslint()
         ]
     });
 }
 
-function serverPlugin() {
+function server() {
     return {
         name: 'server-plugin',
         setup(b) {
