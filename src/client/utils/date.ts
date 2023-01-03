@@ -4,7 +4,7 @@ import { readable, writable } from 'svelte/store';
 
 export function dateFormat(date, locale, options) {
     if (date) {
-        let datetime = new Date(date.includes(' ') ? date : +date),
+        const datetime = new Date(date.includes(' ') ? date : +date),
             locale = 'ru',
             options = {
                 dateStyle: 'short',

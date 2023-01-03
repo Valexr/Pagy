@@ -7,7 +7,7 @@
         "skipLibCheck": true,
         "preserveValueImports": true,
         "typeRoots": [
-            "src/@types",
+            "src/types",
             "/.node_modules/@types"
         ],
         "types": [
@@ -21,7 +21,7 @@
                 "./src/*"
             ],
             "@types/*": [
-                "./src/@types/*"
+                "src/types/*"
             ],
             "@api/*": [
                 "./src/client/api/*"

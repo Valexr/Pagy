@@ -1,7 +1,6 @@
 import DB from '$lib/db';
 
-let base,
-    pattern = '/:base/:table';
+let base
 
 async function connect(req, _res, next) {
     try {
@@ -14,6 +13,8 @@ async function connect(req, _res, next) {
 }
 
 export default function (app) {
+    const pattern = '/:base/:table'
+
     app.use(pattern, connect);
 
     app.get(pattern, async (req, res, next) => {

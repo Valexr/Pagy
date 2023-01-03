@@ -17,7 +17,7 @@ export default async function (url, { ...options }, body = undefined) {
         });
     }
     try {
-        let res = await req();
+        const res = await req();
         // if (res.status === 401) {
         //     const ref = await refresh();
         //     if (ref.status === 200) {

@@ -1,10 +1,10 @@
 import { writable } from 'svelte/store';
 import { redirect } from 'svelte-pathfinder';
-import type { Session } from '@types/client.ts';
+import type { Session } from '@/types/client';
 
 const base = '/api/v1/auth';
 
-export const session = writable<Session>({});
+export const session = writable<Partial<Session>>({});
 
 export async function cookie() {
     const path = `${base}/cookie`;
@@ -85,7 +85,7 @@ export async function refresh(token) {
 
 export async function logout() {
     const path = `${base}/logout`;
-    const options = {
+    const options: RequestInit = {
         method: 'POST',
         credentials: 'include',
         headers: {

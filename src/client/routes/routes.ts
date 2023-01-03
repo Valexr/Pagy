@@ -105,16 +105,6 @@ export const routes = [
         props: { title: 'system', keywords: 'keywords', description: 'description' },
     },
     {
-        match: '/:lang/svectre',
-        default: '/svectre',
-        alias: 'svectre',
-        menu: true,
-        navbar: true,
-        icon: 'upward',
-        component: () => import('@pages/svectre.svelte'),
-        props: { title: 'svectre', keywords: 'keywords', description: 'description' },
-    },
-    {
         match: '*',
         alias: '404',
         menu: false,

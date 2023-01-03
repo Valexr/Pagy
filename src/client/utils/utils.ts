@@ -25,7 +25,7 @@ export function groupBy(data, ...keys) {
     return data.reduce(
         (results, item) => {
             // Get the first instance of the key by which we're grouping
-            var group = getGroupFromItem(item, keys);
+            const group = getGroupFromItem(item, keys);
 
             // Ensure that there's an array to hold our results for this group
             results[group] = results[group] || [];
