@@ -97,7 +97,7 @@
         "lowdb": "^3.0.0",
         "node-watch": "^0.7.3",
         "postcss": "^8.4.21",
-        "prettier": "^2.8.1",
+        "prettier": "^2.8.2",
         "prettier-plugin-svelte": "^2.9.0",
         "sass": "^1.57.1",
         "sortablejs": "^1.15.0",
