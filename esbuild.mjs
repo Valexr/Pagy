@@ -61,25 +61,25 @@ const clientOptions = {
 };
 
 if (DEV) {
-    const ctxServer = await context(serverOptions);
-    const ctxClient = await context(clientOptions);
+    const server = await context(serverOptions);
+    const client = await context(clientOptions);
 
-    await ctxServer.rebuild();
-    await ctxClient.rebuild();
+    await server.rebuild();
+    await client.rebuild();
 
     nodemon(join(CWD, 'app', 'app.js'), { cwd: join(CWD, 'app') });
 
     watch(join(CWD, 'src', 'client'), { recursive: true }, async () => {
         try {
-            await ctxClient.rebuild();
+            await client.rebuild();
         } catch (e) {
             remote.error(e.message, 'Svelte compile error');
         }
     });
 
     watch(join(CWD, 'src', 'server'), { recursive: true }, async () => {
-        await ctxServer.rebuild();
-        await ctxClient.rebuild();
+        await server.rebuild();
+        await client.rebuild();
         // console.log('Restarting server...');
     });
 } else {
